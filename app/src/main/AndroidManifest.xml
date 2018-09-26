@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartloan.smtrick.smart_loan">
+    package="com.smartloan.smtrick.smart_loan_admin">
 
     <application
         android:allowBackup="true"

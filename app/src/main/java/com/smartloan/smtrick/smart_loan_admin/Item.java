@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.view.View;
 

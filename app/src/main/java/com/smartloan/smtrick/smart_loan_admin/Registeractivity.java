@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.smartloan.smtrick.smart_loan_admin.R;
 
 public class Registeractivity extends AppCompatActivity implements
 	AdapterView.OnItemSelectedListener{

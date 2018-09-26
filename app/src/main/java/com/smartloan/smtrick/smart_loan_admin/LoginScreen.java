@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.smartloan.smtrick.smart_loan_admin.R;
 
 public class LoginScreen extends AppCompatActivity {
 	TextView txtregister;

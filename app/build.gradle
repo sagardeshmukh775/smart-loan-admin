@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.smartloan.smtrick.smart_loan"
+        applicationId "com.smartloan.smtrick.smart_loan_admin"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
