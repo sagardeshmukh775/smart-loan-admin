@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/viewdropshadow3"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/viewdropshadow4"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+    <!-- LEFT TITLE PART -->
+    <RelativeLayout
+        android:id="@+id/toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="3"
+        android:background="@color/hederbackground"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/title_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/graycolor"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/title_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_price"
+            android:layout_marginTop="40sp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/graycolor"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/title_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/title_date_label"
+            android:textColor="@color/graycolor"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+    <!-- RIGHT TITLE PART -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bgTitleRight"
+        android:paddingBottom="5dp"
+        android:paddingEnd="5dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingStart="5dp"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="60dp"
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="33">
+
+                <!-- request button -->
+                <TextView
+                    android:id="@+id/textloantype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="HOME"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    style="@style/TitleBadgeTitle"
+                    android:textColor="@color/darkgraycolor"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="33">
+
+                <TextView
+                    android:id="@+id/textbankname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_marginTop="30dp"
+                    style="@style/TitleBadgeTitle"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="1dp"
+                    android:gravity="center_horizontal"
+                    android:text="HDFC"
+                    android:textColor="@color/darkgraycolor"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="33">
+
+                <TextView
+                    android:id="@+id/payoutammount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Rs 11000"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_horizontal"
+                    style="@style/TitleBadgeTitle"
+                    android:textColor="@color/darkgraycolor"
+                    android:textSize="16sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/title_from_to_dots"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/from_to_purple"/>
+
+        <TextView
+            android:id="@+id/title_from_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title_from_to_dots"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@color/mainTextColor"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:id="@+id/title_from_to_dots_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/title_from_address"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/title_from_to_dots"
+            android:layout_toRightOf="@+id/title_from_to_dots"
+            android:src="@color/contentDividerLine" />
+
+        <TextView
+            android:id="@+id/title_to_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_from_to_dots_divider"
+            android:layout_toEndOf="@id/title_from_to_dots"
+            android:layout_toRightOf="@id/title_from_to_dots"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/title_requests_count"
+            style="@style/TitleBadgeText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@+id/title_to_address"/>
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@id/title_requests_count"
+            android:layout_alignLeft="@id/title_requests_count"
+            android:layout_alignStart="@id/title_requests_count"
+            android:text="@string/requests_count_badge"/>
+
+        <TextView
+            android:id="@+id/title_weight"
+            style="@style/TitleBadgeText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/weight_mock" />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@id/title_weight"
+            android:layout_alignLeft="@id/title_weight"
+            android:layout_alignStart="@id/title_weight"
+            android:text="@string/weight_badge" />
+
+        <TextView
+            android:id="@+id/title_pledge"
+            style="@style/TitleBadgeText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/title_pledge1"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@id/title_pledge"
+            android:layout_alignLeft="@id/title_pledge"
+            android:layout_alignStart="@id/title_pledge"
+            android:text="@string/pledge_badge" />
+
+        <!-- dates part -->
+    </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
