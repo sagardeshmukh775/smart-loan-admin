@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ramotion.foldingcell.FoldingCell;
+import com.smartloan.smtrick.smart_loan_admin.R;
 
 import java.util.ArrayList;
 

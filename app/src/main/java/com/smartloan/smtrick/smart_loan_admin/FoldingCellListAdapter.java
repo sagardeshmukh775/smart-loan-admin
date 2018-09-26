@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
+import com.smartloan.smtrick.smart_loan_admin.R;
 
 import java.util.HashSet;
 import java.util.List;
