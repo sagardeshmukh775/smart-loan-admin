@@ -25,5 +25,6 @@
     <item type="color" name="drowertextcolor">#7e7e7e</item>
     <item type="color" name="drowerbackgroundcolor">#e9e9e9</item>
     <item type="color" name="textcolor">#7e7e7e</item>
+    <item type="color" name="red">#ef6868</item>
 
 </resources>
