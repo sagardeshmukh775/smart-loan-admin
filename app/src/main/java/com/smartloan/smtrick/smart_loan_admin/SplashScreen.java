@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan;
+package com.smartloan.smtrick.smart_loan_admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.smartloan.smtrick.smart_loan_admin.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
