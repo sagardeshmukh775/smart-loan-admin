@@ -18,14 +18,11 @@ public class UserTabsFragment extends Fragment {
     ViewPagerAdapter viewPagerAdapter;
 
     public UserTabsFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_tabs, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
@@ -36,5 +33,4 @@ public class UserTabsFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         return view;
     }
-
 }

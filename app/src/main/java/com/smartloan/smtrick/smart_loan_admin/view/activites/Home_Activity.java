@@ -13,12 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.GeneratedLeedsFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UsersFragement;
 
 public class Home_Activity extends AppCompatActivity
         implements
         UsersFragement.OnFragmentInteractionListener,
+        GeneratedLeedsFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +83,7 @@ public class Home_Activity extends AppCompatActivity
         if (id == R.id.Users) {
             fragment = new UserTabsFragment();
         } else if (id == R.id.Leads) {
-
+            fragment = new LeedsTabsFragment();
         } else if (id == R.id.Reports) {
 
         } else if (id == R.id.Settings) {
@@ -96,6 +99,7 @@ public class Home_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onFragmentInteraction(String title) {
         // NOTE:  Code to replace the toolbar title based current visible fragment
