@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UsersFragement;
 
 public class Home_Activity extends AppCompatActivity
@@ -34,7 +35,7 @@ public class Home_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // get our list view
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame, new UsersFragement());
+        ft.replace(R.id.mainFrame, new UserTabsFragment());
         ft.commit();
     }
 
@@ -77,7 +78,7 @@ public class Home_Activity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         if (id == R.id.Users) {
-            fragment = new UsersFragement();
+            fragment = new UserTabsFragment();
         } else if (id == R.id.Leads) {
 
         } else if (id == R.id.Reports) {
