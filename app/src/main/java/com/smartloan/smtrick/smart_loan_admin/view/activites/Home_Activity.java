@@ -13,9 +13,12 @@ import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.GeneratedLeedsFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.InvoicesTabFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsReportFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.SentInvoiceFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.UnderConstrationFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UsersFragement;
 
@@ -25,6 +28,8 @@ public class Home_Activity extends AppCompatActivity
         GeneratedLeedsFragment.OnFragmentInteractionListener,
         LoanCalculatorFragement.OnFragmentInteractionListener,
         LeedsReportFragment.OnFragmentInteractionListener,
+        SentInvoiceFragment.OnFragmentInteractionListener,
+        UnderConstrationFragement.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class Home_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // get our list view
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame, new UserTabsFragment());
+        ft.replace(R.id.mainFrame, new LeedsTabsFragment());
         ft.commit();
     }
 
@@ -73,8 +78,10 @@ public class Home_Activity extends AppCompatActivity
                 fragment = new LeedsReportFragment();
                 break;
             case R.id.Settings:
+                fragment=new UnderConstrationFragement();
                 break;
             case R.id.Invices:
+                fragment = new InvoicesTabFragement();
                 break;
             case R.id.Calulator:
                 fragment = new LoanCalculatorFragement();
