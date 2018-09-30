@@ -5,13 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/Users"
-            android:icon="@drawable/usersimage2"
-            android:textColor="@color/textcolor"
-            android:textSize="22sp"
-            android:textStyle="normal|bold"
-            android:title="Users" />
-        <item
             android:id="@+id/Leads"
             android:icon="@drawable/leadsimage"
             android:textColor="@color/textcolor"
@@ -32,6 +25,13 @@
             android:textSize="22sp"
             android:textStyle="normal|bold"
             android:title="Reports" />
+        <item
+            android:id="@+id/Users"
+            android:icon="@drawable/usersimage2"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Users" />
         <item
             android:id="@+id/Calulator"
             android:icon="@drawable/calculatoricon"
