@@ -27,7 +27,7 @@ public class BankRejectedLeedsFragment extends Fragment implements AdapterView.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generated_leeds, container, false);
         ListView theListView = view.findViewById(R.id.mainListView);
-        final ArrayList<Item> items = Item.getTestingList();
+        final ArrayList<Item> items = Item.getRejectedList();
         items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

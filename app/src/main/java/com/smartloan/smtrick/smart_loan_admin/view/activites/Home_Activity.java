@@ -9,11 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.GeneratedLeedsFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsReportFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
@@ -24,6 +24,7 @@ public class Home_Activity extends AppCompatActivity
         UsersFragement.OnFragmentInteractionListener,
         GeneratedLeedsFragment.OnFragmentInteractionListener,
         LoanCalculatorFragement.OnFragmentInteractionListener,
+        LeedsReportFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class Home_Activity extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -68,6 +70,7 @@ public class Home_Activity extends AppCompatActivity
                 fragment = new LeedsTabsFragment();
                 break;
             case R.id.Reports:
+                fragment = new LeedsReportFragment();
                 break;
             case R.id.Settings:
                 break;

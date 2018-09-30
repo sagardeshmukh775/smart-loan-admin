@@ -7,51 +7,45 @@
         <item
             android:id="@+id/Users"
             android:icon="@drawable/usersimage2"
-            android:title="Users"
-            android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold"/>
-
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Users" />
         <item
             android:id="@+id/Leads"
             android:icon="@drawable/leadsimage"
-            android:title="Leads"
-            android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold"/>
-
-        <item
-            android:id="@+id/Settings"
-            android:icon="@drawable/settingsimage"
-            android:title="Settings"
             android:textSize="22sp"
-            android:textColor="@color/textcolor"
-            android:textStyle="normal|bold" />
-
+            android:textStyle="normal|bold"
+            android:title="Leads" />
         <item
             android:id="@+id/Invices"
             android:icon="@drawable/invoicesicon"
-            android:title="Invoices"
-            android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold"/>
-
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Invoices" />
         <item
             android:id="@+id/Reports"
             android:icon="@drawable/reportsimage"
-            android:title="Reports"
-            android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold" />
-
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Reports" />
         <item
             android:id="@+id/Calulator"
             android:icon="@drawable/calculatoricon"
-            android:title="Loan Calculator"
-            android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold"/>
-
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Loan Calculator" />
+        <item
+            android:id="@+id/Settings"
+            android:icon="@drawable/settingsimage"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Settings" />
     </group>
 
 </menu>
