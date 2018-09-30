@@ -20,6 +20,21 @@
             android:textColor="@color/textcolor"
             android:textStyle="normal|bold"/>
 
+        <item
+            android:id="@+id/Settings"
+            android:icon="@drawable/settingsimage"
+            android:title="Settings"
+            android:textSize="22sp"
+            android:textColor="@color/textcolor"
+            android:textStyle="normal|bold" />
+
+        <item
+            android:id="@+id/Invices"
+            android:icon="@drawable/invoicesicon"
+            android:title="Invoices"
+            android:textSize="22sp"
+            android:textColor="@color/textcolor"
+            android:textStyle="normal|bold"/>
 
         <item
             android:id="@+id/Reports"
@@ -30,14 +45,13 @@
             android:textStyle="normal|bold" />
 
         <item
-            android:id="@+id/Settings"
-            android:icon="@drawable/settingsimage"
-            android:title="Settings"
+            android:id="@+id/Calulator"
+            android:icon="@drawable/calculatoricon"
+            android:title="Loan Calculator"
             android:textSize="22sp"
             android:textColor="@color/textcolor"
-            android:textStyle="normal|bold" />
+            android:textStyle="normal|bold"/>
 
     </group>
-
 
 </menu>

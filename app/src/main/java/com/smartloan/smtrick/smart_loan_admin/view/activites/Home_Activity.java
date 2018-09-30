@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.GeneratedLeedsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UsersFragement;
 
@@ -22,6 +23,7 @@ public class Home_Activity extends AppCompatActivity
         implements
         UsersFragement.OnFragmentInteractionListener,
         GeneratedLeedsFragment.OnFragmentInteractionListener,
+        LoanCalculatorFragement.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,42 +54,28 @@ public class Home_Activity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        if (id == R.id.Users) {
-            fragment = new UserTabsFragment();
-        } else if (id == R.id.Leads) {
-            fragment = new LeedsTabsFragment();
-        } else if (id == R.id.Reports) {
-
-        } else if (id == R.id.Settings) {
-
+        switch (id) {
+            case R.id.Users:
+                fragment = new UserTabsFragment();
+                break;
+            case R.id.Leads:
+                fragment = new LeedsTabsFragment();
+                break;
+            case R.id.Reports:
+                break;
+            case R.id.Settings:
+                break;
+            case R.id.Invices:
+                break;
+            case R.id.Calulator:
+                fragment = new LoanCalculatorFragement();
+                break;
         }
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
