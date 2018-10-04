@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan_admin;
+package com.smartloan.smtrick.smart_loan_admin.view.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,23 +10,22 @@ import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.models.Item;
 
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Simple example of ListAdapter for using with Folding Cell
- * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
- */
-@SuppressWarnings({"WeakerAccess", "unused"})
-public class FoldingCellListAdapter extends ArrayAdapter<Item> {
+public class LeedsReportAdapter extends ArrayAdapter<Item> {
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
 
-    public FoldingCellListAdapter(Context context, List<Item> objects) {
+
+
+    public LeedsReportAdapter(Context context, List<Item> objects) {
         super(context, 0, objects);
     }
+
 
     @NonNull
     @Override
@@ -35,11 +34,11 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         Item item = getItem(position);
         // if cell is exists - reuse it, if not - create the new one from resource
         FoldingCell cell = (FoldingCell) convertView;
-        ViewHolder viewHolder;
+        LeedsReportAdapter.ViewHolder viewHolder;
         if (cell == null) {
-            viewHolder = new ViewHolder();
+            viewHolder = new LeedsReportAdapter.ViewHolder();
             LayoutInflater vi = LayoutInflater.from(getContext());
-            cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
+            cell = (FoldingCell) vi.inflate(R.layout.leeds_report_adapter_layout, parent, false);
             // binding view parts to view holder
             viewHolder.price = cell.findViewById(R.id.title_price);
             viewHolder.time = cell.findViewById(R.id.title_time_label);
@@ -57,7 +56,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             } else {
                 cell.fold(true);
             }
-            viewHolder = (ViewHolder) cell.getTag();
+            viewHolder = (LeedsReportAdapter.ViewHolder) cell.getTag();
         }
 
         if (null == item)

@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name=".view.activites.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,15 +17,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginScreen"
+            android:name=".view.activites.LoginScreen"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Registeractivity"
+            android:name=".view.activites.Registeractivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activites.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Home_Activity" />
+        <activity android:name=".view.activites.Home_Activity" >
+
+        </activity>
     </application>
 
 </manifest>

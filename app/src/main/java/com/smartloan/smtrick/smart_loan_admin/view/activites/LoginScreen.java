@@ -1,4 +1,4 @@
-package com.smartloan.smtrick.smart_loan_admin;
+package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
 import android.content.Intent;
 import android.os.Bundle;

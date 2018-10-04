@@ -1,12 +1,9 @@
-package com.smartloan.smtrick.smart_loan_admin;
+package com.smartloan.smtrick.smart_loan_admin.models;
 
 import android.view.View;
 
 import java.util.ArrayList;
 
-/**
- * Simple POJO model for example
- */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Item {
 
@@ -141,7 +138,35 @@ public class Item {
         items.add(new Item("200000", "$150", "Mr. Pratik Patel", "Status: Loan Approved", "", "TODAY", "4:15 AM"));
         items.add(new Item("200000", "$300",  "Mr. Pratik Patel", "Status: Loan Approved", "", "TODAY", "06:15 PM"));
         return items;
-
     }
 
+    public static ArrayList<Item> getGeneratedList() {
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("200000", "$270", "Mr. Pratik Patel", "Status: New Leed", "a", "TODAY", "05:10 PM"));
+        items.add(new Item("200000", "$116", "Mr. Pratik Patel", "Status: New Leed", "", "TODAY", "11:10 AM"));
+        items.add(new Item("200000", "$350", "Mr. Pratik Patel", "Status: New Leed", "", "TODAY", "07:11 PM"));
+        items.add(new Item("200000", "$150", "Mr. Pratik Patel", "Status: New Leed", "", "TODAY", "4:15 AM"));
+        items.add(new Item("200000", "$300",  "Mr. Pratik Patel", "Status: New Leed", "", "TODAY", "06:15 PM"));
+        return items;
+    }
+
+    public static ArrayList<Item> getVerifiedList() {
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("200000", "$270", "Mr. Pratik Patel", "Status: Verified", "a", "TODAY", "05:10 PM"));
+        items.add(new Item("200000", "$116", "Mr. Pratik Patel", "Status: Verified", "", "TODAY", "11:10 AM"));
+        items.add(new Item("200000", "$350", "Mr. Pratik Patel", "Status: Verified", "", "TODAY", "07:11 PM"));
+        items.add(new Item("200000", "$150", "Mr. Pratik Patel", "Status: Verified", "", "TODAY", "4:15 AM"));
+        items.add(new Item("200000", "$300",  "Mr. Pratik Patel", "Status: Verified", "", "TODAY", "06:15 PM"));
+        return items;
+    }
+
+    public static ArrayList<Item> getRejectedList() {
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item("200000", "$270", "Mr. Pratik Patel", "Status: Rejected", "a", "TODAY", "05:10 PM"));
+        items.add(new Item("200000", "$116", "Mr. Pratik Patel", "Status: Rejected", "", "TODAY", "11:10 AM"));
+        items.add(new Item("200000", "$350", "Mr. Pratik Patel", "Status: Rejected", "", "TODAY", "07:11 PM"));
+        items.add(new Item("200000", "$150", "Mr. Pratik Patel", "Status: Rejected", "", "TODAY", "4:15 AM"));
+        items.add(new Item("200000", "$300",  "Mr. Pratik Patel", "Status: Rejected", "", "TODAY", "06:15 PM"));
+        return items;
+    }
 }
