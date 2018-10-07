@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin.models.UserModel;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.UsersAdapter;
 
@@ -130,10 +131,5 @@ public class UsersFragement extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
-
-    public interface OnFragmentInteractionListener {
-        // NOTE : We changed the Uri to String.
-        void onFragmentInteraction(String title);
     }
 }

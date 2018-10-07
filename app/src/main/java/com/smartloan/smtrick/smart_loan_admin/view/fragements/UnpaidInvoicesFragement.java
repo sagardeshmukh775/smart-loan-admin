@@ -76,8 +76,8 @@ public class UnpaidInvoicesFragement  extends Fragment implements AdapterView.On
         ArrayList<Invoice> results = new ArrayList<Invoice>();
         for (int i = 0; i < 20; i++) {
             Invoice sr = new Invoice();
-            sr.setName("2345");
-            sr.setCityState("Mr Pratik Patel");
+            sr.setInvoiceId("2345");
+            sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
             sr.setStatus("Unpaid");
             results.add(sr);

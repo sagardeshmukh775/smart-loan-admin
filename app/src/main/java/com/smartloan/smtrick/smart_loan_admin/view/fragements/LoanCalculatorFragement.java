@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 
 public class LoanCalculatorFragement extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -146,10 +147,5 @@ public class LoanCalculatorFragement extends Fragment implements AdapterView.OnI
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-    }
-
-    public interface OnFragmentInteractionListener {
-        // NOTE : We changed the Uri to String.
-        void onFragmentInteraction(String title);
     }
 }

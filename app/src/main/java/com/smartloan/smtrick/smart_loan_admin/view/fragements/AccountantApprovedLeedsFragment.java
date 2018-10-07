@@ -11,8 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.RecyclerListener.RecyclerTouchListener;
@@ -21,23 +19,25 @@ import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
 import com.smartloan.smtrick.smart_loan_admin.view.activites.AccountantUpdateLeedsActivity;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.AccountantLeedsAdapter;
 
-public class LeedsReportFragment extends Fragment {
+
+public class AccountantApprovedLeedsFragment extends Fragment {
+    public OnFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
     AccountantLeedsAdapter accountantLeedsAdapter;
 
-    public LeedsReportFragment() {
+    public AccountantApprovedLeedsFragment() {
+        // Required empty public constructor
     }
 
-    Spinner spinloantype, spinemptype, spinincome;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_leeds_report, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        if (mListener != null) {
+            mListener.onFragmentInteraction("Approved Leeds");
+        }
+        View view = inflater.inflate(R.layout.fragment_accountant_approved, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_leeds);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -63,5 +63,21 @@ public class LeedsReportFragment extends Fragment {
 
             }
         }));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 }

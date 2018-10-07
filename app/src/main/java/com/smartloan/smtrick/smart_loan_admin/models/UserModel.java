@@ -1,5 +1,7 @@
 package com.smartloan.smtrick.smart_loan_admin.models;
 
+import java.util.ArrayList;
+
 public class UserModel {
     private String name, type, mobileNumber, userStatus, userId, address, email, gender, dateOfBirth, joiningDateTime, createdDateTime;
 
@@ -92,5 +94,27 @@ public class UserModel {
 
     public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
+    }
+
+    public static ArrayList<UserModel> getUsersList() {
+        ArrayList<UserModel> results = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            if (i % 2 == 0) {
+                UserModel sr = new UserModel();
+                sr.setName("Mr Pratik Patel");
+                sr.setType("Sales");
+                sr.setMobileNumber("7030648899");
+                sr.setUserStatus("Active");
+                results.add(sr);
+            } else {
+                UserModel sr = new UserModel();
+                sr.setName("Mr Sagar Mule");
+                sr.setType("TelleCaller");
+                sr.setMobileNumber("7030648899");
+                sr.setUserStatus("Deactive");
+                results.add(sr);
+            }
+        }
+        return results;
     }
 }

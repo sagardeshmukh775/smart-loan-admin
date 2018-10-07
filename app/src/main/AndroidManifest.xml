@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activites.SplashScreen">
+        <activity
+            android:name=".view.activites.SplashScreen"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +27,17 @@
         <activity
             android:name=".view.activites.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".view.activites.Home_Activity" >
+        <activity
+            android:name=".view.activites.Home_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.AccountantHomeActivity"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity
+            android:name=".view.activites.AccountantUpdateLeedsActivity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

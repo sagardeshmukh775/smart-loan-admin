@@ -13,22 +13,21 @@ import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
-import com.smartloan.smtrick.smart_loan_admin.view.fragements.InvoicesTabFragement;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantApprovedLeedsFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantInvoicesTabFragment;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantUsersFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsReportFragment;
-import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.ReportsTabFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UnderConstrationFragement;
-import com.smartloan.smtrick.smart_loan_admin.view.fragements.UserTabsFragment;
 
-public class Home_Activity extends AppCompatActivity
-        implements
+public class AccountantHomeActivity extends AppCompatActivity implements
         OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_);
+        setContentView(R.layout.activity_accountant_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -40,7 +39,7 @@ public class Home_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // get our list view
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFrame, new LeedsTabsFragment());
+        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
         ft.commit();
     }
 
@@ -63,10 +62,10 @@ public class Home_Activity extends AppCompatActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.Users:
-                fragment = new UserTabsFragment();
+                fragment = new AccountantUsersFragment();
                 break;
             case R.id.Leads:
-                fragment = new LeedsTabsFragment();
+                fragment = new AccountantApprovedLeedsFragment();
                 break;
             case R.id.Reports:
                 fragment = new ReportsTabFragment();
@@ -75,7 +74,7 @@ public class Home_Activity extends AppCompatActivity
                 fragment = new UnderConstrationFragement();
                 break;
             case R.id.Invices:
-                fragment = new InvoicesTabFragement();
+                fragment = new AccountantInvoicesTabFragment();
                 break;
             case R.id.Calulator:
                 fragment = new LoanCalculatorFragement();

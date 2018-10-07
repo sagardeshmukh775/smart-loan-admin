@@ -27,5 +27,7 @@
     <item type="color" name="textcolor">#7e7e7e</item>
     <item type="color" name="red">#ef6868</item>
     <item type="color" name="edittexthintcolor">#7e7e7e</item>
+    <item type="color" name="white">#ffffff</item>
+    <color name="lightgraycolor">#0ee67a2c</color>
 
 </resources>

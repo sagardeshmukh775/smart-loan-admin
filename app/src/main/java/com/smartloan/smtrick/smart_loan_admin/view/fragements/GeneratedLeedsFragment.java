@@ -13,6 +13,7 @@ import android.widget.Spinner;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin.models.Item;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.FoldingCellListAdapter;
 
@@ -99,11 +100,6 @@ public class GeneratedLeedsFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
-
-    public interface OnFragmentInteractionListener {
-        // NOTE : We changed the Uri to String.
-        void onFragmentInteraction(String title);
     }
 }
 

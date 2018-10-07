@@ -1,8 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.fragements;
 
-
-import android.content.Context;
-import android.content.Intent;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,24 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Spinner;
+import android.widget.Button;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.RecyclerListener.RecyclerTouchListener;
-import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
-import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
-import com.smartloan.smtrick.smart_loan_admin.view.activites.AccountantUpdateLeedsActivity;
-import com.smartloan.smtrick.smart_loan_admin.view.adapters.AccountantLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin.models.Invoice;
+import com.smartloan.smtrick.smart_loan_admin.view.adapters.AccountantInvoiceAdapter;
 
-public class LeedsReportFragment extends Fragment {
+public class InvoiceReporsFragement extends Fragment {
     private RecyclerView recyclerView;
-    AccountantLeedsAdapter accountantLeedsAdapter;
+    AccountantInvoiceAdapter accountantInvoiceAdapter;
 
-    public LeedsReportFragment() {
+    public InvoiceReporsFragement() {
     }
-
-    Spinner spinloantype, spinemptype, spinincome;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +38,8 @@ public class LeedsReportFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
        /* recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));*/
-        accountantLeedsAdapter = new AccountantLeedsAdapter(LeedModel.getLeedsModelList());
-        recyclerView.setAdapter(accountantLeedsAdapter);
+        accountantInvoiceAdapter = new AccountantInvoiceAdapter(Invoice.getPaidInvoices());
+        recyclerView.setAdapter(accountantInvoiceAdapter);
         onClickListner();
         return view;
     }
@@ -55,7 +48,7 @@ public class LeedsReportFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                startActivity(new Intent(getActivity(), AccountantUpdateLeedsActivity.class));
+                showDetailDialog();
             }
 
             @Override
@@ -63,5 +56,26 @@ public class LeedsReportFragment extends Fragment {
 
             }
         }));
+    }
+
+    private void showDetailDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.accountant_invoices_detail_dialog_layout);
+        dialog.setTitle("Title...");
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonaccept);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        Button dialogButton2 = (Button) dialog.findViewById(R.id.dialogButtonreject);
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

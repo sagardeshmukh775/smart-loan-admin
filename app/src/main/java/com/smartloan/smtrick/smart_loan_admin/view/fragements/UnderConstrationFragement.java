@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
+
 public class UnderConstrationFragement extends Fragment implements AdapterView.OnItemSelectedListener {
-    private UnderConstrationFragement.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     public UnderConstrationFragement() {
     }
@@ -35,8 +37,8 @@ public class UnderConstrationFragement extends Fragment implements AdapterView.O
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof UnderConstrationFragement.OnFragmentInteractionListener) {
-            mListener = (UnderConstrationFragement.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             // NOTE: This is the part that usually gives you the error
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
@@ -57,10 +59,5 @@ public class UnderConstrationFragement extends Fragment implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
-
-    public interface OnFragmentInteractionListener {
-        // NOTE : We changed the Uri to String.
-        void onFragmentInteraction(String title);
     }
 }

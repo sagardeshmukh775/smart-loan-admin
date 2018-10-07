@@ -46,9 +46,8 @@ public class InvoicesAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.txtName.setText(searchArrayList.get(position).getName());
-        holder.txtCityState.setText(searchArrayList.get(position)
-                .getCityState());
+        holder.txtName.setText(searchArrayList.get(position).getInvoiceId());
+        holder.txtCityState.setText(searchArrayList.get(position).getCustomerName());
         holder.txtPhone.setText(searchArrayList.get(position).getPhone());
         holder.txtStatus.setText(searchArrayList.get(position).getStatus());
         return convertView;
