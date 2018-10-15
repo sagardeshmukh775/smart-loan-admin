@@ -37,8 +37,6 @@ public class AccountantLeedsAdapter extends RecyclerView.Adapter<LeedsViewHolder
             holder.txtBank.setText(leedModel.getBankName());
             holder.txtTotalAmount.setText(leedModel.getTotalAmount());
             holder.txtAgentID.setText(leedModel.getAgentId());
-            holder.txtStatus.setText(leedModel.getStatus());
-            holder.txtDate.setText(leedModel.getDateTime());
             holder.txtLoanType.setText(leedModel.getLoanType());
         } catch (Exception e) {
             e.printStackTrace();

@@ -58,16 +58,26 @@
                 android:layout_height="wrap_content"
                 android:text="Date:"
                 android:padding="2dp"
-
                 android:textColor="@color/darkgraycolor"
                 android:textSize="14dp"
                 />
+
+
 
             <TextView
                 android:id="@+id/txtcname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C Name:"
+                android:padding="2dp"
+                android:textColor="@color/darkgraycolor"
+                android:textSize="14dp"/>
+
+            <TextView
+                android:id="@+id/txtbank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank:"
                 android:padding="2dp"
                 android:textColor="@color/darkgraycolor"
                 android:textSize="14dp"/>
@@ -82,19 +92,28 @@
                 android:textSize="14dp"/>
 
             <TextView
-                android:id="@+id/txtloanammount"
+            android:id="@+id/txtloanammount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loan Amount:"
+            android:padding="2dp"
+            android:textColor="@color/darkgraycolor"
+            android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/txtdissbuss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loan Amount:"
+                android:text="Disbursement:"
                 android:padding="2dp"
                 android:textColor="@color/darkgraycolor"
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtbank"
+                android:id="@+id/txtgst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bank:"
+                android:text="GST:"
                 android:padding="2dp"
                 android:textColor="@color/darkgraycolor"
                 android:textSize="14dp"/>
@@ -148,6 +167,15 @@
                 />
 
             <TextView
+                android:id="@+id/txtbankvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Axis Bank"
+                android:padding="2dp"
+                android:textColor="@color/whitetextcolor"
+                android:textSize="14dp"/>
+
+            <TextView
                 android:id="@+id/txtloantypevalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,15 +191,23 @@
                 android:layout_height="wrap_content"
                 android:text="500000"
                 android:padding="2dp"
-
                 android:textColor="@color/whitetextcolor"
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtbankvalue"
+                android:id="@+id/txtloandissammount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Axis Bank"
+                android:text="200000"
+                android:padding="2dp"
+                android:textColor="@color/whitetextcolor"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/txtgstvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
                 android:padding="2dp"
                 android:textColor="@color/whitetextcolor"
                 android:textSize="14dp"/>
@@ -195,25 +231,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainlayout">
-
-    <EditText
-        android:id="@+id/edittextresone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0sp"
-        android:background="@drawable/edittext_bprder"
-        android:gravity="center_horizontal"
-        android:hint="Reject then Enter Reason"
-        android:maxLength="30"
-        android:padding="10sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColorHint="@color/hinttextcolor"
-        android:paddingLeft="4dp"
-        android:textColor="@color/whitetextcolor"
-        android:textSize="15sp" />
-
-    >
+        >
 </RelativeLayout>
 
 
@@ -232,23 +250,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:background="@color/btnRequest"
-            android:text="ACCEPT"
+            android:text="CANCEL"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:textStyle="normal|bold" />
 
-        <Button
-            android:id="@+id/dialogButtonreject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1sp"
-            android:layout_weight="50"
-            android:background="@color/btnRequest"
-            android:hint="Enter Notice Description"
-            android:text="REJECT"
-            android:textColor="#ffffff"
-            android:textSize="16sp"
-            android:textStyle="normal|bold" />
+
     </LinearLayout>
 
 </RelativeLayout>

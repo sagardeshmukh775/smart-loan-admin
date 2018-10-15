@@ -57,7 +57,7 @@
                 android:id="@+id/txt_Status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status:"
+                android:text="Agent:"
                 android:textColor="@color/darkgraycolor"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -104,7 +104,7 @@
                 android:id="@+id/txt_status_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sent"
+                android:text="AG 47474"
                 android:textColor="@color/whitetextcolor"
                 android:textSize="14dp" />
 

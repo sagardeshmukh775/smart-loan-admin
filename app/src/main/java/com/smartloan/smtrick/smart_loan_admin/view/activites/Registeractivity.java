@@ -21,9 +21,8 @@ import com.smartloan.smtrick.smart_loan_admin.R;
 
 public class Registeractivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
-    TextView txtlogin;
+    TextView txtlogin,txttc;
     Button btlogin;
-    String[] usertypes = {"Accountant", "Tellecaller"};
     EditText etname, etaddress, etmobile, etusername, etpassword, emailid, etreenterpassword;
     Spinner spin;
     RadioButton Rdmale, RdFemale;
@@ -38,11 +37,12 @@ public class Registeractivity extends AppCompatActivity implements
         String[] Userstype = new String[]{
                 "Admin",
                 "Accountant",
-                "Telecaller"};
+                "Telecaller",
+                "Coordinator",
+                "Sales"};
 
-        txtlogin = (TextView) findViewById(R.id.txtRegister);
+        //txtlogin = (TextView) findViewById(R.id.txtRegister);
         btlogin = (Button) findViewById(R.id.buttonsubmit);
-
         etname = (EditText) findViewById(R.id.edittextname);
         etaddress = (EditText) findViewById(R.id.edittextaddress);
         etmobile = (EditText) findViewById(R.id.edittextmobile);
@@ -50,11 +50,12 @@ public class Registeractivity extends AppCompatActivity implements
         etpassword = (EditText) findViewById(R.id.edittextpassword);
         emailid = (EditText) findViewById(R.id.edittextemailid);
         etreenterpassword = (EditText) findViewById(R.id.edittextreenterpassword);
-
         Rdmale = (RadioButton) findViewById(R.id.radiomale);
         RdFemale = (RadioButton) findViewById(R.id.radiofemale);
-
         spin = (Spinner) findViewById(R.id.spinnerselectusertype);
+
+        txttc = (TextView) findViewById(R.id.txttermsandconditions);
+
         spin.setOnItemSelectedListener(this);
 
 
@@ -90,10 +91,12 @@ public class Registeractivity extends AppCompatActivity implements
             }
         });
 
-        txtlogin.setOnClickListener(new View.OnClickListener() {
+
+
+        txttc.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent i = new Intent(Registeractivity.this, LoginScreen.class);
+                Intent i = new Intent(Registeractivity.this, TermsCondition_Activity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
 
@@ -106,6 +109,16 @@ public class Registeractivity extends AppCompatActivity implements
                 Intent i;
                 if (spin.getSelectedItem().toString().equalsIgnoreCase("Accountant"))
                     i = new Intent(Registeractivity.this, AccountantHomeActivity.class);
+
+                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Telecaller"))
+                    i = new Intent(Registeractivity.this, MainActivity_telecaller.class);
+
+                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Coordinator"))
+                    i = new Intent(Registeractivity.this, MainActivity_coordinator.class);
+
+                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Sales"))
+                    i = new Intent(Registeractivity.this, MainActivity_sales.class);
+
                 else
                     i = new Intent(Registeractivity.this, Home_Activity.class);
                 startActivity(i);

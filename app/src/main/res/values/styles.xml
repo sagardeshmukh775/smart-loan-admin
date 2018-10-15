@@ -41,8 +41,15 @@
         <item name="android:textSize">20sp</item><!-- text size in menu-->
         <item name="android:listPreferredItemHeightSmall">20dp</item><!-- item size in menu-->
         <item name="listPreferredItemHeightSmall">20dp</item><!-- item size in menu-->
+
     </style>
 
+
+    <style name="MyToolbarTheme"
+        parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="colorControlNormal">@color/whiteheadercolor</item>
+        <item name="titleTextColor">@color/whiteheadercolor</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -38,6 +38,38 @@
         <activity
             android:name=".view.activites.AccountantUpdateLeedsActivity"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.MainActivity_telecaller"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Updatelead_Activity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.MainActivity_sales"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.MainActivity_coordinator"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.ViewLead_Sales_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Updatelead_Activity_Coordinator"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.TermsCondition_Activity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.View_lead_admin_activity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.Generate_invoice_Activity_Accountant"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

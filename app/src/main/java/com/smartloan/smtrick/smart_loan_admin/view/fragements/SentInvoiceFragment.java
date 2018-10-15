@@ -60,13 +60,7 @@ public class SentInvoiceFragment extends Fragment implements AdapterView.OnItemS
                                 dialog.dismiss();
                             }
                         });
-                        Button dialogButton2 = (Button) dialog.findViewById(R.id.dialogButtonreject);
-                        dialogButton2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
+
                         dialog.show();
                     }
                 });
@@ -82,7 +76,6 @@ public class SentInvoiceFragment extends Fragment implements AdapterView.OnItemS
             sr.setInvoiceId("2345");
             sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
-            sr.setStatus("Sent");
             results.add(sr);
         }
         return results;

@@ -41,7 +41,6 @@ public class InvoicesAdapter extends BaseAdapter {
             holder.txtName = (TextView) convertView.findViewById(R.id.txtidvalue);
             holder.txtCityState = (TextView) convertView.findViewById(R.id.txtcnamevalue);
             holder.txtPhone = (TextView) convertView.findViewById(R.id.txtbankvalue);
-            holder.txtStatus = (TextView) convertView.findViewById(R.id.txt_status_value);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -49,7 +48,6 @@ public class InvoicesAdapter extends BaseAdapter {
         holder.txtName.setText(searchArrayList.get(position).getInvoiceId());
         holder.txtCityState.setText(searchArrayList.get(position).getCustomerName());
         holder.txtPhone.setText(searchArrayList.get(position).getPhone());
-        holder.txtStatus.setText(searchArrayList.get(position).getStatus());
         return convertView;
     }
 

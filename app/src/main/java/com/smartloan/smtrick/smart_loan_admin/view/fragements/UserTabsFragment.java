@@ -26,8 +26,8 @@ public class UserTabsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_tabs, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPagerAdapter.addFragement(new UsersFragement(), "Staff");
-        viewPagerAdapter.addFragement(new UserRequestFragement(), "Requests");
+        viewPagerAdapter.addFragement(new UsersFragement(), "Users");
+        viewPagerAdapter.addFragement(new UserRequestFragement(), "New Requests");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

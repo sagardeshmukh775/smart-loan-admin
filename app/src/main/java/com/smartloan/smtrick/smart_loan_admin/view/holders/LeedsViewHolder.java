@@ -25,8 +25,6 @@ public class LeedsViewHolder extends RecyclerView.ViewHolder {
             txtBank = (TextView) itemView.findViewById(R.id.txt_bank_value);
             txtTotalAmount = (TextView) itemView.findViewById(R.id.txt_amount_value);
             txtAgentID = (TextView) itemView.findViewById(R.id.txt_agent_value);
-            txtDate = (TextView) itemView.findViewById(R.id.txt_date_value);
-            txtStatus = (TextView) itemView.findViewById(R.id.txt_status_value);
             txtLoanType = (TextView) itemView.findViewById(R.id.txt_loan_type_value);
         } catch (Exception e) {
             e.printStackTrace();

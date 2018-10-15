@@ -1,7 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.fragements;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.RecyclerListener.RecyclerTouchListener;
-import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
-import com.smartloan.smtrick.smart_loan_admin.view.activites.AccountantUpdateLeedsActivity;
+import com.smartloan.smtrick.smart_loan_admin.view.activites.View_lead_admin_activity;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.AccountantLeedsAdapter;
 
 public class LeedsReportFragment extends Fragment {
@@ -55,7 +52,7 @@ public class LeedsReportFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                startActivity(new Intent(getActivity(), AccountantUpdateLeedsActivity.class));
+                startActivity(new Intent(getActivity(), View_lead_admin_activity.class));
             }
 
             @Override

@@ -16,7 +16,7 @@ import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
-import com.smartloan.smtrick.smart_loan_admin.view.activites.AccountantUpdateLeedsActivity;
+import com.smartloan.smtrick.smart_loan_admin.view.activites.Generate_invoice_Activity_Accountant;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.AccountantLeedsAdapter;
 
 
@@ -55,7 +55,7 @@ public class AccountantApprovedLeedsFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                startActivity(new Intent(getActivity(), AccountantUpdateLeedsActivity.class));
+                startActivity(new Intent(getActivity(), Generate_invoice_Activity_Accountant.class));
             }
 
             @Override

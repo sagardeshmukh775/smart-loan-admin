@@ -25,10 +25,10 @@ public class LeedsTabsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_tabs, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPagerAdapter.addFragement(new GeneratedLeedsFragment(), "Generated");
-        viewPagerAdapter.addFragement(new VerifiedLeedsFragment(), "Verified");
-        viewPagerAdapter.addFragement(new BankAcceptedLeedsFragment(), "Bank Accepted");
-        viewPagerAdapter.addFragement(new BankRejectedLeedsFragment(), "Bank Rejected");
+        viewPagerAdapter.addFragement(new Add_fragment_lead_tab_generated(), "Generated");
+        viewPagerAdapter.addFragement(new Add_fragment_lead_tab_generated(), "Verified");
+        viewPagerAdapter.addFragement(new Add_fragment_lead_tab_generated(), "Approved");
+        viewPagerAdapter.addFragement(new Add_fragment_lead_tab_generated(), "Rejected");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setTabMode(0);

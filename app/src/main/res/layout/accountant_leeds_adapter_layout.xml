@@ -75,21 +75,7 @@
                     android:textColor="@color/darkgraycolor"
                     android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/txt_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Date:"
-                    android:textColor="@color/darkgraycolor"
-                    android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/txt_Status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Status :"
-                    android:textColor="@color/darkgraycolor"
-                    android:textSize="14dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -146,21 +132,6 @@
                     android:textColor="@color/whitetextcolor"
                     android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/txt_date_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="23/08/2018"
-                    android:textColor="@color/whitetextcolor"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/txt_status_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sent"
-                    android:textColor="@color/whitetextcolor"
-                    android:textSize="14dp" />
 
             </LinearLayout>
 

@@ -60,7 +60,7 @@ public class InvoiceReporsFragement extends Fragment {
 
     private void showDetailDialog() {
         final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.accountant_invoices_detail_dialog_layout);
+        dialog.setContentView(R.layout.invoicedialog);
         dialog.setTitle("Title...");
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonaccept);
         dialogButton.setOnClickListener(new View.OnClickListener() {
@@ -69,13 +69,7 @@ public class InvoiceReporsFragement extends Fragment {
                 dialog.dismiss();
             }
         });
-        Button dialogButton2 = (Button) dialog.findViewById(R.id.dialogButtonreject);
-        dialogButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+
         dialog.show();
     }
 }
