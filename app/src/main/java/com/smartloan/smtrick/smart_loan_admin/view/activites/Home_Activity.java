@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.InvoicesTabFragement;
-import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsReportFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.ReportsTabFragment;
@@ -25,6 +24,7 @@ public class Home_Activity extends AppCompatActivity
         implements
         OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,8 @@ public class Home_Activity extends AppCompatActivity
         ft.replace(R.id.mainFrame, new LeedsTabsFragment());
         ft.commit();
     }
+
+
 
     @Override
     public void onBackPressed() {
