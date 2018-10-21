@@ -47,4 +47,5 @@ public class Constant {
     //****************************************************************
     public static final String LEED_MODEL = "LEED_MODEL";
     public static final String LEED_MODEL3 = "LEED_MODEL3";
+    public static final String LEED_MODEL2 = "LEED_MODEL2";
 }
