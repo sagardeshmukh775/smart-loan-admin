@@ -80,6 +80,7 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             @Override
             public void onLongClick(View view, int position) {
             }
+
         }));
     }
 
