@@ -46,4 +46,5 @@ public class Constant {
     public static final String TIME_DATE_FORMATE = "hh:mm a";
     //****************************************************************
     public static final String LEED_MODEL = "LEED_MODEL";
+    public static final String LEED_MODEL3 = "LEED_MODEL3";
 }
