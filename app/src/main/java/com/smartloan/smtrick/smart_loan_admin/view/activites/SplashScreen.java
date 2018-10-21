@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity implements AnimationListener
 				finish();
 
 				// Start MainActivity.class
-				Intent myIntent = new Intent(SplashScreen.this, Registeractivity.class);
+				Intent myIntent = new Intent(SplashScreen.this, LoginScreen.class);
 				startActivity(myIntent);
 				overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 

@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Fragment_Calculator;
+import com.smartloan.smtrick.smart_loan_admin.view.fragements.Fragment_Reports;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Telecaller_Fragment_leads;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Telecaller_fragment_Reports;
 
@@ -29,6 +31,8 @@ public class MainActivity_telecaller extends AppCompatActivity
 
         NavigationView.OnNavigationItemSelectedListener {
 
+    private AppSharedPreference appSharedPreference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class MainActivity_telecaller extends AppCompatActivity
         setContentView(R.layout.activity_main_telecaller);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        appSharedPreference = new AppSharedPreference(this);
 
         // NOTE : Just remove the fab button
 
@@ -101,7 +107,7 @@ public class MainActivity_telecaller extends AppCompatActivity
         } else if (id == R.id.Reports) {
             fragment = new Telecaller_fragment_Reports();
         }else if (id == R.id.Calulator) {
-            fragment = new Fragment_Calculator();
+            fragment = new Fragment_Reports();
         }
 
         //NOTE: Fragment changing code
@@ -116,6 +122,8 @@ public class MainActivity_telecaller extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     @Override
     public void onFragmentInteraction(String title) {

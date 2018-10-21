@@ -40,13 +40,13 @@ public class LeedsReportAdapter extends ArrayAdapter<Item> {
             LayoutInflater vi = LayoutInflater.from(getContext());
             cell = (FoldingCell) vi.inflate(R.layout.leeds_report_adapter_layout, parent, false);
             // binding view parts to view holder
-            viewHolder.price = cell.findViewById(R.id.title_price);
-            viewHolder.time = cell.findViewById(R.id.title_time_label);
+            viewHolder.price = cell.findViewById(R.id.title_date_label);
+            viewHolder.time = cell.findViewById(R.id.title_date_label);
             viewHolder.date = cell.findViewById(R.id.title_date_label);
-            viewHolder.fromAddress = cell.findViewById(R.id.title_from_address);
-            viewHolder.toAddress = cell.findViewById(R.id.title_to_address);
-            viewHolder.requestsCount = cell.findViewById(R.id.title_requests_count);
-            viewHolder.pledgePrice = cell.findViewById(R.id.title_pledge);
+            viewHolder.fromAddress = cell.findViewById(R.id.title_date_label);
+            viewHolder.toAddress = cell.findViewById(R.id.title_date_label);
+            viewHolder.requestsCount = cell.findViewById(R.id.title_date_label);
+            viewHolder.pledgePrice = cell.findViewById(R.id.title_date_label);
             viewHolder.contentRequestBtn = cell.findViewById(R.id.content_request_btn);
             cell.setTag(viewHolder);
         } else {

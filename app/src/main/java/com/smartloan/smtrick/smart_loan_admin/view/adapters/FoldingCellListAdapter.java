@@ -1,5 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -14,6 +15,11 @@ import com.smartloan.smtrick.smart_loan_admin.models.Item;
 
 import java.util.HashSet;
 import java.util.List;
+
+/**
+ * Simple example of ListAdapter for using with Folding Cell
+ * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
+ */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class FoldingCellListAdapter extends ArrayAdapter<Item> {
 
@@ -27,6 +33,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
     }
 
 
+    @SuppressLint("CutPasteId")
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -40,13 +47,13 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             LayoutInflater vi = LayoutInflater.from(getContext());
             cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
             // binding view parts to view holder
-            viewHolder.price = cell.findViewById(R.id.title_price);
-            viewHolder.time = cell.findViewById(R.id.title_time_label);
+            viewHolder.price = cell.findViewById(R.id.title_date_label);
+            viewHolder.time = cell.findViewById(R.id.title_date_label);
             viewHolder.date = cell.findViewById(R.id.title_date_label);
-            viewHolder.fromAddress = cell.findViewById(R.id.title_from_address);
-            viewHolder.toAddress = cell.findViewById(R.id.title_to_address);
-            viewHolder.requestsCount = cell.findViewById(R.id.title_requests_count);
-            viewHolder.pledgePrice = cell.findViewById(R.id.title_pledge);
+            viewHolder.fromAddress = cell.findViewById(R.id.title_date_label);
+            viewHolder.toAddress = cell.findViewById(R.id.title_date_label);
+            viewHolder.requestsCount = cell.findViewById(R.id.title_date_label);
+            viewHolder.pledgePrice = cell.findViewById(R.id.title_date_label);
             viewHolder.contentRequestBtn = cell.findViewById(R.id.content_request_btn);
             cell.setTag(viewHolder);
         } else {
@@ -71,12 +78,15 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         viewHolder.requestsCount.setText(String.valueOf(item.getRequestsCount()));
         viewHolder.pledgePrice.setText(item.getPledgePrice());
 
+
         // set custom btn handler for list item from that item
         if (item.getRequestBtnClickListener() != null) {
             viewHolder.contentRequestBtn.setOnClickListener(item.getRequestBtnClickListener());
         } else {
             // (optionally) add "default" handler if no handler found in item
             viewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
+
+
         }
 
         return cell;
@@ -116,5 +126,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         TextView requestsCount;
         TextView date;
         TextView time;
+        TextView textrequest;
+
     }
 }

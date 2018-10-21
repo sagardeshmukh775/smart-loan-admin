@@ -21,12 +21,14 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
     // NOTE: Removed Some unwanted Boiler Plate Codes
     private OnFragmentInteractionListener mListener;
 
-    public Telecaller_Fragment_leads() {}
+    public Telecaller_Fragment_leads() {
+    }
+
     private Tab_Adapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    Spinner spinloantype,spinemptype,spinincome;
+    Spinner spinloantype, spinemptype, spinincome;
     Button emiCalcBtn;
     ProgressBar progressBar;
 
@@ -37,9 +39,9 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.telecaller_fragment_leads, container, false);
+        View view = inflater.inflate(R.layout.telecaller_fragment_leads, container, false);
 
         // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
         // ie we are sending "Fragment 1" as title parameter when fragment1 is activated
@@ -47,15 +49,15 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
             mListener.onFragmentInteraction("Leads");
         }
 
-        viewPager = (ViewPager)view.findViewById(R.id.viewPager);
+        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         //adapter = new Tab_Adapter(getSupportFragmentManager());
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Genrated");
-        adapter.addFragment(new Tc_fragment_lead_tab_verifiedleads(), "Verified");
-        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Accepted");
-        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
+        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Verified");
+        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Accepted");
+        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Rejected");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

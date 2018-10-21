@@ -18,23 +18,47 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin.exception.ExceptionUtil;
+import com.smartloan.smtrick.smart_loan_admin.models.User;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
+import com.smartloan.smtrick.smart_loan_admin.repository.UserRepository;
+import com.smartloan.smtrick.smart_loan_admin.repository.impl.UserRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
+
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.ACCOUNTANT;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.ADMIN;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.AGENT_PREFIX;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.CORDINATOR;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.FEMALE;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.MALE;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.TELECALLER;
 
 public class Registeractivity extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener {
-    TextView txtlogin,txttc;
-    Button btlogin;
-    EditText etname, etaddress, etmobile, etusername, etpassword, emailid, etreenterpassword;
+        AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
+    TextView txtlogin, txttc;
+    Button btlogin, btnotp;
+    EditText etname, etaddress, etmobile, editTextPassword, etusername, etpassword, emailid, etreenterpassword, etotp;
     Spinner spin;
     RadioButton Rdmale, RdFemale;
-
+    private UserRepository userRepository;
+    private ProgressDialogClass progressDialogClass;
+    private AppSharedPreference appSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.registeractivity);
+        userRepository = new UserRepositoryImpl(this);
+        progressDialogClass = new ProgressDialogClass(this);
+        appSharedPreference = new AppSharedPreference(this);
+        String[] Userstype = new String[]{"Agent"};
 
-        String[] Userstype = new String[]{
+
+        String[] Userstypeall = new String[]{
                 "Admin",
                 "Accountant",
                 "Telecaller",
@@ -43,6 +67,7 @@ public class Registeractivity extends AppCompatActivity implements
 
         //txtlogin = (TextView) findViewById(R.id.txtRegister);
         btlogin = (Button) findViewById(R.id.buttonsubmit);
+        btnotp = (Button) findViewById(R.id.buttongenerateotp);
         etname = (EditText) findViewById(R.id.edittextname);
         etaddress = (EditText) findViewById(R.id.edittextaddress);
         etmobile = (EditText) findViewById(R.id.edittextmobile);
@@ -50,135 +75,27 @@ public class Registeractivity extends AppCompatActivity implements
         etpassword = (EditText) findViewById(R.id.edittextpassword);
         emailid = (EditText) findViewById(R.id.edittextemailid);
         etreenterpassword = (EditText) findViewById(R.id.edittextreenterpassword);
+        editTextPassword = (EditText) findViewById(R.id.edittextreenterpassword);
+        etotp = (EditText) findViewById(R.id.edittextenterotp);
         Rdmale = (RadioButton) findViewById(R.id.radiomale);
         RdFemale = (RadioButton) findViewById(R.id.radiofemale);
-        spin = (Spinner) findViewById(R.id.spinnerselectusertype);
 
-        txttc = (TextView) findViewById(R.id.txttermsandconditions);
+        spin = (Spinner) findViewById(R.id.spinnerselectusertype);
 
         spin.setOnItemSelectedListener(this);
 
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.sppinner_layout_listitem, Userstype
+                this, R.layout.sppinner_layout_listitem, Userstypeall
         );
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spin.setAdapter(spinnerArrayAdapter);
 
 
-        Rdmale.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                Rdmale.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
 
-        RdFemale.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                RdFemale.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-
-
-        spin.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                spin.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-
-
-
-        txttc.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent i = new Intent(Registeractivity.this, TermsCondition_Activity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
-
-            }
-        });
-
-        btlogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(Registeractivity.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
-                Intent i;
-                if (spin.getSelectedItem().toString().equalsIgnoreCase("Accountant"))
-                    i = new Intent(Registeractivity.this, AccountantHomeActivity.class);
-
-                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Telecaller"))
-                    i = new Intent(Registeractivity.this, MainActivity_telecaller.class);
-
-                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Coordinator"))
-                    i = new Intent(Registeractivity.this, MainActivity_coordinator.class);
-
-                else if(spin.getSelectedItem().toString().equalsIgnoreCase("Sales"))
-                    i = new Intent(Registeractivity.this, MainActivity_sales.class);
-
-                else
-                    i = new Intent(Registeractivity.this, Home_Activity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
-
-            }
-        });
-
-        etname.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etname.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-        etaddress.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etaddress.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-        etmobile.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etmobile.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-        etusername.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etusername.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-        etpassword.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etpassword.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-
-        emailid.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                emailid.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-
-        etreenterpassword.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-                etreenterpassword.startAnimation(zoomOutAnimation);
-                return false;
-            }
-        });
-
+        txttc = (TextView) findViewById(R.id.txttermsandconditions);
+        setClickListners();
+        setTouchListner();
     }
 
     @Override
@@ -191,4 +108,151 @@ public class Registeractivity extends AppCompatActivity implements
         // TODO Auto-generated method stub
     }
 
-}
+    private void setClickListners() {
+        btlogin.setOnClickListener(this);
+        txttc.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonsubmit:
+                validateAndCreateUser();
+                break;
+            case R.id.txttermsandconditions:
+                Intent intent = new Intent(Registeractivity.this, TermsCondition_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
+                break;
+        }
+    }
+
+    private void setTouchListner() {
+        Rdmale.setOnTouchListener(this);
+        RdFemale.setOnTouchListener(this);
+        etname.setOnTouchListener(this);
+        etaddress.setOnTouchListener(this);
+        etmobile.setOnTouchListener(this);
+        etusername.setOnTouchListener(this);
+        etpassword.setOnTouchListener(this);
+        emailid.setOnTouchListener(this);
+        etreenterpassword.setOnTouchListener(this);
+        etotp.setOnTouchListener(this);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
+        view.startAnimation(zoomOutAnimation);
+        return false;
+    }
+
+    private void validateAndCreateUser() {
+        User user = fillUserModel();
+        if (validate(user))
+            createUser(user);
+    }
+
+    private User fillUserModel() {
+        User user = new User();
+        user.setUserName(etname.getText().toString());
+        user.setMobileNumber(etmobile.getText().toString());
+        user.setAddress(etaddress.getText().toString());
+        user.setEmail(emailid.getText().toString());
+        user.setPassword(etpassword.getText().toString());
+        user.setAgentId(Utility.generateAgentId(AGENT_PREFIX));
+
+        String spinvalue = spin.getSelectedItem().toString();
+
+        if (spinvalue == "Admin") {
+            user.setRole(ADMIN);
+
+        } else if (spinvalue == "Telecaller")
+        {
+            user.setRole(TELECALLER);
+
+        } else if (spinvalue == "Coordinator")
+        {
+            user.setRole(CORDINATOR);
+
+        } else if(spinvalue == "Sales")
+        {
+            user.setRole(SALES);
+
+        } else if(spinvalue == "Accountant")
+        {
+            user.setRole(ACCOUNTANT);
+
+        }
+
+        if (Rdmale.isChecked())
+            user.setGender(MALE);
+        else
+            user.setGender(FEMALE);
+        return user;
+    }
+
+    private boolean validate(User user) {
+        String validationMessage;
+        boolean isValid = true;
+        try {
+            if (Utility.isEmptyOrNull(user.getUserName())) {
+                validationMessage = "User Nmae Should not be empty";
+                etname.setError(validationMessage);
+                isValid = false;
+            }
+            if (Utility.isEmptyOrNull(user.getMobileNumber())) {
+                validationMessage = getString(R.string.MOBILE_NUMBER_SHOULD_NOT_BE_EMPTY);
+                etmobile.setError(validationMessage);
+                isValid = false;
+            }else if (!Utility.isValidMobileNumber(user.getMobileNumber())) {
+                validationMessage = getMessage(R.string.INVALID_MOBILE_NUMBER);
+                etmobile.setError(validationMessage);
+                isValid = false;
+            }
+            if (Utility.isEmptyOrNull(user.getPassword())) {
+                validationMessage = getString(R.string.PASSWORD_SHOULD_NOT_BE_EMPTY);
+                etpassword.setError(validationMessage);
+                isValid = false;
+            }
+        } catch (Exception e) {
+            isValid = false;
+            ExceptionUtil.logException( e);
+        }
+        return isValid;
+    }
+
+
+
+    private String getMessage(int id) {
+        return getString(id);
+    }
+
+    private void createUser(final User user) {
+        progressDialogClass.showDialog(getMessage(R.string.loading), getMessage(R.string.please_wait));
+        userRepository.createUser(user, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                addUserDataToPreferences(user);
+                loginToApp();
+            }
+
+            @Override
+            public void onError(Object object) {
+                Utility.showMessage(Registeractivity.this, getMessage(R.string.registration_fail));
+            }
+        });
+    }
+
+    private void addUserDataToPreferences(User user) {
+        appSharedPreference.addUserDetails(user);
+        appSharedPreference.createUserLoginSession();
+    }
+
+    private void loginToApp() {
+        Toast.makeText(Registeractivity.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(Registeractivity.this, LoginScreen.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+}//end of activity

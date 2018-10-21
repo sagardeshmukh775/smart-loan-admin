@@ -34,7 +34,6 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-
     <string name="action_example">Example action</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
@@ -43,13 +42,44 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_generate_leads">Generate Leads</string>
     <string name="hint_principal">Principal Amount ₹</string>
     <string name="hint_interest">Interest rate per Year %</string>
     <string name="hint_years">How Many Years</string>
     <string name="hint_emi">EMI ₹</string>
     <string name="hint_interest_total">Total Interest for Loan ₹</string>
+    <string name="dismiss">dismiss</string>
+    <string name="network_not_available">Network not available, please check your network connection.</string>
+    <string name="MOBILE_NUMBER_SHOULD_NOT_BE_EMPTY">Mobile number should not be empty.</string>
+    <string name="MOBILE_NUMBER_ALREADY_REGISTER">Mobile number already register.</string>
+    <string name="INVALID_EMAIL">Invalid Email</string>
+    <string name="INVALID_CHARACTERS">Invalid Characters</string>
+    <string name="PLEASE_ENTER_NAME"> Please enter the name.</string>
+    <string name="INVALID_MOBILE_NUMBER">Invalid mobile number.</string>
+    <string name="MOBILE_NUMBER_SHOULD_BE_10_DIGIT">Mobile number should be 10 digit.</string>
+    <string name="OTP_FIVE_DIGIT_NUMBER">OTP is 5 digit number</string>
+    <string name="SERVER_NOT_RESPONDING">Server not responding</string>
+    <string name="PASSWORD_SHOULD_NOT_BE_EMPTY">Password should not be empty.</string>
+    <string name="SIGNING_IN">Signing in&#8230;</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="PLEASE_WAIT">Please Wait&#8230;</string>
+    <string name="CREATING_ACCOUNT">Creating Account&#8230;</string>
+    <string name="profile_updating">Profile Updating&#8230;</string>
+    <string name="uploading"> Uploading&#8230;</string>
+    <string name="login_fail_try_again">Login fail, please try again with correct login details.</string>
+    <string name="customer_name_should_be_empty">Customer name should not be empty.</string>
+    <string name="loan_type_error">Select one of loan type.</string>
+    <string name="lead_generated_success_message">Leed generated successfully.</string>
+    <string name="lead_generated_fails_message">Leed generated failed, please try again.</string>
+    <string name="server_error">Faild to fetch data, please try again.</string>
+    <string name="leed_In_loading">Generating Leed&#8230;</string>
+    <string name="na">NA</string>
+    <string name="please_wait">Please wait</string>
+    <string name="registration_fail">Registration fail, please try again.</string>
+
+
 
 </resources>
