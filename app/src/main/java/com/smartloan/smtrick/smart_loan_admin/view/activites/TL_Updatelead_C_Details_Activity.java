@@ -1,6 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,619 +8,737 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
-
 import java.util.ArrayList;
 import java.util.Map;
 
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.LEED_MODEL;
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_VERIFIED;
-
-public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinloantype, spinemptype, spinincome;
-    Button btupdate, btverify, btcancel, btnnext, btnsave;
-    LeedsModel leedsModel;
-    ProgressDialogClass progressDialogClass;
+public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implements OnItemSelectedListener {
+    Spinner CoapplicantRalationship;
+    RadioButton REducation;
+    RadioButton RYN;
+    RadioButton Rcoapplicant;
+    RadioButton RcoapplicantNO;
+    RadioButton RcoapplicantYES;
+    Spinner Recidential;
+    RadioButton Rfemale;
+    RadioButton Rg;
+    RadioButton Rgender;
+    RadioButton Rmale;
+    RadioButton Rno;
+    RadioButton Rother;
+    RadioButton Rpg;
+    RadioButton Rpro;
+    RadioButton Rug;
+    RadioButton Ryes;
     AppSharedPreference appSharedPreference;
+    EditText area;
+    TextView area1;
+    Button btcancel;
+    Button btnnext;
+    Button btnsave;
+    Button btupdate;
+    Button btverify;
+    String cAdhar;
+    String cAdress;
+    String cAltcontatct;
+    String cBdate;
+    String cContatct;
+    String cCurrentPIN;
+    String cCurrentarea;
+    String cCurrentlandmark;
+    String cCurrentstreet;
+    String cDL;
+    String cEducation;
+    String cEmail;
+    String cGender;
+    String cNmae;
+    String cOffaddress;
+    String cOther;
+    String cPAN;
+    String cPANnumber;
+    String cPIN;
+    String cPadress;
+    String cPassport;
+    String cProofDL;
+    String cProofadhar;
+    String cProofcurrentacctstmt;
+    String cProofelectricitybill;
+    String cProofgovtid;
+    String cProofgumasta;
+    String cProofpassport;
+    String cProofrentagmt;
+    String cProofvoterid;
+    String cVoterid;
+    String cYesNo;
+    String carea;
+    CheckBox chAdhar;
+    CheckBox chDL;
+    CheckBox chPAN;
+    CheckBox chPassport;
+    CheckBox chProofAdhar;
+    CheckBox chProofCurrentacctStmt;
+    CheckBox chProofElectricitybill;
+    CheckBox chProofGovtEmpid;
+    CheckBox chProofGumasta;
+    CheckBox chProofPassport;
+    CheckBox chProofRntagmt;
+    CheckBox chProofVoterid;
+    CheckBox chProofdl;
+    CheckBox chVoterID;
+    String clandmark;
+    String cparents;
+    String cresidencial;
+    String cstreet;
+    EditText currentarea;
+    EditText currentlandmark;
+    EditText currentpin;
+    EditText currentstreet;
+    EditText edtotherrelationship;
+    EditText edtreferenceaddress;
+    EditText edtreferenceaddress2;
+    EditText edtreferencecontactno;
+    EditText edtreferencecontactno2;
+    EditText edtreferencename;
+    EditText edtreferencename2;
+    EditText edtreferencerelationship;
+    EditText edtreferencerelationship2;
+    EditText eparents;
+    EditText eresidencial;
+    EditText etaddress;
+    EditText etalternatecontact;
+    EditText etbirthdate;
+    EditText etcEmail;
+    EditText etcname;
+    EditText etcontatct;
+    EditText etoffaddress;
+    EditText etother;
+    EditText etpermanantaddress;
+    RadioGroup groupRadio;
+    RadioGroup groupRadioEducation;
+    RadioGroup groupRadioGender;
+    RadioGroup groupRadiocoapplicant;
+    EditText landmark;
+    TextView landmark1;
+    RelativeLayout layoutarea;
+    RelativeLayout layoutlandmark;
+    RelativeLayout layoutotherrelationship;
+    RelativeLayout layoutothervalue;
+    RelativeLayout layoutpin;
+    RelativeLayout layoutref1address;
+    RelativeLayout layoutref1contact;
+    RelativeLayout layoutref1name;
+    RelativeLayout layoutref1relationship;
+    RelativeLayout layoutref2address;
+    RelativeLayout layoutref2contact;
+    RelativeLayout layoutref2name;
+    RelativeLayout layoutref2relationship;
+    RelativeLayout layoutrelationship;
+    RelativeLayout layoutsavebutton;
+    RelativeLayout layoutstreet;
     LeedRepository leedRepository;
-
+    LeedsModel leedsModel;
     ArrayList<LeedsModel> leedsModelArrayList;
-    EditText etother, eparents, eresidencial, etpermanantaddress, etcname, etaddress, etoffaddress, etcontatct, etalternatecontact, etbirthdate;
-    String padress, cresidencial, cparents, cNmae, cAdress, cPadress, cOffaddress, cContatct, cAltcontatct, cBdate, cOther;
-    TextView txtldate, txtleadid;
-    RadioGroup groupRadio, groupRadioEducation, groupRadioGender,
-            groupRadiocoapplicant;
-    EditText pin, landmark, area, street,
-            currentpin, currentlandmark, currentarea, currentstreet,
-            txtpannumber;
-    TextView pin1, landmark1, area1, street1;
-    RelativeLayout layoutpin, layoutlandmark, layoutarea, layoutstreet, layoutothervalue;
-    EditText etcEmail, edtotherrelationship,
-            edtreferencename, edtreferenceaddress, edtreferencecontactno, edtreferencerelationship,
-            edtreferencename2, edtreferenceaddress2, edtreferencecontactno2, edtreferencerelationship2;
-    CheckBox chAdhar, chPAN, chVoterID, chDL, chPassport, chProofAdhar, chProofVoterid, chProofdl, chProofElectricitybill,
-            chProofRntagmt, chProofPassport, chProofGovtEmpid, chProofGumasta, chProofCurrentacctStmt;
-    String cYesNo, cCurrentPIN, cCurrentlandmark, cCurrentarea, cCurrentstreet, cPIN, clandmark, carea, cstreet, cEducation, cGender, cEmail, cAdhar, cPAN, cVoterid, cDL, cPassport,
-            cProofadhar, cProofvoterid, cProofDL, cProofelectricitybill, cProofrentagmt, cProofpassport, cProofgovtid, cProofgumasta,
-            cProofcurrentacctstmt, cPANnumber,
-            scoapplicantYN, sapplicantrelation, sotherrelationship,
-            sreference1name, sreference1address, sreferencecontactno, sreferencerelationship,
-            sreference2name, sreference2address, sreference2contactno, sreference2relationship;
-    RadioButton REducation, Rgender, RYN, Ryes, Rno, Rug, Rg, Rpg, Rpro, Rother, Rmale, Rfemale,
-            RcoapplicantYES, RcoapplicantNO, Rcoapplicant;
+    String padress;
+    EditText pin;
+    TextView pin1;
+    ProgressDialogClass progressDialogClass;
+    String sapplicantrelation;
+    String scoapplicantYN;
+    String sotherrelationship;
+    Spinner spinemptype;
+    Spinner spinincome;
+    Spinner spinloantype;
+    String sreference1address;
+    String sreference1name;
+    String sreference2address;
+    String sreference2contactno;
+    String sreference2name;
+    String sreference2relationship;
+    String sreferencecontactno;
+    String sreferencerelationship;
+    EditText street;
+    TextView street1;
+    TextView txtldate;
+    TextView txtleadid;
+    EditText txtpannumber;
 
-    Spinner Recidential, CoapplicantRalationship;
-    RelativeLayout layoutrelationship, layoutotherrelationship, layoutsavebutton,
-            layoutref1name, layoutref1address, layoutref1contact, layoutref1relationship,
-            layoutref2name, layoutref2address, layoutref2contact, layoutref2relationship;
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$1 */
+    class C08161 implements OnCheckedChangeListener {
+        C08161() {
+        }
 
-    @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                TL_Updatelead_C_Details_Activity.this.txtpannumber.setVisibility(0);
+            } else {
+                TL_Updatelead_C_Details_Activity.this.txtpannumber.setVisibility(4);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$2 */
+    class C08172 implements RadioGroup.OnCheckedChangeListener {
+        C08172() {
+        }
+
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.Rcoapplicant = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.scoapplicantYN = tL_Updatelead_C_Details_Activity.Rcoapplicant.getText().toString();
+            if (TL_Updatelead_C_Details_Activity.this.Rcoapplicant.getText().toString().equalsIgnoreCase("Yes")) {
+                TL_Updatelead_C_Details_Activity.this.ShowApplicant();
+            } else {
+                TL_Updatelead_C_Details_Activity.this.HideApplicant();
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$3 */
+    class C08183 implements RadioGroup.OnCheckedChangeListener {
+        C08183() {
+        }
+
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.REducation = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
+            if (TL_Updatelead_C_Details_Activity.this.REducation.getText().toString().equalsIgnoreCase("Other")) {
+                TL_Updatelead_C_Details_Activity.this.Showother();
+            } else {
+                TL_Updatelead_C_Details_Activity.this.hideother();
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$4 */
+    class C08194 implements RadioGroup.OnCheckedChangeListener {
+        C08194() {
+        }
+
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.Rgender = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cGender = tL_Updatelead_C_Details_Activity.Rgender.getText().toString();
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$5 */
+    class C08205 implements RadioGroup.OnCheckedChangeListener {
+        C08205() {
+        }
+
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.RYN = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cYesNo = tL_Updatelead_C_Details_Activity.RYN.getText().toString();
+            if (TL_Updatelead_C_Details_Activity.this.RYN.getText().toString().equalsIgnoreCase("No")) {
+                TL_Updatelead_C_Details_Activity.this.fieldVisibility();
+            } else {
+                TL_Updatelead_C_Details_Activity.this.FieldInvisible();
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$6 */
+    class C08216 implements OnClickListener {
+        C08216() {
+        }
+
+        public void onClick(View v) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cNmae = tL_Updatelead_C_Details_Activity.etcname.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cAdress = tL_Updatelead_C_Details_Activity.etaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentPIN = tL_Updatelead_C_Details_Activity.currentpin.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentlandmark = tL_Updatelead_C_Details_Activity.currentlandmark.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentarea = tL_Updatelead_C_Details_Activity.currentarea.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentstreet = tL_Updatelead_C_Details_Activity.currentstreet.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPadress = tL_Updatelead_C_Details_Activity.etpermanantaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPIN = tL_Updatelead_C_Details_Activity.pin.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.clandmark = tL_Updatelead_C_Details_Activity.landmark.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.carea = tL_Updatelead_C_Details_Activity.area.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cstreet = tL_Updatelead_C_Details_Activity.street.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cOffaddress = tL_Updatelead_C_Details_Activity.etoffaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cBdate = tL_Updatelead_C_Details_Activity.etbirthdate.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cContatct = tL_Updatelead_C_Details_Activity.etcontatct.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cAltcontatct = tL_Updatelead_C_Details_Activity.etalternatecontact.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cEmail = tL_Updatelead_C_Details_Activity.etcEmail.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPANnumber = tL_Updatelead_C_Details_Activity.txtpannumber.getText().toString();
+            if (!TL_Updatelead_C_Details_Activity.this.cEmail.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+                TL_Updatelead_C_Details_Activity.this.etcEmail.setError("Invalid Email");
+            }
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity2.cresidencial = tL_Updatelead_C_Details_Activity2.Recidential.getSelectedItem().toString();
+            tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity2.sapplicantrelation = tL_Updatelead_C_Details_Activity2.CoapplicantRalationship.getSelectedItem().toString();
+            tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity2.sotherrelationship = tL_Updatelead_C_Details_Activity2.edtotherrelationship.getText().toString();
+            tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity2.cOther = tL_Updatelead_C_Details_Activity2.etother.getText().toString();
+            if (TL_Updatelead_C_Details_Activity.this.chAdhar.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cAdhar = tL_Updatelead_C_Details_Activity2.chAdhar.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chPAN.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cPAN = tL_Updatelead_C_Details_Activity2.chPAN.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chVoterID.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cVoterid = tL_Updatelead_C_Details_Activity2.chVoterID.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chDL.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cDL = tL_Updatelead_C_Details_Activity2.chDL.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chPassport.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cPassport = tL_Updatelead_C_Details_Activity2.chPassport.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofAdhar.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofadhar = tL_Updatelead_C_Details_Activity2.chProofAdhar.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofVoterid.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofvoterid = tL_Updatelead_C_Details_Activity2.chProofVoterid.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofdl.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofDL = tL_Updatelead_C_Details_Activity2.chProofdl.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofElectricitybill.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofelectricitybill = tL_Updatelead_C_Details_Activity2.chProofElectricitybill.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofRntagmt.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofrentagmt = tL_Updatelead_C_Details_Activity2.chProofRntagmt.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofPassport.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofpassport = tL_Updatelead_C_Details_Activity2.chProofPassport.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofGovtEmpid.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofgovtid = tL_Updatelead_C_Details_Activity2.chProofGovtEmpid.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofGumasta.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofgumasta = tL_Updatelead_C_Details_Activity2.chProofGumasta.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofCurrentacctStmt.isChecked()) {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.cProofcurrentacctstmt = tL_Updatelead_C_Details_Activity2.chProofCurrentacctStmt.getText().toString();
+            }
+            if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cNmae)) {
+                TL_Updatelead_C_Details_Activity.this.etcname.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Customers full Name!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cBdate)) {
+                TL_Updatelead_C_Details_Activity.this.etbirthdate.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Birth Date!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cContatct)) {
+                TL_Updatelead_C_Details_Activity.this.etcontatct.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Contact!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cAltcontatct)) {
+                TL_Updatelead_C_Details_Activity.this.etalternatecontact.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Alternate Contact!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cEmail)) {
+                TL_Updatelead_C_Details_Activity.this.etcEmail.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Email!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cOffaddress)) {
+                TL_Updatelead_C_Details_Activity.this.etoffaddress.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Office address!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cAdhar)) {
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Provide Adhar Card!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cPAN)) {
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Provide PAN Card!", Toast.LENGTH_SHORT).show();
+            } else {
+                tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity2.updateLeadDetails(tL_Updatelead_C_Details_Activity2.leedsModel);
+                Intent i = new Intent(TL_Updatelead_C_Details_Activity.this, TL_Updatelead_Coapplicant_Detail_Activity.class);
+                i.putExtra(Constant.LEED_MODEL, TL_Updatelead_C_Details_Activity.this.leedsModel);
+                TL_Updatelead_C_Details_Activity.this.startActivity(i);
+                TL_Updatelead_C_Details_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$7 */
+    class C08227 implements OnClickListener {
+        C08227() {
+        }
+
+        public void onClick(View v) {
+            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cNmae = tL_Updatelead_C_Details_Activity.etcname.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cAdress = tL_Updatelead_C_Details_Activity.etaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentPIN = tL_Updatelead_C_Details_Activity.currentpin.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentlandmark = tL_Updatelead_C_Details_Activity.currentlandmark.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentarea = tL_Updatelead_C_Details_Activity.currentarea.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cCurrentstreet = tL_Updatelead_C_Details_Activity.currentstreet.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPadress = tL_Updatelead_C_Details_Activity.etpermanantaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPIN = tL_Updatelead_C_Details_Activity.pin.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.clandmark = tL_Updatelead_C_Details_Activity.landmark.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.carea = tL_Updatelead_C_Details_Activity.area.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cstreet = tL_Updatelead_C_Details_Activity.street.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cOffaddress = tL_Updatelead_C_Details_Activity.etoffaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cBdate = tL_Updatelead_C_Details_Activity.etbirthdate.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cPANnumber = tL_Updatelead_C_Details_Activity.txtpannumber.getText().toString();
+
+            if (groupRadioGender.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) TL_Updatelead_C_Details_Activity.this.groupRadioGender.getChildAt(TL_Updatelead_C_Details_Activity.this.groupRadioGender.indexOfChild(TL_Updatelead_C_Details_Activity.this.groupRadioGender.findViewById(TL_Updatelead_C_Details_Activity.this.groupRadioGender.getCheckedRadioButtonId())));
+                TL_Updatelead_C_Details_Activity.this.cGender = btn.getText().toString();
+            }
+            if (groupRadio.getCheckedRadioButtonId() != -1) {
+                RadioButton  btn = (RadioButton) TL_Updatelead_C_Details_Activity.this.groupRadio.getChildAt(TL_Updatelead_C_Details_Activity.this.groupRadio.indexOfChild(TL_Updatelead_C_Details_Activity.this.groupRadio.findViewById(TL_Updatelead_C_Details_Activity.this.groupRadio.getCheckedRadioButtonId())));
+                TL_Updatelead_C_Details_Activity.this.cYesNo = btn.getText().toString();
+            }
+            if (groupRadioEducation.getCheckedRadioButtonId() != -1) {
+                RadioButton  btn = (RadioButton) TL_Updatelead_C_Details_Activity.this.groupRadioEducation.getChildAt(TL_Updatelead_C_Details_Activity.this.groupRadioEducation.indexOfChild(TL_Updatelead_C_Details_Activity.this.groupRadioEducation.findViewById(TL_Updatelead_C_Details_Activity.this.groupRadioEducation.getCheckedRadioButtonId())));
+                TL_Updatelead_C_Details_Activity.this.cEducation = btn.getText().toString();
+            }
+            if (groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
+                RadioButton btn2 = (RadioButton) TL_Updatelead_C_Details_Activity.this.groupRadiocoapplicant.getChildAt(TL_Updatelead_C_Details_Activity.this.groupRadiocoapplicant.indexOfChild(TL_Updatelead_C_Details_Activity.this.groupRadiocoapplicant.findViewById(TL_Updatelead_C_Details_Activity.this.groupRadiocoapplicant.getCheckedRadioButtonId())));
+                TL_Updatelead_C_Details_Activity.this.scoapplicantYN = btn2.getText().toString();
+            }
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cContatct = tL_Updatelead_C_Details_Activity.etcontatct.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cAltcontatct = tL_Updatelead_C_Details_Activity.etalternatecontact.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cEmail = tL_Updatelead_C_Details_Activity.etcEmail.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cresidencial = tL_Updatelead_C_Details_Activity.Recidential.getSelectedItem().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.cOther = tL_Updatelead_C_Details_Activity.etother.getText().toString();
+            if (TL_Updatelead_C_Details_Activity.this.chAdhar.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cAdhar = tL_Updatelead_C_Details_Activity.chAdhar.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chPAN.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cPAN = tL_Updatelead_C_Details_Activity.chPAN.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chVoterID.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cVoterid = tL_Updatelead_C_Details_Activity.chVoterID.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chDL.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cDL = tL_Updatelead_C_Details_Activity.chDL.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chPassport.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cPassport = tL_Updatelead_C_Details_Activity.chPassport.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofAdhar.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofadhar = tL_Updatelead_C_Details_Activity.chProofAdhar.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofVoterid.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofvoterid = tL_Updatelead_C_Details_Activity.chProofVoterid.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofdl.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofDL = tL_Updatelead_C_Details_Activity.chProofdl.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofElectricitybill.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofelectricitybill = tL_Updatelead_C_Details_Activity.chProofElectricitybill.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofRntagmt.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofrentagmt = tL_Updatelead_C_Details_Activity.chProofRntagmt.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofPassport.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofpassport = tL_Updatelead_C_Details_Activity.chProofPassport.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofGovtEmpid.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofgovtid = tL_Updatelead_C_Details_Activity.chProofGovtEmpid.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofGumasta.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofgumasta = tL_Updatelead_C_Details_Activity.chProofGumasta.getText().toString();
+            }
+            if (TL_Updatelead_C_Details_Activity.this.chProofCurrentacctStmt.isChecked()) {
+                tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+                tL_Updatelead_C_Details_Activity.cProofcurrentacctstmt = tL_Updatelead_C_Details_Activity.chProofCurrentacctStmt.getText().toString();
+            }
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sapplicantrelation = tL_Updatelead_C_Details_Activity.CoapplicantRalationship.getSelectedItem().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sotherrelationship = tL_Updatelead_C_Details_Activity.edtotherrelationship.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference1name = tL_Updatelead_C_Details_Activity.edtreferencename.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference1address = tL_Updatelead_C_Details_Activity.edtreferenceaddress.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreferencecontactno = tL_Updatelead_C_Details_Activity.edtreferencecontactno.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreferencerelationship = tL_Updatelead_C_Details_Activity.edtreferencerelationship.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference2name = tL_Updatelead_C_Details_Activity.edtreferencename2.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference2address = tL_Updatelead_C_Details_Activity.edtreferenceaddress2.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference2contactno = tL_Updatelead_C_Details_Activity.edtreferencecontactno2.getText().toString();
+            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
+            tL_Updatelead_C_Details_Activity.sreference2relationship = tL_Updatelead_C_Details_Activity.edtreferencerelationship2.getText().toString();
+            if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cNmae)) {
+                TL_Updatelead_C_Details_Activity.this.etcname.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cBdate)) {
+                TL_Updatelead_C_Details_Activity.this.etbirthdate.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Birth Date!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cContatct)) {
+                TL_Updatelead_C_Details_Activity.this.etcontatct.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Contact!", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cAltcontatct)) {
+                TL_Updatelead_C_Details_Activity.this.etalternatecontact.setError("Required");
+                Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Alternete Contact!", Toast.LENGTH_SHORT).show();
+            } else {
+                String emialpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cEmail)) {
+                    TL_Updatelead_C_Details_Activity.this.etcEmail.setError("Required");
+                    Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Email Address!", Toast.LENGTH_SHORT).show();
+                } else if (!TL_Updatelead_C_Details_Activity.this.cEmail.matches(emialpattern)) {
+                    TL_Updatelead_C_Details_Activity.this.etcEmail.setError("Invalid Email");
+                    Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cOffaddress)) {
+                    Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Enter Office Address!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cAdhar)) {
+                    Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Provide Adhar Card!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(TL_Updatelead_C_Details_Activity.this.cPAN)) {
+                    Toast.makeText(TL_Updatelead_C_Details_Activity.this.getApplicationContext(), "Provide PAN Card!", Toast.LENGTH_SHORT).show();
+                } else {
+                    TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity2 = TL_Updatelead_C_Details_Activity.this;
+                    tL_Updatelead_C_Details_Activity2.updateLeadDetails(tL_Updatelead_C_Details_Activity2.leedsModel);
+                    Intent i = new Intent(TL_Updatelead_C_Details_Activity.this, Tl_Updatelead_incomedetails_Activity.class);
+                    i.putExtra(Constant.LEED_MODEL, TL_Updatelead_C_Details_Activity.this.leedsModel);
+                    TL_Updatelead_C_Details_Activity.this.startActivity(i);
+                    TL_Updatelead_C_Details_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$8 */
+    class C09288 extends CallBack {
+        C09288() {
+        }
+
+        public void onSuccess(Object object) {
+            Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
+            TL_Updatelead_C_Details_Activity.this.progressDialogClass.dismissDialog();
+        }
+
+        public void onError(Object object) {
+            Context context = TL_Updatelead_C_Details_Activity.this;
+            Utility.showLongMessage(context, context.getString(R.string.server_error));
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tl_updatelead_cdetails_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        layoutpin = (RelativeLayout) findViewById(R.id.layoutpin);
-        layoutlandmark = (RelativeLayout) findViewById(R.id.layoutland);
-        layoutarea = (RelativeLayout) findViewById(R.id.layoutArea);
-        layoutstreet = (RelativeLayout) findViewById(R.id.layoutstreet);
-        layoutothervalue = (RelativeLayout) findViewById(R.id.layoutothervalue);
-
-        layoutrelationship = (RelativeLayout) findViewById(R.id.layoutcoapplicantrelation);
-        layoutotherrelationship = (RelativeLayout) findViewById(R.id.layoutotherrelationship);
-        layoutsavebutton = (RelativeLayout) findViewById(R.id.layoutbuttonsave);
-
-        layoutref1name = (RelativeLayout) findViewById(R.id.layoutreferencefullname);
-        layoutref1address = (RelativeLayout) findViewById(R.id.layoutreferenceaddress);
-        layoutref1contact = (RelativeLayout) findViewById(R.id.layoutreferencecontactno);
-        layoutref1relationship = (RelativeLayout) findViewById(R.id.layoutreferencerelationhsip);
-        layoutref2name = (RelativeLayout) findViewById(R.id.layoutreference2fullname);
-        layoutref2address = (RelativeLayout) findViewById(R.id.layoutreference2address);
-        layoutref2contact = (RelativeLayout) findViewById(R.id.layoutreference2contactno);
-        layoutref2relationship = (RelativeLayout) findViewById(R.id.layoutreference2relationhsip);
-
-
+        this.layoutpin = (RelativeLayout) findViewById(R.id.layoutpin);
+        this.layoutlandmark = (RelativeLayout) findViewById(R.id.layoutland);
+        this.layoutarea = (RelativeLayout) findViewById(R.id.layoutArea);
+        this.layoutstreet = (RelativeLayout) findViewById(R.id.layoutstreet);
+        this.layoutothervalue = (RelativeLayout) findViewById(R.id.layoutothervalue);
+        this.layoutrelationship = (RelativeLayout) findViewById(R.id.layoutcoapplicantrelation);
+        this.layoutotherrelationship = (RelativeLayout) findViewById(R.id.layoutotherrelationship);
+        this.layoutsavebutton = (RelativeLayout) findViewById(R.id.layoutbuttonsave);
+        this.layoutref1name = (RelativeLayout) findViewById(R.id.layoutreferencefullname);
+        this.layoutref1address = (RelativeLayout) findViewById(R.id.layoutreferenceaddress);
+        this.layoutref1contact = (RelativeLayout) findViewById(R.id.layoutreferencecontactno);
+        this.layoutref1relationship = (RelativeLayout) findViewById(R.id.layoutreferencerelationhsip);
+        this.layoutref2name = (RelativeLayout) findViewById(R.id.layoutreference2fullname);
+        this.layoutref2address = (RelativeLayout) findViewById(R.id.layoutreference2address);
+        this.layoutref2contact = (RelativeLayout) findViewById(R.id.layoutreference2contactno);
+        this.layoutref2relationship = (RelativeLayout) findViewById(R.id.layoutreference2relationhsip);
         setSupportActionBar(toolbar);
-        leedsModel = (LeedsModel) getIntent().getSerializableExtra(LEED_MODEL);
-        progressDialogClass = new ProgressDialogClass(this);
-        leedRepository = new LeedRepositoryImpl();
-        appSharedPreference = new AppSharedPreference(this);
+        this.leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+        this.progressDialogClass = new ProgressDialogClass(this);
+        this.leedRepository = new LeedRepositoryImpl();
+        this.appSharedPreference = new AppSharedPreference(this);
         String[] loanType = new String[]{"HL", "LAP"};
         String[] empType = new String[]{"Salaried", "Businessman"};
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
-
-        btnnext = (Button) findViewById(R.id.buttonupdatenext);
-        btnsave = (Button) findViewById(R.id.buttonsave);
-
-        etcname = (EditText) findViewById(R.id.txtcamevalue);
-        etaddress = (EditText) findViewById(R.id.txtcurrentaddressvalue);
-        etpermanantaddress = (EditText) findViewById(R.id.txtpermenantaddressvalue);
-        groupRadio = (RadioGroup) findViewById(R.id.radioGYN);
-
-        currentpin = (EditText) findViewById(R.id.txtcurrentpin1);
-        currentlandmark = (EditText) findViewById(R.id.txtcurrentlandmark1);
-        currentarea = (EditText) findViewById(R.id.txtcurrentarea1);
-        currentstreet = (EditText) findViewById(R.id.txtcurrentstreet1);
-
-        pin = (EditText) findViewById(R.id.txtpin1);
-        landmark = (EditText) findViewById(R.id.txtlandmark1);
-        area = (EditText) findViewById(R.id.txtarea1);
-        street = (EditText) findViewById(R.id.txtstreet1);
-        etoffaddress = (EditText) findViewById(R.id.txtofficeaddressvalue);
-        etbirthdate = (EditText) findViewById(R.id.txtbirthdatevalue);
-        groupRadioEducation = (RadioGroup) findViewById(R.id.radioeducation);
-        groupRadioGender = (RadioGroup) findViewById(R.id.radioSex);
-        etcontatct = (EditText) findViewById(R.id.txtcontatctvalue);
-        etalternatecontact = (EditText) findViewById(R.id.edtaltcontact);
-        etcEmail = (EditText) findViewById(R.id.txtemail1);
-        Recidential = (Spinner) findViewById(R.id.spinnerrecidencialvalue);
-
-        CoapplicantRalationship = (Spinner) findViewById(R.id.txtcoapplicantrelation1);
-        CoapplicantRalationship.setOnItemSelectedListener(this);
-        edtotherrelationship = (EditText) findViewById(R.id.txtotherrelationship1);
-
-        edtreferencename = (EditText) findViewById(R.id.txtreferencefullname1);
-        edtreferenceaddress = (EditText) findViewById(R.id.txtreferenceaddress1);
-        edtreferencecontactno = (EditText) findViewById(R.id.txtreferencecontactno1);
-        edtreferencerelationship = (EditText) findViewById(R.id.txtreferencecrelationship1);
-        edtreferencename2 = (EditText) findViewById(R.id.txtreference2fullname1);
-        edtreferenceaddress2 = (EditText) findViewById(R.id.txtreference2address1);
-        edtreferencecontactno2 = (EditText) findViewById(R.id.txtreference2contactno1);
-        edtreferencerelationship2 = (EditText) findViewById(R.id.txtreferencec2relationship1);
-
-        txtpannumber = (EditText) findViewById(R.id.txtpannumber);
-
-        ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter<String>(this, R.layout.sppinner_layout_listitem, recidential);
+        this.btnnext = (Button) findViewById(R.id.buttonupdatenext);
+        this.btnsave = (Button) findViewById(R.id.buttonsave);
+        this.etcname = (EditText) findViewById(R.id.txtcamevalue);
+        this.etaddress = (EditText) findViewById(R.id.txtcurrentaddressvalue);
+        this.etpermanantaddress = (EditText) findViewById(R.id.txtpermenantaddressvalue);
+        this.groupRadio = (RadioGroup) findViewById(R.id.radioGYN);
+        this.currentpin = (EditText) findViewById(R.id.txtcurrentpin1);
+        this.currentlandmark = (EditText) findViewById(R.id.txtcurrentlandmark1);
+        this.currentarea = (EditText) findViewById(R.id.txtcurrentarea1);
+        this.currentstreet = (EditText) findViewById(R.id.txtcurrentstreet1);
+        this.pin = (EditText) findViewById(R.id.txtpin1);
+        this.landmark = (EditText) findViewById(R.id.txtlandmark1);
+        this.area = (EditText) findViewById(R.id.txtarea1);
+        this.street = (EditText) findViewById(R.id.txtstreet1);
+        this.etoffaddress = (EditText) findViewById(R.id.txtofficeaddressvalue);
+        this.etbirthdate = (EditText) findViewById(R.id.txtbirthdatevalue);
+        this.groupRadioEducation = (RadioGroup) findViewById(R.id.radioeducation);
+        this.groupRadioGender = (RadioGroup) findViewById(R.id.radioSex);
+        this.etcontatct = (EditText) findViewById(R.id.txtcontatctvalue);
+        this.etalternatecontact = (EditText) findViewById(R.id.edtaltcontact);
+        this.etcEmail = (EditText) findViewById(R.id.txtemail1);
+        this.Recidential = (Spinner) findViewById(R.id.spinnerrecidencialvalue);
+        this.CoapplicantRalationship = (Spinner) findViewById(R.id.txtcoapplicantrelation1);
+        this.CoapplicantRalationship.setOnItemSelectedListener(this);
+        this.edtotherrelationship = (EditText) findViewById(R.id.txtotherrelationship1);
+        this.edtreferencename = (EditText) findViewById(R.id.txtreferencefullname1);
+        this.edtreferenceaddress = (EditText) findViewById(R.id.txtreferenceaddress1);
+        this.edtreferencecontactno = (EditText) findViewById(R.id.txtreferencecontactno1);
+        this.edtreferencerelationship = (EditText) findViewById(R.id.txtreferencecrelationship1);
+        this.edtreferencename2 = (EditText) findViewById(R.id.txtreference2fullname1);
+        this.edtreferenceaddress2 = (EditText) findViewById(R.id.txtreference2address1);
+        this.edtreferencecontactno2 = (EditText) findViewById(R.id.txtreference2contactno1);
+        this.edtreferencerelationship2 = (EditText) findViewById(R.id.txtreferencec2relationship1);
+        this.txtpannumber = (EditText) findViewById(R.id.txtpannumber);
+        ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, recidential);
         spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        Recidential.setAdapter(spinnerArrayAdapterRecidential);
-
-        ArrayAdapter<String> spinnerArrayAdapterRelationship = new ArrayAdapter<String>(this, R.layout.sppinner_layout_listitem, CoapplicantRelation);
+        this.Recidential.setAdapter(spinnerArrayAdapterRecidential);
+        ArrayAdapter<String> spinnerArrayAdapterRelationship = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CoapplicantRelation);
         spinnerArrayAdapterRelationship.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        CoapplicantRalationship.setAdapter(spinnerArrayAdapterRelationship);
-        //eresidencial = (EditText) findViewById(R.id.txtrecidencialvalue);
-
-        // eparents = (EditText) findViewById(R.id.txtparentsvalue);
-        etother = (EditText) findViewById(R.id.txtOthervalue);
-
-        chAdhar = (CheckBox) findViewById(R.id.checkboxadhar);
-        chPAN = (CheckBox) findViewById(R.id.checkboxpan);
-        if (chPAN.isChecked()) {
-            txtpannumber.setVisibility(View.VISIBLE);
-        }else {
-            txtpannumber.setVisibility(View.INVISIBLE);
+        this.CoapplicantRalationship.setAdapter(spinnerArrayAdapterRelationship);
+        this.etother = (EditText) findViewById(R.id.txtOthervalue);
+        this.chAdhar = (CheckBox) findViewById(R.id.checkboxadhar);
+        this.chPAN = (CheckBox) findViewById(R.id.checkboxpan);
+        if (this.chPAN.isChecked()) {
+            this.txtpannumber.setVisibility(View.VISIBLE);
+        } else {
+            this.txtpannumber.setVisibility(View.INVISIBLE);
         }
-        chPAN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    txtpannumber.setVisibility(View.VISIBLE);
-                } else {
-                    txtpannumber.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-
-        chVoterID = (CheckBox) findViewById(R.id.checkboxvoterid);
-        chDL = (CheckBox) findViewById(R.id.checkboxdrivinglicence);
-        chPassport = (CheckBox) findViewById(R.id.checkboxpassport);
-
-        chProofAdhar = (CheckBox) findViewById(R.id.checkboxproofAdhar);
-        chProofVoterid = (CheckBox) findViewById(R.id.checkboxproofVoterid);
-        chProofdl = (CheckBox) findViewById(R.id.checkboxproofDL);
-        chProofElectricitybill = (CheckBox) findViewById(R.id.checkboxproofElectricitybill);
-        chProofRntagmt = (CheckBox) findViewById(R.id.checkboxpeoofRentAgmt);
-        chProofPassport = (CheckBox) findViewById(R.id.checkboxproofPassport);
-        chProofGovtEmpid = (CheckBox) findViewById(R.id.checkboxproofGevtEmpID);
-        chProofGumasta = (CheckBox) findViewById(R.id.checkboxproofGumasta);
-        chProofCurrentacctStmt = (CheckBox) findViewById(R.id.checkboxproofCurrentAcctStmt);
-
-        txtleadid = (TextView) findViewById(R.id.textheader);
-
-        RcoapplicantYES = (RadioButton) findViewById(R.id.radioapplicantYes);
-        RcoapplicantNO = (RadioButton) findViewById(R.id.radioapplicantNo);
-
-        groupRadiocoapplicant = (RadioGroup) findViewById(R.id.radiocoapplicantYN);
-
-        groupRadiocoapplicant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Rcoapplicant = (RadioButton) findViewById(checkedId);
-                scoapplicantYN = Rcoapplicant.getText().toString();
-                if (Rcoapplicant.getText().toString().equalsIgnoreCase("Yes")) {
-                    ShowApplicant();
-                } else {
-                    HideApplicant();
-                }
-            }
-        });
-
-        groupRadioEducation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                REducation = (RadioButton) findViewById(checkedId);
-                if (REducation.getText().toString().equalsIgnoreCase("Other")) {
-                    Showother();
-                } else {
-                    hideother();
-                }
-            }
-        });
-
-        groupRadioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Rgender = (RadioButton) findViewById(checkedId);
-                cGender = Rgender.getText().toString();
-            }
-        });
-
-        groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RYN = (RadioButton) findViewById(checkedId);
-                cYesNo = RYN.getText().toString();
-                if (RYN.getText().toString().equalsIgnoreCase("No")) {
-                    fieldVisibility();
-                } else {
-                    FieldInvisible();
-                }
-            }
-        });
-
-
-        if (groupRadioGender.getCheckedRadioButtonId() != -1) {
-            int id = groupRadioGender.getCheckedRadioButtonId();
-            View radioButton = groupRadioGender.findViewById(id);
-            int radioId = groupRadioGender.indexOfChild(radioButton);
-            RadioButton btn = (RadioButton) groupRadioGender.getChildAt(radioId);
-            cGender = btn.getText().toString();
+        this.chPAN.setOnCheckedChangeListener(new C08161());
+        this.chVoterID = (CheckBox) findViewById(R.id.checkboxvoterid);
+        this.chDL = (CheckBox) findViewById(R.id.checkboxdrivinglicence);
+        this.chPassport = (CheckBox) findViewById(R.id.checkboxpassport);
+        this.chProofAdhar = (CheckBox) findViewById(R.id.checkboxproofAdhar);
+        this.chProofVoterid = (CheckBox) findViewById(R.id.checkboxproofVoterid);
+        this.chProofdl = (CheckBox) findViewById(R.id.checkboxproofDL);
+        this.chProofElectricitybill = (CheckBox) findViewById(R.id.checkboxproofElectricitybill);
+        this.chProofRntagmt = (CheckBox) findViewById(R.id.checkboxpeoofRentAgmt);
+        this.chProofPassport = (CheckBox) findViewById(R.id.checkboxproofPassport);
+        this.chProofGovtEmpid = (CheckBox) findViewById(R.id.checkboxproofGevtEmpID);
+        this.chProofGumasta = (CheckBox) findViewById(R.id.checkboxproofGumasta);
+        this.chProofCurrentacctStmt = (CheckBox) findViewById(R.id.checkboxproofCurrentAcctStmt);
+        this.txtleadid = (TextView) findViewById(R.id.textheader);
+        this.RcoapplicantYES = (RadioButton) findViewById(R.id.radioapplicantYes);
+        this.RcoapplicantNO = (RadioButton) findViewById(R.id.radioapplicantNo);
+        this.groupRadiocoapplicant = (RadioGroup) findViewById(R.id.radiocoapplicantYN);
+        this.groupRadiocoapplicant.setOnCheckedChangeListener(new C08172());
+        this.groupRadioEducation.setOnCheckedChangeListener(new C08183());
+        this.groupRadioGender.setOnCheckedChangeListener(new C08194());
+        this.groupRadio.setOnCheckedChangeListener(new C08205());
+        if (this.groupRadioGender.getCheckedRadioButtonId() != -1) {
+            this.cGender = ((RadioButton) this.groupRadioGender.getChildAt(this.groupRadioGender.indexOfChild(this.groupRadioGender.findViewById(this.groupRadioGender.getCheckedRadioButtonId())))).getText().toString();
         }
-        if (groupRadio.getCheckedRadioButtonId() != -1) {
-            int id = groupRadio.getCheckedRadioButtonId();
-            View radioButton = groupRadio.findViewById(id);
-            int radioId = groupRadio.indexOfChild(radioButton);
-            RadioButton btn = (RadioButton) groupRadio.getChildAt(radioId);
-            cYesNo = btn.getText().toString();
-
-            if (cYesNo.equalsIgnoreCase("No")) {
+        if (this.groupRadio.getCheckedRadioButtonId() != -1) {
+            this.cYesNo = ((RadioButton) this.groupRadio.getChildAt(this.groupRadio.indexOfChild(this.groupRadio.findViewById(this.groupRadio.getCheckedRadioButtonId())))).getText().toString();
+            if (this.cYesNo.equalsIgnoreCase("No")) {
                 fieldVisibility();
             } else {
                 FieldInvisible();
             }
         }
-        if (groupRadioEducation.getCheckedRadioButtonId() != -1) {
-            int id = groupRadioEducation.getCheckedRadioButtonId();
-            View radioButton = groupRadioEducation.findViewById(id);
-            int radioId = groupRadioEducation.indexOfChild(radioButton);
-            RadioButton btn = (RadioButton) groupRadioEducation.getChildAt(radioId);
-            cEducation = btn.getText().toString();
-
-            if (cEducation.equalsIgnoreCase("Other")) {
+        if (this.groupRadioEducation.getCheckedRadioButtonId() != -1) {
+            this.cEducation = ((RadioButton) this.groupRadioEducation.getChildAt(this.groupRadioEducation.indexOfChild(this.groupRadioEducation.findViewById(this.groupRadioEducation.getCheckedRadioButtonId())))).getText().toString();
+            if (this.cEducation.equalsIgnoreCase("Other")) {
                 Showother();
             } else {
                 hideother();
             }
         }
-        if (groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
-            int id = groupRadiocoapplicant.getCheckedRadioButtonId();
-            View radioButton = groupRadiocoapplicant.findViewById(id);
-            int radioId = groupRadiocoapplicant.indexOfChild(radioButton);
-            RadioButton btn = (RadioButton) groupRadiocoapplicant.getChildAt(radioId);
-            scoapplicantYN = btn.getText().toString();
-
-            if (scoapplicantYN.equalsIgnoreCase("Yes")) {
+        if (this.groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
+            this.scoapplicantYN = ((RadioButton) this.groupRadiocoapplicant.getChildAt(this.groupRadiocoapplicant.indexOfChild(this.groupRadiocoapplicant.findViewById(this.groupRadiocoapplicant.getCheckedRadioButtonId())))).getText().toString();
+            if (this.scoapplicantYN.equalsIgnoreCase("Yes")) {
                 ShowApplicant();
             } else {
                 HideApplicant();
             }
         }
-
         Ryes = (RadioButton) findViewById(R.id.radioYes);
-        Rno = (RadioButton) findViewById(R.id.radioNo);
-        Rug = (RadioButton) findViewById(R.id.radioUG);
-        Rg = (RadioButton) findViewById(R.id.radioGraguate);
-        Rpg = (RadioButton) findViewById(R.id.radioPG);
-        Rpro = (RadioButton) findViewById(R.id.radioprofessional);
-        Rother = (RadioButton) findViewById(R.id.radioother);
-        Rmale = (RadioButton) findViewById(R.id.radioMale);
-        Rfemale = (RadioButton) findViewById(R.id.radioFemale);
-
-
-        btnsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                cNmae = etcname.getText().toString();
-                cAdress = etaddress.getText().toString();
-
-                cCurrentPIN = currentpin.getText().toString();
-                cCurrentlandmark = currentlandmark.getText().toString();
-                cCurrentarea = currentarea.getText().toString();
-                cCurrentstreet = currentstreet.getText().toString();
-
-                cPadress = etpermanantaddress.getText().toString();
-                cPIN = pin.getText().toString();
-                clandmark = landmark.getText().toString();
-                carea = area.getText().toString();
-                cstreet = street.getText().toString();
-                cOffaddress = etoffaddress.getText().toString();
-                cBdate = etbirthdate.getText().toString();
-
-                cContatct = etcontatct.getText().toString();
-                cAltcontatct = etalternatecontact.getText().toString();
-                cEmail = etcEmail.getText().toString();
-
-                cPANnumber = txtpannumber.getText().toString();
-
-                String emialpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                if (!cEmail.matches(emialpattern)) {
-                    etcEmail.setError("Invalid Email");
-                }
-
-                cresidencial = Recidential.getSelectedItem().toString();
-                sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
-                sotherrelationship = edtotherrelationship.getText().toString();
-
-                cOther = etother.getText().toString();
-
-                if (chAdhar.isChecked()) {
-                    cAdhar = chAdhar.getText().toString();
-                }
-                if (chPAN.isChecked()) {
-                    cPAN = chPAN.getText().toString();
-                }
-                if (chVoterID.isChecked()) {
-                    cVoterid = chVoterID.getText().toString();
-                }
-                if (chDL.isChecked()) {
-                    cDL = chDL.getText().toString();
-                }
-                if (chPassport.isChecked()) {
-                    cPassport = chPassport.getText().toString();
-                }
-
-                if (chProofAdhar.isChecked()) {
-                    cProofadhar = chProofAdhar.getText().toString();
-                }
-                if (chProofVoterid.isChecked()) {
-                    cProofvoterid = chProofVoterid.getText().toString();
-                }
-                if (chProofdl.isChecked()) {
-                    cProofDL = chProofdl.getText().toString();
-                }
-                if (chProofElectricitybill.isChecked()) {
-                    cProofelectricitybill = chProofElectricitybill.getText().toString();
-                }
-                if (chProofRntagmt.isChecked()) {
-                    cProofrentagmt = chProofRntagmt.getText().toString();
-                }
-                if (chProofPassport.isChecked()) {
-                    cProofpassport = chProofPassport.getText().toString();
-                }
-                if (chProofGovtEmpid.isChecked()) {
-                    cProofgovtid = chProofGovtEmpid.getText().toString();
-                }
-                if (chProofGumasta.isChecked()) {
-                    cProofgumasta = chProofGumasta.getText().toString();
-                }
-                if (chProofCurrentacctStmt.isChecked()) {
-                    cProofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
-                }
-
-
-                if (TextUtils.isEmpty(cNmae)) {
-                    etcname.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Customers full Name!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cBdate)) {
-                    etbirthdate.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Birth Date!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cContatct)) {
-                    etcontatct.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Contact!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cAltcontatct)) {
-                    etalternatecontact.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Alternate Contact!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cEmail)) {
-                    etcEmail.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Email!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cOffaddress)) {
-                    etoffaddress.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Office address!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cAdhar)) {
-                    Toast.makeText(getApplicationContext(), "Provide Adhar Card!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cPAN)) {
-                    Toast.makeText(getApplicationContext(), "Provide PAN Card!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                updateLeadDetails(leedsModel);
-                //   Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Lead Update Successfully", Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(TL_Updatelead_C_Details_Activity.this, TL_Updatelead_Coapplicant_Detail_Activity.class);
-                i.putExtra(LEED_MODEL, leedsModel);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-            }
-        });
-
-        btnnext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                cNmae = etcname.getText().toString();
-                cAdress = etaddress.getText().toString();
-
-                cCurrentPIN = currentpin.getText().toString();
-                cCurrentlandmark = currentlandmark.getText().toString();
-                cCurrentarea = currentarea.getText().toString();
-                cCurrentstreet = currentstreet.getText().toString();
-
-                cPadress = etpermanantaddress.getText().toString();
-                cPIN = pin.getText().toString();
-                clandmark = landmark.getText().toString();
-                carea = area.getText().toString();
-                cstreet = street.getText().toString();
-                cOffaddress = etoffaddress.getText().toString();
-                cBdate = etbirthdate.getText().toString();
-
-                cPANnumber = txtpannumber.getText().toString();
-
-                if (groupRadioGender.getCheckedRadioButtonId() != -1) {
-                    int id = groupRadioGender.getCheckedRadioButtonId();
-                    View radioButton = groupRadioGender.findViewById(id);
-                    int radioId = groupRadioGender.indexOfChild(radioButton);
-                    RadioButton btn = (RadioButton) groupRadioGender.getChildAt(radioId);
-                    cGender = btn.getText().toString();
-                }
-                if (groupRadio.getCheckedRadioButtonId() != -1) {
-                    int id = groupRadio.getCheckedRadioButtonId();
-                    View radioButton = groupRadio.findViewById(id);
-                    int radioId = groupRadio.indexOfChild(radioButton);
-                    RadioButton btn = (RadioButton) groupRadio.getChildAt(radioId);
-                    cYesNo = btn.getText().toString();
-                }
-                if (groupRadioEducation.getCheckedRadioButtonId() != -1) {
-                    int id = groupRadioEducation.getCheckedRadioButtonId();
-                    View radioButton = groupRadioEducation.findViewById(id);
-                    int radioId = groupRadioEducation.indexOfChild(radioButton);
-                    RadioButton btn = (RadioButton) groupRadioEducation.getChildAt(radioId);
-                    cEducation = btn.getText().toString();
-                }
-                if (groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
-                    int id = groupRadiocoapplicant.getCheckedRadioButtonId();
-                    View radioButton = groupRadiocoapplicant.findViewById(id);
-                    int radioId = groupRadiocoapplicant.indexOfChild(radioButton);
-                    RadioButton btn = (RadioButton) groupRadiocoapplicant.getChildAt(radioId);
-                    scoapplicantYN = btn.getText().toString();
-                }
-
-                cContatct = etcontatct.getText().toString();
-                cAltcontatct = etalternatecontact.getText().toString();
-                cEmail = etcEmail.getText().toString();
-
-                cresidencial = Recidential.getSelectedItem().toString();
-
-
-                cOther = etother.getText().toString();
-
-                if (chAdhar.isChecked()) {
-                    cAdhar = chAdhar.getText().toString();
-                }
-                if (chPAN.isChecked()) {
-                    cPAN = chPAN.getText().toString();
-                }
-                if (chVoterID.isChecked()) {
-                    cVoterid = chVoterID.getText().toString();
-                }
-                if (chDL.isChecked()) {
-                    cDL = chDL.getText().toString();
-                }
-                if (chPassport.isChecked()) {
-                    cPassport = chPassport.getText().toString();
-                }
-
-                if (chProofAdhar.isChecked()) {
-                    cProofadhar = chProofAdhar.getText().toString();
-                }
-                if (chProofVoterid.isChecked()) {
-                    cProofvoterid = chProofVoterid.getText().toString();
-                }
-                if (chProofdl.isChecked()) {
-                    cProofDL = chProofdl.getText().toString();
-                }
-                if (chProofElectricitybill.isChecked()) {
-                    cProofelectricitybill = chProofElectricitybill.getText().toString();
-                }
-                if (chProofRntagmt.isChecked()) {
-                    cProofrentagmt = chProofRntagmt.getText().toString();
-                }
-                if (chProofPassport.isChecked()) {
-                    cProofpassport = chProofPassport.getText().toString();
-                }
-                if (chProofGovtEmpid.isChecked()) {
-                    cProofgovtid = chProofGovtEmpid.getText().toString();
-                }
-                if (chProofGumasta.isChecked()) {
-                    cProofgumasta = chProofGumasta.getText().toString();
-                }
-                if (chProofCurrentacctStmt.isChecked()) {
-                    cProofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
-                }
-
-                sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
-                sotherrelationship = edtotherrelationship.getText().toString();
-                sreference1name = edtreferencename.getText().toString();
-                sreference1address = edtreferenceaddress.getText().toString();
-                sreferencecontactno = edtreferencecontactno.getText().toString();
-                sreferencerelationship = edtreferencerelationship.getText().toString();
-                sreference2name = edtreferencename2.getText().toString();
-                sreference2address = edtreferenceaddress2.getText().toString();
-                sreference2contactno = edtreferencecontactno2.getText().toString();
-                sreference2relationship = edtreferencerelationship2.getText().toString();
-
-                if (TextUtils.isEmpty(cNmae)) {
-                    etcname.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cBdate)) {
-                    etbirthdate.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Birth Date!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cContatct)) {
-                    etcontatct.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Contact!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cAltcontatct)) {
-                    etalternatecontact.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Alternete Contact!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String emialpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                if (TextUtils.isEmpty(cEmail)) {
-                    etcEmail.setError("Required");
-                    Toast.makeText(getApplicationContext(), "Enter Email Address!", Toast.LENGTH_SHORT).show();
-
-                    return;
-                } else if (!cEmail.matches(emialpattern)) {
-                    etcEmail.setError("Invalid Email");
-                    Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cOffaddress)) {
-                    Toast.makeText(getApplicationContext(), "Enter Office Address!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cAdhar)) {
-                    Toast.makeText(getApplicationContext(), "Provide Adhar Card!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(cPAN)) {
-                    Toast.makeText(getApplicationContext(), "Provide PAN Card!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                updateLeadDetails(leedsModel);
-                //   Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Lead Update Successfully", Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(TL_Updatelead_C_Details_Activity.this, Tl_Updatelead_incomedetails_Activity.class);
-                i.putExtra(LEED_MODEL, leedsModel);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-            }
-        });
-
+        this.Rno = (RadioButton) findViewById(R.id.radioNo);
+        this.Rug = (RadioButton) findViewById(R.id.radioUG);
+        this.Rg = (RadioButton) findViewById(R.id.radioGraguate);
+        this.Rpg = (RadioButton) findViewById(R.id.radioPG);
+        this.Rpro = (RadioButton) findViewById(R.id.radioprofessional);
+        this.Rother = (RadioButton) findViewById(R.id.radioother);
+        this.Rmale = (RadioButton) findViewById(R.id.radioMale);
+        this.Rfemale = (RadioButton) findViewById(R.id.radioFemale);
+        this.btnsave.setOnClickListener(new C08216());
+        this.btnnext.setOnClickListener(new C08227());
         getdata();
-
-    }//end of oncreate
-
+    }
 
     private void getdata() {
-
         try {
-
-
-            String leednumber = leedsModel.getLeedNumber();
+            String currentPIN;
+            String leednumber = this.leedsModel.getLeedNumber();
             String cname = leedsModel.getCustomerName();
             String caddress = leedsModel.getAddress();
             String officeaddress = leedsModel.getofficeAdderess();
@@ -629,33 +747,41 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
             String birthdate = leedsModel.getDateOfBirth();
             String residencial = leedsModel.getRecidential();
             String permanataddress = leedsModel.getPeraddress();
-
             String addressYN = leedsModel.getAddressYesNo();
             String otherEdu = leedsModel.getOtherEducation();
             String education = leedsModel.getEducation();
             String gender = leedsModel.getGender();
             String applicantYN = leedsModel.getCoApplicantYN();
-
-            String currentPIN = leedsModel.getCurrentpin();
-            String currentland = leedsModel.getCurrentlandmark();
-            String currentSarea = leedsModel.getCurrentarea();
-            String currentSstreet = leedsModel.getCurrentstreet();
-
-            String PIN = leedsModel.getPincode();
-            String land = leedsModel.getLandmark();
-            String Sarea = leedsModel.getArea();
-            String Sstreet = leedsModel.getStreet();
-
-            String email = leedsModel.getEmail();
+            String currentPIN2 = leedsModel.getCurrentpin();
+            String birthdate2 = birthdate;
+            birthdate = leedsModel.getCurrentlandmark();
+            String residencial2 = residencial;
+            residencial = leedsModel.getCurrentarea();
+            String altcontact2 = altcontact;
+            altcontact = leedsModel.getCurrentstreet();
+            String contact2 = contact;
+            contact = leedsModel.getPincode();
+            String officeaddress2 = officeaddress;
+            officeaddress = leedsModel.getLandmark();
+            String permanataddress2 = permanataddress;
+            permanataddress = leedsModel.getArea();
+            String caddress2 = caddress;
+            caddress = leedsModel.getStreet();
+            String cname2 = cname;
+            cname = leedsModel.getEmail();
+            String leednumber2 = leednumber;
             String adhar = leedsModel.getadharNo();
             String pan = leedsModel.getCheckpanCardNumber();
             String pannumber = leedsModel.getPanCardNumber();
-            String voterid = leedsModel.getApvoterid();
-            String driverlicence = leedsModel.getApdrivinglicence();
+            leednumber = leedsModel.getApvoterid();
+            String email = cname;
+            cname = leedsModel.getApdrivinglicence();
+            String otherEdu2 = otherEdu;
             String passport = leedsModel.getAppassport();
-
-            String adharproof = leedsModel.getProofadhar();
-            String voteridproof = leedsModel.getProofvoterid();
+            otherEdu = leedsModel.getProofadhar();
+            String driverlicence = cname;
+            cname = leedsModel.getProofvoterid();
+            String voterid = leednumber;
             String dlproof = leedsModel.getProofdl();
             String electricitybillproof = leedsModel.getProofelectricitybill();
             String rentagmtproof = leedsModel.getProofrentagmt();
@@ -663,75 +789,75 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
             String gevtidproof = leedsModel.getProofgevtid();
             String gumastaproof = leedsModel.getProofgumasta();
             String currentacctprrof = leedsModel.getProofcurrentacctstmt();
-
-            String relatioship = leedsModel.getPrapplicantrelation();
-            String otherrelationship = leedsModel.getCoapplicantotherrelation();
-            String ref1name = leedsModel.getPrreference1name();
-            String ref1address = leedsModel.getPrreference1address();
-            String ref1contact = leedsModel.getPrreferencecontactno();
-            String ref1relation = leedsModel.getPrreferencerelationship();
-            String ref2name = leedsModel.getPrreference2name();
-            String ref2address = leedsModel.getPrreference2address();
-            String ref2contact = leedsModel.getPrreference2contactno();
-            String ref2relation = leedsModel.getPrreference2relationship();
-
-            if (applicantYN != null) {
-                if (applicantYN.equalsIgnoreCase("Yes")) {
-                    RcoapplicantYES.setChecked(true);
-                    ShowApplicant();
-                } else if (applicantYN.equalsIgnoreCase("No")) {
+            leednumber = leedsModel.getPrapplicantrelation();
+            String voteridproof = cname;
+            cname = leedsModel.getCoapplicantotherrelation();
+            String adharproof = otherEdu;
+            otherEdu = leedsModel.getPrreference1name();
+            String Sstreet = caddress;
+            caddress = leedsModel.getPrreference1address();
+            String Sarea = permanataddress;
+            permanataddress = leedsModel.getPrreferencecontactno();
+            String land = officeaddress;
+            officeaddress = leedsModel.getPrreferencerelationship();
+            String PIN = contact;
+            contact = leedsModel.getPrreference2name();
+            String addressYN2 = addressYN;
+            addressYN = leedsModel.getPrreference2address();
+            String currentSstreet = altcontact;
+            altcontact = leedsModel.getPrreference2contactno();
+            String currentSarea = residencial;
+            residencial = leedsModel.getPrreference2relationship();
+            String currentland = birthdate;
+            if (applicantYN == null) {
+                currentPIN = currentPIN2;
+            } else if (applicantYN.equalsIgnoreCase("Yes")) {
+                currentPIN = currentPIN2;
+                RcoapplicantYES.setChecked(true);
+                ShowApplicant();
+            } else {
+                currentPIN = currentPIN2;
+                if (applicantYN.equalsIgnoreCase("No")) {
                     RcoapplicantNO.setChecked(true);
                     HideApplicant();
                 }
             }
-            if (relatioship != null) {
-
+            if (leednumber != null) {
                 ArrayAdapter myAdap = (ArrayAdapter) CoapplicantRalationship.getAdapter();
-                int spinnerPosition = myAdap.getPosition(relatioship);
-                CoapplicantRalationship.setSelection(spinnerPosition);
-                if (relatioship.equalsIgnoreCase("Please specify")) {
+                CoapplicantRalationship.setSelection(myAdap.getPosition(leednumber));
+                if (leednumber.equalsIgnoreCase("Please specify")) {
                     showotherRelation();
                 } else {
                     hideotherRelation();
                 }
             }
-            if (otherrelationship != null) {
-                edtotherrelationship.setText(otherrelationship);
-
+            if (cname != null) {
+                edtotherrelationship.setText(cname);
             }
-            if (ref1name != null) {
-                edtreferencename.setText(ref1name);
-
+            if (otherEdu != null) {
+                edtreferencename.setText(otherEdu);
             }
-            if (ref1address != null) {
-                edtreferenceaddress.setText(ref1address);
-
+            if (caddress != null) {
+                edtreferenceaddress.setText(caddress);
             }
-            if (ref1contact != null) {
-                edtreferencecontactno.setText(ref1contact);
-
+            if (permanataddress != null) {
+                edtreferencecontactno.setText(permanataddress);
             }
-            if (ref1relation != null) {
-                edtreferencerelationship.setText(ref1relation);
-
+            if (officeaddress != null) {
+                edtreferencerelationship.setText(officeaddress);
             }
-            if (ref2name != null) {
-                edtreferencename2.setText(ref2name);
-
+            if (contact != null) {
+                edtreferencename2.setText(contact);
             }
-            if (ref2address != null) {
-                edtreferenceaddress2.setText(ref2address);
-
+            if (addressYN != null) {
+                edtreferenceaddress2.setText(addressYN);
             }
-            if (ref2contact != null) {
-                edtreferencecontactno2.setText(ref2contact);
-
+            if (altcontact != null) {
+                edtreferencecontactno2.setText(altcontact);
             }
-            if (ref2relation != null) {
-                edtreferencerelationship2.setText(ref2relation);
-
+            if (residencial != null) {
+                edtreferencerelationship2.setText(residencial);
             }
-
             if (education != null) {
                 if (education.equalsIgnoreCase("Under Graduate")) {
                     Rug.setChecked(true);
@@ -751,391 +877,371 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
                 }
             }
             if (gender != null) {
-                if (gender.equalsIgnoreCase("Male")) {
+                if (gender.equalsIgnoreCase(Constant.MALE)) {
                     Rmale.setChecked(true);
                 } else {
                     Rfemale.setChecked(true);
                 }
             }
-
             if (currentPIN != null) {
                 currentpin.setText(currentPIN);
-
             }
             if (currentland != null) {
-                currentlandmark.setText(currentland);
-
+                leednumber = currentland;
+                currentlandmark.setText(leednumber);
+            } else {
+                leednumber = currentland;
             }
             if (currentSarea != null) {
-                currentarea.setText(currentSarea);
-
+                currentland = leednumber;
+                leednumber = currentSarea;
+                currentarea.setText(leednumber);
+            } else {
+                leednumber = currentSarea;
             }
             if (currentSstreet != null) {
-                currentstreet.setText(currentSstreet);
-
+                currentSarea = leednumber;
+                leednumber = currentSstreet;
+                currentstreet.setText(leednumber);
+            } else {
+                leednumber = currentSstreet;
             }
-            if (addressYN != null) {
-                if (addressYN.equalsIgnoreCase("Yes")) {
+            if (addressYN2 != null) {
+                currentSstreet = leednumber;
+                leednumber = addressYN2;
+                if (leednumber.equalsIgnoreCase("Yes")) {
+                    addressYN2 = leednumber;
                     Ryes.setChecked(true);
                     FieldInvisible();
-
                 } else {
+                    addressYN2 = leednumber;
                     Rno.setChecked(true);
                     fieldVisibility();
-
                 }
             }
-
             if (Rno.isChecked()) {
-
-
+                birthdate = PIN;
+                PIN = cname;
+                cname = Sstreet;
             } else {
                 if (PIN != null) {
                     pin.setText(PIN);
-
                 }
                 if (land != null) {
-                    landmark.setText(land);
-
+                    cname = land;
+                    landmark.setText(cname);
+                } else {
+                    cname = land;
                 }
                 if (Sarea != null) {
-                    area.setText(Sarea);
-
+                    land = cname;
+                    cname = Sarea;
+                    area.setText(cname);
+                } else {
+                    cname = Sarea;
                 }
                 if (Sstreet != null) {
-                    street.setText(Sstreet);
-
+                    Sarea = cname;
+                    cname = Sstreet;
+                    street.setText(cname);
+                } else {
+                    cname = Sstreet;
                 }
             }
-
             if (adharproof != null) {
+                Sstreet = cname;
                 chProofAdhar.setChecked(true);
-
             }
             if (voteridproof != null) {
                 chProofVoterid.setChecked(true);
-
             }
             if (dlproof != null) {
                 chProofdl.setChecked(true);
-
             }
             if (electricitybillproof != null) {
                 chProofElectricitybill.setChecked(true);
-
             }
             if (rentagmtproof != null) {
                 chProofRntagmt.setChecked(true);
-
             }
             if (passportproof != null) {
                 chProofPassport.setChecked(true);
-
             }
             if (gevtidproof != null) {
                 chProofGovtEmpid.setChecked(true);
-
             }
             if (gumastaproof != null) {
                 chProofGumasta.setChecked(true);
-
             }
             if (currentacctprrof != null) {
                 chProofCurrentacctStmt.setChecked(true);
-
             }
-
-
             if (voterid != null) {
                 chVoterID.setChecked(true);
-
             }
             if (driverlicence != null) {
                 chDL.setChecked(true);
-
             }
             if (passport != null) {
                 chPassport.setChecked(true);
-
             }
-            if (otherEdu != null) {
-                etother.setText(otherEdu);
-
+            if (otherEdu2 != null) {
+                cname = otherEdu2;
+                etother.setText(cname);
+            } else {
+                cname = otherEdu2;
             }
             if (email != null) {
-                etcEmail.setText(email);
-
+                otherEdu2 = cname;
+                cname = email;
+                etcEmail.setText(cname);
+            } else {
+                cname = email;
             }
             if (adhar != null) {
+                email = cname;
                 chAdhar.setChecked(true);
-
             }
             if (pannumber != null) {
                 chPAN.setChecked(true);
-                txtpannumber.setText(pannumber);
-
+                cname = pannumber;
+                txtpannumber.setText(cname);
+            } else {
+                cname = pannumber;
             }
-
-
-            if (leednumber != null) {
-                txtleadid.setText(leednumber);
-
+            if (leednumber2 != null) {
+                pannumber = cname;
+                cname = leednumber2;
+                txtleadid.setText(cname);
+            } else {
+                cname = leednumber2;
             }
-            if (cname != null) {
+            if (cname2 != null) {
+                leednumber2 = cname;
+                cname = cname2;
                 etcname.setText(cname);
-
+            } else {
+                cname = cname2;
             }
-            if (caddress != null) {
-                etaddress.setText(caddress);
-
+            if (caddress2 != null) {
+                cname2 = cname;
+                cname = caddress2;
+                etaddress.setText(cname);
+            } else {
+                cname = caddress2;
             }
-            if (permanataddress != null) {
-                etpermanantaddress.setText(permanataddress);
-
+            if (permanataddress2 != null) {
+                caddress2 = cname;
+                cname = permanataddress2;
+                etpermanantaddress.setText(cname);
+            } else {
+                cname = permanataddress2;
             }
-            if (officeaddress != null) {
-                etoffaddress.setText(officeaddress);
+            if (officeaddress2 != null) {
+                permanataddress2 = cname;
+                cname = officeaddress2;
+                etoffaddress.setText(cname);
+            } else {
+                cname = officeaddress2;
             }
-
-            if (contact != null) {
-                etcontatct.setText(contact);
-
+            if (contact2 != null) {
+                officeaddress2 = cname;
+                cname = contact2;
+                etcontatct.setText(cname);
+            } else {
+                cname = contact2;
             }
-            if (altcontact != null) {
-                etalternatecontact.setText(altcontact);
+            if (altcontact2 != null) {
+                contact2 = cname;
+                cname = altcontact2;
+                etalternatecontact.setText(cname);
+            } else {
+                cname = altcontact2;
             }
-            if (residencial != null) {
-
-                ArrayAdapter myAdap = (ArrayAdapter) Recidential.getAdapter();
-                int spinnerPosition = myAdap.getPosition(residencial);
-                Recidential.setSelection(spinnerPosition);
+            String residencial3;
+            if (residencial2 != null) {
+                ArrayAdapter myAdap2 = (ArrayAdapter) Recidential.getAdapter();
+                altcontact2 = cname;
+                cname = residencial2;
+                ArrayAdapter residencial4 = myAdap2;
+                residencial3 = cname;
+                Recidential.setSelection(myAdap2.getPosition(cname));
+            } else {
+                residencial3 = residencial2;
             }
-
-            if (birthdate != null) {
-                etbirthdate.setText(birthdate);
+            if (birthdate2 != null) {
+                etbirthdate.setText(birthdate2);
             }
-
-
         } catch (Exception e) {
         }
-
     }
 
     private void setLeedStatus(LeedsModel leedsModel) {
-        leedsModel.setStatus(STATUS_VERIFIED);
+        leedsModel.setStatus(Constant.STATUS_VERIFIED);
         updateLeed(leedsModel.getLeedNumber(), leedsModel.getLeedStatusMap1());
     }
 
-
     private void updateLeadDetails(LeedsModel leedsModel) {
         try {
-            leedsModel.setCustomerName(cNmae);
-            leedsModel.setAddress(cAdress);
-            leedsModel.setMobileNumber(cContatct);
-            leedsModel.setAlternetMobileNumber(cAltcontatct);
-            leedsModel.setDateOfBirth(cBdate);
-            leedsModel.setOfficeAdderess(cOffaddress);
-
-            leedsModel.setRecidential(cresidencial);
-            leedsModel.setPeraddress(cPadress);
-
-            leedsModel.setCurrentpin(cCurrentPIN);
-            leedsModel.setCurrentarea(cCurrentarea);
-            leedsModel.setCurrentlandmark(cCurrentlandmark);
-            leedsModel.setCurrentstreet(cCurrentstreet);
-
-            if (cYesNo.equalsIgnoreCase("No")) {
-                leedsModel.setPincode(cPIN);
-                leedsModel.setArea(carea);
-                leedsModel.setLandmark(clandmark);
-                leedsModel.setStreet(cstreet);
-            } else if (cYesNo.equalsIgnoreCase("Yes")) {
-                leedsModel.setPincode(cCurrentPIN);
-                leedsModel.setArea(cCurrentarea);
-                leedsModel.setLandmark(cCurrentlandmark);
-                leedsModel.setStreet(cCurrentstreet);
+            leedsModel.setCustomerName(this.cNmae);
+            leedsModel.setAddress(this.cAdress);
+            leedsModel.setMobileNumber(this.cContatct);
+            leedsModel.setAlternetMobileNumber(this.cAltcontatct);
+            leedsModel.setDateOfBirth(this.cBdate);
+            leedsModel.setOfficeAdderess(this.cOffaddress);
+            leedsModel.setRecidential(this.cresidencial);
+            leedsModel.setPeraddress(this.cPadress);
+            leedsModel.setCurrentpin(this.cCurrentPIN);
+            leedsModel.setCurrentarea(this.cCurrentarea);
+            leedsModel.setCurrentlandmark(this.cCurrentlandmark);
+            leedsModel.setCurrentstreet(this.cCurrentstreet);
+            if (this.cYesNo.equalsIgnoreCase("No")) {
+                leedsModel.setPincode(this.cPIN);
+                leedsModel.setArea(this.carea);
+                leedsModel.setLandmark(this.clandmark);
+                leedsModel.setStreet(this.cstreet);
+            } else if (this.cYesNo.equalsIgnoreCase("Yes")) {
+                leedsModel.setPincode(this.cCurrentPIN);
+                leedsModel.setArea(this.cCurrentarea);
+                leedsModel.setLandmark(this.cCurrentlandmark);
+                leedsModel.setStreet(this.cCurrentstreet);
             }
-
-            leedsModel.setEmail(cEmail);
-            leedsModel.setAdharNo(cAdhar);
-            leedsModel.setCheckpanCardNumber(cPAN);
-            leedsModel.setPanCardNumber(cPANnumber);
-            leedsModel.setOtherEducation(cOther);
-            leedsModel.setApvoterid(cVoterid);
-            leedsModel.setApdrivinglicence(cDL);
-            leedsModel.setAppassport(cPassport);
-
-            leedsModel.setProofadhar(cProofadhar);
-            leedsModel.setProofvoterid(cProofvoterid);
-            leedsModel.setProofdl(cProofDL);
-            leedsModel.setProofelectricitybill(cProofelectricitybill);
-            leedsModel.setProofrentagmt(cProofrentagmt);
-            leedsModel.setProofpassport(cProofpassport);
-            leedsModel.setProofgevtid(cProofgovtid);
-            leedsModel.setProofgumasta(cProofgumasta);
-            leedsModel.setProofcurrentacctstmt(cProofcurrentacctstmt);
-
-
-            leedsModel.setPrapplicantrelation(sapplicantrelation);
-            leedsModel.setCoapplicantotherrelation(sotherrelationship);
-            leedsModel.setPrreference1name(sreference1name);
-            leedsModel.setPrreference1address(sreference1address);
-            leedsModel.setPrreferencecontactno(sreferencecontactno);
-            leedsModel.setPrreferencerelationship(sreferencerelationship);
-            leedsModel.setPrreference2name(sreference2name);
-            leedsModel.setPrreference2address(sreference2address);
-            leedsModel.setPrreference2contactno(sreference2contactno);
-            leedsModel.setPrreference2relationship(sreference2relationship);
-
-            leedsModel.setEducation(cEducation);
-            leedsModel.setGender(cGender);
-            leedsModel.setAddressYesNo(cYesNo);
-            leedsModel.setCoApplicantYN(scoapplicantYN);
-
+            leedsModel.setEmail(this.cEmail);
+            leedsModel.setAdharNo(this.cAdhar);
+            leedsModel.setCheckpanCardNumber(this.cPAN);
+            leedsModel.setPanCardNumber(this.cPANnumber);
+            leedsModel.setOtherEducation(this.cOther);
+            leedsModel.setApvoterid(this.cVoterid);
+            leedsModel.setApdrivinglicence(this.cDL);
+            leedsModel.setAppassport(this.cPassport);
+            leedsModel.setProofadhar(this.cProofadhar);
+            leedsModel.setProofvoterid(this.cProofvoterid);
+            leedsModel.setProofdl(this.cProofDL);
+            leedsModel.setProofelectricitybill(this.cProofelectricitybill);
+            leedsModel.setProofrentagmt(this.cProofrentagmt);
+            leedsModel.setProofpassport(this.cProofpassport);
+            leedsModel.setProofgevtid(this.cProofgovtid);
+            leedsModel.setProofgumasta(this.cProofgumasta);
+            leedsModel.setProofcurrentacctstmt(this.cProofcurrentacctstmt);
+            leedsModel.setPrapplicantrelation(this.sapplicantrelation);
+            leedsModel.setCoapplicantotherrelation(this.sotherrelationship);
+            leedsModel.setPrreference1name(this.sreference1name);
+            leedsModel.setPrreference1address(this.sreference1address);
+            leedsModel.setPrreferencecontactno(this.sreferencecontactno);
+            leedsModel.setPrreferencerelationship(this.sreferencerelationship);
+            leedsModel.setPrreference2name(this.sreference2name);
+            leedsModel.setPrreference2address(this.sreference2address);
+            leedsModel.setPrreference2contactno(this.sreference2contactno);
+            leedsModel.setPrreference2relationship(this.sreference2relationship);
+            leedsModel.setEducation(this.cEducation);
+            leedsModel.setGender(this.cGender);
+            leedsModel.setAddressYesNo(this.cYesNo);
+            leedsModel.setCoApplicantYN(this.scoapplicantYN);
         } catch (Exception e) {
-
         }
-
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
-
     private void updateLeed(String leedId, Map leedsMap) {
-        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-        leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
-            @Override
-            public void onSuccess(Object object) {
-                Toast.makeText(TL_Updatelead_C_Details_Activity.this, "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
-                progressDialogClass.dismissDialog();
-            }
-
-            @Override
-            public void onError(Object object) {
-                // progressDialogClass.dismissDialog();
-                Utility.showLongMessage(TL_Updatelead_C_Details_Activity.this, getString(R.string.server_error));
-            }
-        });
+        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        this.leedRepository.updateLeed(leedId, leedsMap, new C09288());
     }
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        // sploantype = spinloantype.getSelectedItem().toString();
-        // spoccupation = spinemptype.getSelectedItem().toString();
-        String relation = CoapplicantRalationship.getSelectedItem().toString();
-        if (relation.equalsIgnoreCase("Please specify")) {
+    public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
+        if (this.CoapplicantRalationship.getSelectedItem().toString().equalsIgnoreCase("Please specify")) {
             showotherRelation();
         } else {
             hideotherRelation();
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
-
     public void fieldVisibility() {
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutpin.getLayoutParams();
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutlandmark.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutarea.getLayoutParams();
-        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) layoutstreet.getLayoutParams();
-        params.height = ActionBar.LayoutParams.FILL_PARENT;
-        params1.height = ActionBar.LayoutParams.FILL_PARENT;
-        params2.height = ActionBar.LayoutParams.FILL_PARENT;
-        params3.height = ActionBar.LayoutParams.FILL_PARENT;
-        layoutpin.setLayoutParams(params);
-        layoutlandmark.setLayoutParams(params1);
-        layoutarea.setLayoutParams(params2);
-        layoutstreet.setLayoutParams(params3);
-
+        LayoutParams params = (LayoutParams) this.layoutpin.getLayoutParams();
+        LayoutParams params1 = (LayoutParams) this.layoutlandmark.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutarea.getLayoutParams();
+        LayoutParams params3 = (LayoutParams) this.layoutstreet.getLayoutParams();
+        params.height = -1;
+        params1.height = -1;
+        params2.height = -1;
+        params3.height = -1;
+        this.layoutpin.setLayoutParams(params);
+        this.layoutlandmark.setLayoutParams(params1);
+        this.layoutarea.setLayoutParams(params2);
+        this.layoutstreet.setLayoutParams(params3);
     }
 
     public void FieldInvisible() {
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutpin.getLayoutParams();
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutlandmark.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutarea.getLayoutParams();
-        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) layoutstreet.getLayoutParams();
+        LayoutParams params = (LayoutParams) this.layoutpin.getLayoutParams();
+        LayoutParams params1 = (LayoutParams) this.layoutlandmark.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutarea.getLayoutParams();
+        LayoutParams params3 = (LayoutParams) this.layoutstreet.getLayoutParams();
         params.height = 0;
         params1.height = 0;
         params2.height = 0;
         params3.height = 0;
-        layoutpin.setLayoutParams(params);
-        layoutlandmark.setLayoutParams(params1);
-        layoutarea.setLayoutParams(params2);
-        layoutstreet.setLayoutParams(params3);
+        this.layoutpin.setLayoutParams(params);
+        this.layoutlandmark.setLayoutParams(params1);
+        this.layoutarea.setLayoutParams(params2);
+        this.layoutstreet.setLayoutParams(params3);
     }
 
     public void hideother() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutothervalue.getLayoutParams();
+        LayoutParams params = (LayoutParams) this.layoutothervalue.getLayoutParams();
         params.height = 0;
-        layoutothervalue.setLayoutParams(params);
+        this.layoutothervalue.setLayoutParams(params);
     }
 
     public void Showother() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutothervalue.getLayoutParams();
-        params.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        layoutothervalue.setLayoutParams(params);
+        LayoutParams params = (LayoutParams) this.layoutothervalue.getLayoutParams();
+        params.height = -1;
+        this.layoutothervalue.setLayoutParams(params);
     }
 
-
     public void ShowApplicant() {
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutrelationship.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutsavebutton.getLayoutParams();
-
-        params.height = ActionBar.LayoutParams.FILL_PARENT;
-        params2.height = ActionBar.LayoutParams.FILL_PARENT;
-
-        layoutrelationship.setLayoutParams(params);
-        layoutsavebutton.setLayoutParams(params2);
-
-
+        LayoutParams params = (LayoutParams) this.layoutrelationship.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutsavebutton.getLayoutParams();
+        params.height = -1;
+        params2.height = -1;
+        this.layoutrelationship.setLayoutParams(params);
+        this.layoutsavebutton.setLayoutParams(params2);
     }
 
     public void showotherRelation() {
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutotherrelationship.getLayoutParams();
-        params1.height = ActionBar.LayoutParams.FILL_PARENT;
-        layoutotherrelationship.setLayoutParams(params1);
+        LayoutParams params1 = (LayoutParams) this.layoutotherrelationship.getLayoutParams();
+        params1.height = -1;
+        this.layoutotherrelationship.setLayoutParams(params1);
     }
 
     public void hideotherRelation() {
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutotherrelationship.getLayoutParams();
+        LayoutParams params1 = (LayoutParams) this.layoutotherrelationship.getLayoutParams();
         params1.height = 0;
-        layoutotherrelationship.setLayoutParams(params1);
+        this.layoutotherrelationship.setLayoutParams(params1);
     }
 
     public void HideApplicant() {
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutrelationship.getLayoutParams();
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutotherrelationship.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutsavebutton.getLayoutParams();
-
+        LayoutParams params = (LayoutParams) this.layoutrelationship.getLayoutParams();
+        LayoutParams params1 = (LayoutParams) this.layoutotherrelationship.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutsavebutton.getLayoutParams();
         params.height = 0;
         params1.height = 0;
         params2.height = 0;
-
-        layoutrelationship.setLayoutParams(params);
-        layoutotherrelationship.setLayoutParams(params1);
-        layoutsavebutton.setLayoutParams(params2);
-
+        this.layoutrelationship.setLayoutParams(params);
+        this.layoutotherrelationship.setLayoutParams(params1);
+        this.layoutsavebutton.setLayoutParams(params2);
     }
 
     public void Hidereference() {
-
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutref1name.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutref1address.getLayoutParams();
-        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) layoutref1contact.getLayoutParams();
-        RelativeLayout.LayoutParams params4 = (RelativeLayout.LayoutParams) layoutref1relationship.getLayoutParams();
-        RelativeLayout.LayoutParams params5 = (RelativeLayout.LayoutParams) layoutref2name.getLayoutParams();
-        RelativeLayout.LayoutParams params6 = (RelativeLayout.LayoutParams) layoutref2address.getLayoutParams();
-        RelativeLayout.LayoutParams params7 = (RelativeLayout.LayoutParams) layoutref2contact.getLayoutParams();
-        RelativeLayout.LayoutParams params8 = (RelativeLayout.LayoutParams) layoutref2relationship.getLayoutParams();
-
+        LayoutParams params1 = (LayoutParams) this.layoutref1name.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutref1address.getLayoutParams();
+        LayoutParams params3 = (LayoutParams) this.layoutref1contact.getLayoutParams();
+        LayoutParams params4 = (LayoutParams) this.layoutref1relationship.getLayoutParams();
+        LayoutParams params5 = (LayoutParams) this.layoutref2name.getLayoutParams();
+        LayoutParams params6 = (LayoutParams) this.layoutref2address.getLayoutParams();
+        LayoutParams params7 = (LayoutParams) this.layoutref2contact.getLayoutParams();
+        LayoutParams params8 = (LayoutParams) this.layoutref2relationship.getLayoutParams();
         params1.height = 0;
         params2.height = 0;
         params3.height = 0;
@@ -1144,77 +1250,54 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         params6.height = 0;
         params7.height = 0;
         params8.height = 0;
-
-        layoutref1name.setLayoutParams(params1);
-        layoutref1address.setLayoutParams(params2);
-        layoutref1contact.setLayoutParams(params3);
-        layoutref1relationship.setLayoutParams(params4);
-        layoutref2name.setLayoutParams(params5);
-        layoutref2address.setLayoutParams(params6);
-        layoutref2contact.setLayoutParams(params7);
-        layoutref2relationship.setLayoutParams(params8);
-
-
+        this.layoutref1name.setLayoutParams(params1);
+        this.layoutref1address.setLayoutParams(params2);
+        this.layoutref1contact.setLayoutParams(params3);
+        this.layoutref1relationship.setLayoutParams(params4);
+        this.layoutref2name.setLayoutParams(params5);
+        this.layoutref2address.setLayoutParams(params6);
+        this.layoutref2contact.setLayoutParams(params7);
+        this.layoutref2relationship.setLayoutParams(params8);
     }
 
     public void Showreference() {
-
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layoutref1name.getLayoutParams();
-        RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) layoutref1address.getLayoutParams();
-        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) layoutref1contact.getLayoutParams();
-        RelativeLayout.LayoutParams params4 = (RelativeLayout.LayoutParams) layoutref1relationship.getLayoutParams();
-        RelativeLayout.LayoutParams params5 = (RelativeLayout.LayoutParams) layoutref2name.getLayoutParams();
-        RelativeLayout.LayoutParams params6 = (RelativeLayout.LayoutParams) layoutref2address.getLayoutParams();
-        RelativeLayout.LayoutParams params7 = (RelativeLayout.LayoutParams) layoutref2contact.getLayoutParams();
-        RelativeLayout.LayoutParams params8 = (RelativeLayout.LayoutParams) layoutref2relationship.getLayoutParams();
-
-        params1.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params2.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params3.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params4.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params5.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params6.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params7.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-        params8.height = ActionBar.LayoutParams.FILL_PARENT;
-        ;
-
-        layoutref1name.setLayoutParams(params1);
-        layoutref1address.setLayoutParams(params2);
-        layoutref1contact.setLayoutParams(params3);
-        layoutref1relationship.setLayoutParams(params4);
-        layoutref2name.setLayoutParams(params5);
-        layoutref2address.setLayoutParams(params6);
-        layoutref2contact.setLayoutParams(params7);
-        layoutref2relationship.setLayoutParams(params8);
-
-
+        LayoutParams params1 = (LayoutParams) this.layoutref1name.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) this.layoutref1address.getLayoutParams();
+        LayoutParams params3 = (LayoutParams) this.layoutref1contact.getLayoutParams();
+        LayoutParams params4 = (LayoutParams) this.layoutref1relationship.getLayoutParams();
+        LayoutParams params5 = (LayoutParams) this.layoutref2name.getLayoutParams();
+        LayoutParams params6 = (LayoutParams) this.layoutref2address.getLayoutParams();
+        LayoutParams params7 = (LayoutParams) this.layoutref2contact.getLayoutParams();
+        LayoutParams params8 = (LayoutParams) this.layoutref2relationship.getLayoutParams();
+        params1.height = -1;
+        params2.height = -1;
+        params3.height = -1;
+        params4.height = -1;
+        params5.height = -1;
+        params6.height = -1;
+        params7.height = -1;
+        params8.height = -1;
+        this.layoutref1name.setLayoutParams(params1);
+        this.layoutref1address.setLayoutParams(params2);
+        this.layoutref1contact.setLayoutParams(params3);
+        this.layoutref1relationship.setLayoutParams(params4);
+        this.layoutref2name.setLayoutParams(params5);
+        this.layoutref2address.setLayoutParams(params6);
+        this.layoutref2contact.setLayoutParams(params7);
+        this.layoutref2relationship.setLayoutParams(params8);
     }
 
-    @Override
     public void onBackPressed() {
-        // super.onBackPressed(); commented this line in order to disable back press
-        //Write your code here
         Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
     protected void onResume() {
         super.onResume();
-
-//        edtreferencename.requestFocus();
         Log.d("lifecycle", "onResume invoked");
     }
 
-    @Override
     protected void onRestart() {
         super.onRestart();
-        edtreferencename.requestFocus();
+        this.edtreferencename.requestFocus();
     }
 }

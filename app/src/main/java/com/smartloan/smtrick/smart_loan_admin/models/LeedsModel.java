@@ -1,9 +1,11 @@
 package com.smartloan.smtrick.smart_loan_admin.models;
 
-import android.view.View;
+import android.support.v4.app.NotificationCompat;
+import android.view.View.OnClickListener;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
+import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,189 +13,172 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LeedsModel implements Serializable {
-
-    //Applicant
-    private String customerName;
-    private String mobileNumber;
     private String address;
-    private String gender;
+    private String addressYesNo;
+    private String adharNo;
     private String agentId;
-    private Long createdDateTime, updatedDateTime;
-    private String loanType;
-    private String panCardNumber;
-    private String checkpanCardNumber;
-    private String email;
-    private String dateOfBirth;
-//    private String expectedLoanAmount;
-   private String expectedLoanAmount;;
-    private String occupation;
     private String agentName;
-    private String leedId;
-    private String status;
+    private String aggrecultureIncome;
+    private String alternetMobileNumber;
+    private String annualincome;
+    private String apdrivinglicence;
+    private String appassport;
+    private String appointmentltr;
+    private String approvedLoan;
+    private String apvoterid;
+    private String area;
+    private String bankName;
+    private String bankstmt;
+    private String bonus;
+    private String businessagmt;
+    private String carLoanAmount;
+    private String channelPartner;
+    private String checkpanCardNumber;
+    private String coApplicantYN;
+    private String coapplicantotherrelation;
+    private String companytype;
+    private String conformationltr;
+    private String contractltr;
+    private String createdBy;
+    private Long createdDateTime;
+    private String currentarea;
+    private String currentbankstmt;
+    private String currentlandmark;
+    private String currentpin;
+    private String currentstreet;
     private String customerImageSmall;
     private String customerImagelarg;
-    private String leedNumber;
-    private String bankName;
-    private String payout;
-    private String createdBy;
-    private Map<String, ImagesModel> documentImages;
-    private String approvedLoan;
-    private String gst;
-    private String officeAdderess;
-    private String propertyAddress;
+    private String customerName;
+    private String dateOfBirth;
+    private String department;
     private String description;
+    private String designation;
     private String dissbussloan;
-    private String adharNo;
-    private String alternetMobileNumber;
-    private String income;
-    private String recidential;
-    private String peraddress;
-    private String mincome;
-    private String yincome;
+    private Map<String, ImagesModel> documentImages;
+    private String downpayment;
+    private String education;
+    private String email;
+    private String emi;
+    private String emiOtherDetails;
+    private String emicar;
+    private String emihome;
+    private String emiother;
+    private String emipersonal;
+    private String emisociety;
+    private String emploerltr;
+    private String employed;
+    private String expectedLoanAmount;
+    private String experience;
+    private String experinceltr;
     private String flatno;
+    private String form;
+    private String gender;
+    private String grosssalary;
+    private String gst;
+    private String homeLoanAmount;
+    private String incentive;
+    private String income;
+    private String itr;
+    private String landmark;
+    private String leedId;
+    private String leedNumber;
+    private String loanType;
+    private String loanrequirement;
+    private String mincome;
+    private String mobileNumber;
+    private String netsalary;
+    private String nrebankstmt;
+    private String occupation;
+    private String officeAdderess;
+    private String otherEducation;
+    private String otherIncome;
+    private String othercompany;
+    private String overseasbankdetail;
+    private String overtime;
+    private String panCardNumber;
+    private String partnersheepdeed;
+    private String passport;
+    private String payout;
+    private String pcity;
+    private String peraddress;
+    private String personalLoanAmount;
+    private String pincode;
+    private String poa;
+    private String prAPadhar;
+    private String prAapan;
+    private String prAapdl;
+    private String prAappassport;
+    private String prAapvoterid;
+    private String pradadhar;
+    private String pradcurrentacctstmt;
+    private String praddl;
+    private String pradelectricity;
+    private String pradgovtid;
+    private String pradgumasta;
+    private String pradpassport;
+    private String pradrentagmt;
+    private String pradvoterid;
+    private String praplicantoffceaddress;
+    private String prapplicantaltcontactno;
+    private String prapplicantcontactno;
+    private String prapplicantcurrentaddress;
+    private String prapplicantdob;
+    private String prapplicantemail;
+    private String prapplicantfullname;
+    private String prapplicantperaddress;
+    private String prapplicantrelation;
+    private String prdescripiton;
+    private String predu;
+    private String prgender;
     private String projectname;
+    private String proofadhar;
+    private String proofcurrentacctstmt;
+    private String proofdl;
+    private String proofelectricitybill;
+    private String proofgevtid;
+    private String proofgumasta;
+    private String proofpassport;
+    private String proofrentagmt;
+    private String proofvoterid;
     private String propaddress;
     private String propage;
     private String proparea;
-    private String currentpin;
-    private String currentlandmark;
-    private String currentarea;
-    private String currentstreet;
-    private String pincode;
-    private String landmark;
-    private String area;
-    private String street;
-    private String pcity;
-    private String pstate;
-    private String education;
-    private String channelPartner;
-    private String addressYesNo;
-    private String otherEducation;
-    private String apvoterid;
-    private String apdrivinglicence;
-    private String appassport;
-    private String proofadhar;
-    private String proofvoterid;
-    private String proofdl;
-    private String proofelectricitybill;
-    private String proofrentagmt;
-    private String proofpassport;
-    private String proofgevtid;
-    private String proofgumasta;
-    private String proofcurrentacctstmt;
-
-    private String coApplicantYN;
-    private String prapplicantrelation;
-    private String coapplicantotherrelation;
-    private String prreference1name;
-    private String prreference1address;
-    private String prreferencecontactno;
-    private String prreferencerelationship;
-    private String prreference2name;
-    private String prreference2address;
-    private String prreference2contactno;
-    private String prreference2relationship;
-
-
-    //Income
-    private String employed;
-    private String companytype;
-    private String othercompany;
-    private String salaytype;
-    private String emi;
-    private String tenure;
-    private String experience;
-    private String department;
-    private String designation;
-    private String grosssalary;
-    private String netsalary;
-    private String overtime;
-    private String incentive;
-    private String bonus;
-    private String rentalincome;
-    private String annualincome;
-    private String rental;
-    private String salarysleep;
-    private String bankstmt;
-    private String form;
-    private String appointmentltr;
-    private String conformationltr;
-    private String experinceltr;
-    private String visa;
-    private String passport;
-    private String emploerltr;
-    private String contractltr;
-    private String poa;
-    private String nrebankstmt;
-    private String overseasbankdetail;
-    private String itr;
-    private String currentbankstmt;
-    private String savingacctstmt;
-    private String partnersheepdeed;
-    private String businessagmt;
-    private String qualification;
-    private String aggrecultureIncome;
-    private String otherIncome;
-    private String emicar;
-    private String emihome;
-    private String emisociety;
-    private String emipersonal;
-    private String emiother;
-    private String emiOtherDetails;
-
-    private String carLoanAmount;
-    private String homeLoanAmount;
-    private String societyLoanAmount;
-    private String personalLoanAmount;
-
-    //Propety Details
+    private String propertyAddress;
     private String propety;
     private String propetyYN;
-    private String loanrequirement;
-    private String downpayment;
-
-
-    private String prgender;
-    private String predu;
-    private String prpropertyaddress;
-    private String prpropertypin;
-    private String prpropertylandmark;
-    private String prpropertyarea;
     private String prprojectname;
-    private String prapplicantfullname;
-    private String prapplicantdob;
-    private String prapplicantcontactno;
-    private String prapplicantaltcontactno;
-    private String prapplicantemail;
-    private String prapplicantcurrentaddress;
-    private String prapplicantperaddress;
-    private String praplicantoffceaddress;
-    private String prAPadhar;
-    private String prAapan;
-    private String prAapvoterid;
-    private String prAapdl;
-    private String prAappassport;
-    private String pradadhar;
-    private String pradvoterid;
-    private String praddl;
-    private String pradelectricity;
-    private String pradpassport;
-    private String pradrentagmt;
-    private String pradgovtid;
-    private String pradgumasta;
-    private String pradcurrentacctstmt;
+    private String prpropertyaddress;
+    private String prpropertyarea;
+    private String prpropertylandmark;
+    private String prpropertypin;
     private String prpropertytype;
     private String prrecidenttype;
-    private String prdescripiton;
-
-
-    private View.OnClickListener requestBtnClickListener;
-
-    public LeedsModel() {
-    }
+    private String prreference1address;
+    private String prreference1name;
+    private String prreference2address;
+    private String prreference2contactno;
+    private String prreference2name;
+    private String prreference2relationship;
+    private String prreferencecontactno;
+    private String prreferencerelationship;
+    private String pstate;
+    private String qualification;
+    private String recidential;
+    private String rental;
+    private String rentalincome;
+    private OnClickListener requestBtnClickListener;
+    private String salarysleep;
+    private String salaytype;
+    private String savingacctstmt;
+    private String societyLoanAmount;
+    private String status;
+    private String street;
+    private String tenure;
+    private Long updatedDateTime;
+    private String visa;
+    private String yincome;
 
     public LeedsModel(int id) {
-
         this.addressYesNo = "address";
         this.otherEducation = "other";
         this.apvoterid = "voterid";
@@ -208,7 +193,6 @@ public class LeedsModel implements Serializable {
         this.proofgevtid = "adhar";
         this.proofgumasta = "adhar";
         this.proofcurrentacctstmt = "adhar";
-
         this.channelPartner = "ChannelPartner";
         this.education = "mca";
         this.flatno = "Prateek Patel";
@@ -228,20 +212,18 @@ public class LeedsModel implements Serializable {
         this.pstate = "Pune";
         this.mincome = "Prateek Patel";
         this.yincome = "84121211";
-       // this.parents = "Prateek Patel";
         this.recidential = "84121211";
         this.peraddress = "Pune";
         this.customerName = "Prateek Patel";
         this.mobileNumber = "84121211";
         this.address = "Pune";
-        this.gender = "Male";
+        this.gender = Constant.MALE;
         this.agentId = "Ag-56465";
         this.loanType = "Home Loan";
         this.panCardNumber = "jds45";
         this.checkpanCardNumber = "31564";
         this.email = "kjsdj@jhjdf.sdf";
-//        this.expectedLoanAmount = "2565656";
-        this.expectedLoanAmount ="2565656";
+        this.expectedLoanAmount = "2565656";
         this.occupation = "vdvf";
         this.agentName = "Aikk";
         this.leedId = "dfgdfg";
@@ -258,7 +240,6 @@ public class LeedsModel implements Serializable {
         this.alternetMobileNumber = "na";
         this.adharNo = "na";
         this.income = "na";
-
         this.coApplicantYN = "YN";
         this.prapplicantrelation = "na";
         this.coapplicantotherrelation = "na";
@@ -270,8 +251,6 @@ public class LeedsModel implements Serializable {
         this.prreference2address = "na";
         this.prreference2contactno = "na";
         this.prreference2relationship = "na";
-
-        //Income
         this.employed = "na";
         this.companytype = "na";
         this.othercompany = "na";
@@ -316,13 +295,10 @@ public class LeedsModel implements Serializable {
         this.qualification = "na";
         this.aggrecultureIncome = "na";
         this.otherIncome = "na";
-
         this.carLoanAmount = "na";
         this.homeLoanAmount = "na";
         this.societyLoanAmount = "na";
         this.personalLoanAmount = "na";
-
-        //Property
         this.prgender = "na";
         this.predu = "na";
         this.prpropertyaddress = "na";
@@ -355,13 +331,15 @@ public class LeedsModel implements Serializable {
         this.prpropertytype = "na";
         this.prrecidenttype = "na";
         this.prdescripiton = "na";
+    }
 
+    public LeedsModel() {
 
     }
 
     @Exclude
     public Long getCreatedDateTimeLong() {
-        return createdDateTime;
+        return this.createdDateTime;
     }
 
     public Map<String, String> getCreatedDateTime() {
@@ -369,12 +347,11 @@ public class LeedsModel implements Serializable {
     }
 
     public void setCreatedDateTime(Long createdDateTime) {
-        this.createdDateTime = (Long) createdDateTime;
+        this.createdDateTime = createdDateTime;
     }
 
-
     public String getProofadhar() {
-        return proofadhar;
+        return this.proofadhar;
     }
 
     public void setProofadhar(String proofadhar) {
@@ -382,7 +359,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofvoterid() {
-        return proofvoterid;
+        return this.proofvoterid;
     }
 
     public void setProofvoterid(String proofvoterid) {
@@ -390,7 +367,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofdl() {
-        return proofdl;
+        return this.proofdl;
     }
 
     public void setProofdl(String proofdl) {
@@ -398,7 +375,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofelectricitybill() {
-        return proofelectricitybill;
+        return this.proofelectricitybill;
     }
 
     public void setProofelectricitybill(String proofelectricitybill) {
@@ -406,7 +383,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofrentagmt() {
-        return proofrentagmt;
+        return this.proofrentagmt;
     }
 
     public void setProofrentagmt(String proofrentagmt) {
@@ -414,7 +391,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofpassport() {
-        return proofpassport;
+        return this.proofpassport;
     }
 
     public void setProofpassport(String proofpassport) {
@@ -422,7 +399,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofgevtid() {
-        return proofgevtid;
+        return this.proofgevtid;
     }
 
     public void setProofgevtid(String proofgevtid) {
@@ -430,7 +407,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofgumasta() {
-        return proofgumasta;
+        return this.proofgumasta;
     }
 
     public void setProofgumasta(String proofgumasta) {
@@ -438,7 +415,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProofcurrentacctstmt() {
-        return proofcurrentacctstmt;
+        return this.proofcurrentacctstmt;
     }
 
     public void setProofcurrentacctstmt(String proofcurrentacctstmt) {
@@ -446,7 +423,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getApvoterid() {
-        return apvoterid;
+        return this.apvoterid;
     }
 
     public void setApvoterid(String apvoterid) {
@@ -454,7 +431,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getApdrivinglicence() {
-        return apdrivinglicence;
+        return this.apdrivinglicence;
     }
 
     public void setApdrivinglicence(String apdrivinglicence) {
@@ -462,7 +439,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAppassport() {
-        return appassport;
+        return this.appassport;
     }
 
     public void setAppassport(String appassport) {
@@ -470,7 +447,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEducation() {
-        return education;
+        return this.education;
     }
 
     public void setEducation(String education) {
@@ -478,7 +455,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getOtherEducation() {
-        return otherEducation;
+        return this.otherEducation;
     }
 
     public void setOtherEducation(String otherEducation) {
@@ -487,7 +464,7 @@ public class LeedsModel implements Serializable {
 
     @Exclude
     public Long getUpdatedDateTimeLong() {
-        return updatedDateTime;
+        return this.updatedDateTime;
     }
 
     public void setUpdatedDateTime(Long updatedDateTime) {
@@ -499,7 +476,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getofficeAdderess() {
-        return officeAdderess;
+        return this.officeAdderess;
     }
 
     public void setOfficeAdderess(String officeAdderess) {
@@ -507,20 +484,19 @@ public class LeedsModel implements Serializable {
     }
 
     public String getpropertyAddress() {
-        return propertyAddress;
+        return this.propertyAddress;
     }
 
     public String getdescription() {
-        return description;
+        return this.description;
     }
 
-
     public String getCustomerName() {
-        return customerName;
+        return this.customerName;
     }
 
     public String getAlternetMobileNumber() {
-        return alternetMobileNumber;
+        return this.alternetMobileNumber;
     }
 
     public void setAlternetMobileNumber(String alternetMobileNumber) {
@@ -532,7 +508,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
+        return this.mobileNumber;
     }
 
     public void setMobileNumber(String mobileNumber) {
@@ -540,7 +516,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -548,7 +524,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     public void setGender(String gender) {
@@ -556,7 +532,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAgentId() {
-        return agentId;
+        return this.agentId;
     }
 
     public void setAgentId(String agentId) {
@@ -564,7 +540,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getadharNo() {
-        return adharNo;
+        return this.adharNo;
     }
 
     public void setAdharNo(String adharNo) {
@@ -572,7 +548,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getLandmark() {
-        return landmark;
+        return this.landmark;
     }
 
     public void setLandmark(String landmark) {
@@ -580,7 +556,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getArea() {
-        return area;
+        return this.area;
     }
 
     public void setArea(String area) {
@@ -588,7 +564,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
     public void setStreet(String street) {
@@ -596,11 +572,11 @@ public class LeedsModel implements Serializable {
     }
 
     public String getincome() {
-        return income;
+        return this.income;
     }
 
     public String getLoanType() {
-        return loanType;
+        return this.loanType;
     }
 
     public void setLoanType(String loanType) {
@@ -612,7 +588,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPanCardNumber() {
-        return panCardNumber;
+        return this.panCardNumber;
     }
 
     public void setPanCardNumber(String panCardNumber) {
@@ -620,7 +596,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCheckpanCardNumber() {
-        return checkpanCardNumber;
+        return this.checkpanCardNumber;
     }
 
     public void setCheckpanCardNumber(String checkpanCardNumber) {
@@ -628,7 +604,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -636,7 +612,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAddressYesNo() {
-        return addressYesNo;
+        return this.addressYesNo;
     }
 
     public void setAddressYesNo(String addressYesNo) {
@@ -644,34 +620,31 @@ public class LeedsModel implements Serializable {
     }
 
     public String getFlatno() {
-        return flatno;
+        return this.flatno;
     }
 
     public void setFlatno(String flatno) {
         this.flatno = flatno;
     }
 
-
     public String getProjectname() {
-        return projectname;
+        return this.projectname;
     }
 
     public void setProjectname(String projectname) {
         this.projectname = projectname;
     }
 
-
     public String getPropaddress() {
-        return propaddress;
+        return this.propaddress;
     }
 
     public void setPropaddress(String propaddress) {
         this.propaddress = propaddress;
     }
 
-
     public String getPropage() {
-        return propage;
+        return this.propage;
     }
 
     public void setPropage(String propage) {
@@ -679,16 +652,15 @@ public class LeedsModel implements Serializable {
     }
 
     public String getProparea() {
-        return proparea;
+        return this.proparea;
     }
 
     public void setProparea(String proparea) {
         this.proparea = proparea;
     }
 
-
     public String getCurrentpin() {
-        return currentpin;
+        return this.currentpin;
     }
 
     public void setCurrentpin(String currentpin) {
@@ -696,7 +668,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCurrentlandmark() {
-        return currentlandmark;
+        return this.currentlandmark;
     }
 
     public void setCurrentlandmark(String currentlandmark) {
@@ -704,7 +676,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCurrentarea() {
-        return currentarea;
+        return this.currentarea;
     }
 
     public void setCurrentarea(String currentarea) {
@@ -712,7 +684,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCurrentstreet() {
-        return currentstreet;
+        return this.currentstreet;
     }
 
     public void setCurrentstreet(String currentstreet) {
@@ -720,34 +692,31 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPincode() {
-        return pincode;
+        return this.pincode;
     }
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
     }
 
-
     public String getPcity() {
-        return pcity;
+        return this.pcity;
     }
 
     public void setPcity(String pcity) {
         this.pcity = pcity;
     }
 
-
     public String getPstate() {
-        return pstate;
+        return this.pstate;
     }
 
     public void setPstate(String pstate) {
         this.pstate = pstate;
     }
 
-
     public String getMincome() {
-        return mincome;
+        return this.mincome;
     }
 
     public void setMincome(String mincome) {
@@ -755,16 +724,15 @@ public class LeedsModel implements Serializable {
     }
 
     public String getYincome() {
-        return yincome;
+        return this.yincome;
     }
 
     public void setYincome(String yincome) {
         this.yincome = yincome;
     }
 
-
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return this.dateOfBirth;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
@@ -775,20 +743,8 @@ public class LeedsModel implements Serializable {
         this.dissbussloan = dissbussloan;
     }
 
-
-
-//    public String getExpectedLoanAmount() {
-//        return expectedLoanAmount;
-//    }
-//
-//    public void setExpectedLoanAmount(String expectedLoanAmount) {
-//        this.expectedLoanAmount = expectedLoanAmount;
-//    }
-
-
-
     public String getOccupation() {
-        return occupation;
+        return this.occupation;
     }
 
     public void setOccupation(String occupation) {
@@ -796,7 +752,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAgentName() {
-        return agentName;
+        return this.agentName;
     }
 
     public void setAgentName(String agentName) {
@@ -804,7 +760,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(String status) {
@@ -812,16 +768,15 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCustomerImageSmall() {
-        return customerImageSmall;
+        return this.customerImageSmall;
     }
-
 
     public void setCustomerImageSmall(String customerImageSmall) {
         this.customerImageSmall = customerImageSmall;
     }
 
     public String getCustomerImagelarg() {
-        return customerImagelarg;
+        return this.customerImagelarg;
     }
 
     public void setCustomerImagelarg(String customerImagelarg) {
@@ -829,69 +784,55 @@ public class LeedsModel implements Serializable {
     }
 
     public String getLeedId() {
-        return leedId;
+        return this.leedId;
     }
 
     public void setLeedId(String leedId) {
         this.leedId = leedId;
     }
 
-
     public String getLeedNumber() {
-        return leedNumber;
+        return this.leedNumber;
     }
 
     public void setLeedNumber(String leedNumber) {
         this.leedNumber = leedNumber;
     }
 
-
     public String getPeraddress() {
-        return peraddress;
+        return this.peraddress;
     }
 
     public void setPeraddress(String peraddress) {
         this.peraddress = peraddress;
     }
 
-
     public String getRecidential() {
-        return recidential;
+        return this.recidential;
     }
 
     public void setRecidential(String recidential) {
         this.recidential = recidential;
     }
 
-
-//    public String getParents() {
-//        return parents;
-//    }
-//
-//    public void setParents(String parents) {
-//        this.parents = parents;
-//    }
-
     public String getExpectedLoanAmount() {
-        return expectedLoanAmount;
+        return this.expectedLoanAmount;
     }
 
     public void setExpectedLoanAmount(String expectedLoanAmount) {
         this.expectedLoanAmount = expectedLoanAmount;
     }
 
-
     public String getBankName() {
-        return bankName;
+        return this.bankName;
     }
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
 
-
     public String getPayout() {
-        return payout;
+        return this.payout;
     }
 
     public void setPayout(String payout) {
@@ -899,7 +840,7 @@ public class LeedsModel implements Serializable {
     }
 
     public Map<String, ImagesModel> getDocumentImages() {
-        return documentImages;
+        return this.documentImages;
     }
 
     public void setDocumentImages(Map<String, ImagesModel> documentImages) {
@@ -907,7 +848,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCreatedBy() {
-        return createdBy;
+        return this.createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
@@ -915,16 +856,15 @@ public class LeedsModel implements Serializable {
     }
 
     public String getApprovedLoan() {
-        return approvedLoan;
+        return this.approvedLoan;
     }
 
     public void setApprovedLoan(String approvedLoan) {
         this.approvedLoan = approvedLoan;
     }
 
-
     public String getEmployed() {
-        return employed;
+        return this.employed;
     }
 
     public void setEmployed(String employed) {
@@ -932,7 +872,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCompanytype() {
-        return companytype;
+        return this.companytype;
     }
 
     public void setCompanytype(String companytype) {
@@ -940,7 +880,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getOthercompany() {
-        return othercompany;
+        return this.othercompany;
     }
 
     public void setOthercompany(String othercompany) {
@@ -948,7 +888,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getSalaytype() {
-        return salaytype;
+        return this.salaytype;
     }
 
     public void setSalaytype(String salaytype) {
@@ -956,7 +896,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmi() {
-        return emi;
+        return this.emi;
     }
 
     public void setEmi(String emi) {
@@ -964,7 +904,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmicar() {
-        return emicar;
+        return this.emicar;
     }
 
     public void setEmicar(String emicar) {
@@ -972,7 +912,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmihome() {
-        return emihome;
+        return this.emihome;
     }
 
     public void setEmihome(String emihome) {
@@ -980,7 +920,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmisociety() {
-        return emisociety;
+        return this.emisociety;
     }
 
     public void setEmisociety(String emisociety) {
@@ -988,7 +928,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmipersonal() {
-        return emipersonal;
+        return this.emipersonal;
     }
 
     public void setEmipersonal(String emipersonal) {
@@ -996,7 +936,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmiother() {
-        return emiother;
+        return this.emiother;
     }
 
     public void setEmiother(String emiother) {
@@ -1004,7 +944,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmiOtherDetails() {
-        return emiOtherDetails;
+        return this.emiOtherDetails;
     }
 
     public void setEmiOtherDetails(String emiOtherDetails) {
@@ -1012,7 +952,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getTenure() {
-        return tenure;
+        return this.tenure;
     }
 
     public void setTenure(String tenure) {
@@ -1020,7 +960,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getExperience() {
-        return experience;
+        return this.experience;
     }
 
     public void setExperience(String experience) {
@@ -1028,7 +968,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getDepartment() {
-        return department;
+        return this.department;
     }
 
     public void setDepartment(String department) {
@@ -1036,7 +976,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getDesignation() {
-        return designation;
+        return this.designation;
     }
 
     public void setDesignation(String designation) {
@@ -1044,7 +984,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getGrosssalary() {
-        return grosssalary;
+        return this.grosssalary;
     }
 
     public void setGrosssalary(String grosssalary) {
@@ -1052,7 +992,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getNetsalary() {
-        return netsalary;
+        return this.netsalary;
     }
 
     public void setNetsalary(String netsalary) {
@@ -1060,7 +1000,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getOvertime() {
-        return overtime;
+        return this.overtime;
     }
 
     public void setOvertime(String overtime) {
@@ -1068,7 +1008,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getIncentive() {
-        return incentive;
+        return this.incentive;
     }
 
     public void setIncentive(String incentive) {
@@ -1076,7 +1016,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getBonus() {
-        return bonus;
+        return this.bonus;
     }
 
     public void setBonus(String bonus) {
@@ -1084,7 +1024,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getRentalincome() {
-        return rentalincome;
+        return this.rentalincome;
     }
 
     public void setRentalincome(String rentalincome) {
@@ -1092,7 +1032,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAnnualincome() {
-        return annualincome;
+        return this.annualincome;
     }
 
     public void setAnnualincome(String annualincome) {
@@ -1100,7 +1040,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getRental() {
-        return rental;
+        return this.rental;
     }
 
     public void setRental(String rental) {
@@ -1108,7 +1048,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAggrecultureIncome() {
-        return aggrecultureIncome;
+        return this.aggrecultureIncome;
     }
 
     public void setAggrecultureIncome(String aggrecultureIncome) {
@@ -1116,7 +1056,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getOtherIncome() {
-        return otherIncome;
+        return this.otherIncome;
     }
 
     public void setOtherIncome(String otherIncome) {
@@ -1124,7 +1064,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getSalarysleep() {
-        return salarysleep;
+        return this.salarysleep;
     }
 
     public void setSalarysleep(String salarysleep) {
@@ -1132,7 +1072,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getBankstmt() {
-        return bankstmt;
+        return this.bankstmt;
     }
 
     public void setBankstmt(String bankstmt) {
@@ -1140,7 +1080,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getForm() {
-        return form;
+        return this.form;
     }
 
     public void setForm(String form) {
@@ -1148,7 +1088,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getAppointmentltr() {
-        return appointmentltr;
+        return this.appointmentltr;
     }
 
     public void setAppointmentltr(String appointmentltr) {
@@ -1156,7 +1096,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getConformationltr() {
-        return conformationltr;
+        return this.conformationltr;
     }
 
     public void setConformationltr(String conformationltr) {
@@ -1164,7 +1104,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getExperinceltr() {
-        return experinceltr;
+        return this.experinceltr;
     }
 
     public void setExperinceltr(String experinceltr) {
@@ -1172,7 +1112,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getVisa() {
-        return visa;
+        return this.visa;
     }
 
     public void setVisa(String visa) {
@@ -1180,7 +1120,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPassport() {
-        return passport;
+        return this.passport;
     }
 
     public void setPassport(String passport) {
@@ -1188,7 +1128,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getEmploerltr() {
-        return emploerltr;
+        return this.emploerltr;
     }
 
     public void setEmploerltr(String emploerltr) {
@@ -1196,7 +1136,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getContractltr() {
-        return contractltr;
+        return this.contractltr;
     }
 
     public void setContractltr(String contractltr) {
@@ -1204,7 +1144,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPoa() {
-        return poa;
+        return this.poa;
     }
 
     public void setPoa(String poa) {
@@ -1212,7 +1152,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getNrebankstmt() {
-        return nrebankstmt;
+        return this.nrebankstmt;
     }
 
     public void setNrebankstmt(String nrebankstmt) {
@@ -1220,7 +1160,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getOverseasbankdetail() {
-        return overseasbankdetail;
+        return this.overseasbankdetail;
     }
 
     public void setOverseasbankdetail(String overseasbankdetail) {
@@ -1228,7 +1168,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getItr() {
-        return itr;
+        return this.itr;
     }
 
     public void setItr(String itr) {
@@ -1236,7 +1176,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCurrentbankstmt() {
-        return currentbankstmt;
+        return this.currentbankstmt;
     }
 
     public void setCurrentbankstmt(String currentbankstmt) {
@@ -1244,7 +1184,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getSavingacctstmt() {
-        return savingacctstmt;
+        return this.savingacctstmt;
     }
 
     public void setSavingacctstmt(String savingacctstmt) {
@@ -1252,7 +1192,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPartnersheepdeed() {
-        return partnersheepdeed;
+        return this.partnersheepdeed;
     }
 
     public void setPartnersheepdeed(String partnersheepdeed) {
@@ -1260,7 +1200,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrgender() {
-        return prgender;
+        return this.prgender;
     }
 
     public void setPrgender(String prgender) {
@@ -1268,7 +1208,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPredu() {
-        return predu;
+        return this.predu;
     }
 
     public void setPredu(String predu) {
@@ -1276,7 +1216,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrpropertyaddress() {
-        return prpropertyaddress;
+        return this.prpropertyaddress;
     }
 
     public void setPrpropertyaddress(String prpropertyaddress) {
@@ -1284,7 +1224,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPropety() {
-        return propety;
+        return this.propety;
     }
 
     public void setPropety(String propety) {
@@ -1292,7 +1232,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPropetyYN() {
-        return propetyYN;
+        return this.propetyYN;
     }
 
     public void setPropetyYN(String propetyYN) {
@@ -1300,7 +1240,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getLoanrequirement() {
-        return loanrequirement;
+        return this.loanrequirement;
     }
 
     public void setLoanrequirement(String loanrequirement) {
@@ -1308,7 +1248,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getDownpayment() {
-        return downpayment;
+        return this.downpayment;
     }
 
     public void setDownpayment(String downpayment) {
@@ -1316,7 +1256,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrpropertypin() {
-        return prpropertypin;
+        return this.prpropertypin;
     }
 
     public void setPrpropertypin(String prpropertypin) {
@@ -1324,7 +1264,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrpropertylandmark() {
-        return prpropertylandmark;
+        return this.prpropertylandmark;
     }
 
     public void setPrpropertylandmark(String prpropertylandmark) {
@@ -1332,7 +1272,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrpropertyarea() {
-        return prpropertyarea;
+        return this.prpropertyarea;
     }
 
     public void setPrpropertyarea(String prpropertyarea) {
@@ -1340,7 +1280,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrprojectname() {
-        return prprojectname;
+        return this.prprojectname;
     }
 
     public void setPrprojectname(String prprojectname) {
@@ -1348,7 +1288,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantfullname() {
-        return prapplicantfullname;
+        return this.prapplicantfullname;
     }
 
     public void setPrapplicantfullname(String prapplicantfullname) {
@@ -1356,7 +1296,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantdob() {
-        return prapplicantdob;
+        return this.prapplicantdob;
     }
 
     public void setPrapplicantdob(String prapplicantdob) {
@@ -1364,7 +1304,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantcontactno() {
-        return prapplicantcontactno;
+        return this.prapplicantcontactno;
     }
 
     public void setPrapplicantcontactno(String prapplicantcontactno) {
@@ -1372,7 +1312,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantaltcontactno() {
-        return prapplicantaltcontactno;
+        return this.prapplicantaltcontactno;
     }
 
     public void setPrapplicantaltcontactno(String prapplicantaltcontactno) {
@@ -1380,7 +1320,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantemail() {
-        return prapplicantemail;
+        return this.prapplicantemail;
     }
 
     public void setPrapplicantemail(String prapplicantemail) {
@@ -1388,7 +1328,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantcurrentaddress() {
-        return prapplicantcurrentaddress;
+        return this.prapplicantcurrentaddress;
     }
 
     public void setPrapplicantcurrentaddress(String prapplicantcurrentaddress) {
@@ -1396,7 +1336,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantperaddress() {
-        return prapplicantperaddress;
+        return this.prapplicantperaddress;
     }
 
     public void setPrapplicantperaddress(String prapplicantperaddress) {
@@ -1404,7 +1344,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPraplicantoffceaddress() {
-        return praplicantoffceaddress;
+        return this.praplicantoffceaddress;
     }
 
     public void setPraplicantoffceaddress(String praplicantoffceaddress) {
@@ -1412,7 +1352,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference1name() {
-        return prreference1name;
+        return this.prreference1name;
     }
 
     public void setPrreference1name(String prreference1name) {
@@ -1420,7 +1360,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference1address() {
-        return prreference1address;
+        return this.prreference1address;
     }
 
     public void setPrreference1address(String prreference1address) {
@@ -1428,7 +1368,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreferencecontactno() {
-        return prreferencecontactno;
+        return this.prreferencecontactno;
     }
 
     public void setPrreferencecontactno(String prreferencecontactno) {
@@ -1436,7 +1376,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreferencerelationship() {
-        return prreferencerelationship;
+        return this.prreferencerelationship;
     }
 
     public void setPrreferencerelationship(String prreferencerelationship) {
@@ -1444,7 +1384,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference2name() {
-        return prreference2name;
+        return this.prreference2name;
     }
 
     public void setPrreference2name(String prreference2name) {
@@ -1452,7 +1392,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference2address() {
-        return prreference2address;
+        return this.prreference2address;
     }
 
     public void setPrreference2address(String prreference2address) {
@@ -1460,7 +1400,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference2contactno() {
-        return prreference2contactno;
+        return this.prreference2contactno;
     }
 
     public void setPrreference2contactno(String prreference2contactno) {
@@ -1468,7 +1408,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrreference2relationship() {
-        return prreference2relationship;
+        return this.prreference2relationship;
     }
 
     public void setPrreference2relationship(String prreference2relationship) {
@@ -1476,7 +1416,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrAPadhar() {
-        return prAPadhar;
+        return this.prAPadhar;
     }
 
     public void setPrAPadhar(String prAPadhar) {
@@ -1484,7 +1424,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrAapan() {
-        return prAapan;
+        return this.prAapan;
     }
 
     public void setPrAapan(String prAapan) {
@@ -1492,7 +1432,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrAapvoterid() {
-        return prAapvoterid;
+        return this.prAapvoterid;
     }
 
     public void setPrAapvoterid(String prAapvoterid) {
@@ -1500,7 +1440,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrAapdl() {
-        return prAapdl;
+        return this.prAapdl;
     }
 
     public void setPrAapdl(String prAapdl) {
@@ -1508,7 +1448,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrAappassport() {
-        return prAappassport;
+        return this.prAappassport;
     }
 
     public void setPrAappassport(String prAappassport) {
@@ -1516,7 +1456,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradadhar() {
-        return pradadhar;
+        return this.pradadhar;
     }
 
     public void setPradadhar(String pradadhar) {
@@ -1524,7 +1464,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradvoterid() {
-        return pradvoterid;
+        return this.pradvoterid;
     }
 
     public void setPradvoterid(String pradvoterid) {
@@ -1532,7 +1472,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPraddl() {
-        return praddl;
+        return this.praddl;
     }
 
     public void setPraddl(String praddl) {
@@ -1540,7 +1480,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradelectricity() {
-        return pradelectricity;
+        return this.pradelectricity;
     }
 
     public void setPradelectricity(String pradelectricity) {
@@ -1548,7 +1488,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradpassport() {
-        return pradpassport;
+        return this.pradpassport;
     }
 
     public void setPradpassport(String pradpassport) {
@@ -1556,7 +1496,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradrentagmt() {
-        return pradrentagmt;
+        return this.pradrentagmt;
     }
 
     public void setPradrentagmt(String pradrentagmt) {
@@ -1564,7 +1504,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradgovtid() {
-        return pradgovtid;
+        return this.pradgovtid;
     }
 
     public void setPradgovtid(String pradgovtid) {
@@ -1572,7 +1512,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradgumasta() {
-        return pradgumasta;
+        return this.pradgumasta;
     }
 
     public void setPradgumasta(String pradgumasta) {
@@ -1580,7 +1520,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPradcurrentacctstmt() {
-        return pradcurrentacctstmt;
+        return this.pradcurrentacctstmt;
     }
 
     public void setPradcurrentacctstmt(String pradcurrentacctstmt) {
@@ -1588,7 +1528,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrpropertytype() {
-        return prpropertytype;
+        return this.prpropertytype;
     }
 
     public void setPrpropertytype(String prpropertytype) {
@@ -1596,7 +1536,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrrecidenttype() {
-        return prrecidenttype;
+        return this.prrecidenttype;
     }
 
     public void setPrrecidenttype(String prrecidenttype) {
@@ -1604,7 +1544,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrdescripiton() {
-        return prdescripiton;
+        return this.prdescripiton;
     }
 
     public void setPrdescripiton(String prdescripiton) {
@@ -1612,7 +1552,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCoApplicantYN() {
-        return coApplicantYN;
+        return this.coApplicantYN;
     }
 
     public void setCoApplicantYN(String coApplicantYN) {
@@ -1620,7 +1560,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPrapplicantrelation() {
-        return prapplicantrelation;
+        return this.prapplicantrelation;
     }
 
     public void setPrapplicantrelation(String prapplicantrelation) {
@@ -1628,7 +1568,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getCoapplicantotherrelation() {
-        return coapplicantotherrelation;
+        return this.coapplicantotherrelation;
     }
 
     public void setCoapplicantotherrelation(String coapplicantotherrelation) {
@@ -1636,7 +1576,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getBusinessagmt() {
-        return businessagmt;
+        return this.businessagmt;
     }
 
     public void setBusinessagmt(String businessagmt) {
@@ -1644,24 +1584,23 @@ public class LeedsModel implements Serializable {
     }
 
     public String getQualification() {
-        return qualification;
+        return this.qualification;
     }
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
-    public View.OnClickListener getRequestBtnClickListener() {
-        return requestBtnClickListener;
+    public OnClickListener getRequestBtnClickListener() {
+        return this.requestBtnClickListener;
     }
 
-    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
+    public void setRequestBtnClickListener(OnClickListener requestBtnClickListener) {
         this.requestBtnClickListener = requestBtnClickListener;
     }
 
-
     public String getCarLoanAmount() {
-        return carLoanAmount;
+        return this.carLoanAmount;
     }
 
     public void setCarLoanAmount(String carLoanAmount) {
@@ -1669,7 +1608,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getHomeLoanAmount() {
-        return homeLoanAmount;
+        return this.homeLoanAmount;
     }
 
     public void setHomeLoanAmount(String homeLoanAmount) {
@@ -1677,7 +1616,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getSocietyLoanAmount() {
-        return societyLoanAmount;
+        return this.societyLoanAmount;
     }
 
     public void setSocietyLoanAmount(String societyLoanAmount) {
@@ -1685,7 +1624,7 @@ public class LeedsModel implements Serializable {
     }
 
     public String getPersonalLoanAmount() {
-        return personalLoanAmount;
+        return this.personalLoanAmount;
     }
 
     public void setPersonalLoanAmount(String personalLoanAmount) {
@@ -1693,16 +1632,15 @@ public class LeedsModel implements Serializable {
     }
 
     public static ArrayList<LeedsModel> getLeeds() {
-        ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
+        ArrayList<LeedsModel> leedsModelArrayList = new ArrayList();
         for (int i = 0; i < 10; i++) {
-            LeedsModel leedsModel = new LeedsModel(i);
-            leedsModelArrayList.add(leedsModel);
+            leedsModelArrayList.add(new LeedsModel(i));
         }
         return leedsModelArrayList;
     }
 
     public String getChannelPartner() {
-        return channelPartner;
+        return this.channelPartner;
     }
 
     public void setChannelPartner(String channelPartner) {
@@ -1711,8 +1649,7 @@ public class LeedsModel implements Serializable {
 
     @Exclude
     public Map getLeedStatusMap() {
-        Map<String, Object> leedMap = new HashMap<>();
-        //leedMap.put("status", getStatus());
+        Map<String, Object> leedMap = new HashMap();
         leedMap.put("updatedDateTime", getUpdatedDateTime());
         leedMap.put("customerName", getCustomerName());
         leedMap.put("address", getAddress());
@@ -1727,9 +1664,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("description", getdescription());
         leedMap.put("alternetMobileNumber", getAlternetMobileNumber());
         leedMap.put("adharNo", getadharNo());
-//        leedMap.put("ExpectedLoanAmount", getExpectedLoanAmount());
         leedMap.put("expectedLoanAmount", getExpectedLoanAmount());
-     //   leedMap.put("parents", getParents());
         leedMap.put("recidential", getRecidential());
         leedMap.put("peraddress", getPeraddress());
         leedMap.put("mincome", getMincome());
@@ -1738,12 +1673,10 @@ public class LeedsModel implements Serializable {
         leedMap.put("projectname", getProjectname());
         leedMap.put("propage", getPropage());
         leedMap.put("proparea", getProparea());
-
         leedMap.put("currentpin", getCurrentpin());
         leedMap.put("currentlandmark", getCurrentlandmark());
         leedMap.put("currentarea", getCurrentarea());
         leedMap.put("currentstreet", getCurrentstreet());
-
         leedMap.put("pincode", getPincode());
         leedMap.put("pcity", getPcity());
         leedMap.put("pstate", getPstate());
@@ -1758,7 +1691,6 @@ public class LeedsModel implements Serializable {
         leedMap.put("gender", getGender());
         leedMap.put("dateOfBirth", getDateOfBirth());
         leedMap.put("otherEducation", getOtherEducation());
-
         leedMap.put("coApplicantYN", getCoApplicantYN());
         leedMap.put("prapplicantrelation", getPrapplicantrelation());
         leedMap.put("coapplicantotherrelation", getCoapplicantotherrelation());
@@ -1771,7 +1703,6 @@ public class LeedsModel implements Serializable {
         leedMap.put("prreference2contactno", getPrreference2contactno());
         leedMap.put("prreference2relationship", getPrreference2relationship());
         leedMap.put("leedNumber", getLeedNumber());
-
         leedMap.put("employed", getEmployed());
         leedMap.put("companytype", getCompanytype());
         leedMap.put("othercompany", getOthercompany());
@@ -1783,12 +1714,10 @@ public class LeedsModel implements Serializable {
         leedMap.put("emipersonal", getEmipersonal());
         leedMap.put("emiother", getEmiother());
         leedMap.put("emiOtherDetails", getEmiOtherDetails());
-
         leedMap.put("carLoanAmount", getCarLoanAmount());
         leedMap.put("homeLoanAmount", getHomeLoanAmount());
         leedMap.put("societyLoanAmount", getSocietyLoanAmount());
         leedMap.put("personalLoanAmount", getPersonalLoanAmount());
-
         leedMap.put("tenure", getTenure());
         leedMap.put("experience", getExperience());
         leedMap.put("department", getDepartment());
@@ -1822,7 +1751,6 @@ public class LeedsModel implements Serializable {
         leedMap.put("qualification", getQualification());
         leedMap.put("aggrecultureIncome", getAggrecultureIncome());
         leedMap.put("otherIncome", getOtherIncome());
-
         leedMap.put("prgender", getPrgender());
         leedMap.put("predu", getPredu());
         leedMap.put("prpropertyaddress", getPrpropertyaddress());
@@ -1838,7 +1766,6 @@ public class LeedsModel implements Serializable {
         leedMap.put("prapplicantcurrentaddress", getPrapplicantcurrentaddress());
         leedMap.put("prapplicantperaddress", getPrapplicantperaddress());
         leedMap.put("praplicantoffceaddress", getPraplicantoffceaddress());
-
         leedMap.put("prAPadhar", getPrAPadhar());
         leedMap.put("prAapan", getPrAapan());
         leedMap.put("prAapvoterid", getPrAapvoterid());
@@ -1856,16 +1783,13 @@ public class LeedsModel implements Serializable {
         leedMap.put("prpropertytype", getPrpropertytype());
         leedMap.put("prrecidenttype", getPrrecidenttype());
         leedMap.put("prdescripiton", getPrdescripiton());
-
         leedMap.put("propety", getPropety());
         leedMap.put("propetyYN", getPropetyYN());
         leedMap.put("loanrequirement", getLoanrequirement());
         leedMap.put("downpayment", getDownpayment());
-
         leedMap.put("apvoterid", getApvoterid());
         leedMap.put("apdrivinglicence", getApdrivinglicence());
         leedMap.put("appassport", getAppassport());
-
         leedMap.put("proofadhar", getProofadhar());
         leedMap.put("proofvoterid", getProofvoterid());
         leedMap.put("proofdl", getProofdl());
@@ -1875,16 +1799,14 @@ public class LeedsModel implements Serializable {
         leedMap.put("proofgevtid", getProofgevtid());
         leedMap.put("proofgumasta", getProofgumasta());
         leedMap.put("proofcurrentacctstmt", getProofcurrentacctstmt());
-
         return leedMap;
     }
 
     @Exclude
     public Map getLeedStatusMap1() {
-        Map<String, Object> leedMap = new HashMap<>();
-        leedMap.put("status", getStatus());
+        Map<String, Object> leedMap = new HashMap();
+        leedMap.put(NotificationCompat.CATEGORY_STATUS, getStatus());
         leedMap.put("updatedDateTime", getUpdatedDateTime());
-
         return leedMap;
     }
 }

@@ -1,14 +1,14 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,414 +16,548 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
-
 import java.util.Map;
 
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.LEED_MODEL;
-
-public class Tl_Updatelead_incomedetails_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinloantype;
-    Button btupdate, btverify, btcancel, btnupdatenext;
+public class Tl_Updatelead_incomedetails_Activity extends AppCompatActivity implements OnItemSelectedListener {
+    RadioButton Remployed;
+    RadioButton Rsalaried;
+    RadioButton Rselfemployed;
+    Spinner SPEMI;
+    Spinner SPcompanytype;
+    Spinner SPsalarytype;
+    AppSharedPreference appSharedPreference;
+    Button btcancel;
+    Button btnupdatenext;
+    Button btupdate;
+    Button btverify;
+    String cAgrreIncome;
+    String cAnnualincome;
+    String cAnual;
+    String cAppointmentltr;
+    String cBankstmt;
+    String cBisunessagmt;
+    String cBonus;
+    String cCarloan;
+    String cCarloanamt;
+    String cCompanytype;
+    String cConfermationltr;
+    String cContractltr;
+    String cCurrentbnkstmt;
+    String cDept;
+    String cDesignation;
+    String cEMI;
+    String cEcperience;
+    String cEmployedtype;
+    String cEmployerltr;
+    String cExperinceltr;
+    String cForm16;
+    String cGrossslr;
+    String cHomeloan;
+    String cHomeloanamt;
+    String cITR;
+    String cIncentive;
+    String cMonthly;
+    String cNRAbankstmt;
+    String cNetslr;
+    String cOtherEMIdetails;
+    String cOthercompany;
+    String cOtherincome;
+    String cOtherloan;
+    String cOverbank;
+    String cOvertime;
+    String cPOA;
+    String cPartnerdeed;
+    String cPassport;
+    String cPersonalloan;
+    String cPersonalloanamt;
+    String cQulification;
+    String cRental;
+    String cRentalincome;
+    String cSalaried;
+    String cSalaryType;
+    String cSalarysleep;
+    String cSavingbnkstmt;
+    String cSelfEmployed;
+    String cSocietyloan;
+    String cSocietyloanamt;
+    String cTenure;
+    String cVisa;
+    CheckBox chNREbankstatement;
+    CheckBox chPOA;
+    CheckBox chappointmentletter;
+    CheckBox chbankstatement;
+    CheckBox chbisunessagreement;
+    CheckBox chcarloan;
+    CheckBox chconfermationletter;
+    CheckBox chcontractletter;
+    CheckBox chcurrentbankstatement;
+    CheckBox chemployerletter;
+    CheckBox chexperieceletter;
+    CheckBox chformno16;
+    CheckBox chhomloan;
+    CheckBox chitr;
+    CheckBox chotherloan;
+    CheckBox choverbankdetails;
+    CheckBox chpartnersheepdeed;
+    CheckBox chpasspoet;
+    CheckBox chpersonalloan;
+    CheckBox chqualification;
+    CheckBox chsalarysleep;
+    CheckBox chsavingacctstatement;
+    CheckBox chsocietyloan;
+    CheckBox chvisa;
+    EditText edtagrreculturincom;
+    EditText edtannualincome;
+    EditText edtbonus;
+    EditText edtdepartment;
+    EditText edtdesignation;
+    EditText edtexperience;
+    EditText edtgrosssalary;
+    EditText edtincentive;
+    EditText edtnetsalary;
+    EditText edtothercompany;
+    EditText edtotheremidetails;
+    EditText edtotherincome;
+    EditText edtovertime;
+    EditText edtrental;
+    EditText edtrentalincome;
+    EditText edttenure;
+    RadioGroup groupRadioEmployed;
+    RelativeLayout layoutothercompany;
+    RelativeLayout layoutotheremi;
+    LeedRepository leedRepository;
+    String leedid;
     LeedsModel leedsModel;
     ProgressDialogClass progressDialogClass;
-    AppSharedPreference appSharedPreference;
-    LeedRepository leedRepository;
+    Spinner spinloantype;
+    String sploantype;
+    EditText txtCarloan;
+    EditText txtHomeloan;
+    TextView txtgeneratedby;
+    TextView txtldate;
+    TextView txtleadid;
+    EditText txtpersonalloan;
+    EditText txtsocietyloan;
 
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$1 */
+    class C08331 implements OnCheckedChangeListener {
+        C08331() {
+        }
 
-    String leedid, sploantype, cAnual, cMonthly;
-    TextView txtldate, txtleadid, txtgeneratedby;
-    EditText txtCarloan, txtHomeloan, txtsocietyloan, txtpersonalloan;
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            Tl_Updatelead_incomedetails_Activity tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.Remployed = (RadioButton) tl_Updatelead_incomedetails_Activity.findViewById(checkedId);
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cEmployedtype = tl_Updatelead_incomedetails_Activity.Remployed.getText().toString();
+        }
+    }
 
-    RadioGroup groupRadioEmployed;
-    RadioButton Rsalaried, Rselfemployed, Remployed;
-    Spinner SPcompanytype, SPsalarytype, SPEMI;
-    EditText edttenure, edtexperience, edtdepartment, edtdesignation, edtgrosssalary, edtnetsalary,
-            edtovertime, edtincentive, edtbonus, edtrentalincome, edtannualincome, edtrental, edtothercompany,
-            edtagrreculturincom, edtotherincome, edtotheremidetails;
-    CheckBox chsalarysleep, chbankstatement, chformno16, chappointmentletter, chconfermationletter,
-            chexperieceletter, chvisa, chpasspoet, chemployerletter, chPOA, chNREbankstatement, chcontractletter, choverbankdetails,
-            chitr, chcurrentbankstatement, chsavingacctstatement, chpartnersheepdeed, chbisunessagreement, chqualification,
-            chcarloan, chhomloan, chsocietyloan, chpersonalloan, chotherloan;
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$2 */
+    class C08342 implements OnClickListener {
+        C08342() {
+        }
 
-    String cSalaried, cSelfEmployed, cEmployedtype, cCompanytype, cOthercompany, cSalaryType, cEMI, cTenure, cEcperience, cDept, cDesignation, cGrossslr, cNetslr,
-            cOvertime, cIncentive, cBonus, cRentalincome, cAnnualincome, cRental, cSalarysleep, cBankstmt, cForm16, cAppointmentltr, cConfermationltr,
-            cExperinceltr, cVisa, cPassport, cEmployerltr, cPOA, cNRAbankstmt, cContractltr, cOverbank, cITR, cCurrentbnkstmt, cSavingbnkstmt,
-            cPartnerdeed, cBisunessagmt, cQulification, cAgrreIncome, cOtherincome,
-            cCarloan, cHomeloan, cSocietyloan, cPersonalloan, cOtherloan, cOtherEMIdetails,
-            cCarloanamt, cHomeloanamt, cSocietyloanamt, cPersonalloanamt;
-    RelativeLayout layoutothercompany, layoutotheremi;
+        public void onClick(View v) {
+            if (Tl_Updatelead_incomedetails_Activity.this.groupRadioEmployed.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) Tl_Updatelead_incomedetails_Activity.this.groupRadioEmployed.getChildAt(Tl_Updatelead_incomedetails_Activity.this.groupRadioEmployed.indexOfChild(Tl_Updatelead_incomedetails_Activity.this.groupRadioEmployed.findViewById(Tl_Updatelead_incomedetails_Activity.this.groupRadioEmployed.getCheckedRadioButtonId())));
+                Tl_Updatelead_incomedetails_Activity.this.cEmployedtype = btn.getText().toString();
+            }
+            Tl_Updatelead_incomedetails_Activity tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cCompanytype = tl_Updatelead_incomedetails_Activity.SPcompanytype.getSelectedItem().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cSalaryType = tl_Updatelead_incomedetails_Activity.SPsalarytype.getSelectedItem().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cOthercompany = tl_Updatelead_incomedetails_Activity.edtothercompany.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cTenure = tl_Updatelead_incomedetails_Activity.edttenure.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cEcperience = tl_Updatelead_incomedetails_Activity.edtexperience.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cDept = tl_Updatelead_incomedetails_Activity.edtdepartment.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cDesignation = tl_Updatelead_incomedetails_Activity.edtdesignation.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cGrossslr = tl_Updatelead_incomedetails_Activity.edtgrosssalary.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cNetslr = tl_Updatelead_incomedetails_Activity.edtnetsalary.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cOvertime = tl_Updatelead_incomedetails_Activity.edtovertime.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cIncentive = tl_Updatelead_incomedetails_Activity.edtincentive.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cBonus = tl_Updatelead_incomedetails_Activity.edtbonus.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cRentalincome = tl_Updatelead_incomedetails_Activity.edtrentalincome.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cAnnualincome = tl_Updatelead_incomedetails_Activity.edtannualincome.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cRental = tl_Updatelead_incomedetails_Activity.edtrental.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cAgrreIncome = tl_Updatelead_incomedetails_Activity.edtagrreculturincom.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cOtherincome = tl_Updatelead_incomedetails_Activity.edtotherincome.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cOtherEMIdetails = tl_Updatelead_incomedetails_Activity.edtotheremidetails.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cCarloanamt = tl_Updatelead_incomedetails_Activity.txtCarloan.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cHomeloanamt = tl_Updatelead_incomedetails_Activity.txtHomeloan.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cSocietyloanamt = tl_Updatelead_incomedetails_Activity.txtsocietyloan.getText().toString();
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.cPersonalloanamt = tl_Updatelead_incomedetails_Activity.txtpersonalloan.getText().toString();
+            if (Tl_Updatelead_incomedetails_Activity.this.chcarloan.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cCarloan = tl_Updatelead_incomedetails_Activity.chcarloan.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chhomloan.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cHomeloan = tl_Updatelead_incomedetails_Activity.chhomloan.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chsocietyloan.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cSocietyloan = tl_Updatelead_incomedetails_Activity.chsocietyloan.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chpersonalloan.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cPersonalloan = tl_Updatelead_incomedetails_Activity.chpersonalloan.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chotherloan.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cOtherloan = tl_Updatelead_incomedetails_Activity.chotherloan.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chsalarysleep.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cSalarysleep = tl_Updatelead_incomedetails_Activity.chsalarysleep.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chbankstatement.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cBankstmt = tl_Updatelead_incomedetails_Activity.chbankstatement.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chformno16.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cForm16 = tl_Updatelead_incomedetails_Activity.chformno16.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chappointmentletter.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cAppointmentltr = tl_Updatelead_incomedetails_Activity.chappointmentletter.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chconfermationletter.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cConfermationltr = tl_Updatelead_incomedetails_Activity.chconfermationletter.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chexperieceletter.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cExperinceltr = tl_Updatelead_incomedetails_Activity.chexperieceletter.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chvisa.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cVisa = tl_Updatelead_incomedetails_Activity.chvisa.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chpasspoet.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cPassport = tl_Updatelead_incomedetails_Activity.chpasspoet.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chemployerletter.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cEmployerltr = tl_Updatelead_incomedetails_Activity.chemployerletter.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chPOA.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cPOA = tl_Updatelead_incomedetails_Activity.chPOA.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chNREbankstatement.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cNRAbankstmt = tl_Updatelead_incomedetails_Activity.chNREbankstatement.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chcontractletter.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cContractltr = tl_Updatelead_incomedetails_Activity.chcontractletter.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.choverbankdetails.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cOverbank = tl_Updatelead_incomedetails_Activity.choverbankdetails.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chitr.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cITR = tl_Updatelead_incomedetails_Activity.chitr.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chcurrentbankstatement.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cCurrentbnkstmt = tl_Updatelead_incomedetails_Activity.chcurrentbankstatement.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chsavingacctstatement.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cSavingbnkstmt = tl_Updatelead_incomedetails_Activity.chsavingacctstatement.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chpartnersheepdeed.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cPartnerdeed = tl_Updatelead_incomedetails_Activity.chpartnersheepdeed.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chbisunessagreement.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cBisunessagmt = tl_Updatelead_incomedetails_Activity.chbisunessagreement.getText().toString();
+            }
+            if (Tl_Updatelead_incomedetails_Activity.this.chqualification.isChecked()) {
+                tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+                tl_Updatelead_incomedetails_Activity.cQulification = tl_Updatelead_incomedetails_Activity.chqualification.getText().toString();
+            }
+            tl_Updatelead_incomedetails_Activity = Tl_Updatelead_incomedetails_Activity.this;
+            tl_Updatelead_incomedetails_Activity.updateLeadDetails(tl_Updatelead_incomedetails_Activity.leedsModel);
+            Toast.makeText(Tl_Updatelead_incomedetails_Activity.this, "Lead Update Successfully", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Tl_Updatelead_incomedetails_Activity.this, TL_Updatelead_property_Details_Activity.class);
+            i.putExtra(Constant.LEED_MODEL, Tl_Updatelead_incomedetails_Activity.this.leedsModel);
+            Tl_Updatelead_incomedetails_Activity.this.startActivity(i);
+            Tl_Updatelead_incomedetails_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+    }
 
-    @Override
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$3 */
+    class C08353 implements CompoundButton.OnCheckedChangeListener {
+        C08353() {
+        }
+
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                Tl_Updatelead_incomedetails_Activity.this.ShowotherEMI();
+            } else {
+                Tl_Updatelead_incomedetails_Activity.this.hideotherEMI();
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$4 */
+    class C08364 implements CompoundButton.OnCheckedChangeListener {
+        C08364() {
+        }
+
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+              txtCarloan.setVisibility(View.VISIBLE);
+            } else {
+                txtCarloan.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$5 */
+    class C08375 implements CompoundButton.OnCheckedChangeListener {
+        C08375() {
+        }
+
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                txtHomeloan.setVisibility(View.VISIBLE);
+            } else {
+               txtHomeloan.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$6 */
+    class C08386 implements CompoundButton.OnCheckedChangeListener {
+        C08386() {
+        }
+
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                Tl_Updatelead_incomedetails_Activity.this.txtsocietyloan.setVisibility(View.VISIBLE);
+            } else {
+                Tl_Updatelead_incomedetails_Activity.this.txtsocietyloan.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$7 */
+    class C08397 implements CompoundButton.OnCheckedChangeListener {
+        C08397() {
+        }
+
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                Tl_Updatelead_incomedetails_Activity.this.txtpersonalloan.setVisibility(View.VISIBLE);
+            } else {
+                Tl_Updatelead_incomedetails_Activity.this.txtpersonalloan.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Tl_Updatelead_incomedetails_Activity$8 */
+    class C09318 extends CallBack {
+        C09318() {
+        }
+
+        public void onSuccess(Object object) {
+            Tl_Updatelead_incomedetails_Activity.this.progressDialogClass.dismissDialog();
+        }
+
+        public void onError(Object object) {
+            Tl_Updatelead_incomedetails_Activity.this.progressDialogClass.dismissDialog();
+            Context context = Tl_Updatelead_incomedetails_Activity.this;
+            Utility.showLongMessage(context, context.getString(R.string.server_error));
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.updatelead_income_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        leedsModel = (LeedsModel) getIntent().getSerializableExtra(LEED_MODEL);
-        progressDialogClass = new ProgressDialogClass(this);
-        leedRepository = new LeedRepositoryImpl();
-        appSharedPreference = new AppSharedPreference(this);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        this.leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+        this.progressDialogClass = new ProgressDialogClass(this);
+        this.leedRepository = new LeedRepositoryImpl();
+        this.appSharedPreference = new AppSharedPreference(this);
         String[] loanType = new String[]{"Bussiness", "Job"};
-        String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office",
-                "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
+        String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
         String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
         String[] EMI = new String[]{"Car", "Home Loan", "Sociaty Loan/Employer Loan", "Other"};
-
-        layoutothercompany = (RelativeLayout) findViewById(R.id.layoutothercompany);
-        layoutotheremi = (RelativeLayout) findViewById(R.id.layoutotheremidetails);
-
-        groupRadioEmployed = (RadioGroup) findViewById(R.id.radioOccupation);
-        Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
-        Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
-
-        SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
-        SPcompanytype.setOnItemSelectedListener(this);
-        SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
-        //  SPEMI = (Spinner) findViewById(R.id.spemi1);
-
-        edttenure = (EditText) findViewById(R.id.txttenure1);
-        edtexperience = (EditText) findViewById(R.id.txtexperience1);
-        edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
-        edtdesignation = (EditText) findViewById(R.id.txtdesignation1);
-        edtgrosssalary = (EditText) findViewById(R.id.txtmontlygrossincome1);
-        edtnetsalary = (EditText) findViewById(R.id.txtnetsalary1);
-        edtovertime = (EditText) findViewById(R.id.txtovertime1);
-        edtincentive = (EditText) findViewById(R.id.txtiincentive1);
-        edtbonus = (EditText) findViewById(R.id.txtbonus1);
-        edtrentalincome = (EditText) findViewById(R.id.txtrent1);
-        edtannualincome = (EditText) findViewById(R.id.txtannualincome1);
-        edtrental = (EditText) findViewById(R.id.txtrentalexpence1);
-        edtothercompany = (EditText) findViewById(R.id.txtothercompany1);
-        edtagrreculturincom = (EditText) findViewById(R.id.txtagreecultureincome1);
-        edtotherincome = (EditText) findViewById(R.id.txtotherincome1);
-        edtotheremidetails = (EditText) findViewById(R.id.txtotheremi1);
-
-        txtCarloan = (EditText) findViewById(R.id.txtcarloanamount);
-        txtHomeloan = (EditText) findViewById(R.id.txthomeloanamount);
-        txtsocietyloan = (EditText) findViewById(R.id.txtsocietyloanamount);
-        txtpersonalloan = (EditText) findViewById(R.id.txtpersonalloanamount);
-
-
-        chsalarysleep = (CheckBox) findViewById(R.id.checkboxsalarysleep);
-        chbankstatement = (CheckBox) findViewById(R.id.checkboxbankstatement);
-        chformno16 = (CheckBox) findViewById(R.id.checkboxform16);
-        chappointmentletter = (CheckBox) findViewById(R.id.checkboxappointmentletter);
-        chconfermationletter = (CheckBox) findViewById(R.id.checkboxconfermationletter);
-        chexperieceletter = (CheckBox) findViewById(R.id.checkboxexpletter);
-        chvisa = (CheckBox) findViewById(R.id.checkboxvisa);
-        chpasspoet = (CheckBox) findViewById(R.id.checkboxpassport);
-        chemployerletter = (CheckBox) findViewById(R.id.checkboxEmployerletter);
-        chcontractletter = (CheckBox) findViewById(R.id.checkboxcontractletter);
-        chPOA = (CheckBox) findViewById(R.id.checkboxPOA);
-        chNREbankstatement = (CheckBox) findViewById(R.id.checkboxNREbank);
-        choverbankdetails = (CheckBox) findViewById(R.id.checkboxOverseasbank);
-        chitr = (CheckBox) findViewById(R.id.checkboxITR);
-        chcurrentbankstatement = (CheckBox) findViewById(R.id.checkboxcurrentaccountstatement);
-        chsavingacctstatement = (CheckBox) findViewById(R.id.checkboxsavingacctstatement);
-        chpartnersheepdeed = (CheckBox) findViewById(R.id.checkboxpartnerdeed);
-        chbisunessagreement = (CheckBox) findViewById(R.id.checkboxbusinessagreement);
-        chqualification = (CheckBox) findViewById(R.id.checkboxqualification);
-
-        chcarloan = (CheckBox) findViewById(R.id.checkboxCarloan);
-        chhomloan = (CheckBox) findViewById(R.id.checkboxHomeloan);
-        chsocietyloan = (CheckBox) findViewById(R.id.checkboxSocietyloan);
-        chpersonalloan = (CheckBox) findViewById(R.id.checkboxPersonalloan);
-        chotherloan = (CheckBox) findViewById(R.id.checkboxOtherloan);
-
-
+        this.layoutothercompany = (RelativeLayout) findViewById(R.id.layoutothercompany);
+        this.layoutotheremi = (RelativeLayout) findViewById(R.id.layoutotheremidetails);
+        this.groupRadioEmployed = (RadioGroup) findViewById(R.id.radioOccupation);
+        this.Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
+        this.Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
+        this.SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
+        this.SPcompanytype.setOnItemSelectedListener(this);
+        this.SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
+        this.edttenure = (EditText) findViewById(R.id.txttenure1);
+        this.edtexperience = (EditText) findViewById(R.id.txtexperience1);
+        this.edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
+        this.edtdesignation = (EditText) findViewById(R.id.txtdesignation1);
+        this.edtgrosssalary = (EditText) findViewById(R.id.txtmontlygrossincome1);
+        this.edtnetsalary = (EditText) findViewById(R.id.txtnetsalary1);
+        this.edtovertime = (EditText) findViewById(R.id.txtovertime1);
+        this.edtincentive = (EditText) findViewById(R.id.txtiincentive1);
+        this.edtbonus = (EditText) findViewById(R.id.txtbonus1);
+        this.edtrentalincome = (EditText) findViewById(R.id.txtrent1);
+        this.edtannualincome = (EditText) findViewById(R.id.txtannualincome1);
+        this.edtrental = (EditText) findViewById(R.id.txtrentalexpence1);
+        this.edtothercompany = (EditText) findViewById(R.id.txtothercompany1);
+        this.edtagrreculturincom = (EditText) findViewById(R.id.txtagreecultureincome1);
+        this.edtotherincome = (EditText) findViewById(R.id.txtotherincome1);
+        this.edtotheremidetails = (EditText) findViewById(R.id.txtotheremi1);
+        this.txtCarloan = (EditText) findViewById(R.id.txtcarloanamount);
+        this.txtHomeloan = (EditText) findViewById(R.id.txthomeloanamount);
+        this.txtsocietyloan = (EditText) findViewById(R.id.txtsocietyloanamount);
+        this.txtpersonalloan = (EditText) findViewById(R.id.txtpersonalloanamount);
+        this.chsalarysleep = (CheckBox) findViewById(R.id.checkboxsalarysleep);
+        this.chbankstatement = (CheckBox) findViewById(R.id.checkboxbankstatement);
+        this.chformno16 = (CheckBox) findViewById(R.id.checkboxform16);
+        this.chappointmentletter = (CheckBox) findViewById(R.id.checkboxappointmentletter);
+        this.chconfermationletter = (CheckBox) findViewById(R.id.checkboxconfermationletter);
+        this.chexperieceletter = (CheckBox) findViewById(R.id.checkboxexpletter);
+        this.chvisa = (CheckBox) findViewById(R.id.checkboxvisa);
+        this.chpasspoet = (CheckBox) findViewById(R.id.checkboxpassport);
+        this.chemployerletter = (CheckBox) findViewById(R.id.checkboxEmployerletter);
+        this.chcontractletter = (CheckBox) findViewById(R.id.checkboxcontractletter);
+        this.chPOA = (CheckBox) findViewById(R.id.checkboxPOA);
+        this.chNREbankstatement = (CheckBox) findViewById(R.id.checkboxNREbank);
+        this.choverbankdetails = (CheckBox) findViewById(R.id.checkboxOverseasbank);
+        this.chitr = (CheckBox) findViewById(R.id.checkboxITR);
+        this.chcurrentbankstatement = (CheckBox) findViewById(R.id.checkboxcurrentaccountstatement);
+        this.chsavingacctstatement = (CheckBox) findViewById(R.id.checkboxsavingacctstatement);
+        this.chpartnersheepdeed = (CheckBox) findViewById(R.id.checkboxpartnerdeed);
+        this.chbisunessagreement = (CheckBox) findViewById(R.id.checkboxbusinessagreement);
+        this.chqualification = (CheckBox) findViewById(R.id.checkboxqualification);
+        this.chcarloan = (CheckBox) findViewById(R.id.checkboxCarloan);
+        this.chhomloan = (CheckBox) findViewById(R.id.checkboxHomeloan);
+        this.chsocietyloan = (CheckBox) findViewById(R.id.checkboxSocietyloan);
+        this.chpersonalloan = (CheckBox) findViewById(R.id.checkboxPersonalloan);
+        this.chotherloan = (CheckBox) findViewById(R.id.checkboxOtherloan);
         Setchecked();
-
-
-        // btupdate = (Button) findViewById(R.id.buttonupdate);
-        // btverify = (Button) findViewById(R.id.buttonverify);
-        // btcancel = (Button) findViewById(R.id.buttoncancel);
-        btnupdatenext = (Button) findViewById(R.id.buttonupdatenext);
-
-
-        txtleadid = (TextView) findViewById(R.id.textheader);
-
-
-        //       spinloantype.setOnItemSelectedListener(this);
-
-        groupRadioEmployed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Remployed = (RadioButton) findViewById(checkedId);
-                cEmployedtype = Remployed.getText().toString();
-            }
-        });
-
-        ArrayAdapter<String> spinnerArrayAdaptercompanyType = new ArrayAdapter<String>(this, R.layout.sppinner_layout_listitem, CompanyType);
+        this.btnupdatenext = (Button) findViewById(R.id.buttonupdatenext);
+        this.txtleadid = (TextView) findViewById(R.id.textheader);
+        this.groupRadioEmployed.setOnCheckedChangeListener(new C08331());
+        ArrayAdapter<String> spinnerArrayAdaptercompanyType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CompanyType);
         spinnerArrayAdaptercompanyType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        SPcompanytype.setAdapter(spinnerArrayAdaptercompanyType);
-
-
-        ArrayAdapter<String> spinnerArrayAdapterSalaryType = new ArrayAdapter<String>(this, R.layout.sppinner_layout_listitem, SalaryType);
+        this.SPcompanytype.setAdapter(spinnerArrayAdaptercompanyType);
+        ArrayAdapter<String> spinnerArrayAdapterSalaryType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, SalaryType);
         spinnerArrayAdapterSalaryType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
-
-        btnupdatenext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-
-                if (groupRadioEmployed.getCheckedRadioButtonId() != -1) {
-                    int id = groupRadioEmployed.getCheckedRadioButtonId();
-                    View radioButton = groupRadioEmployed.findViewById(id);
-                    int radioId = groupRadioEmployed.indexOfChild(radioButton);
-                    RadioButton btn = (RadioButton) groupRadioEmployed.getChildAt(radioId);
-                    cEmployedtype = btn.getText().toString();
-                }
-
-                cCompanytype = SPcompanytype.getSelectedItem().toString();
-                cSalaryType = SPsalarytype.getSelectedItem().toString();
-                // cEMI = SPEMI.getSelectedItem().toString();
-
-                cOthercompany = edtothercompany.getText().toString();
-                cTenure = edttenure.getText().toString();
-                cEcperience = edtexperience.getText().toString();
-                cDept = edtdepartment.getText().toString();
-                cDesignation = edtdesignation.getText().toString();
-                cGrossslr = edtgrosssalary.getText().toString();
-                cNetslr = edtnetsalary.getText().toString();
-                cOvertime = edtovertime.getText().toString();
-                cIncentive = edtincentive.getText().toString();
-                cBonus = edtbonus.getText().toString();
-                cRentalincome = edtrentalincome.getText().toString();
-                cAnnualincome = edtannualincome.getText().toString();
-                cRental = edtrental.getText().toString();
-                cAgrreIncome = edtagrreculturincom.getText().toString();
-                cOtherincome = edtotherincome.getText().toString();
-                cOtherEMIdetails = edtotheremidetails.getText().toString();
-
-                cCarloanamt = txtCarloan.getText().toString();
-                cHomeloanamt = txtHomeloan.getText().toString();
-                cSocietyloanamt = txtsocietyloan.getText().toString();
-                cPersonalloanamt = txtpersonalloan.getText().toString();
-
-                if (chcarloan.isChecked()) {
-                    cCarloan = chcarloan.getText().toString();
-                }
-                if (chhomloan.isChecked()) {
-                    cHomeloan = chhomloan.getText().toString();
-                }
-                if (chsocietyloan.isChecked()) {
-                    cSocietyloan = chsocietyloan.getText().toString();
-                }
-                if (chpersonalloan.isChecked()) {
-                    cPersonalloan = chpersonalloan.getText().toString();
-                }
-                if (chotherloan.isChecked()) {
-                    cOtherloan = chotherloan.getText().toString();
-                }
-
-                if (chsalarysleep.isChecked()) {
-                    cSalarysleep = chsalarysleep.getText().toString();
-                }
-                if (chbankstatement.isChecked()) {
-                    cBankstmt = chbankstatement.getText().toString();
-                }
-                if (chformno16.isChecked()) {
-                    cForm16 = chformno16.getText().toString();
-                }
-                if (chappointmentletter.isChecked()) {
-                    cAppointmentltr = chappointmentletter.getText().toString();
-                }
-                if (chconfermationletter.isChecked()) {
-                    cConfermationltr = chconfermationletter.getText().toString();
-                }
-                if (chexperieceletter.isChecked()) {
-                    cExperinceltr = chexperieceletter.getText().toString();
-                }
-                if (chvisa.isChecked()) {
-                    cVisa = chvisa.getText().toString();
-                }
-                if (chpasspoet.isChecked()) {
-                    cPassport = chpasspoet.getText().toString();
-                }
-                if (chemployerletter.isChecked()) {
-                    cEmployerltr = chemployerletter.getText().toString();
-                }
-                if (chPOA.isChecked()) {
-                    cPOA = chPOA.getText().toString();
-                }
-                if (chNREbankstatement.isChecked()) {
-                    cNRAbankstmt = chNREbankstatement.getText().toString();
-                }
-                if (chcontractletter.isChecked()) {
-                    cContractltr = chcontractletter.getText().toString();
-                }
-                if (choverbankdetails.isChecked()) {
-                    cOverbank = choverbankdetails.getText().toString();
-                }
-                if (chitr.isChecked()) {
-                    cITR = chitr.getText().toString();
-                }
-                if (chcurrentbankstatement.isChecked()) {
-                    cCurrentbnkstmt = chcurrentbankstatement.getText().toString();
-                }
-                if (chsavingacctstatement.isChecked()) {
-                    cSavingbnkstmt = chsavingacctstatement.getText().toString();
-                }
-                if (chpartnersheepdeed.isChecked()) {
-                    cPartnerdeed = chpartnersheepdeed.getText().toString();
-                }
-                if (chbisunessagreement.isChecked()) {
-                    cBisunessagmt = chbisunessagreement.getText().toString();
-                }
-                if (chqualification.isChecked()) {
-                    cQulification = chqualification.getText().toString();
-                }
-
-//                if (TextUtils.isEmpty(cITR)) {
-//                    Toast.makeText(getApplicationContext(), "Provide ITR!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-
-                updateLeadDetails(leedsModel);
-                Toast.makeText(Tl_Updatelead_incomedetails_Activity.this, "Lead Update Successfully", Toast.LENGTH_SHORT).show();
-
-
-                Intent i = new Intent(Tl_Updatelead_incomedetails_Activity.this, TL_Updatelead_property_Details_Activity.class);
-                i.putExtra(LEED_MODEL, leedsModel);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-            }
-        });
-
+        this.SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
+        this.btnupdatenext.setOnClickListener(new C08342());
         getdata();
         Loanvisibility();
-
-    }//end of oncreate
+    }
 
     private void Setchecked() {
-
-        chotherloan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    ShowotherEMI();
-                } else {
-                    hideotherEMI();
-                }
-            }
-        });
-        chcarloan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    txtCarloan.setVisibility(View.VISIBLE);
-                } else {
-                    txtCarloan.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        chhomloan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    txtHomeloan.setVisibility(View.VISIBLE);
-                } else {
-                    txtHomeloan.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        chsocietyloan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    txtsocietyloan.setVisibility(View.VISIBLE);
-                } else {
-                    txtsocietyloan.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        chpersonalloan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    txtpersonalloan.setVisibility(View.VISIBLE);
-                } else {
-                    txtpersonalloan.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
+        this.chotherloan.setOnCheckedChangeListener(new C08353());
+        this.chcarloan.setOnCheckedChangeListener(new C08364());
+        this.chhomloan.setOnCheckedChangeListener(new C08375());
+        this.chsocietyloan.setOnCheckedChangeListener(new C08386());
+        this.chpersonalloan.setOnCheckedChangeListener(new C08397());
     }
 
     private void Loanvisibility() {
-        if (chcarloan.isChecked()) {
-            txtCarloan.setVisibility(View.VISIBLE);
+        if (this.chcarloan.isChecked()) {
+            this.txtCarloan.setVisibility(View.VISIBLE);
         } else {
-            txtCarloan.setVisibility(View.INVISIBLE);
+            this.txtCarloan.setVisibility(View.INVISIBLE);
         }
-        if (chpersonalloan.isChecked()) {
-            txtpersonalloan.setVisibility(View.VISIBLE);
+        if (this.chpersonalloan.isChecked()) {
+            this.txtpersonalloan.setVisibility(View.VISIBLE);
         } else {
-            txtpersonalloan.setVisibility(View.INVISIBLE);
+            this.txtpersonalloan.setVisibility(View.INVISIBLE);
         }
-        if (chsocietyloan.isChecked()) {
-            txtsocietyloan.setVisibility(View.VISIBLE);
+        if (this.chsocietyloan.isChecked()) {
+            this.txtsocietyloan.setVisibility(View.VISIBLE);
         } else {
-            txtsocietyloan.setVisibility(View.INVISIBLE);
+            this.txtsocietyloan.setVisibility(View.INVISIBLE);
         }
-        if (chhomloan.isChecked()) {
-            txtHomeloan.setVisibility(View.VISIBLE);
+        if (this.chhomloan.isChecked()) {
+            this.txtHomeloan.setVisibility(View.VISIBLE);
         } else {
-            txtHomeloan.setVisibility(View.INVISIBLE);
+            this.txtHomeloan.setVisibility(View.INVISIBLE);
         }
-//        if (chcarloan.isChecked()) {
-//            txtCarloan.setVisibility(View.VISIBLE);
-//        }else {
-//            txtCarloan.setVisibility(View.INVISIBLE);
-//        }
     }
 
-
     private void getdata() {
-
         try {
-
             String cleedid = leedsModel.getLeedNumber();
-
             String sEmployed = leedsModel.getEmployed();
             String sCompanytype = leedsModel.getCompanytype();
             String sSalarytype = leedsModel.getSalaytype();
-            //  String sEMI = leedsModel.getEmi();
             String sEMIcar = leedsModel.getEmicar();
             String sEMIhome = leedsModel.getEmihome();
             String sEMIsociety = leedsModel.getEmisociety();
             String sEMIpersonal = leedsModel.getEmipersonal();
-
             String carloanamt = leedsModel.getCarLoanAmount();
             String homeloanamt = leedsModel.getHomeLoanAmount();
             String societyloanamt = leedsModel.getSocietyLoanAmount();
             String personalloanamt = leedsModel.getPersonalLoanAmount();
-
             String sEMIother = leedsModel.getEmiother();
             String othercompany = leedsModel.getOthercompany();
             String sTenure = leedsModel.getTenure();
-            String sExperience = leedsModel.getExperience();
-            String sDept = leedsModel.getDepartment();
-            String sDesignation = leedsModel.getDesignation();
-            String sGross = leedsModel.getGrosssalary();
-            String sNet = leedsModel.getNetsalary();
-            String sOvertime = leedsModel.getOvertime();
-            String sInsentive = leedsModel.getIncentive();
-            String sBonus = leedsModel.getBonus();
+            String sEMIother2 = sEMIother;
+            sEMIother = leedsModel.getExperience();
+            String personalloanamt2 = personalloanamt;
+            personalloanamt = leedsModel.getDepartment();
+            String sEMIpersonal2 = sEMIpersonal;
+            sEMIpersonal = leedsModel.getDesignation();
+            String societyloanamt2 = societyloanamt;
+            societyloanamt = leedsModel.getGrosssalary();
+            String sEMIsociety2 = sEMIsociety;
+            sEMIsociety = leedsModel.getNetsalary();
+            String homeloanamt2 = homeloanamt;
+            homeloanamt = leedsModel.getOvertime();
+            String sEMIhome2 = sEMIhome;
+            sEMIhome = leedsModel.getIncentive();
+            String carloanamt2 = carloanamt;
+            carloanamt = leedsModel.getBonus();
+            String sEMIcar2 = sEMIcar;
             String sRentalincom = leedsModel.getRentalincome();
             String sAnnualincome = leedsModel.getAnnualincome();
             String sRental = leedsModel.getRental();
@@ -448,330 +582,290 @@ public class Tl_Updatelead_incomedetails_Activity extends AppCompatActivity impl
             String sQualification = leedsModel.getQualification();
             String sAgreeincome = leedsModel.getAggrecultureIncome();
             String sotherincome = leedsModel.getOtherIncome();
-            String sotherEMIdetails = leedsModel.getEmiOtherDetails();
-
-
+            sEMIcar = leedsModel.getEmiOtherDetails();
+            String sBonus = carloanamt;
             ArrayAdapter myAdap = (ArrayAdapter) SPcompanytype.getAdapter();
-            int spinnerPosition = myAdap.getPosition(sCompanytype);
-            SPcompanytype.setSelection(spinnerPosition);
+            String sInsentive = sEMIhome;
+            SPcompanytype.setSelection(myAdap.getPosition(sCompanytype));
             if (sCompanytype.equalsIgnoreCase("Other")) {
                 Showothercompany();
             } else {
                 hideothercompany();
             }
-
-            ArrayAdapter myAdap1 = (ArrayAdapter) SPsalarytype.getAdapter();
-            int spinnerPosition1 = myAdap1.getPosition(sSalarytype);
-            SPsalarytype.setSelection(spinnerPosition1);
-
-
+            SPsalarytype.setSelection(((ArrayAdapter) SPsalarytype.getAdapter()).getPosition(sSalarytype));
             if (cleedid != null) {
                 txtleadid.setText(cleedid);
-
             }
-
-            if (sEmployed != null) {
-                if (sEmployed.equalsIgnoreCase("Salaried")) {
-                    Rsalaried.setChecked(true);
-
-                } else if (sEmployed.equalsIgnoreCase("Self Employed")) {
+            if (sEmployed == null) {
+            } else if (sEmployed.equalsIgnoreCase("Salaried")) {
+                Rsalaried.setChecked(true);
+            } else {
+                if (sEmployed.equalsIgnoreCase("Self Employed")) {
                     Rselfemployed.setChecked(true);
                 }
             }
-
             if (othercompany != null) {
                 edtothercompany.setText(othercompany);
             }
-            if (sotherEMIdetails != null) {
-                edtotheremidetails.setText(sotherEMIdetails);
+            if (sEMIcar != null) {
+                edtotheremidetails.setText(sEMIcar);
             }
             if (sTenure != null) {
                 edttenure.setText(sTenure);
-
             }
-            if (sExperience != null) {
-                edtexperience.setText(sExperience);
-
+            if (sEMIother != null) {
+                edtexperience.setText(sEMIother);
             }
-            if (sDept != null) {
-                edtdepartment.setText(sDept);
-
+            if (personalloanamt != null) {
+                edtdepartment.setText(personalloanamt);
             }
-            if (sDesignation != null) {
-                edtdesignation.setText(sDesignation);
-
+            if (sEMIpersonal != null) {
+                edtdesignation.setText(sEMIpersonal);
             }
-            if (sGross != null) {
-                edtgrosssalary.setText(sGross);
-
+            if (societyloanamt != null) {
+                edtgrosssalary.setText(societyloanamt);
             }
-            if (sNet != null) {
-                edtnetsalary.setText(sNet);
-
+            if (sEMIsociety != null) {
+                edtnetsalary.setText(sEMIsociety);
             }
-            if (sOvertime != null) {
-                edtovertime.setText(sOvertime);
-
+            if (homeloanamt != null) {
+                edtovertime.setText(homeloanamt);
             }
             if (sInsentive != null) {
                 edtincentive.setText(sInsentive);
-
             }
             if (sBonus != null) {
-                edtbonus.setText(sBonus);
-
+                sEmployed = sBonus;
+                edtbonus.setText(sEmployed);
+            } else {
+                sEmployed = sBonus;
             }
             if (sRentalincom != null) {
-                edtrentalincome.setText(sRentalincom);
-
+                sBonus = sEmployed;
+                sEmployed = sRentalincom;
+                edtrentalincome.setText(sEmployed);
+            } else {
+                sEmployed = sRentalincom;
             }
             if (sAnnualincome != null) {
-                edtannualincome.setText(sAnnualincome);
-
+                sRentalincom = sEmployed;
+                sEmployed = sAnnualincome;
+                edtannualincome.setText(sEmployed);
+            } else {
+                sEmployed = sAnnualincome;
             }
             if (sAgreeincome != null) {
-                edtagrreculturincom.setText(sAgreeincome);
-
+                sAnnualincome = sEmployed;
+                sEmployed = sAgreeincome;
+                edtagrreculturincom.setText(sEmployed);
+            } else {
+                sEmployed = sAgreeincome;
             }
             if (sotherincome != null) {
-                edtotherincome.setText(sotherincome);
-
+                sAgreeincome = sEmployed;
+                sEmployed = sotherincome;
+                edtotherincome.setText(sEmployed);
+            } else {
+                sEmployed = sotherincome;
             }
             if (sRental != null) {
-                edtrental.setText(sRental);
-
+                sotherincome = sEmployed;
+                sEmployed = sRental;
+                edtrental.setText(sEmployed);
+            } else {
+                sEmployed = sRental;
             }
             if (sSalrysleep != null) {
+                sRental = sEmployed;
                 chsalarysleep.setChecked(true);
-
             }
             if (sBankstmt != null) {
                 chbankstatement.setChecked(true);
-
             }
             if (sForm != null) {
                 chformno16.setChecked(true);
-
             }
             if (sAppointmentltr != null) {
                 chappointmentletter.setChecked(true);
-
             }
             if (sConfermationltr != null) {
                 chconfermationletter.setChecked(true);
-
             }
             if (sExperinceltr != null) {
                 chexperieceletter.setChecked(true);
-
             }
             if (sVisa != null) {
                 chvisa.setChecked(true);
-
             }
             if (sPassport != null) {
                 chpasspoet.setChecked(true);
-
             }
             if (sEmployerltr != null) {
                 chemployerletter.setChecked(true);
-
             }
             if (sContractltr != null) {
                 chcontractletter.setChecked(true);
-
             }
             if (sPOA != null) {
                 chPOA.setChecked(true);
-
             }
             if (sNREbank != null) {
                 chNREbankstatement.setChecked(true);
-
             }
             if (sOverseasebank != null) {
                 choverbankdetails.setChecked(true);
-
             }
             if (sITR != null) {
                 chitr.setChecked(true);
-
             }
             if (sCurrentbank != null) {
                 chcurrentbankstatement.setChecked(true);
-
             }
             if (sSavingbank != null) {
                 chsavingacctstatement.setChecked(true);
-
             }
             if (sPartnerdeed != null) {
                 chpartnersheepdeed.setChecked(true);
-
             }
             if (sBusinessagmt != null) {
                 chbisunessagreement.setChecked(true);
-
             }
             if (sQualification != null) {
                 chqualification.setChecked(true);
-
             }
-            if (sEMIcar != null) {
+            if (sEMIcar2 != null) {
                 chcarloan.setChecked(true);
-                txtCarloan.setText(carloanamt);
-
+                sEmployed = carloanamt2;
+                txtCarloan.setText(sEmployed);
+            } else {
+                sEmployed = carloanamt2;
             }
-            if (sEMIhome != null) {
+            if (sEMIhome2 != null) {
+                carloanamt2 = sEmployed;
                 chhomloan.setChecked(true);
-                txtHomeloan.setText(homeloanamt);
-
+                sEmployed = homeloanamt2;
+                txtHomeloan.setText(sEmployed);
+            } else {
+                sEmployed = homeloanamt2;
             }
-            if (sEMIsociety != null) {
+            if (sEMIsociety2 != null) {
+                homeloanamt2 = sEmployed;
                 chsocietyloan.setChecked(true);
-                txtsocietyloan.setText(societyloanamt);
-
+                sEmployed = societyloanamt2;
+                txtsocietyloan.setText(sEmployed);
+            } else {
+                sEmployed = societyloanamt2;
             }
-            if (sEMIpersonal != null) {
+            if (sEMIpersonal2 != null) {
+                societyloanamt2 = sEmployed;
                 chpersonalloan.setChecked(true);
-                txtpersonalloan.setText(personalloanamt);
-
+                txtpersonalloan.setText(personalloanamt2);
             }
-            if (sEMIother != null) {
+            if (sEMIother2 != null) {
                 chotherloan.setChecked(true);
                 ShowotherEMI();
             } else {
                 hideotherEMI();
             }
-
         } catch (Exception e) {
         }
-
     }
-
 
     private void updateLeadDetails(LeedsModel leedsModel) {
         try {
-            leedsModel.setEmployed(cEmployedtype);
-            leedsModel.setCompanytype(cCompanytype);
-            leedsModel.setSalaytype(cSalaryType);
-            //   leedsModel.setEmi(cEMI);
-            leedsModel.setEmicar(cCarloan);
-            leedsModel.setEmihome(cHomeloan);
-            leedsModel.setEmisociety(cSocietyloan);
-            leedsModel.setEmipersonal(cPersonalloan);
-
-            leedsModel.setCarLoanAmount(cCarloanamt);
-            leedsModel.setHomeLoanAmount(cHomeloanamt);
-            leedsModel.setSocietyLoanAmount(cSocietyloanamt);
-            leedsModel.setPersonalLoanAmount(cPersonalloanamt);
-
-            leedsModel.setEmiother(cOtherloan);
-            leedsModel.setOthercompany(cOthercompany);
-            leedsModel.setTenure(cTenure);
-            leedsModel.setExperience(cEcperience);
-            leedsModel.setDepartment(cDept);
-            leedsModel.setDesignation(cDesignation);
-            leedsModel.setGrosssalary(cGrossslr);
-            leedsModel.setNetsalary(cNetslr);
-            leedsModel.setOvertime(cOvertime);
-            leedsModel.setIncentive(cIncentive);
-            leedsModel.setBonus(cBonus);
-            leedsModel.setRentalincome(cRentalincome);
-            leedsModel.setAnnualincome(cAnnualincome);
-            leedsModel.setRental(cRental);
-            leedsModel.setSalarysleep(cSalarysleep);
-            leedsModel.setBankstmt(cBankstmt);
-            leedsModel.setForm(cForm16);
-            leedsModel.setAppointmentltr(cAppointmentltr);
-            leedsModel.setConformationltr(cConfermationltr);
-            leedsModel.setExperinceltr(cExperinceltr);
-            leedsModel.setVisa(cVisa);
-            leedsModel.setPassport(cPassport);
-            leedsModel.setEmploerltr(cEmployerltr);
-            leedsModel.setContractltr(cContractltr);
-            leedsModel.setPoa(cPOA);
-            leedsModel.setNrebankstmt(cNRAbankstmt);
-            leedsModel.setOverseasbankdetail(cOverbank);
-            leedsModel.setItr(cITR);
-            leedsModel.setCurrentbankstmt(cCurrentbnkstmt);
-            leedsModel.setSavingacctstmt(cSavingbnkstmt);
-            leedsModel.setPartnersheepdeed(cPartnerdeed);
-            leedsModel.setBusinessagmt(cBisunessagmt);
-            leedsModel.setQualification(cQulification);
-            leedsModel.setAggrecultureIncome(cAgrreIncome);
-            leedsModel.setOtherIncome(cOtherincome);
-            leedsModel.setEmiOtherDetails(cOtherEMIdetails);
-
+            leedsModel.setEmployed(this.cEmployedtype);
+            leedsModel.setCompanytype(this.cCompanytype);
+            leedsModel.setSalaytype(this.cSalaryType);
+            leedsModel.setEmicar(this.cCarloan);
+            leedsModel.setEmihome(this.cHomeloan);
+            leedsModel.setEmisociety(this.cSocietyloan);
+            leedsModel.setEmipersonal(this.cPersonalloan);
+            leedsModel.setCarLoanAmount(this.cCarloanamt);
+            leedsModel.setHomeLoanAmount(this.cHomeloanamt);
+            leedsModel.setSocietyLoanAmount(this.cSocietyloanamt);
+            leedsModel.setPersonalLoanAmount(this.cPersonalloanamt);
+            leedsModel.setEmiother(this.cOtherloan);
+            leedsModel.setOthercompany(this.cOthercompany);
+            leedsModel.setTenure(this.cTenure);
+            leedsModel.setExperience(this.cEcperience);
+            leedsModel.setDepartment(this.cDept);
+            leedsModel.setDesignation(this.cDesignation);
+            leedsModel.setGrosssalary(this.cGrossslr);
+            leedsModel.setNetsalary(this.cNetslr);
+            leedsModel.setOvertime(this.cOvertime);
+            leedsModel.setIncentive(this.cIncentive);
+            leedsModel.setBonus(this.cBonus);
+            leedsModel.setRentalincome(this.cRentalincome);
+            leedsModel.setAnnualincome(this.cAnnualincome);
+            leedsModel.setRental(this.cRental);
+            leedsModel.setSalarysleep(this.cSalarysleep);
+            leedsModel.setBankstmt(this.cBankstmt);
+            leedsModel.setForm(this.cForm16);
+            leedsModel.setAppointmentltr(this.cAppointmentltr);
+            leedsModel.setConformationltr(this.cConfermationltr);
+            leedsModel.setExperinceltr(this.cExperinceltr);
+            leedsModel.setVisa(this.cVisa);
+            leedsModel.setPassport(this.cPassport);
+            leedsModel.setEmploerltr(this.cEmployerltr);
+            leedsModel.setContractltr(this.cContractltr);
+            leedsModel.setPoa(this.cPOA);
+            leedsModel.setNrebankstmt(this.cNRAbankstmt);
+            leedsModel.setOverseasbankdetail(this.cOverbank);
+            leedsModel.setItr(this.cITR);
+            leedsModel.setCurrentbankstmt(this.cCurrentbnkstmt);
+            leedsModel.setSavingacctstmt(this.cSavingbnkstmt);
+            leedsModel.setPartnersheepdeed(this.cPartnerdeed);
+            leedsModel.setBusinessagmt(this.cBisunessagmt);
+            leedsModel.setQualification(this.cQulification);
+            leedsModel.setAggrecultureIncome(this.cAgrreIncome);
+            leedsModel.setOtherIncome(this.cOtherincome);
+            leedsModel.setEmiOtherDetails(this.cOtherEMIdetails);
             updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
         } catch (Exception e) {
-
         }
     }
 
-
     private void updateLeed(String leedId, Map leedsMap) {
-        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-        leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
-            @Override
-            public void onSuccess(Object object) {
-                //Toast.makeText(Tl_Updatelead_incomedetails_Activity.this, "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
-                progressDialogClass.dismissDialog();
-            }
-
-            @Override
-            public void onError(Object object) {
-                progressDialogClass.dismissDialog();
-                Utility.showLongMessage(Tl_Updatelead_incomedetails_Activity.this, getString(R.string.server_error));
-            }
-        });
+        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        this.leedRepository.updateLeed(leedId, leedsMap, new C09318());
     }
 
     public void hideothercompany() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutothercompany.getLayoutParams();
+        LayoutParams params = (LayoutParams) this.layoutothercompany.getLayoutParams();
         params.height = 0;
-        layoutothercompany.setLayoutParams(params);
+        this.layoutothercompany.setLayoutParams(params);
     }
 
     public void Showothercompany() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutothercompany.getLayoutParams();
-        params.height = ActionBar.LayoutParams.FILL_PARENT;
-        layoutothercompany.setLayoutParams(params);
+        LayoutParams params = (LayoutParams) this.layoutothercompany.getLayoutParams();
+        params.height = -1;
+        this.layoutothercompany.setLayoutParams(params);
     }
 
     public void hideotherEMI() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutotheremi.getLayoutParams();
+        LayoutParams params = (LayoutParams) this.layoutotheremi.getLayoutParams();
         params.height = 0;
-        layoutotheremi.setLayoutParams(params);
+        this.layoutotheremi.setLayoutParams(params);
     }
 
     public void ShowotherEMI() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layoutotheremi.getLayoutParams();
-        params.height = ActionBar.LayoutParams.FILL_PARENT;
-        layoutotheremi.setLayoutParams(params);
+        LayoutParams params = (LayoutParams) this.layoutotheremi.getLayoutParams();
+        params.height = -1;
+        this.layoutotheremi.setLayoutParams(params);
     }
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        //     sploantype = spinloantype.getSelectedItem().toString();
-        if (SPcompanytype.getSelectedItem().toString().equalsIgnoreCase("Other")) {
+    public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
+        if (this.SPcompanytype.getSelectedItem().toString().equalsIgnoreCase("Other")) {
             Showothercompany();
         } else {
             hideothercompany();
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
     public void onBackPressed() {
-        // super.onBackPressed(); commented this line in order to disable back press
-        //Write your code here
-        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Back press disabled!", 0).show();
     }
-
-
 }

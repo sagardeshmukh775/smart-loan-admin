@@ -4,93 +4,131 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
-import com.smartloan.smtrick.smart_loan_admin.exception.ExceptionUtil;
+import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.INVOICE_TABLE_REF;
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.LEED_MODEL;
-
-public class Generate_invoice_Activity_Accountant extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener{
-
-  EditText etleadid,etloantype,etdate,etcname,etbank,etloanammount,etdiss,etgst,etcom,etapploan,etagentid,etagentname,etinvoiceid,txtleadid;
-    String sleadid,sdate,scname,sbank,sloanammount,sdiss,sgst,scomm,said,saname,sapamt,sinvoice;
-
+public class Generate_invoice_Activity_Accountant extends AppCompatActivity implements OnItemSelectedListener {
+    AppSharedPreference appSharedPreference;
     Button btnsend;
-
+    EditText etagentid;
+    EditText etagentname;
+    EditText etapploan;
+    EditText etbank;
+    EditText etcname;
+    EditText etcom;
+    EditText etdate;
+    EditText etdiss;
+    EditText etgst;
+    EditText etinvoiceid;
+    EditText etleadid;
+    EditText etloanammount;
+    EditText etloantype;
+    LeedRepository leedRepository;
     LeedsModel leedsModel;
     ProgressDialogClass progressDialogClass;
-    AppSharedPreference appSharedPreference;
-    LeedRepository leedRepository;
+    String said;
+    String saname;
+    String sapamt;
+    String sbank;
+    String scname;
+    String scomm;
+    String sdate;
+    String sdiss;
+    String sgst;
+    String sinvoice;
+    String sleadid;
+    String sloanammount;
+    EditText txtleadid;
 
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Generate_invoice_Activity_Accountant$1 */
+    class C08061 implements OnClickListener {
+        C08061() {
+        }
 
+        public void onClick(View v) {
+            Generate_invoice_Activity_Accountant generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sleadid = generate_invoice_Activity_Accountant.txtleadid.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sdate = generate_invoice_Activity_Accountant.etdate.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.scname = generate_invoice_Activity_Accountant.etcname.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sbank = generate_invoice_Activity_Accountant.etbank.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sloanammount = generate_invoice_Activity_Accountant.etloanammount.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sdiss = generate_invoice_Activity_Accountant.etdiss.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sgst = generate_invoice_Activity_Accountant.etgst.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.scomm = generate_invoice_Activity_Accountant.etcom.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.said = generate_invoice_Activity_Accountant.etagentid.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.saname = generate_invoice_Activity_Accountant.etagentname.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sapamt = generate_invoice_Activity_Accountant.etapploan.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.sinvoice = generate_invoice_Activity_Accountant.etinvoiceid.getText().toString();
+            generate_invoice_Activity_Accountant = Generate_invoice_Activity_Accountant.this;
+            generate_invoice_Activity_Accountant.updateLeadDetails(generate_invoice_Activity_Accountant.leedsModel);
+            Toast.makeText(Generate_invoice_Activity_Accountant.this, "send invoice Successfully", 0).show();
+        }
+    }
 
-    @Override
+    /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Generate_invoice_Activity_Accountant$2 */
+    class C09242 extends CallBack {
+        C09242() {
+        }
+
+        public void onSuccess(Object object) {
+            Toast.makeText(Generate_invoice_Activity_Accountant.this, "Send Invoice Successfully", 0).show();
+            Generate_invoice_Activity_Accountant.this.progressDialogClass.dismissDialog();
+        }
+
+        public void onError(Object object) {
+            Generate_invoice_Activity_Accountant.this.progressDialogClass.dismissDialog();
+            Toast.makeText(Generate_invoice_Activity_Accountant.this, "invoice fail", 0).show();
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generateinvoice_accountant);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        leedsModel = (LeedsModel) getIntent().getSerializableExtra(LEED_MODEL);
-        progressDialogClass = new ProgressDialogClass(this);
-        leedRepository = new LeedRepositoryImpl();
-        appSharedPreference = new AppSharedPreference(this);
-
-        txtleadid = (EditText) findViewById(R.id.txtleadid1);
-        etdate = (EditText) findViewById(R.id.txtdate1);
-        etcname = (EditText) findViewById(R.id.txtcname1);
-        etbank = (EditText) findViewById(R.id.txtbank1);
-        etloanammount = (EditText) findViewById(R.id.txtloanammount1);
-        etdiss = (EditText) findViewById(R.id.txtdiss1);
-        etgst = (EditText) findViewById(R.id.txtgst1);
-        etcom = (EditText) findViewById(R.id.txtcomm1);
-        btnsend = (Button) findViewById(R.id.buttonupdate);
-
-
-        etloantype = (EditText) findViewById(R.id.txtloantype1);
-        etapploan = (EditText) findViewById(R.id.txtapprovedloanvalue);
-        etagentid = (EditText) findViewById(R.id.txtagentidvalue);
-        etagentname = (EditText) findViewById(R.id.txtagentnamevalue);
-        etinvoiceid = (EditText) findViewById(R.id.txtinvoiceidvalue);
-
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        this.leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+        this.progressDialogClass = new ProgressDialogClass(this);
+        this.leedRepository = new LeedRepositoryImpl();
+        this.appSharedPreference = new AppSharedPreference(this);
+        this.txtleadid = (EditText) findViewById(R.id.txtleadid1);
+        this.etdate = (EditText) findViewById(R.id.txtdate1);
+        this.etcname = (EditText) findViewById(R.id.txtcname1);
+        this.etbank = (EditText) findViewById(R.id.txtbank1);
+        this.etloanammount = (EditText) findViewById(R.id.txtloanammount1);
+        this.etdiss = (EditText) findViewById(R.id.txtdiss1);
+        this.etgst = (EditText) findViewById(R.id.txtgst1);
+        this.etcom = (EditText) findViewById(R.id.txtcomm1);
+        this.btnsend = (Button) findViewById(R.id.buttonupdate);
+        this.etloantype = (EditText) findViewById(R.id.txtloantype1);
+        this.etapploan = (EditText) findViewById(R.id.txtapprovedloanvalue);
+        this.etagentid = (EditText) findViewById(R.id.txtagentidvalue);
+        this.etagentname = (EditText) findViewById(R.id.txtagentnamevalue);
+        this.etinvoiceid = (EditText) findViewById(R.id.txtinvoiceidvalue);
         getdata();
-
-
-        btnsend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                sleadid = txtleadid.getText().toString();
-                sdate = etdate.getText().toString();
-                scname = etcname.getText().toString();
-                sbank = etbank.getText().toString();
-                sloanammount = etloanammount.getText().toString();
-                sdiss = etdiss.getText().toString();
-                sgst = etgst.getText().toString();
-                scomm = etcom.getText().toString();
-                said = etagentid.getText().toString();
-                saname = etagentname.getText().toString();
-                sapamt = etapploan.getText().toString();
-                sinvoice = etinvoiceid.getText().toString();
-                updateLeadDetails(leedsModel);
-                Toast.makeText(Generate_invoice_Activity_Accountant.this, "send invoice Successfully", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
+        this.btnsend.setOnClickListener(new C08061());
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
@@ -98,9 +136,7 @@ public class Generate_invoice_Activity_Accountant extends AppCompatActivity impl
     }
 
     private void getdata() {
-
         try {
-
             String leedid = leedsModel.getLeedId();
             String cname = leedsModel.getCustomerName();
             String caddress = leedsModel.getAddress();
@@ -109,9 +145,9 @@ public class Generate_invoice_Activity_Accountant extends AppCompatActivity impl
             String occupation = leedsModel.getOccupation();
             String loanamount = leedsModel.getExpectedLoanAmount();
             String agentid = leedsModel.getAgentId();
-            String leednumber=leedsModel.getLeedNumber();
+            String leednumber = leedsModel.getLeedNumber();
             Long ldatetime = leedsModel.getCreatedDateTimeLong();
-            String sdatetime=Long.toString(ldatetime);
+            String sdatetime = Long.toString(ldatetime.longValue());
             String income = leedsModel.getincome();
             String description = leedsModel.getdescription();
             String panno = leedsModel.getPanCardNumber();
@@ -120,112 +156,68 @@ public class Generate_invoice_Activity_Accountant extends AppCompatActivity impl
             String propertyaddress = leedsModel.getpropertyAddress();
             String altmobileno = leedsModel.getAlternetMobileNumber();
             String adhaar = leedsModel.getadharNo();
-            String agentname = leedsModel.getAgentName();
-            String bank = leedsModel.getBankName();
-
-
-            if(leednumber != null)
-            {
+            leedid = leedsModel.getAgentName();
+            occupation = leedsModel.getBankName();
+            if (leednumber != null) {
                 txtleadid.setText(leednumber);
-
-            } if(cname != null)
-            {
+            }
+            if (cname != null) {
                 etcname.setText(cname);
-
-            } if(caddress != null)
-            {
-                etbank.setText(bank);
-            } if(contact != null)
-            {
+            }
+            if (caddress != null) {
+                etbank.setText(occupation);
+            }
+            if (contact != null) {
                 etloanammount.setText(loanamount);
-            } if(loantype != null)
-            {
+            }
+            if (loantype != null) {
                 etagentid.setText(agentid);
-            }  if(income != null)
-            {
+            }
+            if (income != null) {
                 etloantype.setText(loantype);
-            } if(loanamount != null)
-            {
-                etagentname.setText(agentname);
-
-            }if(loanamount != null)
-            {
+            }
+            if (loanamount != null) {
+                etagentname.setText(leedid);
+            }
+            if (loanamount != null) {
                 etdate.setText(sdatetime);
             }
-
-
-
-
-
-        }catch (Exception e){}
-
-
+        } catch (Exception e) {
+        }
     }
-
-
-
 
     private void generateinvoice(String leedId) {
         LeedsModel leedsModel = fillUserModel();
         if (validate(leedsModel)) {
-            progressDialogClass.showDialog(this.getString(R.string.leed_In_loading), this.getString(R.string.PLEASE_WAIT));
-            leedRepository.createInvoice(leedsModel, new CallBack() {
-                @Override
-                public void onSuccess(Object object) {
-                    Toast.makeText(Generate_invoice_Activity_Accountant.this, "Send Invoice Successfully", Toast.LENGTH_SHORT).show();
-                    progressDialogClass.dismissDialog();
-                }
-
-                @Override
-                public void onError(Object object) {
-                    progressDialogClass.dismissDialog();
-                    Toast.makeText(Generate_invoice_Activity_Accountant.this, "invoice fail", Toast.LENGTH_SHORT).show();
-
-                }
-            });
+            this.progressDialogClass.showDialog(getString(R.string.leed_In_loading), getString(R.string.PLEASE_WAIT));
+            this.leedRepository.createInvoice(leedsModel, new C09242());
         }
     }
 
     private LeedsModel fillUserModel() {
         LeedsModel leedsModel = new LeedsModel();
-        leedsModel.setLeedId(INVOICE_TABLE_REF.push().getKey());
-        leedsModel.setCustomerName(scname);
-        leedsModel.setBankName(sbank);
-        leedsModel.setApprovedLoan(sloanammount);
-        leedsModel.setdissbussloan(sdiss);
-        leedsModel.setPayout(scomm);
-        leedsModel.setgst(sgst);
-        leedsModel.setdissbussloan(sdiss);
-        leedsModel.setPayout(scomm);
-        leedsModel.setAgentId(said);
-        leedsModel.setAgentName(saname);
-        leedsModel.setApprovedLoan(sapamt);
-
+        leedsModel.setLeedId(Constant.INVOICE_TABLE_REF.push().getKey());
+        leedsModel.setCustomerName(this.scname);
+        leedsModel.setBankName(this.sbank);
+        leedsModel.setApprovedLoan(this.sloanammount);
+        leedsModel.setdissbussloan(this.sdiss);
+        leedsModel.setPayout(this.scomm);
+        leedsModel.setgst(this.sgst);
+        leedsModel.setdissbussloan(this.sdiss);
+        leedsModel.setPayout(this.scomm);
+        leedsModel.setAgentId(this.said);
+        leedsModel.setAgentName(this.saname);
+        leedsModel.setApprovedLoan(this.sapamt);
         return leedsModel;
     }
 
-
-
     private boolean validate(LeedsModel leedsModel) {
-        String validationMessage;
-        boolean isValid = true;
-        try {
-
-
-        } catch (Exception e) {
-            isValid = false;
-            ExceptionUtil.logException(e);
-        }
-        return isValid;
+        return true;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-
-    }
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+    public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
     }
 
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 }
