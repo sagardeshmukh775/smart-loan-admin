@@ -1,94 +1,120 @@
 package com.smartloan.smtrick.smart_loan_admin.view.fragements;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.smartloan.smtrick.smart_loan_admin.R;
-import com.smartloan.smtrick.smart_loan_admin.view.activites.Updatelead_Activity_Coordinator;
-import com.smartloan.smtrick.smart_loan_admin.view.adapters.Co_CustumadapterLead;
-import com.smartloan.smtrick.smart_loan_admin.view.holders.GetterSetterInvoice;
+import com.smartloan.smtrick.smart_loan_admin.RecyclerListener.RecyclerTouchListener;
+import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin.databinding.TcFragmentLeadTabGeneratedleadBinding;
+import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
+import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin.singleton.AppSingleton;
+import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin.view.activites.Coordinator_Update_Activity;
+import com.smartloan.smtrick.smart_loan_admin.view.adapters.TelecallerLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
 
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.LEED_MODEL;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_VERIFIED;
+
 public class Co_fragment_lead_tab_verified extends Fragment {
 
-    ArrayList<GetterSetterInvoice> searchResults = GetSearchResults();
+    TelecallerLeedsAdapter telecallerLeedsAdapter;
+    LeedRepository leedRepository;
+    AppSingleton appSingleton;
+    ProgressDialogClass progressDialogClass;
+    AppSharedPreference appSharedPreference;
+    TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
+    int fromYear, fromMonth, fromDay;
+    int toYear, toMonth, toDay;
+    long fromDate, toDate;
+    ArrayList<LeedsModel> leedsModelArrayList;
 
-    ListView listleads;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.tc_fragment_lead_tab_generatedlead, container, false);
-
-        listleads = (ListView) view.findViewById(R.id.listleads);
-        listleads.setAdapter(new Co_CustumadapterLead(getActivity(), searchResults));
-        listleads.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-
-                Object o = listleads.getItemAtPosition(position);
-
-
-                listleads.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                        Intent i = new Intent(getActivity(), Updatelead_Activity_Coordinator.class);
-                        startActivity(i);
-
-
-                    }
-                });
-
-            }
-        });
-
-
-        return view;
+        if (tcFragmentLeadTabGeneratedleadBinding == null) {
+            tcFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.tc_fragment_lead_tab_generatedlead, container, false);
+            progressDialogClass = new ProgressDialogClass(getActivity());
+            appSingleton = AppSingleton.getInstance(getActivity());
+            leedRepository = new LeedRepositoryImpl();
+            appSharedPreference = new AppSharedPreference(getActivity());
+            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
+            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
+            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
+                    DividerItemDecoration.VERTICAL));
+            getteLeed();
+        }
+        return tcFragmentLeadTabGeneratedleadBinding.getRoot();
     }
 
-    private ArrayList<GetterSetterInvoice> GetSearchResults(){
-        ArrayList<GetterSetterInvoice> results = new ArrayList<GetterSetterInvoice>();
+    private LeedsModel getModel(int position) {
+        return leedsModelArrayList.get(leedsModelArrayList.size() - 1 - position);
+    }
 
-        GetterSetterInvoice sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);
+    private void getteLeed() {
+        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+        leedRepository.readLeedsByStatus(STATUS_VERIFIED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    leedsModelArrayList = (ArrayList<LeedsModel>) object;
+                    serAdapter(leedsModelArrayList);
+                }
+                progressDialogClass.dismissDialog();
+            }
 
-        sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+                Utility.showLongMessage(getActivity(), getString(R.string.server_error));
+            }
+        });
+    }
 
-        sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);
+    private void onClickListner() {
+        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                LeedsModel leedsModel = getModel(position);
+                Intent intent = new Intent(getActivity(), Coordinator_Update_Activity.class);
+                intent.putExtra(LEED_MODEL, leedsModel);
+                startActivity(intent);
+            }
 
-        sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);;
+            @Override
+            public void onLongClick(View view, int position) {
+            }
 
-        sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);
+        }));
+    }
 
-        sr = new GetterSetterInvoice();
-        sr.setName("2345");
-        sr.setCityState("Mr Pratik Patel");
-        sr.setPhone("AG 37383");
-        results.add(sr);
-        return results;
+    private void serAdapter(ArrayList<LeedsModel> leedsModels) {
+        if (leedsModels != null) {
+            if (telecallerLeedsAdapter == null) {
+                telecallerLeedsAdapter = new TelecallerLeedsAdapter(getActivity(), leedsModels);
+                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                onClickListner();
+            } else {
+                ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
+                leedsModelArrayList.addAll(leedsModels);
+                telecallerLeedsAdapter.reload(leedsModelArrayList);
+            }
+        }
     }
 }

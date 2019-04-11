@@ -1,5 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,12 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantApprovedLeedsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantInvoicesTabFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.AccountantUsersFragment;
-import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsReportFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.ReportsTabFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.UnderConstrationFragement;
@@ -24,12 +26,14 @@ import com.smartloan.smtrick.smart_loan_admin.view.fragements.UnderConstrationFr
 public class AccountantHomeActivity extends AppCompatActivity implements
         OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+    private AppSharedPreference appSharedPreference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accountant_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+       // setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -79,7 +83,13 @@ public class AccountantHomeActivity extends AppCompatActivity implements
             case R.id.Calulator:
                 fragment = new LoanCalculatorFragement();
                 break;
+            case R.id.Logout:
+                clearDataWithSignOut();
+                break;
         }
+
+
+
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame, fragment);
@@ -89,6 +99,22 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void clearDataWithSignOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        appSharedPreference.clear();
+        logOut();
+    }
+
+    private void logOut()
+    {
+        Intent intent = new Intent(this, LoginScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override

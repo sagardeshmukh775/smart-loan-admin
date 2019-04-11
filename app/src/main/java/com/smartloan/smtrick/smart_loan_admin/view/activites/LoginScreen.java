@@ -84,7 +84,9 @@ public class LoginScreen extends AppCompatActivity {
                 try {
                     if (appSharedPreference != null && appSharedPreference.getUserLoginStatus()) {
                         if (appSharedPreference.getRegId() != null && appSharedPreference.getUserId() != null) {
-                            loginToApp();
+
+                            String roll = appSharedPreference.getRole();
+                            loginTotellecallerApp();
                         }
                     }
                 } catch (Exception e) {
@@ -94,10 +96,28 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-
-
-    private void loginToApp() {
+    private void loginToadminApp() {
+        Intent i = new Intent(this, Home_Activity.class);
+        startActivity(i);
+        finish();
+    }
+    private void loginTotellecallerApp() {
         Intent i = new Intent(this, MainActivity_telecaller.class);
+        startActivity(i);
+        finish();
+    }
+    private void loginTocordinatorApp() {
+        Intent i = new Intent(this, MainActivity_coordinator.class);
+        startActivity(i);
+        finish();
+    }
+    private void loginTosalesApp() {
+        Intent i = new Intent(this, MainActivity_sales.class);
+        startActivity(i);
+        finish();
+    }
+    private void loginToaccountantApp() {
+        Intent i = new Intent(this, AccountantHomeActivity.class);
         startActivity(i);
         finish();
     }
@@ -125,6 +145,7 @@ public class LoginScreen extends AppCompatActivity {
                     FirebaseUser userFirebase = Constant.AUTH.getCurrentUser();
                     if (userFirebase != null) {
                         signInUserData(userFirebase.getUid());
+
                     }
                 }
 
@@ -146,8 +167,39 @@ public class LoginScreen extends AppCompatActivity {
                     User user = (User) object;
                     appSharedPreference.createUserLoginSession();
                     appSharedPreference.addUserDetails(user);
-                    loginToApp();
-                } else {
+
+                    String roll = appSharedPreference.getRole();
+
+                    if(roll.equals("ADMIN"))
+                    { loginToadminApp();
+                        }
+
+                    else if(roll.equals("TELECALLER"))
+
+                    {
+                        loginTotellecallerApp();
+
+                    }
+
+                    else if(roll.equals("CORDINATOR"))
+                    {
+                        loginTocordinatorApp();
+
+                    }
+                    else if(roll.equals("SALES"))
+                    {
+                        loginTosalesApp();
+
+                    }
+                    else if(roll.equals("ACCOUNTANT"))
+
+                    {
+                        loginToaccountantApp();
+
+                    } }
+
+                    else
+                        {
                     Utility.showTimedSnackBar(activity,etpassword, getMessage(R.string.login_fail_try_again));
                 }
                 if (progressDialog != null)

@@ -91,8 +91,6 @@ public class Registeractivity extends AppCompatActivity implements
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spin.setAdapter(spinnerArrayAdapter);
 
-
-
         txttc = (TextView) findViewById(R.id.txttermsandconditions);
         setClickListners();
         setTouchListner();

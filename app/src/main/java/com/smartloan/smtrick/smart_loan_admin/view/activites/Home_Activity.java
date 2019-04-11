@@ -1,5 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.interfaces.OnFragmentInteractionListener;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.InvoicesTabFragement;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.LoanCalculatorFragement;
@@ -24,6 +27,8 @@ public class Home_Activity extends AppCompatActivity
         implements
         OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+    private AppSharedPreference appSharedPreference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,9 @@ public class Home_Activity extends AppCompatActivity
             case R.id.Calulator:
                 fragment = new LoanCalculatorFragement();
                 break;
+            case R.id.Logout:
+                clearDataWithSignOut();
+                break;
         }
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -90,6 +98,22 @@ public class Home_Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void clearDataWithSignOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        appSharedPreference.clear();
+        logOut();
+    }
+
+    private void logOut()
+    {
+        Intent intent = new Intent(this, LoginScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override

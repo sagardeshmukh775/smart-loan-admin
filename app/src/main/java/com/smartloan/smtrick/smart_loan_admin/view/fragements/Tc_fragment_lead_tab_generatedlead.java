@@ -58,6 +58,7 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
+
             getteLeed();
         }
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
@@ -99,10 +100,11 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             @Override
             public void onError(Object object) {
                 progressDialogClass.dismissDialog();
-                Utility.showLongMessage(getActivity(), getString(R.string.server_error));
+//                Utility.showLongMessage(getActivity(), getString(R.string.server_error));
             }
         });
     }
+
 
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {

@@ -30,6 +30,14 @@
             android:textColor="@color/textcolor"
             android:textStyle="normal|bold"/>
 
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/calculatoricon"
+            android:title="Logout"
+            android:textSize="22sp"
+            android:textColor="@color/textcolor"
+            android:textStyle="normal|bold"/>
+
     </group>
 
 </menu>

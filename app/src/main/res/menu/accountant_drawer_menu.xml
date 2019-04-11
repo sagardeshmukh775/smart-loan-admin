@@ -39,5 +39,12 @@
             android:textSize="22sp"
             android:textStyle="normal|bold"
             android:title="Loan Calculator" />
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/calculatoricon"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Logout" />
     </group>
 </menu>

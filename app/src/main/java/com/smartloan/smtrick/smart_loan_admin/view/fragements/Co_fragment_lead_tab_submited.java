@@ -25,9 +25,9 @@ import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
 
-import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_REJECTED;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_SALES_SUBMITED;
 
-public class Tc_fragment_lead_tab_rejectedleads extends Fragment {
+public class Co_fragment_lead_tab_submited extends Fragment {
 
     TelecallerLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
@@ -63,10 +63,9 @@ public class Tc_fragment_lead_tab_rejectedleads extends Fragment {
         return leedsModelArrayList.get(leedsModelArrayList.size() - 1 - position);
     }
 
-
     private void getteLeed() {
         progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-        leedRepository.readLeedsByStatus(STATUS_REJECTED, new CallBack() {
+        leedRepository.readLeedsByStatus(STATUS_SALES_SUBMITED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -83,7 +82,6 @@ public class Tc_fragment_lead_tab_rejectedleads extends Fragment {
             }
         });
     }
-
 
 
 

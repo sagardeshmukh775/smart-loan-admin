@@ -12,6 +12,7 @@ public class Constant {
     public static final DatabaseReference USER_TABLE_REF = DATABASE.getReference("user");
     public static final DatabaseReference LEEDS_TABLE_REF = DATABASE.getReference("leeds");
     public static final DatabaseReference INVOICE_TABLE_REF = DATABASE.getReference("invoice");
+    public static final DatabaseReference COAPPLICANT_LEEDS_TABLE_REF = DATABASE.getReference("coapleecantleeds");
     /************************************** Firebase Authentication reference constants ***************************************************************************/
     public static final FirebaseAuth AUTH = FirebaseAuth.getInstance();
     /************************************** Calender Constatns ***************************************************************************/
@@ -38,14 +39,26 @@ public class Constant {
     public static final String STATUS_APPROVED = "APPROVED";
     public static final String STATUS_REJECTED = "REJECTED";
     public static final String STATUS_VERIFIED = "VERIFIED";
+    public static final String STATUS_SUBMITED = "SUBMITED";
+    public static final String STATUS_SALES_SUBMITED = "SALESSUBMITED";
+    public static final String STATUS_BANK_SUBMITED = "BANKSUBMITED";
+
     public static final String STATUS_IN_PROGRESS = "IN-PROGRESS";
-    public static final String GLOBAL_DATE_FORMATE = "dd MMM yyyy hh:mm a";
+    public static final String GLOBAL_DATE_FORMATE = "dd MMM yyyy";
+    public static final String GLOBAL_TIME_FORMATE = "hh:mm a";
+
     public static final String CALANDER_DATE_FORMATE = "dd/MM/yy";
     public static final String LEED_DATE_FORMATE = "dd MMM, yyyy";
     public static final String DAY_DATE_FORMATE = "EEEE";
     public static final String TIME_DATE_FORMATE = "hh:mm a";
     //****************************************************************
     public static final String LEED_MODEL = "LEED_MODEL";
+    public static final String INVOICE = "INVOICE";
+
+
     public static final String LEED_MODEL3 = "LEED_MODEL3";
     public static final String LEED_MODEL2 = "LEED_MODEL2";
+
+    public static final String DATABASE_PATH_UPLOADS = "Advertise";
+    public static final String STORAGE_PATH_UPLOADS = "NewImage/";
 }

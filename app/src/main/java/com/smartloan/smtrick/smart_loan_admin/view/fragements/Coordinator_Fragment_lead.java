@@ -53,9 +53,9 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Co_fragment_lead_tab_verified(), "Verified");
-        adapter.addFragment(new Co_fragment_lead_tab_verified(), "Submited");
-        adapter.addFragment(new Co_fragment_lead_tab_verified(), "Accepted");
-        adapter.addFragment(new Co_fragment_lead_tab_verified(), "Rejected");
+        adapter.addFragment(new Co_fragment_lead_tab_submited(), "Submited");
+        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Accepted");
+        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -73,6 +73,8 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
+
+
 
     @Override
     public void onDetach() {

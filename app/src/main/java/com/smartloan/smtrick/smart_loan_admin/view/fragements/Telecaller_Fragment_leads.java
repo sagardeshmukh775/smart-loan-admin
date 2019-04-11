@@ -40,7 +40,6 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.telecaller_fragment_leads, container, false);
 
         // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
@@ -55,9 +54,9 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Genrated");
-        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Verified");
-        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Accepted");
-        adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Rejected");
+        adapter.addFragment(new Tc_fragment_lead_tab_verifiedleads(), "Verified");
+        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Accepted");
+        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

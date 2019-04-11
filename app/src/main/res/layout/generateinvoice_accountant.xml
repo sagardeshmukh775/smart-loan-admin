@@ -11,13 +11,13 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/textheader"
+            android:id="@+id/txtcreate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
            android:padding="10dp"
-            android:text="Invoice Id: 2345"
+            android:text="Create Invoice"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="normal|bold" />
@@ -65,6 +65,18 @@
                         android:layout_weight="60"
                         android:orientation="vertical">
 
+
+
+                        <TextView
+                            android:id="@+id/invoiceid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="Invoice Id:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/txtleadid"
@@ -134,6 +146,40 @@
                             android:textSize="14dp" />
 
                         <TextView
+                            android:id="@+id/Approvedloanammount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="App Loan Amount:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/txtagentid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="Agent Id:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtagentname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="Agent Name:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14dp" />
+
+                        <TextView
                             android:id="@+id/txtdiss"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -176,7 +222,21 @@
                         android:layout_weight="40"
                         android:orientation="vertical">
 
-                        <TextView
+
+                        <EditText
+                            android:id="@+id/txtinvoiceidvalue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/edittextanimation"
+                            android:padding="10dp"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14dp" />
+
+
+                        <EditText
                             android:id="@+id/txtleadid1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -184,7 +244,7 @@
                             android:layout_marginTop="5dp"
                             android:background="@drawable/edittextanimation"
                             android:padding="10dp"
-                            android:text="84849"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -196,7 +256,7 @@
                             android:layout_marginTop="5dp"
                             android:background="@drawable/edittextanimation"
                             android:padding="10dp"
-                            android:text="30 sep 2018"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -209,7 +269,7 @@
                             android:layout_marginTop="5dp"
                             android:background="@drawable/edittextanimation"
                             android:padding="10dp"
-                            android:text="Pratik Patel"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -221,7 +281,7 @@
                             android:layout_marginTop="5dp"
                             android:background="@drawable/edittextanimation"
                             android:padding="10dp"
-                            android:text="India Bulls"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -233,7 +293,7 @@
                             android:layout_marginTop="5dp"
                             android:background="@drawable/edittextanimation"
                             android:padding="10dp"
-                            android:text="LAP"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -245,10 +305,50 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
-                            android:text="500000"
+                            android:text=""
                             android:background="@drawable/edittextanimation"
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
+
+
+                        <EditText
+                            android:id="@+id/txtapprovedloanvalue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text=""
+                            android:background="@drawable/edittextanimation"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14dp" />
+
+
+                        <EditText
+                            android:id="@+id/txtagentidvalue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text=""
+                            android:background="@drawable/edittextanimation"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14dp" />
+
+
+                        <EditText
+                            android:id="@+id/txtagentnamevalue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text=""
+                            android:background="@drawable/edittextanimation"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14dp" />
+
 
                         <EditText
                             android:id="@+id/txtdiss1"
@@ -257,7 +357,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
-                            android:text="200000"
+                            android:text=""
                             android:background="@drawable/edittextanimation"
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
@@ -270,7 +370,7 @@
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:background="@drawable/edittextanimation"
-                            android:text="0"
+                            android:text=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 
@@ -283,7 +383,7 @@
                             android:padding="10dp"
                             android:background="@drawable/edittextanimation"
                             android:text=""
-                            android:hint="5000"
+                            android:hint=""
                             android:textColor="@color/mainTextColor"
                             android:textSize="14dp" />
 

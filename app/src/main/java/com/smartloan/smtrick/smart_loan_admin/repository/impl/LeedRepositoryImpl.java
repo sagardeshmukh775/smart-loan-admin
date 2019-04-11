@@ -5,7 +5,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin.repository.FirebaseTemplateRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 
@@ -85,6 +87,23 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
         });
     }
 
+
+    @Override
+    public void createInvoice(LeedsModel leedsModel, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.INVOICE_TABLE_REF.child(leedsModel.getLeedId());
+        fireBaseCreate(databaseReference, leedsModel, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
     @Override
     public void deleteLeed(String leedId, CallBack callback) {
         DatabaseReference databaseReference = Constant.LEEDS_TABLE_REF.child(leedId);
@@ -106,6 +125,26 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
             }
         });
     }
+
+
+    @Override
+    public void updateCoApplicantLeed(LeedsModelCo leedsModelCo, final CallBack callBack) {
+        final DatabaseReference databaseReference = Constant.COAPPLICANT_LEEDS_TABLE_REF.child(leedsModelCo.getLeedId());
+        fireBaseCreate(databaseReference, leedsModelCo, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+
+
 
     @Override
     public void readLeedByLeedId(String leedId, final CallBack callBack) {
@@ -135,6 +174,34 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     @Override
     public void readLeedsByStatus(String status, final CallBack callBack) {
         final Query query = Constant.LEEDS_TABLE_REF.orderByChild("status").equalTo(status);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            LeedsModel leedsModel = suggestionSnapshot.getValue(LeedsModel.class);
+                            leedsModelArrayList.add(leedsModel);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+    @Override
+    public void readLeedsByID(String id, final CallBack callBack) {
+        final Query query = Constant.COAPPLICANT_LEEDS_TABLE_REF.orderByChild("leedNumber").equalTo(id);
         fireBaseNotifyChange(query, new CallBack() {
             @Override
             public void onSuccess(Object object) {

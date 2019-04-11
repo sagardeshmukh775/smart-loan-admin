@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.activites.TL_Updatelead_Coapplicant_Detail_Activity"></activity>
         <activity
             android:name=".view.activites.SplashScreen"
             android:windowSoftInputMode="stateHidden">
@@ -32,20 +33,16 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activites.AccountantHomeActivity"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".view.activites.AccountantUpdateLeedsActivity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.MainActivity_telecaller"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activites.Updatelead_Activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.MainActivity_sales"
             android:windowSoftInputMode="stateHidden" />
@@ -56,19 +53,25 @@
             android:name=".view.activites.ViewLead_Sales_Activity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".view.activites.Updatelead_Activity_Coordinator"
+            android:name=".view.activites.Coordinator_Update_Activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.TermsCondition_Activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.View_lead_admin_activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.Generate_invoice_Activity_Accountant"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.TL_Updatelead_C_Details_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Tl_Updatelead_incomedetails_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.TL_Updatelead_property_Details_Activity"
             android:windowSoftInputMode="stateHidden" />
     </application>
 

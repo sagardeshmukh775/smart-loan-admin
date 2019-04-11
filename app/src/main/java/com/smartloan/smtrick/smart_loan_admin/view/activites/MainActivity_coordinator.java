@@ -1,5 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Coordinator_Fragment_lead;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Fragment_Calculator;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Telecaller_fragment_Reports;
@@ -29,6 +32,7 @@ public class MainActivity_coordinator extends AppCompatActivity
 
         NavigationView.OnNavigationItemSelectedListener {
 
+    private AppSharedPreference appSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,8 @@ public class MainActivity_coordinator extends AppCompatActivity
             fragment = new Telecaller_fragment_Reports();
         }else if (id == R.id.Calulator) {
             fragment = new Fragment_Calculator();
+        }else if (id == R.id.Logout) {
+            clearDataWithSignOut();
         }
 
         //NOTE: Fragment changing code
@@ -116,7 +122,21 @@ public class MainActivity_coordinator extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void clearDataWithSignOut()
+    {
+        FirebaseAuth.getInstance().signOut();
+        appSharedPreference.clear();
+        logOut();
+    }
 
+    private void logOut()
+    {
+        Intent intent = new Intent(this, LoginScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
     @Override
     public void onFragmentInteraction(String title) {
         // NOTE:  Code to replace the toolbar title based current visible fragment
