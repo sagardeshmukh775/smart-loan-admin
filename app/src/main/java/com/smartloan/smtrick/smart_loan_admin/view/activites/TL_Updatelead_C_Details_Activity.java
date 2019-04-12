@@ -206,14 +206,13 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         }
 
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
-            tL_Updatelead_C_Details_Activity.Rcoapplicant = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
-            tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
-            tL_Updatelead_C_Details_Activity.scoapplicantYN = tL_Updatelead_C_Details_Activity.Rcoapplicant.getText().toString();
-            if (TL_Updatelead_C_Details_Activity.this.Rcoapplicant.getText().toString().equalsIgnoreCase("Yes")) {
-                TL_Updatelead_C_Details_Activity.this.ShowApplicant();
+
+            Rcoapplicant = (RadioButton) findViewById(checkedId);
+            scoapplicantYN = Rcoapplicant.getText().toString();
+            if (Rcoapplicant.getText().toString().equalsIgnoreCase("Yes")) {
+                ShowApplicant();
             } else {
-                TL_Updatelead_C_Details_Activity.this.HideApplicant();
+                HideApplicant();
             }
         }
     }
@@ -224,12 +223,11 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         }
 
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            TL_Updatelead_C_Details_Activity tL_Updatelead_C_Details_Activity = TL_Updatelead_C_Details_Activity.this;
-            tL_Updatelead_C_Details_Activity.REducation = (RadioButton) tL_Updatelead_C_Details_Activity.findViewById(checkedId);
-            if (TL_Updatelead_C_Details_Activity.this.REducation.getText().toString().equalsIgnoreCase("Other")) {
-                TL_Updatelead_C_Details_Activity.this.Showother();
+            REducation = (RadioButton) findViewById(checkedId);
+            if (REducation.getText().toString().equalsIgnoreCase("Other")) {
+                Showother();
             } else {
-                TL_Updatelead_C_Details_Activity.this.hideother();
+                hideother();
             }
         }
     }
@@ -659,12 +657,15 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         this.edtreferencecontactno2 = (EditText) findViewById(R.id.txtreference2contactno1);
         this.edtreferencerelationship2 = (EditText) findViewById(R.id.txtreferencec2relationship1);
         this.txtpannumber = (EditText) findViewById(R.id.txtpannumber);
+
         ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, recidential);
         spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        this.Recidential.setAdapter(spinnerArrayAdapterRecidential);
+        Recidential.setAdapter(spinnerArrayAdapterRecidential);
+
         ArrayAdapter<String> spinnerArrayAdapterRelationship = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CoapplicantRelation);
         spinnerArrayAdapterRelationship.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         this.CoapplicantRalationship.setAdapter(spinnerArrayAdapterRelationship);
+
         this.etother = (EditText) findViewById(R.id.txtOthervalue);
         this.chAdhar = (CheckBox) findViewById(R.id.checkboxadhar);
         this.chPAN = (CheckBox) findViewById(R.id.checkboxpan);
