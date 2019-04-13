@@ -52,6 +52,7 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
     /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.Updatelead_Activity$1 */
     class C08401 implements OnClickListener {
         C08401() {
+            
         }
 
         public void onClick(View v) {
