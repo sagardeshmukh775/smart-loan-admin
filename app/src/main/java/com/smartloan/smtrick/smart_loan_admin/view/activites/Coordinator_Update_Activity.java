@@ -189,7 +189,23 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     //PROPERTY
     Spinner SPpropertytype;
     RadioButton Rpresanctioned, Rpurchasepropety;
-    EditText edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin,edtpropertylandmark, edtpropertyarea, edtprojectname;
+    EditText edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea, edtprojectname;
+    EditText edtbankname, edtbranchname, edtifsccode;
+    Spinner SPsalesperson;
+    String Sdate, Stime, Sleednumber, Sagenname, Sloantype, Scusomername, Scustomergender, Sbirthdate, Scontactno, Saltcontact,
+            Semail, SEducation, Sotheredudetails, Scurrentpin, Scurrentland, Scurrentarea, Scurrentstreet, SaddressYN,
+            Sperpin, Sperland, Sperarea, Sperstreet, Sresidentialtype, Sofficeaddress, Skycadhar, Skycpan, Akycpannumber,
+            Skycvoterid, SkycDL, Skycpassport, Sproofadhar, Sproofvoterid, SproofDL, Sproofelectricitybill, Sproofrentagmt,
+            Sproofpassport, Sproofgovtid, Sproofgumasta, Sproofcurrentacctstmt, ScoapplicantYN, Scoapplicantrelation,
+            Scoapplicantotherrelationdetails, Sref1nmae, Sref1address, Sref1contact, Sref1relation, Sref2name, Sref2address,
+            Sref2contact, Sref2relation, Soccupationtype, Scompanytype, Sothercmptype, Stenure, Sworkexp, Sdepartment,
+            Sdesignation, Smonthlygrosssalary, Snetsalary, Sovertime, Sinsentive, Sbonus, Srentalincome, Sagreeincome,
+            Sannualincome, Sotherincome, Ssalarycomesin, Srentalexpence, Scarloan, Scarloanamt, Shomelloan, Shomeloanamt,
+            Ssocietyloan, Ssocietyloanamt, Spersonalloan, Spersonalloanamt, Sotherloan, Sotherloanamt, Ssalarysleep,
+            Sbankstmt, Sform16, Sappointmentletter, Sconfermationletter, Sexperienceletter, Snrivisa, Snripassport,
+            Snriemployerletter, Snricontractletter, Snripoa, SNREbankacct, Soverseasebankacct, Sitr, Scurrentacctstmt,
+            Ssavingacctstmt, Spartnershipdeed, Sbusinessagmt, Squalificationcirtificate, Spropertytype, SpropertyYN, Sprpin, Sprland, Sprarea, Sprprojectname, Sprpropertytype, Sprloanrequirement, Sprdownpayment, Sprdescriptio,
+            Sbankname, Sbranchname, Sifsccode, Ssalespersone;
 
     @Override
     public void onClick(View v) {
@@ -202,19 +218,135 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         }
 
         public void onClick(View v) {
-            cNmae = etcname.getText().toString();
-            cAdress = etaddress.getText().toString();
-            cPadress = etpropaddress.getText().toString();
-            cOffaddress = etoffaddress.getText().toString();
-            cContatct = etcontatct.getText().toString();
-            cAltcontatct = etalternatecontact.getText().toString();
-            cBdate = etbirthdate.getText().toString();
-            cPanno = etpanno.getText().toString();
-            cAdharno = etadharno.getText().toString();
-            cIncome = etincome.getText().toString();
-            cExamount = etexammount.getText().toString();
-            cDescreption = etdescription.getText().toString();
-            cBank = etbank.getText().toString();
+//            cNmae = etcname.getText().toString();
+//            cAdress = etaddress.getText().toString();
+//            cPadress = etpropaddress.getText().toString();
+//            cOffaddress = etoffaddress.getText().toString();
+//            cContatct = etcontatct.getText().toString();
+//            cAltcontatct = etalternatecontact.getText().toString();
+//            cBdate = etbirthdate.getText().toString();
+//            cPanno = etpanno.getText().toString();
+//            cAdharno = etadharno.getText().toString();
+//            cIncome = etincome.getText().toString();
+//            cExamount = etexammount.getText().toString();
+//            cDescreption = etdescription.getText().toString();
+//            cBank = etbank.getText().toString();
+
+            Sagenname = txtgeneratedby.getText().toString();
+            Sloantype = txtgeneratedby.getText().toString();
+            Scusomername = txtgeneratedby.getText().toString();
+            Scustomergender = txtgeneratedby.getText().toString();
+            Sbirthdate = txtgeneratedby.getText().toString();
+            Scontactno = txtgeneratedby.getText().toString();
+            Saltcontact = txtgeneratedby.getText().toString();
+            Semail = txtgeneratedby.getText().toString();
+            SEducation = txtgeneratedby.getText().toString();
+            Sotheredudetails = txtgeneratedby.getText().toString();
+            Scurrentpin = txtgeneratedby.getText().toString();
+            Scurrentland = txtgeneratedby.getText().toString();
+            Scurrentarea = txtgeneratedby.getText().toString();
+            Scurrentstreet = txtgeneratedby.getText().toString();
+
+            SaddressYN = txtgeneratedby.getText().toString();
+
+            Sperpin = txtgeneratedby.getText().toString();
+            Sperland = txtgeneratedby.getText().toString();
+            Sperarea = txtgeneratedby.getText().toString();
+            Sperstreet = txtgeneratedby.getText().toString();
+            Sresidentialtype = txtgeneratedby.getText().toString();
+            Sofficeaddress = txtgeneratedby.getText().toString();
+            Skycadhar = txtgeneratedby.getText().toString();
+            Skycpan = txtgeneratedby.getText().toString();
+            Akycpannumber = txtgeneratedby.getText().toString();
+            Skycvoterid = txtgeneratedby.getText().toString();
+            SkycDL = txtgeneratedby.getText().toString();
+            Skycpassport = txtgeneratedby.getText().toString();
+            Sproofadhar = txtgeneratedby.getText().toString();
+            Sproofvoterid = txtgeneratedby.getText().toString();
+            SproofDL = txtgeneratedby.getText().toString();
+            Sproofelectricitybill = txtgeneratedby.getText().toString();
+            Sproofrentagmt = txtgeneratedby.getText().toString();
+            Sproofpassport = txtgeneratedby.getText().toString();
+            Sproofgovtid = txtgeneratedby.getText().toString();
+            Sproofgumasta = txtgeneratedby.getText().toString();
+            Sproofcurrentacctstmt = txtgeneratedby.getText().toString();
+
+            ScoapplicantYN = txtgeneratedby.getText().toString();
+
+            Scoapplicantrelation = txtgeneratedby.getText().toString();
+            Scoapplicantotherrelationdetails = txtgeneratedby.getText().toString();
+            Sref1nmae = txtgeneratedby.getText().toString();
+            Sref1address = txtgeneratedby.getText().toString();
+            Sref1contact = txtgeneratedby.getText().toString();
+            Sref1relation = txtgeneratedby.getText().toString();
+            Sref2name = txtgeneratedby.getText().toString();
+            Sref2address = txtgeneratedby.getText().toString();
+            Sref2contact = txtgeneratedby.getText().toString();
+            Sref2relation = txtgeneratedby.getText().toString();
+            Soccupationtype = txtgeneratedby.getText().toString();
+            Scompanytype = txtgeneratedby.getText().toString();
+            Sothercmptype = txtgeneratedby.getText().toString();
+            Stenure = txtgeneratedby.getText().toString();
+            Sworkexp = txtgeneratedby.getText().toString();
+            Sdepartment = txtgeneratedby.getText().toString();
+            Sdesignation = txtgeneratedby.getText().toString();
+            Smonthlygrosssalary = txtgeneratedby.getText().toString();
+            Snetsalary = txtgeneratedby.getText().toString();
+            Sovertime = txtgeneratedby.getText().toString();
+            Sinsentive = txtgeneratedby.getText().toString();
+            Sbonus = txtgeneratedby.getText().toString();
+            Srentalincome = txtgeneratedby.getText().toString();
+            Sagreeincome = txtgeneratedby.getText().toString();
+            Sannualincome = txtgeneratedby.getText().toString();
+            Sotherincome = txtgeneratedby.getText().toString();
+            Ssalarycomesin = txtgeneratedby.getText().toString();
+            Srentalexpence = txtgeneratedby.getText().toString();
+            Scarloan = txtgeneratedby.getText().toString();
+            Scarloanamt = txtgeneratedby.getText().toString();
+            Shomelloan = txtgeneratedby.getText().toString();
+            Shomeloanamt = txtgeneratedby.getText().toString();
+            Ssocietyloan = txtgeneratedby.getText().toString();
+            Ssocietyloanamt = txtgeneratedby.getText().toString();
+            Spersonalloan = txtgeneratedby.getText().toString();
+            Spersonalloanamt = txtgeneratedby.getText().toString();
+            Sotherloan = txtgeneratedby.getText().toString();
+            Sotherloanamt = txtgeneratedby.getText().toString();
+            Ssalarysleep = txtgeneratedby.getText().toString();
+            Sbankstmt = txtgeneratedby.getText().toString();
+            Sform16 = txtgeneratedby.getText().toString();
+            Sappointmentletter =txtgeneratedby.getText().toString();
+            Sconfermationletter = txtgeneratedby.getText().toString();
+            Sexperienceletter = txtgeneratedby.getText().toString();
+            Snrivisa = txtgeneratedby.getText().toString();
+            Snripassport = txtgeneratedby.getText().toString();
+            Snriemployerletter = txtgeneratedby.getText().toString();
+            Snricontractletter = txtgeneratedby.getText().toString();
+            Snripoa = txtgeneratedby.getText().toString();
+            SNREbankacct = txtgeneratedby.getText().toString();
+            Soverseasebankacct = txtgeneratedby.getText().toString();
+            Sitr = txtgeneratedby.getText().toString();
+            Scurrentacctstmt = txtgeneratedby.getText().toString();
+            Ssavingacctstmt = txtgeneratedby.getText().toString();
+            Spartnershipdeed = txtgeneratedby.getText().toString();
+            Sbusinessagmt = txtgeneratedby.getText().toString();
+            Squalificationcirtificate = txtgeneratedby.getText().toString();
+            Spropertytype = txtgeneratedby.getText().toString();
+
+            SpropertyYN = txtgeneratedby.getText().toString();
+
+            Sprpin = txtgeneratedby.getText().toString();
+            Sprland = txtgeneratedby.getText().toString();
+            Sprarea = txtgeneratedby.getText().toString();
+            Sprprojectname = txtgeneratedby.getText().toString();
+            Sprpropertytype = txtgeneratedby.getText().toString();
+            Sprloanrequirement = txtgeneratedby.getText().toString();
+            Sprdownpayment = txtgeneratedby.getText().toString();
+            Sprdescriptio = txtgeneratedby.getText().toString();
+            Sbankname = txtgeneratedby.getText().toString();
+            Sbranchname = txtgeneratedby.getText().toString();
+            Sifsccode = txtgeneratedby.getText().toString();
+            Ssalespersone = txtgeneratedby.getText().toString();
+
             updateLeadDetails(leedsModel);
             Toast.makeText(getApplicationContext(), "Lead Update Successfully", Toast.LENGTH_SHORT).show();
         }
@@ -273,11 +405,16 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
 
+        edtbankname = (EditText) findViewById(R.id.txtbankname1);
+        edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
+        edtifsccode = (EditText) findViewById(R.id.txtifsccode1);
+        SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
+
         spinloantype = (Spinner) findViewById(R.id.sploantype1);
 
         btupdate = (Button) findViewById(R.id.buttonupdate);
-        btverify = (Button) findViewById(R.id.buttonverify);
-        btcancel = (Button) findViewById(R.id.buttoncancel);
+//        btverify = (Button) findViewById(R.id.buttonverify);
+//        btcancel = (Button) findViewById(R.id.buttoncancel);
 
         txtleadid = (TextView) findViewById(R.id.textheader);
 
@@ -306,7 +443,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         CoapplicantRalationship = (Spinner) findViewById(R.id.txtcoapplicantrelation1);
         ArrayAdapter<String> spinnerArrayAdapterRelationship = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CoapplicantRelation);
         spinnerArrayAdapterRelationship.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        this.CoapplicantRalationship.setAdapter(spinnerArrayAdapterRelationship);
+        CoapplicantRalationship.setAdapter(spinnerArrayAdapterRelationship);
 
         edtotherrelationship = (EditText) findViewById(R.id.txtotherrelationship1);
         edtreferencename = (EditText) findViewById(R.id.txtreferencefullname1);
@@ -366,62 +503,62 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
 //        String[] EMI = new String[]{"Car", "Home Loan", "Sociaty Loan/Employer Loan", "Other"};
 
-        this.Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
-        this.Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
-        this.SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
-        this.SPcompanytype.setOnItemSelectedListener(this);
-        this.SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
-        this.edttenure = (EditText) findViewById(R.id.txttenure1);
-        this.edtexperience = (EditText) findViewById(R.id.txtexperience1);
-        this.edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
-        this.edtdesignation = (EditText) findViewById(R.id.txtdesignation1);
-        this.edtgrosssalary = (EditText) findViewById(R.id.txtmontlygrossincome1);
-        this.edtnetsalary = (EditText) findViewById(R.id.txtnetsalary1);
-        this.edtovertime = (EditText) findViewById(R.id.txtovertime1);
-        this.edtincentive = (EditText) findViewById(R.id.txtiincentive1);
-        this.edtbonus = (EditText) findViewById(R.id.txtbonus1);
-        this.edtrentalincome = (EditText) findViewById(R.id.txtrent1);
-        this.edtannualincome = (EditText) findViewById(R.id.txtannualincome1);
-        this.edtrental = (EditText) findViewById(R.id.txtrentalexpence1);
-        this.edtothercompany = (EditText) findViewById(R.id.txtothercompany1);
-        this.edtagrreculturincom = (EditText) findViewById(R.id.txtagreecultureincome1);
-        this.edtotherincome = (EditText) findViewById(R.id.txtotherincome1);
-        this.edtotheremidetails = (EditText) findViewById(R.id.txtotheremi1);
-        this.txtCarloan = (EditText) findViewById(R.id.txtcarloanamount);
-        this.txtHomeloan = (EditText) findViewById(R.id.txthomeloanamount);
-        this.txtsocietyloan = (EditText) findViewById(R.id.txtsocietyloanamount);
-        this.txtpersonalloan = (EditText) findViewById(R.id.txtpersonalloanamount);
-        this.chsalarysleep = (CheckBox) findViewById(R.id.checkboxsalarysleep);
-        this.chbankstatement = (CheckBox) findViewById(R.id.checkboxbankstatement);
-        this.chformno16 = (CheckBox) findViewById(R.id.checkboxform16);
-        this.chappointmentletter = (CheckBox) findViewById(R.id.checkboxappointmentletter);
-        this.chconfermationletter = (CheckBox) findViewById(R.id.checkboxconfermationletter);
-        this.chexperieceletter = (CheckBox) findViewById(R.id.checkboxexpletter);
-        this.chvisa = (CheckBox) findViewById(R.id.checkboxvisa);
-        this.chpasspoet = (CheckBox) findViewById(R.id.checkboxpassport);
-        this.chemployerletter = (CheckBox) findViewById(R.id.checkboxEmployerletter);
-        this.chcontractletter = (CheckBox) findViewById(R.id.checkboxcontractletter);
-        this.chPOA = (CheckBox) findViewById(R.id.checkboxPOA);
-        this.chNREbankstatement = (CheckBox) findViewById(R.id.checkboxNREbank);
-        this.choverbankdetails = (CheckBox) findViewById(R.id.checkboxOverseasbank);
-        this.chitr = (CheckBox) findViewById(R.id.checkboxITR);
-        this.chcurrentbankstatement = (CheckBox) findViewById(R.id.checkboxcurrentaccountstatement);
-        this.chsavingacctstatement = (CheckBox) findViewById(R.id.checkboxsavingacctstatement);
-        this.chpartnersheepdeed = (CheckBox) findViewById(R.id.checkboxpartnerdeed);
-        this.chbisunessagreement = (CheckBox) findViewById(R.id.checkboxbusinessagreement);
-        this.chqualification = (CheckBox) findViewById(R.id.checkboxqualification);
-        this.chcarloan = (CheckBox) findViewById(R.id.checkboxCarloan);
-        this.chhomloan = (CheckBox) findViewById(R.id.checkboxHomeloan);
-        this.chsocietyloan = (CheckBox) findViewById(R.id.checkboxSocietyloan);
-        this.chpersonalloan = (CheckBox) findViewById(R.id.checkboxPersonalloan);
-        this.chotherloan = (CheckBox) findViewById(R.id.checkboxOtherloan);
+        Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
+        Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
+        SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
+        SPcompanytype.setOnItemSelectedListener(this);
+        SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
+        edttenure = (EditText) findViewById(R.id.txttenure1);
+        edtexperience = (EditText) findViewById(R.id.txtexperience1);
+        edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
+        edtdesignation = (EditText) findViewById(R.id.txtdesignation1);
+        edtgrosssalary = (EditText) findViewById(R.id.txtmontlygrossincome1);
+        edtnetsalary = (EditText) findViewById(R.id.txtnetsalary1);
+        edtovertime = (EditText) findViewById(R.id.txtovertime1);
+        edtincentive = (EditText) findViewById(R.id.txtiincentive1);
+        edtbonus = (EditText) findViewById(R.id.txtbonus1);
+        edtrentalincome = (EditText) findViewById(R.id.txtrent1);
+        edtannualincome = (EditText) findViewById(R.id.txtannualincome1);
+        edtrental = (EditText) findViewById(R.id.txtrentalexpence1);
+        edtothercompany = (EditText) findViewById(R.id.txtothercompany1);
+        edtagrreculturincom = (EditText) findViewById(R.id.txtagreecultureincome1);
+        edtotherincome = (EditText) findViewById(R.id.txtotherincome1);
+        edtotheremidetails = (EditText) findViewById(R.id.txtotheremi1);
+        txtCarloan = (EditText) findViewById(R.id.txtcarloanamount);
+        txtHomeloan = (EditText) findViewById(R.id.txthomeloanamount);
+        txtsocietyloan = (EditText) findViewById(R.id.txtsocietyloanamount);
+        txtpersonalloan = (EditText) findViewById(R.id.txtpersonalloanamount);
+        chsalarysleep = (CheckBox) findViewById(R.id.checkboxsalarysleep);
+        chbankstatement = (CheckBox) findViewById(R.id.checkboxbankstatement);
+        chformno16 = (CheckBox) findViewById(R.id.checkboxform16);
+        chappointmentletter = (CheckBox) findViewById(R.id.checkboxappointmentletter);
+        chconfermationletter = (CheckBox) findViewById(R.id.checkboxconfermationletter);
+        chexperieceletter = (CheckBox) findViewById(R.id.checkboxexpletter);
+        chvisa = (CheckBox) findViewById(R.id.checkboxvisa);
+        chpasspoet = (CheckBox) findViewById(R.id.checkboxpassport);
+        chemployerletter = (CheckBox) findViewById(R.id.checkboxEmployerletter);
+        chcontractletter = (CheckBox) findViewById(R.id.checkboxcontractletter);
+        chPOA = (CheckBox) findViewById(R.id.checkboxPOA);
+        chNREbankstatement = (CheckBox) findViewById(R.id.checkboxNREbank);
+        choverbankdetails = (CheckBox) findViewById(R.id.checkboxOverseasbank);
+        chitr = (CheckBox) findViewById(R.id.checkboxITR);
+        chcurrentbankstatement = (CheckBox) findViewById(R.id.checkboxcurrentaccountstatement);
+        chsavingacctstatement = (CheckBox) findViewById(R.id.checkboxsavingacctstatement);
+        chpartnersheepdeed = (CheckBox) findViewById(R.id.checkboxpartnerdeed);
+        chbisunessagreement = (CheckBox) findViewById(R.id.checkboxbusinessagreement);
+        chqualification = (CheckBox) findViewById(R.id.checkboxqualification);
+        chcarloan = (CheckBox) findViewById(R.id.checkboxCarloan);
+        chhomloan = (CheckBox) findViewById(R.id.checkboxHomeloan);
+        chsocietyloan = (CheckBox) findViewById(R.id.checkboxSocietyloan);
+        chpersonalloan = (CheckBox) findViewById(R.id.checkboxPersonalloan);
+        chotherloan = (CheckBox) findViewById(R.id.checkboxOtherloan);
 
         ArrayAdapter<String> spinnerArrayAdaptercompanyType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CompanyType);
         spinnerArrayAdaptercompanyType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        this.SPcompanytype.setAdapter(spinnerArrayAdaptercompanyType);
+        SPcompanytype.setAdapter(spinnerArrayAdaptercompanyType);
         ArrayAdapter<String> spinnerArrayAdapterSalaryType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, SalaryType);
         spinnerArrayAdapterSalaryType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        this.SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
+        SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
 
 //PROPERTY
         String[] APPropertytype = new String[]{"Perchase of flat", "Purchase of vila", "Purchase of plot", "Balance transfer",
@@ -448,7 +585,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         edtprojectname = (EditText) findViewById(R.id.txtpropertyprojectname1);
 
         getdata();
-//        btupdate.setOnClickListener(this);
+        btupdate.setOnClickListener(this);
 //        btverify.setOnClickListener(this);
 //        btcancel.setOnClickListener( this);
     }
@@ -457,18 +594,18 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         try {
 
             //LEED DETAILS
-            String leedid = this.leedsModel.getLeedNumber();
-            String agentname = this.leedsModel.getAgentName();
-            Long ldatetime = this.leedsModel.getCreatedDateTimeLong();
-            Long time = this.leedsModel.getCreatedDateTimeLong();
+            String leedid = leedsModel.getLeedNumber();
+            String agentname = leedsModel.getAgentName();
+            Long ldatetime = leedsModel.getCreatedDateTimeLong();
+            Long time = leedsModel.getCreatedDateTimeLong();
             spinloantype.setSelection(((ArrayAdapter) spinloantype.getAdapter()).getPosition(leedsModel.getLoanType()));
 
 
             if (ldatetime != null) {
-                txtldate.setText(Utility.convertMilliSecondsToFormatedDate(this.leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
+                txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
             }
             if (time != null) {
-                txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(this.leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
+                txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
             }
             if (leedid != null) {
                 txtleadid.setText(leedid);
@@ -619,7 +756,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
                     Recidential.setSelection(spinnerpos);
 
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
@@ -683,7 +820,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
                     ArrayAdapter myAdap = (ArrayAdapter) CoapplicantRalationship.getAdapter();
                     CoapplicantRalationship.setSelection(myAdap.getPosition(prapplicantrelation));
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
             if (coapplicantotherrelation != null) {
@@ -771,10 +908,8 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             String sQualification = leedsModel.getQualification();
 
 
-
             ArrayAdapter myAdap = (ArrayAdapter) SPcompanytype.getAdapter();
             SPcompanytype.setSelection(myAdap.getPosition(sCompanytype));
-
 
 
             if (sEmployed == null) {
@@ -985,412 +1120,8 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
             }
 
-
         } catch (Exception e) {
         }
-
-//            String leednumber;
-//            String leedid = leedsModel.getLeedId();
-//            String loantype = leedsModel.getLoanType();
-//            String agentname = leedsModel.getAgentName();
-//            String leednumber2 = leedsModel.getLeedNumber();
-//            Long ldatetime = leedsModel.getCreatedDateTimeLong();
-//            String sdatetime = Long.toString(ldatetime.longValue());
-//            String cname = leedsModel.getCustomerName();
-//            String caddress = leedsModel.getAddress();
-//            String officeaddress = leedsModel.getofficeAdderess();
-//            String contact = leedsModel.getMobileNumber();
-//            String altcontact = leedsModel.getAlternetMobileNumber();
-//            String birthdate = leedsModel.getDateOfBirth();
-//            String residencial = leedsModel.getRecidential();
-//            String permanataddress = leedsModel.getPeraddress();
-//            String addressYN = leedsModel.getAddressYesNo();
-//            leedid = leedsModel.getOtherEducation();
-//            String education = leedsModel.getEducation();
-//            String birthdate2 = birthdate;
-//            birthdate = leedsModel.getGender();
-//            String residencial2 = residencial;
-//            residencial = leedsModel.getCoApplicantYN();
-//            String altcontact2 = altcontact;
-//            altcontact = leedsModel.getCurrentpin();
-//            String contact2 = contact;
-//            contact = leedsModel.getCurrentlandmark();
-//            String officeaddress2 = officeaddress;
-//            officeaddress = leedsModel.getCurrentarea();
-//            String permanataddress2 = permanataddress;
-//            permanataddress = leedsModel.getCurrentstreet();
-//            String caddress2 = caddress;
-//            caddress = leedsModel.getPincode();
-//            String cname2 = cname;
-//            cname = leedsModel.getLandmark();
-//            String otherEdu = leedid;
-//            String Sarea = leedsModel.getArea();
-//            String Sstreet = leedsModel.getStreet();
-//            String email = leedsModel.getEmail();
-//            String adhar = leedsModel.getadharNo();
-//            String pan = leedsModel.getCheckpanCardNumber();
-//            String pannumber = leedsModel.getPanCardNumber();
-//            String voterid = leedsModel.getApvoterid();
-//            String driverlicence = leedsModel.getApdrivinglicence();
-//            String passport = leedsModel.getAppassport();
-//            String adharproof = leedsModel.getProofadhar();
-//            String voteridproof = leedsModel.getProofvoterid();
-//            String dlproof = leedsModel.getProofdl();
-//            String electricitybillproof = leedsModel.getProofelectricitybill();
-//            String rentagmtproof = leedsModel.getProofrentagmt();
-//            String passportproof = leedsModel.getProofpassport();
-//            String gevtidproof = leedsModel.getProofgevtid();
-//            String gumastaproof = leedsModel.getProofgumasta();
-//            String currentacctprrof = leedsModel.getProofcurrentacctstmt();
-//            leedid = leedsModel.getPrapplicantrelation();
-//            String land = cname;
-//            cname = leedsModel.getCoapplicantotherrelation();
-//            String PIN = caddress;
-//            caddress = leedsModel.getPrreference1name();
-//            String addressYN2 = addressYN;
-//            addressYN = leedsModel.getPrreference1address();
-//            String currentSstreet = permanataddress;
-//            permanataddress = leedsModel.getPrreferencecontactno();
-//            String currentSarea = officeaddress;
-//            officeaddress = leedsModel.getPrreferencerelationship();
-//            String currentland = contact;
-//            contact = leedsModel.getPrreference2name();
-//            String currentPIN = altcontact;
-//            altcontact = leedsModel.getPrreference2address();
-//            String gender = birthdate;
-//            birthdate = leedsModel.getPrreference2contactno();
-//            String education2 = education;
-//            String ref2relation = leedsModel.getPrreference2relationship();
-//            String sEmployed = leedsModel.getEmployed();
-//            String sCompanytype = leedsModel.getCompanytype();
-//            String sSalarytype = leedsModel.getSalaytype();
-//            String sEMIcar = leedsModel.getEmicar();
-//            String sEMIhome = leedsModel.getEmihome();
-//            String sEMIsociety = leedsModel.getEmisociety();
-//            String sEMIpersonal = leedsModel.getEmipersonal();
-//            String carloanamt = leedsModel.getCarLoanAmount();
-//            String homeloanamt = leedsModel.getHomeLoanAmount();
-//            String societyloanamt = leedsModel.getSocietyLoanAmount();
-//            String personalloanamt = leedsModel.getPersonalLoanAmount();
-//            String sEMIother = leedsModel.getEmiother();
-//            String othercompany = leedsModel.getOthercompany();
-//            String sTenure = leedsModel.getTenure();
-//            String sExperience = leedsModel.getExperience();
-//            String sDept = leedsModel.getDepartment();
-//            String sDesignation = leedsModel.getDesignation();
-//            String sGross = leedsModel.getGrosssalary();
-//            String sNet = leedsModel.getNetsalary();
-//            String sOvertime = leedsModel.getOvertime();
-//            String sInsentive = leedsModel.getIncentive();
-//            String sBonus = leedsModel.getBonus();
-//            String sRentalincom = leedsModel.getRentalincome();
-//            String sAnnualincome = leedsModel.getAnnualincome();
-//            String sRental = leedsModel.getRental();
-//            String sSalrysleep = leedsModel.getSalarysleep();
-//            String sBankstmt = leedsModel.getBankstmt();
-//            String sForm = leedsModel.getForm();
-//            String sAppointmentltr = leedsModel.getAppointmentltr();
-//            String sConfermationltr = leedsModel.getConformationltr();
-//            String sExperinceltr = leedsModel.getExperinceltr();
-//            String sVisa = leedsModel.getVisa();
-//            String sPassport = leedsModel.getPassport();
-//            String sEmployerltr = leedsModel.getEmploerltr();
-//            String sContractltr = leedsModel.getContractltr();
-//            String sPOA = leedsModel.getPoa();
-//            String sNREbank = leedsModel.getNrebankstmt();
-//            String sOverseasebank = leedsModel.getOverseasbankdetail();
-//            String sITR = leedsModel.getItr();
-//            String sCurrentbank = leedsModel.getCurrentbankstmt();
-//            String sSavingbank = leedsModel.getSavingacctstmt();
-//            String sPartnerdeed = leedsModel.getPartnersheepdeed();
-//            String sBusinessagmt = leedsModel.getBusinessagmt();
-//            String sQualification = leedsModel.getQualification();
-//            String sAgreeincome = leedsModel.getAggrecultureIncome();
-//            String sotherincome = leedsModel.getOtherIncome();
-//            String sotherEMIdetails = leedsModel.getEmiOtherDetails();
-//            String property = leedsModel.getPropety();
-//            String YN = leedsModel.getPropetyYN();
-//            String loanrequirement = leedsModel.getExpectedLoanAmount();
-//            String downpayment = leedsModel.getDownpayment();
-//            String propertypin = leedsModel.getPrpropertypin();
-//            String propertylandmark = leedsModel.getPrpropertylandmark();
-//            String propertyarea = leedsModel.getPrpropertyarea();
-//            String projectname = leedsModel.getPrprojectname();
-//            String description = leedsModel.getPrdescripiton();
-//            String propertytype = leedsModel.getPrpropertytype();
-//            ArrayAdapter myAdap = (ArrayAdapter) spinloantype.getAdapter();
-//            int spinnerPosition = myAdap.getPosition(loantype);
-//            spinloantype.setSelection(spinnerPosition);
-//
-//            if (leednumber2 != null) {
-//                txtleadid.setText(leednumber2);
-//                etleednumber.setText(leednumber2);
-//            }
-//            int i;
-//            if (sdatetime != null) {
-//                i = spinnerPosition;
-//                leednumber = leednumber2;
-//                txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
-//                txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
-//            } else {
-//                leednumber = leednumber2;
-//                i = spinnerPosition;
-//                String str = sdatetime;
-//            }
-//            if (agentname != null) {
-//                txtgeneratedby.setText(agentname);
-//            }
-//            if (residencial != null) {
-//                if (residencial.equalsIgnoreCase("Yes")) {
-//                    RcoapplicantYES.setChecked(true);
-//                } else if (residencial.equalsIgnoreCase("No")) {
-//                    RcoapplicantNO.setChecked(true);
-//                }
-//            }
-//            if (leedid != null) {
-//                CoapplicantRalationship.setSelection(((ArrayAdapter) CoapplicantRalationship.getAdapter()).getPosition(leedid));
-//            }
-//            if (cname != null) {
-//                edtotherrelationship.setText(cname);
-//            }
-//            if (caddress != null) {
-//                edtreferencename.setText(caddress);
-//            }
-//            if (addressYN != null) {
-//                edtreferenceaddress.setText(addressYN);
-//            }
-//            if (permanataddress != null) {
-//                edtreferencecontactno.setText(permanataddress);
-//            }
-//            if (officeaddress != null) {
-//                edtreferencerelationship.setText(officeaddress);
-//            }
-//            if (contact != null) {
-//                edtreferencename2.setText(contact);
-//            }
-//            if (altcontact != null) {
-//                edtreferenceaddress2.setText(altcontact);
-//            }
-//            if (birthdate != null) {
-//                edtreferencecontactno2.setText(birthdate);
-//            }
-//            if (ref2relation != null) {
-//                edtreferencerelationship2.setText(ref2relation);
-//            }
-//            if (education2 != null) {
-//                sdatetime = education2;
-//                if (sdatetime.equalsIgnoreCase("Under Graduate")) {
-//                    Rug.setChecked(true);
-//                } else if (sdatetime.equalsIgnoreCase("Graduate")) {
-//                    Rg.setChecked(true);
-//                } else if (sdatetime.equalsIgnoreCase("Post Graduate")) {
-//                    Rpg.setChecked(true);
-//                } else if (sdatetime.equalsIgnoreCase("Professional")) {
-//                    Rpro.setChecked(true);
-//                } else {
-//                    Rother.setChecked(true);
-//                }
-//            }
-//            if (gender != null) {
-//                loantype = gender;
-//                if (loantype.equalsIgnoreCase(Constant.MALE)) {
-//                    gender = leedid;
-//                    Rmale.setChecked(true);
-//                } else {
-//                    gender = leedid;
-//                    Rfemale.setChecked(true);
-//                }
-//            } else {
-//                loantype = gender;
-//            }
-//            if (currentPIN != null) {
-//                currentpin.setText(currentPIN);
-//            }
-//            if (currentland != null) {
-//                loantype = currentland;
-//                currentlandmark.setText(loantype);
-//            } else {
-//                loantype = currentland;
-//            }
-//            if (currentSarea != null) {
-//                currentland = loantype;
-//                loantype = currentSarea;
-//                currentarea.setText(loantype);
-//            } else {
-//                loantype = currentSarea;
-//            }
-//            if (currentSstreet != null) {
-//                currentSarea = loantype;
-//                loantype = currentSstreet;
-//                currentstreet.setText(loantype);
-//            } else {
-//                loantype = currentSstreet;
-//            }
-//            if (addressYN2 != null) {
-//                currentSstreet = loantype;
-//                loantype = addressYN2;
-//                if (loantype.equalsIgnoreCase("Yes")) {
-//                    addressYN2 = loantype;
-//                    Ryes.setChecked(true);
-//                } else {
-//                    addressYN2 = loantype;
-//                    Rno.setChecked(true);
-//                }
-//            }
-//            if (Rno.isChecked()) {
-//                loantype = Sstreet;
-//            } else {
-//                if (PIN != null) {
-//                    loantype = PIN;
-//                    pin.setText(loantype);
-//                } else {
-//                    loantype = PIN;
-//                }
-//                if (land != null) {
-//                    PIN = loantype;
-//                    loantype = land;
-//                    landmark.setText(loantype);
-//                } else {
-//                    loantype = land;
-//                }
-//                if (Sarea != null) {
-//                    land = loantype;
-//                    loantype = Sarea;
-//                    area.setText(loantype);
-//                } else {
-//                    loantype = Sarea;
-//                }
-//                if (Sstreet != null) {
-//                    Sarea = loantype;
-//                    loantype = Sstreet;
-//                    street.setText(loantype);
-//                } else {
-//                    loantype = Sstreet;
-//                }
-//            }
-//            if (adharproof != null) {
-//                Sstreet = loantype;
-//                chProofAdhar.setChecked(true);
-//            }
-//            if (voteridproof != null) {
-//                chProofVoterid.setChecked(true);
-//            }
-//            if (dlproof != null) {
-//                chProofdl.setChecked(true);
-//            }
-//            if (electricitybillproof != null) {
-//                chProofElectricitybill.setChecked(true);
-//            }
-//            if (rentagmtproof != null) {
-//                chProofRntagmt.setChecked(true);
-//            }
-//            if (passportproof != null) {
-//                chProofPassport.setChecked(true);
-//            }
-//            if (gevtidproof != null) {
-//                chProofGovtEmpid.setChecked(true);
-//            }
-//            if (gumastaproof != null) {
-//                chProofGumasta.setChecked(true);
-//            }
-//            if (currentacctprrof != null) {
-//                chProofCurrentacctStmt.setChecked(true);
-//            }
-//            if (voterid != null) {
-//                chVoterID.setChecked(true);
-//            }
-//            if (driverlicence != null) {
-//                chDL.setChecked(true);
-//            }
-//            if (passport != null) {
-//                chPassport.setChecked(true);
-//            }
-//            if (otherEdu != null) {
-//                loantype = otherEdu;
-//                etother.setText(loantype);
-//            } else {
-//                loantype = otherEdu;
-//            }
-//            if (email != null) {
-//                otherEdu = loantype;
-//                loantype = email;
-//                etcEmail.setText(loantype);
-//            } else {
-//                loantype = email;
-//            }
-//            if (adhar != null) {
-//                email = loantype;
-//                chAdhar.setChecked(true);
-//            }
-//            if (pannumber != null) {
-//                chPAN.setChecked(true);
-//                loantype = pannumber;
-//                txtpannumber.setText(loantype);
-//            } else {
-//                loantype = pannumber;
-//            }
-//            if (leednumber != null) {
-//                pannumber = loantype;
-//                loantype = leednumber;
-//                txtleadid.setText(loantype);
-//            } else {
-//                loantype = leednumber;
-//            }
-//            if (cname2 != null) {
-//                leednumber = loantype;
-//                loantype = cname2;
-//                etcname.setText(loantype);
-//            } else {
-//                loantype = cname2;
-//            }
-//            if (caddress2 != null) {
-//                cname2 = loantype;
-//                loantype = caddress2;
-//                etaddress.setText(loantype);
-//            } else {
-//                loantype = caddress2;
-//            }
-//            if (permanataddress2 != null) {
-//                caddress2 = loantype;
-//                loantype = permanataddress2;
-//                etpermanantaddress.setText(loantype);
-//            } else {
-//                loantype = permanataddress2;
-//            }
-//            if (officeaddress2 != null) {
-//                permanataddress2 = loantype;
-//                loantype = officeaddress2;
-//                etoffaddress.setText(loantype);
-//            } else {
-//                loantype = officeaddress2;
-//            }
-//            if (contact2 != null) {
-//                officeaddress2 = loantype;
-//                loantype = contact2;
-//                etcontatct.setText(loantype);
-//            } else {
-//                loantype = contact2;
-//            }
-//            if (altcontact2 != null) {
-//                contact2 = loantype;
-//                loantype = altcontact2;
-//                etalternatecontact.setText(loantype);
-//            } else {
-//                loantype = altcontact2;
-//            }
-//            if (residencial2 != null) {
-//                ArrayAdapter myAdap2 = (ArrayAdapter) Recidential.getAdapter();
-//                altcontact2 = loantype;
-//                loantype = residencial2;
-//                ArrayAdapter residencial3 = myAdap2;
-//                ref2relation = loantype;
-//                Recidential.setSelection(myAdap2.getPosition(loantype));
-//            } else {
-//                ref2relation = residencial2;
-//            }
-//            if (birthdate2 != null) {
-//                etbirthdate.setText(birthdate2);
-//            }
 
     }
 
@@ -1400,16 +1131,16 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setCustomerName(this.cNmae);
-        leedsModel.setAddress(this.cAdress);
-        leedsModel.setMobileNumber(this.cContatct);
-        leedsModel.setDateOfBirth(this.cBdate);
-        leedsModel.setPanCardNumber(this.cPanno);
-        leedsModel.setLoanType(this.sploantype);
-        leedsModel.setOccupation(this.spoccupation);
-        leedsModel.setExpectedLoanAmount(this.cExamount);
-        leedsModel.setLoanType(this.cAdress);
-        leedsModel.setBankName(this.cBank);
+        leedsModel.setCustomerName(cNmae);
+        leedsModel.setAddress(cAdress);
+        leedsModel.setMobileNumber(cContatct);
+        leedsModel.setDateOfBirth(cBdate);
+        leedsModel.setPanCardNumber(cPanno);
+        leedsModel.setLoanType(sploantype);
+        leedsModel.setOccupation(spoccupation);
+        leedsModel.setExpectedLoanAmount(cExamount);
+        leedsModel.setLoanType(cAdress);
+        leedsModel.setBankName(cBank);
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
@@ -1419,7 +1150,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     }
 
     public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
-        sploantype = this.spinloantype.getSelectedItem().toString();
+        sploantype = spinloantype.getSelectedItem().toString();
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {

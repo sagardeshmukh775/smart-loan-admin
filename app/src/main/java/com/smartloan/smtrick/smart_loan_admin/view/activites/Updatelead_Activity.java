@@ -64,8 +64,7 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
         }
 
         public void onClick(View v) {
-            Updatelead_Activity updatelead_Activity = Updatelead_Activity.this;
-            updatelead_Activity.setLeedStatus(updatelead_Activity.leedsModel);
+            setLeedStatus(leedsModel);
         }
     }
 
@@ -75,8 +74,8 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
         }
 
         public void onClick(View v) {
-            Updatelead_Activity.this.startActivity(new Intent(Updatelead_Activity.this, MainActivity_telecaller.class));
-            Updatelead_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            startActivity(new Intent(getApplicationContext(), MainActivity_telecaller.class));
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 
@@ -86,13 +85,12 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
         }
 
         public void onClick(View v) {
-            Updatelead_Activity updatelead_Activity = Updatelead_Activity.this;
-            updatelead_Activity.updateLeadDetails(updatelead_Activity.leedsModel);
-            Toast.makeText(Updatelead_Activity.this, "Lead Update Successfully", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(Updatelead_Activity.this, TL_Updatelead_C_Details_Activity.class);
-            i.putExtra(Constant.LEED_MODEL, Updatelead_Activity.this.leedsModel);
-            Updatelead_Activity.this.startActivity(i);
-            Updatelead_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            updateLeadDetails(leedsModel);
+            Toast.makeText(getApplicationContext(), "Lead Update Successfully", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), TL_Updatelead_C_Details_Activity.class);
+            i.putExtra(Constant.LEED_MODEL, leedsModel);
+            startActivity(i);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 
@@ -102,12 +100,12 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
         }
 
         public void onSuccess(Object object) {
-            Updatelead_Activity.this.progressDialogClass.dismissDialog();
+            progressDialogClass.dismissDialog();
         }
 
         public void onError(Object object) {
-            Updatelead_Activity.this.progressDialogClass.dismissDialog();
-            Context context = Updatelead_Activity.this;
+            progressDialogClass.dismissDialog();
+            Context context = getApplicationContext();
             Utility.showLongMessage(context, context.getString(R.string.server_error));
         }
     }
@@ -116,51 +114,51 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
         super.onCreate(savedInstanceState);
         setContentView(R.layout.updatelead_activity);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        this.leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
-        this.progressDialogClass = new ProgressDialogClass(this);
-        this.leedRepository = new LeedRepositoryImpl();
-        this.appSharedPreference = new AppSharedPreference(this);
+        leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+        progressDialogClass = new ProgressDialogClass(this);
+        leedRepository = new LeedRepositoryImpl();
+        appSharedPreference = new AppSharedPreference(this);
         String[] loanType = new String[]{"HL", "LAP"};
-        this.btupdate = (Button) findViewById(R.id.buttonupdate);
-        this.btverify = (Button) findViewById(R.id.buttonverify);
-        this.btcancel = (Button) findViewById(R.id.buttoncancel);
-        this.btnupdatenext = (Button) findViewById(R.id.buttonupdatenext);
-        this.txtldate = (TextView) findViewById(R.id.txtdate1);
-        this.txttime = (TextView) findViewById(R.id.txtleedtime1);
-        this.txtleadid = (TextView) findViewById(R.id.txtleadidvalue);
-        this.spinloantype = (Spinner) findViewById(R.id.sploantype1);
-        this.txtgeneratedby = (TextView) findViewById(R.id.txtagentid1);
-        this.txtleadidtop = (TextView) findViewById(R.id.textheader);
-        this.spinloantype.setOnItemSelectedListener(this);
+        btupdate = (Button) findViewById(R.id.buttonupdate);
+        btverify = (Button) findViewById(R.id.buttonverify);
+        btcancel = (Button) findViewById(R.id.buttoncancel);
+        btnupdatenext = (Button) findViewById(R.id.buttonupdatenext);
+        txtldate = (TextView) findViewById(R.id.txtdate1);
+        txttime = (TextView) findViewById(R.id.txtleedtime1);
+        txtleadid = (TextView) findViewById(R.id.txtleadidvalue);
+        spinloantype = (Spinner) findViewById(R.id.sploantype1);
+        txtgeneratedby = (TextView) findViewById(R.id.txtagentid1);
+        txtleadidtop = (TextView) findViewById(R.id.textheader);
+        spinloantype.setOnItemSelectedListener(this);
         ArrayAdapter<String> spinnerArrayAdapterloantype = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, loanType);
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        this.spinloantype.setAdapter(spinnerArrayAdapterloantype);
+        spinloantype.setAdapter(spinnerArrayAdapterloantype);
         getdata();
-        this.btupdate.setOnClickListener(new C08401());
-        this.btverify.setOnClickListener(new C08412());
-        this.btcancel.setOnClickListener(new C08423());
-        this.btnupdatenext.setOnClickListener(new C08434());
+        btupdate.setOnClickListener(new C08401());
+        btverify.setOnClickListener(new C08412());
+        btcancel.setOnClickListener(new C08423());
+        btnupdatenext.setOnClickListener(new C08434());
     }
 
     private void getdata() {
         try {
-            String leedid = this.leedsModel.getLeedNumber();
-            String agentname = this.leedsModel.getAgentName();
-            Long ldatetime = this.leedsModel.getCreatedDateTimeLong();
-            Long time = this.leedsModel.getCreatedDateTimeLong();
-            this.spinloantype.setSelection(((ArrayAdapter) this.spinloantype.getAdapter()).getPosition(this.leedsModel.getLoanType()));
+            String leedid = leedsModel.getLeedNumber();
+            String agentname = leedsModel.getAgentName();
+            Long ldatetime = leedsModel.getCreatedDateTimeLong();
+            Long time = leedsModel.getCreatedDateTimeLong();
+            spinloantype.setSelection(((ArrayAdapter) spinloantype.getAdapter()).getPosition(leedsModel.getLoanType()));
             if (ldatetime != null) {
-                this.txtldate.setText(Utility.convertMilliSecondsToFormatedDate(this.leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
+                txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
             }
             if (time != null) {
-                this.txttime.setText(Utility.convertMilliSecondsToFormatedDate(this.leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
+                txttime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
             }
             if (leedid != null) {
-                this.txtleadid.setText(leedid);
-                this.txtleadidtop.setText(leedid);
+                txtleadid.setText(leedid);
+                txtleadidtop.setText(leedid);
             }
             if (agentname != null) {
-                this.txtgeneratedby.setText(agentname);
+                txtgeneratedby.setText(agentname);
             }
         } catch (Exception e) {
         }
@@ -172,17 +170,17 @@ public class Updatelead_Activity extends AppCompatActivity implements OnItemSele
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setLoanType(this.sploantype);
+        leedsModel.setLoanType(sploantype);
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
     private void updateLeed(String leedId, Map leedsMap) {
-        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
-        this.leedRepository.updateLeed(leedId, leedsMap, new C09325());
+        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        leedRepository.updateLeed(leedId, leedsMap, new C09325());
     }
 
     public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
-        this.sploantype = this.spinloantype.getSelectedItem().toString();
+        sploantype = spinloantype.getSelectedItem().toString();
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {

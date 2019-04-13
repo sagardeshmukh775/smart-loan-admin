@@ -360,45 +360,12 @@
 
                     </RelativeLayout>
 
-                    <RelativeLayout
-                        android:id="@+id/layoutLoanrequirement"
-                        android:layout_width="match_parent"
-                        android:layout_below="@+id/layoutpropertytype"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:id="@+id/txtloanrequirement"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:padding="10dp"
-                            android:text="Loan Requirement"
-                            android:textColor="@color/darkgraycolor"
-                            android:textSize="14dp" />
-
-                        <EditText
-                            android:id="@+id/txtloanrequirement1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_toRightOf="@+id/txtloanrequirement"
-                            android:background="@drawable/edittextanimation"
-                            android:padding="10dp"
-                            android:text=""
-                            android:inputType="number"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/layoutDownpayment"
                         android:layout_width="match_parent"
-                        android:layout_below="@+id/layoutLoanrequirement"
+                        android:layout_below="@+id/layoutpropertytype"
                         android:layout_height="fill_parent"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_vertical">
@@ -431,9 +398,44 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/layotDescription"
+                        android:id="@+id/layoutLoanrequirement"
                         android:layout_width="match_parent"
                         android:layout_below="@+id/layoutDownpayment"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/txtloanrequirement"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:padding="10dp"
+                            android:text="Loan Requirement"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/txtloanrequirement1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/txtloanrequirement"
+                            android:background="@drawable/edittextanimation"
+                            android:padding="10dp"
+                            android:text=""
+                            android:inputType="number"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layotDescription"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/layoutLoanrequirement"
                         android:layout_height="fill_parent"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_vertical">

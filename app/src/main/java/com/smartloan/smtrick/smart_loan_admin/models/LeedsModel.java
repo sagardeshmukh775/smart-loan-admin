@@ -178,7 +178,17 @@ public class LeedsModel implements Serializable {
     private String visa;
     private String yincome;
 
+    private String banknName;
+    private String branchName;
+    private String ifscCode;
+    private String salesPerson;
+
     public LeedsModel(int id) {
+        this.bankName = "bank";
+        this.branchName = "branch";
+        this.ifscCode = "ifsc";
+        this.salesPerson = "sales";
+
         this.addressYesNo = "address";
         this.otherEducation = "other";
         this.apvoterid = "voterid";
@@ -348,6 +358,39 @@ public class LeedsModel implements Serializable {
 
     public void setCreatedDateTime(Long createdDateTime) {
         this.createdDateTime = createdDateTime;
+    }
+
+
+    public String getBanknName() {
+        return banknName;
+    }
+
+    public void setBanknName(String banknName) {
+        this.banknName = banknName;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getIfscCode() {
+        return ifscCode;
+    }
+
+    public void setIfscCode(String ifscCode) {
+        this.ifscCode = ifscCode;
+    }
+
+    public String getSalesPerson() {
+        return salesPerson;
+    }
+
+    public void setSalesPerson(String salesPerson) {
+        this.salesPerson = salesPerson;
     }
 
     public String getProofadhar() {
@@ -1799,6 +1842,11 @@ public class LeedsModel implements Serializable {
         leedMap.put("proofgevtid", getProofgevtid());
         leedMap.put("proofgumasta", getProofgumasta());
         leedMap.put("proofcurrentacctstmt", getProofcurrentacctstmt());
+
+        leedMap.put("banknName", getBanknName());
+        leedMap.put("branchName", getBranchName());
+        leedMap.put("ifscCode", getIfscCode());
+        leedMap.put("salesPerson", getSalesPerson());
         return leedMap;
     }
 

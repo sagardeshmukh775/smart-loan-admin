@@ -769,7 +769,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         RelativeLayout.LayoutParams paramsarea = (RelativeLayout.LayoutParams) layoutarea.getLayoutParams();
         RelativeLayout.LayoutParams paramsproject = (RelativeLayout.LayoutParams) layoutprojectname.getLayoutParams();
         RelativeLayout.LayoutParams paramsproperty = (RelativeLayout.LayoutParams) layoutpropertytype.getLayoutParams();
-        RelativeLayout.LayoutParams paramsloanrequirement = (RelativeLayout.LayoutParams) layoutloanrequirement.getLayoutParams();
+      //  RelativeLayout.LayoutParams paramsloanrequirement = (RelativeLayout.LayoutParams) layoutloanrequirement.getLayoutParams();
         RelativeLayout.LayoutParams paramsdownpayment = (RelativeLayout.LayoutParams) layoutdownpayment.getLayoutParams();
 
         paramspin.height = 0;
@@ -777,7 +777,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         paramsarea.height = 0;
         paramsproject.height = 0;
         paramsproperty.height = 0;
-        paramsloanrequirement.height = 0;
+    //    paramsloanrequirement.height = 0;
         paramsdownpayment.height = 0;
 
         layoutpin.setLayoutParams(paramspin);
@@ -785,7 +785,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         layoutarea.setLayoutParams(paramsarea);
         layoutprojectname.setLayoutParams(paramsproject);
         layoutpropertytype.setLayoutParams(paramsproperty);
-        layoutloanrequirement.setLayoutParams(paramsloanrequirement);
+     //   layoutloanrequirement.setLayoutParams(paramsloanrequirement);
         layoutdownpayment.setLayoutParams(paramsdownpayment);
 
     }
@@ -797,7 +797,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         RelativeLayout.LayoutParams paramsarea = (RelativeLayout.LayoutParams) layoutarea.getLayoutParams();
         RelativeLayout.LayoutParams paramsproject = (RelativeLayout.LayoutParams) layoutprojectname.getLayoutParams();
         RelativeLayout.LayoutParams paramsproperty = (RelativeLayout.LayoutParams) layoutpropertytype.getLayoutParams();
-        RelativeLayout.LayoutParams paramsloanrequirement = (RelativeLayout.LayoutParams) layoutloanrequirement.getLayoutParams();
+       // RelativeLayout.LayoutParams paramsloanrequirement = (RelativeLayout.LayoutParams) layoutloanrequirement.getLayoutParams();
         RelativeLayout.LayoutParams paramsdownpayment = (RelativeLayout.LayoutParams) layoutdownpayment.getLayoutParams();
 
         paramspin.height = ActionBar.LayoutParams.FILL_PARENT;
@@ -805,7 +805,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         paramsarea.height = ActionBar.LayoutParams.FILL_PARENT;
         paramsproject.height = ActionBar.LayoutParams.FILL_PARENT;
         paramsproperty.height = ActionBar.LayoutParams.FILL_PARENT;
-        paramsloanrequirement.height = ActionBar.LayoutParams.FILL_PARENT;
+      //  paramsloanrequirement.height = ActionBar.LayoutParams.FILL_PARENT;
         paramsdownpayment.height = ActionBar.LayoutParams.FILL_PARENT;
 
         layoutpin.setLayoutParams(paramspin);
@@ -813,7 +813,7 @@ public class TL_Updatelead_property_Details_Activity extends AppCompatActivity i
         layoutarea.setLayoutParams(paramsarea);
         layoutprojectname.setLayoutParams(paramsproject);
         layoutpropertytype.setLayoutParams(paramsproperty);
-        layoutloanrequirement.setLayoutParams(paramsloanrequirement);
+     //   layoutloanrequirement.setLayoutParams(paramsloanrequirement);
         layoutdownpayment.setLayoutParams(paramsdownpayment);
     }
 

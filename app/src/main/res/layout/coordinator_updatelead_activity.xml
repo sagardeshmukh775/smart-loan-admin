@@ -3144,11 +3144,148 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutsalesperson"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layotDescription"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                              android:id="@+id/txtsalespersonname"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="Sales Person:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <Spinner
+                                android:id="@+id/txtsalespersonname1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtsalespersonname"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                           android:id="@+id/layoutbankname"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutsalesperson"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                               android:id="@+id/txtbankname"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="Bank Name::"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <EditText
+                               android:id="@+id/txtbankname1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtbankname"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                           android:id="@+id/layoutbranchname"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutbankname"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtbranchname"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="Branch Name:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <EditText
+                                android:id="@+id/txtbranchname1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtbranchname"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layoutifsccode"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutbranchname"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtifsccode"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="IFSC Code:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <EditText
+                                android:id="@+id/txtifsccode1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtifsccode"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
+
                         <LinearLayout
                             android:id="@id/layoutbuttons"
-                            android:layout_width="0.0dip"
-                            android:layout_height="0.0dip"
-                            android:layout_below="@id/layoutbuttonnext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layoutifsccode"
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"
@@ -3165,31 +3302,31 @@
                                 android:textSize="16.0sp"
                                 android:textStyle="bold" />
 
-                            <Button
-                                android:id="@id/buttonverify"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="1.0sp"
-                                android:layout_weight="33.0"
-                                android:background="@color/btnRequest"
-                                android:hint="Enter Notice Description"
-                                android:text="SUBMIT"
-                                android:textColor="#ffffffff"
-                                android:textSize="16.0sp"
-                                android:textStyle="bold" />
+                            <!--<Button-->
+                                <!--android:id="@id/buttonverify"-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginLeft="1.0sp"-->
+                                <!--android:layout_weight="33.0"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:hint="Enter Notice Description"-->
+                                <!--android:text="SUBMIT"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textSize="16.0sp"-->
+                                <!--android:textStyle="bold" />-->
 
-                            <Button
-                                android:id="@id/buttoncancel"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="1.0sp"
-                                android:layout_weight="33.0"
-                                android:background="@color/btnRequest"
-                                android:hint="Enter Notice Description"
-                                android:text="CANCEL"
-                                android:textColor="#ffffffff"
-                                android:textSize="16.0sp"
-                                android:textStyle="bold" />
+                            <!--<Button-->
+                                <!--android:id="@id/buttoncancel"-->
+                                <!--android:layout_width="fill_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginLeft="1.0sp"-->
+                                <!--android:layout_weight="33.0"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:hint="Enter Notice Description"-->
+                                <!--android:text="CANCEL"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textSize="16.0sp"-->
+                                <!--android:textStyle="bold" />-->
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>
