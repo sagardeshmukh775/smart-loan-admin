@@ -210,8 +210,15 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
     RadioGroup groupAboutproperty, groupAboutpropetyYN;
     RadioButton Rproperty, Ryn;
-//    RadioButton Rmale, Rfemale, RGraduation, RUGraduation, RPGraduation, Rprofessional, ROther, Rgend, Redu,
+    RadioGroup groupRadioGender;
+    RadioGroup groupRadioEducation;
+    RadioGroup groupRadio;
+    RadioGroup groupRadiocoapplicant;
+
+    RadioGroup groupRadioEmployed;
+    //    RadioButton Rmale, Rfemale, RGraduation, RUGraduation, RPGraduation, Rprofessional, ROther, Rgend, Redu,
 //            Rpresanctioned, Rpurchasepropety, Ryes, Rno, Rproperty, Ryn;
+    RadioButton Rcoapplicant, Remployed;
 
     @Override
     public void onClick(View v) {
@@ -242,14 +249,36 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Sloantype = spinloantype.getSelectedItem().toString();
             Scusomername = etcname.getText().toString();
 
-            Scustomergender = txtgeneratedby.getText().toString();
+            if (groupRadioGender.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) groupRadioGender.getChildAt(groupRadioGender.indexOfChild(groupRadioGender.findViewById(groupRadioGender.getCheckedRadioButtonId())));
+                Scustomergender = btn.getText().toString();
+            }
+            groupRadioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Rgender = (RadioButton) findViewById(checkedId);
+
+                    Scustomergender = Rgender.getText().toString();
+                }
+            });
 
             Sbirthdate = etbirthdate.getText().toString();
             Scontactno = etcontatct.getText().toString();
             Saltcontact = etalternatecontact.getText().toString();
             Semail = etcEmail.getText().toString();
 
-            SEducation = txtgeneratedby.getText().toString();
+            //  SEducation = txtgeneratedby.getText().toString();
+            if (groupRadioEducation.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) groupRadioEducation.getChildAt(groupRadioEducation.indexOfChild(groupRadioEducation.findViewById(groupRadioEducation.getCheckedRadioButtonId())));
+                SEducation = btn.getText().toString();
+            }
+            groupRadioEducation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    REducation = (RadioButton) findViewById(checkedId);
+                    SEducation = REducation.getText().toString();
+                }
+            });
 
             Sotheredudetails = etother.getText().toString();
             Scurrentpin = Currentpin.getText().toString();
@@ -257,7 +286,19 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Scurrentarea = Currentarea.getText().toString();
             Scurrentstreet = Currentstreet.getText().toString();
 
-            SaddressYN = txtgeneratedby.getText().toString();
+            //  SaddressYN = txtgeneratedby.getText().toString();
+            if (groupRadio.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) groupRadio.getChildAt(groupRadio.indexOfChild(groupRadio.findViewById(groupRadio.getCheckedRadioButtonId())));
+                SaddressYN = btn.getText().toString();
+            }
+            groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    RYN = (RadioButton) findViewById(checkedId);
+
+                    SaddressYN = RYN.getText().toString();
+                }
+            });
 
             Sperpin = pin.getText().toString();
             Sperland = landmark.getText().toString();
@@ -265,23 +306,64 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Sperstreet = street.getText().toString();
             Sresidentialtype = Recidential.getSelectedItem().toString();
             Sofficeaddress = etoffaddress.getText().toString();
-            Skycadhar = chAdhar.getText().toString();
-            Skycpan = chPAN.getText().toString();
-            Akycpannumber = txtpannumber.getText().toString();
-            Skycvoterid = chVoterID.getText().toString();
-            SkycDL = chDL.getText().toString();
-            Skycpassport = chPassport.getText().toString();
-            Sproofadhar = chProofAdhar.getText().toString();
-            Sproofvoterid = chProofVoterid.getText().toString();
-            SproofDL = chProofdl.getText().toString();
-            Sproofelectricitybill = chProofElectricitybill.getText().toString();
-            Sproofrentagmt = chProofRntagmt.getText().toString();
-            Sproofpassport = chProofPassport.getText().toString();
-            Sproofgovtid = chProofGovtEmpid.getText().toString();
-            Sproofgumasta = chProofGumasta.getText().toString();
-            Sproofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
+            if (chAdhar.isChecked()) {
+                Skycadhar = chAdhar.getText().toString();
+            }
+            if (chPAN.isChecked()) {
+                Skycpan = chPAN.getText().toString();
+            }
+            if (chAdhar.isChecked()) {
+                Akycpannumber = txtpannumber.getText().toString();
+            }
+            if (chVoterID.isChecked()) {
+                Skycvoterid = chVoterID.getText().toString();
+            }
+            if (chDL.isChecked()) {
+                SkycDL = chDL.getText().toString();
+            }
+            if (chPassport.isChecked()) {
+                Skycpassport = chPassport.getText().toString();
+            }
+            if (chProofAdhar.isChecked()) {
+                Sproofadhar = chProofAdhar.getText().toString();
+            }
+            if (chProofVoterid.isChecked()) {
+                Sproofvoterid = chProofVoterid.getText().toString();
+            }
+            if (chProofdl.isChecked()) {
+                SproofDL = chProofdl.getText().toString();
+            }
+            if (chProofElectricitybill.isChecked()) {
+                Sproofelectricitybill = chProofElectricitybill.getText().toString();
+            }
+            if (chProofRntagmt.isChecked()) {
+                Sproofrentagmt = chProofRntagmt.getText().toString();
+            }
+            if (chProofPassport.isChecked()) {
+                Sproofpassport = chProofPassport.getText().toString();
+            }
+            if (chProofGovtEmpid.isChecked()) {
+                Sproofgovtid = chProofGovtEmpid.getText().toString();
+            }
+            if (chProofGumasta.isChecked()) {
+                Sproofgumasta = chProofGumasta.getText().toString();
+            }
+            if (chProofCurrentacctStmt.isChecked()) {
+                Sproofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
+            }
 
-            ScoapplicantYN = txtgeneratedby.getText().toString();
+            //  ScoapplicantYN = txtgeneratedby.getText().toString();
+            if (groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
+                RadioButton btn2 = (RadioButton) groupRadiocoapplicant.getChildAt(groupRadiocoapplicant.indexOfChild(groupRadiocoapplicant.findViewById(groupRadiocoapplicant.getCheckedRadioButtonId())));
+                ScoapplicantYN = btn2.getText().toString();
+            }
+            groupRadiocoapplicant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Rcoapplicant = (RadioButton) findViewById(checkedId);
+                    ScoapplicantYN = Rcoapplicant.getText().toString();
+                }
+            });
 
             Scoapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
             Scoapplicantotherrelationdetails = edtotherrelationship.getText().toString();
@@ -294,7 +376,18 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Sref2contact = edtreferencecontactno2.getText().toString();
             Sref2relation = edtreferencerelationship2.getText().toString();
 
-            Soccupationtype = txtgeneratedby.getText().toString();
+            //   Soccupationtype = txtgeneratedby.getText().toString();
+            if (groupRadioEmployed.getCheckedRadioButtonId() != -1) {
+                RadioButton btn = (RadioButton) groupRadioEmployed.getChildAt(groupRadioEmployed.indexOfChild(groupRadioEmployed.findViewById(groupRadioEmployed.getCheckedRadioButtonId())));
+                Soccupationtype = btn.getText().toString();
+            }
+            groupRadioEmployed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Remployed = (RadioButton) findViewById(checkedId);
+                    Soccupationtype = Remployed.getText().toString();
+                }
+            });
 
             Scompanytype = SPcompanytype.getSelectedItem().toString();
             Sothercmptype = edtothercompany.getText().toString();
@@ -313,35 +406,83 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Sotherincome = edtotherincome.getText().toString();
             Ssalarycomesin = SPsalarytype.getSelectedItem().toString();
             Srentalexpence = edtrental.getText().toString();
-            Scarloan = chcarloan.getText().toString();
-            Scarloanamt = txtCarloan.getText().toString();
-            Shomelloan = chhomloan.getText().toString();
-            Shomeloanamt = txtHomeloan.getText().toString();
-            Ssocietyloan = chsocietyloan.getText().toString();
-            Ssocietyloanamt = txtsocietyloan.getText().toString();
-            Spersonalloan = chpersonalloan.getText().toString();
-            Spersonalloanamt = txtpersonalloan.getText().toString();
-            Sotherloan = chotherloan.getText().toString();
-            Sotherloanamt = edtotheremidetails.getText().toString();
-            Ssalarysleep = chsalarysleep.getText().toString();
-            Sbankstmt = chbankstatement.getText().toString();
-            Sform16 = chformno16.getText().toString();
-            Sappointmentletter = chappointmentletter.getText().toString();
-            Sconfermationletter = chconfermationletter.getText().toString();
-            Sexperienceletter = chexperieceletter.getText().toString();
-            Snrivisa = chvisa.getText().toString();
-            Snripassport = chPassport.getText().toString();
-            Snriemployerletter = chemployerletter.getText().toString();
-            Snricontractletter = chcontractletter.getText().toString();
-            Snripoa = chPOA.getText().toString();
-            SNREbankacct = chbankstatement.getText().toString();
-            Soverseasebankacct = choverbankdetails.getText().toString();
-            Sitr = chitr.getText().toString();
-            Scurrentacctstmt = chcurrentbankstatement.getText().toString();
-            Ssavingacctstmt = chsavingacctstatement.getText().toString();
-            Spartnershipdeed = chpartnersheepdeed.getText().toString();
-            Sbusinessagmt = chbisunessagreement.getText().toString();
-            Squalificationcirtificate = chqualification.getText().toString();
+            if (chcarloan.isChecked()) {
+                Scarloan = chcarloan.getText().toString();
+                Scarloanamt = txtCarloan.getText().toString();
+            }
+            if (chhomloan.isChecked()) {
+                Shomelloan = chhomloan.getText().toString();
+                Shomeloanamt = txtHomeloan.getText().toString();
+            }
+            if (chsocietyloan.isChecked()) {
+                Ssocietyloan = chsocietyloan.getText().toString();
+                Ssocietyloanamt = txtsocietyloan.getText().toString();
+            }
+            if (chpersonalloan.isChecked()) {
+                Spersonalloan = chpersonalloan.getText().toString();
+                Spersonalloanamt = txtpersonalloan.getText().toString();
+            }
+            if (chotherloan.isChecked()) {
+                Sotherloan = chotherloan.getText().toString();
+                Sotherloanamt = edtotheremidetails.getText().toString();
+            }
+            if (chsalarysleep.isChecked()) {
+                Ssalarysleep = chsalarysleep.getText().toString();
+            }
+            if (chbankstatement.isChecked()) {
+                Sbankstmt = chbankstatement.getText().toString();
+            }
+            if (chformno16.isChecked()) {
+                Sform16 = chformno16.getText().toString();
+            }
+            if (chappointmentletter.isChecked()) {
+                Sappointmentletter = chappointmentletter.getText().toString();
+            }
+            if (chconfermationletter.isChecked()) {
+                Sconfermationletter = chconfermationletter.getText().toString();
+            }
+            if (chexperieceletter.isChecked()) {
+                Sexperienceletter = chexperieceletter.getText().toString();
+            }
+            if (chvisa.isChecked()) {
+                Snrivisa = chvisa.getText().toString();
+            }
+            if (chpasspoet.isChecked()) {
+                Snripassport = chpasspoet.getText().toString();
+            }
+            if (chemployerletter.isChecked()) {
+                Snriemployerletter = chemployerletter.getText().toString();
+            }
+            if (chcontractletter.isChecked()) {
+                Snricontractletter = chcontractletter.getText().toString();
+            }
+            if (chPOA.isChecked()) {
+                Snripoa = chPOA.getText().toString();
+            }
+            if (chbankstatement.isChecked()) {
+                SNREbankacct = chbankstatement.getText().toString();
+            }
+            if (choverbankdetails.isChecked()) {
+                Soverseasebankacct = choverbankdetails.getText().toString();
+            }
+            if (chitr.isChecked()) {
+                Sitr = chitr.getText().toString();
+            }
+            if (chcurrentbankstatement.isChecked()) {
+                Scurrentacctstmt = chcurrentbankstatement.getText().toString();
+            }
+            if (chsavingacctstatement.isChecked()) {
+                Ssavingacctstmt = chsavingacctstatement.getText().toString();
+            }
+            if (chpartnersheepdeed.isChecked()) {
+                Spartnershipdeed = chpartnersheepdeed.getText().toString();
+            }
+            if (chbisunessagreement.isChecked()) {
+                Sbusinessagmt = chbisunessagreement.getText().toString();
+            }
+            if (chqualification.isChecked()) {
+                Squalificationcirtificate = chqualification.getText().toString();
+            }
 
 
             groupAboutproperty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -462,15 +603,26 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         String[] empType = new String[]{"Salaried", "Businessman"};
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
+        String[] salesperson = new String[]{"Amit Kumar", "Rahul rathi", "Suraj chavan"};
 
         groupAboutproperty = (RadioGroup) findViewById(R.id.radioGroupaboutproperty);
         groupAboutpropetyYN = (RadioGroup) findViewById(R.id.radioGroupaboutpropertyYesNo);
+
+        groupRadioGender = (RadioGroup) findViewById(R.id.radioSex);
+        groupRadioEducation = (RadioGroup) findViewById(R.id.radioeducation);
+        groupRadio = (RadioGroup) findViewById(R.id.radioGYN);
+        groupRadiocoapplicant = (RadioGroup) findViewById(R.id.radiocoapplicantYN);
+
+        groupRadioEmployed = (RadioGroup) findViewById(R.id.radioOccupation);
 
 
         edtbankname = (EditText) findViewById(R.id.txtbankname1);
         edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
         edtifsccode = (EditText) findViewById(R.id.txtifsccode1);
         SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
+        ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, salesperson);
+        spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
 
         spinloantype = (Spinner) findViewById(R.id.sploantype1);
 
@@ -647,7 +799,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         edtprojectname = (EditText) findViewById(R.id.txtpropertyprojectname1);
 
         getdata();
-        btupdate.setOnClickListener(this);
+        btupdate.setOnClickListener(new C08031());
 //        btverify.setOnClickListener(this);
 //        btcancel.setOnClickListener( this);
     }
@@ -969,6 +1121,22 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             String sBusinessagmt = leedsModel.getBusinessagmt();
             String sQualification = leedsModel.getQualification();
 
+            String bankname = leedsModel.getBanknName();
+            String branchname = leedsModel.getBranchName();
+            String ifsccode = leedsModel.getIfscCode();
+            String salsepersone = leedsModel.getSalesPerson();
+
+            if (bankname != null){
+                edtbankname.setText(bankname);
+            }
+            if (branchname != null){
+                edtbranchname.setText(branchname);
+            }
+            if (ifsccode != null){
+                edtifsccode.setText(ifsccode);
+            }
+            ArrayAdapter myAdap0 = (ArrayAdapter) SPsalesperson.getAdapter();
+            SPsalesperson.setSelection(myAdap0.getPosition(salsepersone));
 
             ArrayAdapter myAdap = (ArrayAdapter) SPcompanytype.getAdapter();
             SPcompanytype.setSelection(myAdap.getPosition(sCompanytype));
@@ -1203,7 +1371,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 //        leedsModel.setExpectedLoanAmount(cExamount);
 //        leedsModel.setLoanType(cAdress);
 //        leedsModel.setBankName(cBank);
-
 
 
         leedsModel.setCustomerName(Scusomername);

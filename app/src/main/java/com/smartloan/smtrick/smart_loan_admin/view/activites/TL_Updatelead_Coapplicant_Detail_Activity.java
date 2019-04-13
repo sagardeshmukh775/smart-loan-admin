@@ -69,6 +69,7 @@ public class TL_Updatelead_Coapplicant_Detail_Activity extends AppCompatActivity
 
     String LeedNumber;
     Spinner Recidential;
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,9 @@ public class TL_Updatelead_Coapplicant_Detail_Activity extends AppCompatActivity
         layoutsavebutton = (RelativeLayout) findViewById(R.id.layoutbuttonsave);
 
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(LEED_MODEL);
+        Intent i = getIntent();
+        code = i.getStringExtra("Code");
+
         LeedNumber = leedsModel.getLeedNumber();
         leedRepository = new LeedRepositoryImpl();
 
@@ -343,6 +347,7 @@ public class TL_Updatelead_Coapplicant_Detail_Activity extends AppCompatActivity
 
                 Intent i = new Intent(TL_Updatelead_Coapplicant_Detail_Activity.this, TL_Updatelead_C_Details_Activity.class);
                 i.putExtra(LEED_MODEL, leedsModel);
+                i.putExtra("code", code);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 

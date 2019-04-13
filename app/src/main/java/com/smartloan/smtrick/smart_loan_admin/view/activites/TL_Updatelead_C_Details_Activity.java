@@ -185,6 +185,7 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
     TextView txtldate;
     TextView txtleadid;
     EditText txtpannumber;
+    String code = "100";
 
     /* renamed from: com.smartloan.smtrick.smart_loan_admin.view.activites.TL_Updatelead_C_Details_Activity$1 */
     class C08161 implements OnCheckedChangeListener {
@@ -396,6 +397,7 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
                 updateLeadDetails(leedsModel);
                 Intent i = new Intent(getApplicationContext(), TL_Updatelead_Coapplicant_Detail_Activity.class);
                 i.putExtra(Constant.LEED_MODEL, leedsModel);
+                i.putExtra("Code",code);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
@@ -594,6 +596,8 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         layoutref2relationship = (RelativeLayout) findViewById(R.id.layoutreference2relationhsip);
         setSupportActionBar(toolbar);
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+
+
         progressDialogClass = new ProgressDialogClass(this);
         leedRepository = new LeedRepositoryImpl();
         appSharedPreference = new AppSharedPreference(this);
@@ -711,6 +715,11 @@ public class TL_Updatelead_C_Details_Activity extends AppCompatActivity implemen
         Rfemale = (RadioButton) findViewById(R.id.radioFemale);
         btnsave.setOnClickListener(new C08216());
         btnnext.setOnClickListener(new C08227());
+        Intent in = getIntent();
+        String code1 = in.getStringExtra("code");
+        if (code.equalsIgnoreCase(code1)){
+            edtreferencename.requestFocus();
+        }
         getdata();
     }
 
