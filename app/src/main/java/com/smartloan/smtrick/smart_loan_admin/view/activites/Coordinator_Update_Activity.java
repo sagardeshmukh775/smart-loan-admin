@@ -192,7 +192,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     EditText edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea, edtprojectname;
     EditText edtbankname, edtbranchname, edtifsccode;
     Spinner SPsalesperson;
-    String Sdate, Stime, Sleednumber, Sagenname, Sloantype, Scusomername, Scustomergender, Sbirthdate, Scontactno, Saltcontact,
+    String Sagenname, Sloantype, Scusomername, Scustomergender, Sbirthdate, Scontactno, Saltcontact,
             Semail, SEducation, Sotheredudetails, Scurrentpin, Scurrentland, Scurrentarea, Scurrentstreet, SaddressYN,
             Sperpin, Sperland, Sperarea, Sperstreet, Sresidentialtype, Sofficeaddress, Skycadhar, Skycpan, Akycpannumber,
             Skycvoterid, SkycDL, Skycpassport, Sproofadhar, Sproofvoterid, SproofDL, Sproofelectricitybill, Sproofrentagmt,
@@ -205,7 +205,13 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             Sbankstmt, Sform16, Sappointmentletter, Sconfermationletter, Sexperienceletter, Snrivisa, Snripassport,
             Snriemployerletter, Snricontractletter, Snripoa, SNREbankacct, Soverseasebankacct, Sitr, Scurrentacctstmt,
             Ssavingacctstmt, Spartnershipdeed, Sbusinessagmt, Squalificationcirtificate, Spropertytype, SpropertyYN, Sprpin, Sprland, Sprarea, Sprprojectname, Sprpropertytype, Sprloanrequirement, Sprdownpayment, Sprdescriptio,
-            Sbankname, Sbranchname, Sifsccode, Ssalespersone;
+            Sbankname, Sbranchname, Sifsccode, Ssalespersone,
+            saboutpropety, sYN;
+
+    RadioGroup groupAboutproperty, groupAboutpropetyYN;
+    RadioButton Rproperty, Ryn;
+//    RadioButton Rmale, Rfemale, RGraduation, RUGraduation, RPGraduation, Rprofessional, ROther, Rgend, Redu,
+//            Rpresanctioned, Rpurchasepropety, Ryes, Rno, Rproperty, Ryn;
 
     @Override
     public void onClick(View v) {
@@ -233,119 +239,171 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 //            cBank = etbank.getText().toString();
 
             Sagenname = txtgeneratedby.getText().toString();
-            Sloantype = txtgeneratedby.getText().toString();
-            Scusomername = txtgeneratedby.getText().toString();
+            Sloantype = spinloantype.getSelectedItem().toString();
+            Scusomername = etcname.getText().toString();
+
             Scustomergender = txtgeneratedby.getText().toString();
-            Sbirthdate = txtgeneratedby.getText().toString();
-            Scontactno = txtgeneratedby.getText().toString();
-            Saltcontact = txtgeneratedby.getText().toString();
-            Semail = txtgeneratedby.getText().toString();
+
+            Sbirthdate = etbirthdate.getText().toString();
+            Scontactno = etcontatct.getText().toString();
+            Saltcontact = etalternatecontact.getText().toString();
+            Semail = etcEmail.getText().toString();
+
             SEducation = txtgeneratedby.getText().toString();
-            Sotheredudetails = txtgeneratedby.getText().toString();
-            Scurrentpin = txtgeneratedby.getText().toString();
-            Scurrentland = txtgeneratedby.getText().toString();
-            Scurrentarea = txtgeneratedby.getText().toString();
-            Scurrentstreet = txtgeneratedby.getText().toString();
+
+            Sotheredudetails = etother.getText().toString();
+            Scurrentpin = Currentpin.getText().toString();
+            Scurrentland = Currentlandmark.getText().toString();
+            Scurrentarea = Currentarea.getText().toString();
+            Scurrentstreet = Currentstreet.getText().toString();
 
             SaddressYN = txtgeneratedby.getText().toString();
 
-            Sperpin = txtgeneratedby.getText().toString();
-            Sperland = txtgeneratedby.getText().toString();
-            Sperarea = txtgeneratedby.getText().toString();
-            Sperstreet = txtgeneratedby.getText().toString();
-            Sresidentialtype = txtgeneratedby.getText().toString();
-            Sofficeaddress = txtgeneratedby.getText().toString();
-            Skycadhar = txtgeneratedby.getText().toString();
-            Skycpan = txtgeneratedby.getText().toString();
-            Akycpannumber = txtgeneratedby.getText().toString();
-            Skycvoterid = txtgeneratedby.getText().toString();
-            SkycDL = txtgeneratedby.getText().toString();
-            Skycpassport = txtgeneratedby.getText().toString();
-            Sproofadhar = txtgeneratedby.getText().toString();
-            Sproofvoterid = txtgeneratedby.getText().toString();
-            SproofDL = txtgeneratedby.getText().toString();
-            Sproofelectricitybill = txtgeneratedby.getText().toString();
-            Sproofrentagmt = txtgeneratedby.getText().toString();
-            Sproofpassport = txtgeneratedby.getText().toString();
-            Sproofgovtid = txtgeneratedby.getText().toString();
-            Sproofgumasta = txtgeneratedby.getText().toString();
-            Sproofcurrentacctstmt = txtgeneratedby.getText().toString();
+            Sperpin = pin.getText().toString();
+            Sperland = landmark.getText().toString();
+            Sperarea = area.getText().toString();
+            Sperstreet = street.getText().toString();
+            Sresidentialtype = Recidential.getSelectedItem().toString();
+            Sofficeaddress = etoffaddress.getText().toString();
+            Skycadhar = chAdhar.getText().toString();
+            Skycpan = chPAN.getText().toString();
+            Akycpannumber = txtpannumber.getText().toString();
+            Skycvoterid = chVoterID.getText().toString();
+            SkycDL = chDL.getText().toString();
+            Skycpassport = chPassport.getText().toString();
+            Sproofadhar = chProofAdhar.getText().toString();
+            Sproofvoterid = chProofVoterid.getText().toString();
+            SproofDL = chProofdl.getText().toString();
+            Sproofelectricitybill = chProofElectricitybill.getText().toString();
+            Sproofrentagmt = chProofRntagmt.getText().toString();
+            Sproofpassport = chProofPassport.getText().toString();
+            Sproofgovtid = chProofGovtEmpid.getText().toString();
+            Sproofgumasta = chProofGumasta.getText().toString();
+            Sproofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
 
             ScoapplicantYN = txtgeneratedby.getText().toString();
 
-            Scoapplicantrelation = txtgeneratedby.getText().toString();
-            Scoapplicantotherrelationdetails = txtgeneratedby.getText().toString();
-            Sref1nmae = txtgeneratedby.getText().toString();
-            Sref1address = txtgeneratedby.getText().toString();
-            Sref1contact = txtgeneratedby.getText().toString();
-            Sref1relation = txtgeneratedby.getText().toString();
-            Sref2name = txtgeneratedby.getText().toString();
-            Sref2address = txtgeneratedby.getText().toString();
-            Sref2contact = txtgeneratedby.getText().toString();
-            Sref2relation = txtgeneratedby.getText().toString();
+            Scoapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
+            Scoapplicantotherrelationdetails = edtotherrelationship.getText().toString();
+            Sref1nmae = edtreferencename.getText().toString();
+            Sref1address = edtreferenceaddress.getText().toString();
+            Sref1contact = edtreferencecontactno.getText().toString();
+            Sref1relation = edtreferencerelationship.getText().toString();
+            Sref2name = edtreferencename2.getText().toString();
+            Sref2address = edtreferenceaddress2.getText().toString();
+            Sref2contact = edtreferencecontactno2.getText().toString();
+            Sref2relation = edtreferencerelationship2.getText().toString();
+
             Soccupationtype = txtgeneratedby.getText().toString();
-            Scompanytype = txtgeneratedby.getText().toString();
-            Sothercmptype = txtgeneratedby.getText().toString();
-            Stenure = txtgeneratedby.getText().toString();
-            Sworkexp = txtgeneratedby.getText().toString();
-            Sdepartment = txtgeneratedby.getText().toString();
-            Sdesignation = txtgeneratedby.getText().toString();
-            Smonthlygrosssalary = txtgeneratedby.getText().toString();
-            Snetsalary = txtgeneratedby.getText().toString();
-            Sovertime = txtgeneratedby.getText().toString();
-            Sinsentive = txtgeneratedby.getText().toString();
-            Sbonus = txtgeneratedby.getText().toString();
-            Srentalincome = txtgeneratedby.getText().toString();
-            Sagreeincome = txtgeneratedby.getText().toString();
-            Sannualincome = txtgeneratedby.getText().toString();
-            Sotherincome = txtgeneratedby.getText().toString();
-            Ssalarycomesin = txtgeneratedby.getText().toString();
-            Srentalexpence = txtgeneratedby.getText().toString();
-            Scarloan = txtgeneratedby.getText().toString();
-            Scarloanamt = txtgeneratedby.getText().toString();
-            Shomelloan = txtgeneratedby.getText().toString();
-            Shomeloanamt = txtgeneratedby.getText().toString();
-            Ssocietyloan = txtgeneratedby.getText().toString();
-            Ssocietyloanamt = txtgeneratedby.getText().toString();
-            Spersonalloan = txtgeneratedby.getText().toString();
-            Spersonalloanamt = txtgeneratedby.getText().toString();
-            Sotherloan = txtgeneratedby.getText().toString();
-            Sotherloanamt = txtgeneratedby.getText().toString();
-            Ssalarysleep = txtgeneratedby.getText().toString();
-            Sbankstmt = txtgeneratedby.getText().toString();
-            Sform16 = txtgeneratedby.getText().toString();
-            Sappointmentletter =txtgeneratedby.getText().toString();
-            Sconfermationletter = txtgeneratedby.getText().toString();
-            Sexperienceletter = txtgeneratedby.getText().toString();
-            Snrivisa = txtgeneratedby.getText().toString();
-            Snripassport = txtgeneratedby.getText().toString();
-            Snriemployerletter = txtgeneratedby.getText().toString();
-            Snricontractletter = txtgeneratedby.getText().toString();
-            Snripoa = txtgeneratedby.getText().toString();
-            SNREbankacct = txtgeneratedby.getText().toString();
-            Soverseasebankacct = txtgeneratedby.getText().toString();
-            Sitr = txtgeneratedby.getText().toString();
-            Scurrentacctstmt = txtgeneratedby.getText().toString();
-            Ssavingacctstmt = txtgeneratedby.getText().toString();
-            Spartnershipdeed = txtgeneratedby.getText().toString();
-            Sbusinessagmt = txtgeneratedby.getText().toString();
-            Squalificationcirtificate = txtgeneratedby.getText().toString();
-            Spropertytype = txtgeneratedby.getText().toString();
 
-            SpropertyYN = txtgeneratedby.getText().toString();
+            Scompanytype = SPcompanytype.getSelectedItem().toString();
+            Sothercmptype = edtothercompany.getText().toString();
+            Stenure = edttenure.getText().toString();
+            Sworkexp = edtexperience.getText().toString();
+            Sdepartment = edtdepartment.getText().toString();
+            Sdesignation = edtdesignation.getText().toString();
+            Smonthlygrosssalary = edtgrosssalary.getText().toString();
+            Snetsalary = edtnetsalary.getText().toString();
+            Sovertime = edtovertime.getText().toString();
+            Sinsentive = edtincentive.getText().toString();
+            Sbonus = edtbonus.getText().toString();
+            Srentalincome = edtrentalincome.getText().toString();
+            Sagreeincome = edtagrreculturincom.getText().toString();
+            Sannualincome = edtannualincome.getText().toString();
+            Sotherincome = edtotherincome.getText().toString();
+            Ssalarycomesin = SPsalarytype.getSelectedItem().toString();
+            Srentalexpence = edtrental.getText().toString();
+            Scarloan = chcarloan.getText().toString();
+            Scarloanamt = txtCarloan.getText().toString();
+            Shomelloan = chhomloan.getText().toString();
+            Shomeloanamt = txtHomeloan.getText().toString();
+            Ssocietyloan = chsocietyloan.getText().toString();
+            Ssocietyloanamt = txtsocietyloan.getText().toString();
+            Spersonalloan = chpersonalloan.getText().toString();
+            Spersonalloanamt = txtpersonalloan.getText().toString();
+            Sotherloan = chotherloan.getText().toString();
+            Sotherloanamt = edtotheremidetails.getText().toString();
+            Ssalarysleep = chsalarysleep.getText().toString();
+            Sbankstmt = chbankstatement.getText().toString();
+            Sform16 = chformno16.getText().toString();
+            Sappointmentletter = chappointmentletter.getText().toString();
+            Sconfermationletter = chconfermationletter.getText().toString();
+            Sexperienceletter = chexperieceletter.getText().toString();
+            Snrivisa = chvisa.getText().toString();
+            Snripassport = chPassport.getText().toString();
+            Snriemployerletter = chemployerletter.getText().toString();
+            Snricontractletter = chcontractletter.getText().toString();
+            Snripoa = chPOA.getText().toString();
+            SNREbankacct = chbankstatement.getText().toString();
+            Soverseasebankacct = choverbankdetails.getText().toString();
+            Sitr = chitr.getText().toString();
+            Scurrentacctstmt = chcurrentbankstatement.getText().toString();
+            Ssavingacctstmt = chsavingacctstatement.getText().toString();
+            Spartnershipdeed = chpartnersheepdeed.getText().toString();
+            Sbusinessagmt = chbisunessagreement.getText().toString();
+            Squalificationcirtificate = chqualification.getText().toString();
 
-            Sprpin = txtgeneratedby.getText().toString();
-            Sprland = txtgeneratedby.getText().toString();
-            Sprarea = txtgeneratedby.getText().toString();
-            Sprprojectname = txtgeneratedby.getText().toString();
-            Sprpropertytype = txtgeneratedby.getText().toString();
-            Sprloanrequirement = txtgeneratedby.getText().toString();
-            Sprdownpayment = txtgeneratedby.getText().toString();
-            Sprdescriptio = txtgeneratedby.getText().toString();
-            Sbankname = txtgeneratedby.getText().toString();
-            Sbranchname = txtgeneratedby.getText().toString();
-            Sifsccode = txtgeneratedby.getText().toString();
-            Ssalespersone = txtgeneratedby.getText().toString();
+
+            groupAboutproperty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Rproperty = (RadioButton) findViewById(checkedId);
+                    saboutpropety = Rproperty.getText().toString();
+                    if (Rproperty.getText().toString().equalsIgnoreCase("Purchase Propety identified")) {
+
+                    } else if (Rproperty.getText().toString().equalsIgnoreCase("Pre-Sanction")) {
+
+                        Rno.setChecked(true);
+                        Ryes.setChecked(false);
+                    }
+                }
+            });
+            groupAboutpropetyYN.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Ryn = (RadioButton) findViewById(checkedId);
+                    sYN = Ryn.getText().toString();
+
+                }
+            });
+
+
+            if (groupAboutproperty.getCheckedRadioButtonId() != -1) {
+                int id = groupAboutproperty.getCheckedRadioButtonId();
+                View radioButton = groupAboutproperty.findViewById(id);
+                int radioId = groupAboutproperty.indexOfChild(radioButton);
+                RadioButton btn = (RadioButton) groupAboutproperty.getChildAt(radioId);
+                saboutpropety = btn.getText().toString();
+
+                if (saboutpropety.equalsIgnoreCase("Purchase Propety identified")) {
+
+                } else if (saboutpropety.equalsIgnoreCase("Pre-Sanction")) {
+                    Rno.setChecked(true);
+                    Ryes.setChecked(false);
+                }
+            }
+            if (groupAboutpropetyYN.getCheckedRadioButtonId() != -1) {
+                int id = groupAboutpropetyYN.getCheckedRadioButtonId();
+                View radioButton = groupAboutpropetyYN.findViewById(id);
+                int radioId = groupAboutpropetyYN.indexOfChild(radioButton);
+                RadioButton btn = (RadioButton) groupAboutpropetyYN.getChildAt(radioId);
+                sYN = btn.getText().toString();
+
+            }
+
+            Sprpin = edtpropertypin.getText().toString();
+            Sprland = edtpropertylandmark.getText().toString();
+            Sprarea = edtpropertyarea.getText().toString();
+            Sprprojectname = edtprojectname.getText().toString();
+            Sprpropertytype = SPpropertytype.getSelectedItem().toString();
+            Sprloanrequirement = edtloanrequirement.getText().toString();
+            Sprdownpayment = edtdownpayment.getText().toString();
+            Sprdescriptio = edtdescription.getText().toString();
+
+            Sbankname = edtbankname.getText().toString();
+            Sbranchname = edtbranchname.getText().toString();
+            Sifsccode = edtifsccode.getText().toString();
+            Ssalespersone = SPsalesperson.getSelectedItem().toString();
 
             updateLeadDetails(leedsModel);
             Toast.makeText(getApplicationContext(), "Lead Update Successfully", Toast.LENGTH_SHORT).show();
@@ -404,6 +462,10 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         String[] empType = new String[]{"Salaried", "Businessman"};
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
+
+        groupAboutproperty = (RadioGroup) findViewById(R.id.radioGroupaboutproperty);
+        groupAboutpropetyYN = (RadioGroup) findViewById(R.id.radioGroupaboutpropertyYesNo);
+
 
         edtbankname = (EditText) findViewById(R.id.txtbankname1);
         edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
@@ -1131,16 +1193,139 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setCustomerName(cNmae);
+//        leedsModel.setCustomerName(cNmae);
+//        leedsModel.setAddress(cAdress);
+//        leedsModel.setMobileNumber(cContatct);
+//        leedsModel.setDateOfBirth(cBdate);
+//        leedsModel.setPanCardNumber(cPanno);
+//        leedsModel.setLoanType(sploantype);
+//        leedsModel.setOccupation(spoccupation);
+//        leedsModel.setExpectedLoanAmount(cExamount);
+//        leedsModel.setLoanType(cAdress);
+//        leedsModel.setBankName(cBank);
+
+
+
+        leedsModel.setCustomerName(Scusomername);
         leedsModel.setAddress(cAdress);
-        leedsModel.setMobileNumber(cContatct);
+        leedsModel.setMobileNumber(Scontactno);
+        leedsModel.setAlternetMobileNumber(Saltcontact);
         leedsModel.setDateOfBirth(cBdate);
-        leedsModel.setPanCardNumber(cPanno);
-        leedsModel.setLoanType(sploantype);
-        leedsModel.setOccupation(spoccupation);
-        leedsModel.setExpectedLoanAmount(cExamount);
-        leedsModel.setLoanType(cAdress);
-        leedsModel.setBankName(cBank);
+        leedsModel.setOfficeAdderess(Sofficeaddress);
+        leedsModel.setRecidential(Sresidentialtype);
+        leedsModel.setCurrentpin(Scurrentpin);
+        leedsModel.setCurrentarea(Scurrentarea);
+        leedsModel.setCurrentlandmark(Scurrentland);
+        leedsModel.setCurrentstreet(Scurrentstreet);
+        if (SaddressYN.equalsIgnoreCase("No")) {
+            leedsModel.setPincode(Sperpin);
+            leedsModel.setArea(Sperarea);
+            leedsModel.setLandmark(Sperland);
+            leedsModel.setStreet(Sperstreet);
+        } else if (SaddressYN.equalsIgnoreCase("Yes")) {
+            leedsModel.setPincode(Scurrentpin);
+            leedsModel.setArea(Scurrentarea);
+            leedsModel.setLandmark(Scurrentland);
+            leedsModel.setStreet(Scurrentstreet);
+        }
+        leedsModel.setEmail(Semail);
+        leedsModel.setAdharNo(Skycadhar);
+        leedsModel.setCheckpanCardNumber(Skycpan);
+        leedsModel.setPanCardNumber(Akycpannumber);
+        leedsModel.setOtherEducation(Sotheredudetails);
+        leedsModel.setApvoterid(Skycvoterid);
+        leedsModel.setApdrivinglicence(SkycDL);
+        leedsModel.setAppassport(Skycpassport);
+        leedsModel.setProofadhar(Sproofadhar);
+        leedsModel.setProofvoterid(Sproofvoterid);
+        leedsModel.setProofdl(SproofDL);
+        leedsModel.setProofelectricitybill(Sproofelectricitybill);
+        leedsModel.setProofrentagmt(Sproofrentagmt);
+        leedsModel.setProofpassport(Sproofpassport);
+        leedsModel.setProofgevtid(Sproofgovtid);
+        leedsModel.setProofgumasta(Sproofgumasta);
+        leedsModel.setProofcurrentacctstmt(Sproofcurrentacctstmt);
+        leedsModel.setPrapplicantrelation(Scoapplicantrelation);
+        leedsModel.setCoapplicantotherrelation(Scoapplicantotherrelationdetails);
+        leedsModel.setPrreference1name(Sref1nmae);
+        leedsModel.setPrreference1address(Sref1address);
+        leedsModel.setPrreferencecontactno(Sref1contact);
+        leedsModel.setPrreferencerelationship(Sref1relation);
+        leedsModel.setPrreference2name(Sref2name);
+        leedsModel.setPrreference2address(Sref2address);
+        leedsModel.setPrreference2contactno(Sref2contact);
+        leedsModel.setPrreference2relationship(Sref2relation);
+        leedsModel.setEducation(SEducation);
+        leedsModel.setGender(Scustomergender);
+        leedsModel.setAddressYesNo(SaddressYN);
+        leedsModel.setCoApplicantYN(ScoapplicantYN);
+
+
+        leedsModel.setEmployed(Soccupationtype);
+        leedsModel.setCompanytype(Scompanytype);
+        leedsModel.setSalaytype(Ssalarycomesin);
+        leedsModel.setEmicar(Scarloan);
+        leedsModel.setEmihome(Shomelloan);
+        leedsModel.setEmisociety(Ssocietyloan);
+        leedsModel.setEmipersonal(Spersonalloan);
+        leedsModel.setCarLoanAmount(Scarloanamt);
+        leedsModel.setHomeLoanAmount(Shomeloanamt);
+        leedsModel.setSocietyLoanAmount(Ssocietyloanamt);
+        leedsModel.setPersonalLoanAmount(Spersonalloanamt);
+        leedsModel.setEmiother(Sotherloan);
+        leedsModel.setOthercompany(Sothercmptype);
+        leedsModel.setTenure(Stenure);
+        leedsModel.setExperience(Sworkexp);
+        leedsModel.setDepartment(Sdepartment);
+        leedsModel.setDesignation(Sdesignation);
+        leedsModel.setGrosssalary(Smonthlygrosssalary);
+        leedsModel.setNetsalary(Snetsalary);
+        leedsModel.setOvertime(Sovertime);
+        leedsModel.setIncentive(Sinsentive);
+        leedsModel.setBonus(Sbonus);
+        leedsModel.setRentalincome(Srentalincome);
+        leedsModel.setAnnualincome(Sannualincome);
+        leedsModel.setRental(Srentalexpence);
+        leedsModel.setSalarysleep(Ssalarysleep);
+        leedsModel.setBankstmt(Sbankstmt);
+        leedsModel.setForm(Sform16);
+        leedsModel.setAppointmentltr(Sappointmentletter);
+        leedsModel.setConformationltr(Sconfermationletter);
+        leedsModel.setExperinceltr(Sexperienceletter);
+        leedsModel.setVisa(Snrivisa);
+        leedsModel.setPassport(Snripassport);
+        leedsModel.setEmploerltr(Snriemployerletter);
+        leedsModel.setContractltr(Snricontractletter);
+        leedsModel.setPoa(Snripoa);
+        leedsModel.setNrebankstmt(SNREbankacct);
+        leedsModel.setOverseasbankdetail(Soverseasebankacct);
+        leedsModel.setItr(Sitr);
+        leedsModel.setCurrentbankstmt(Scurrentacctstmt);
+        leedsModel.setSavingacctstmt(Ssavingacctstmt);
+        leedsModel.setPartnersheepdeed(Spartnershipdeed);
+        leedsModel.setBusinessagmt(Sbusinessagmt);
+        leedsModel.setQualification(Squalificationcirtificate);
+        leedsModel.setAggrecultureIncome(Sagreeincome);
+        leedsModel.setOtherIncome(Sotherincome);
+        leedsModel.setEmiOtherDetails(Sotherloanamt);
+
+        leedsModel.setPropety(saboutpropety);
+        leedsModel.setPropetyYN(sYN);
+        leedsModel.setExpectedLoanAmount(Sprloanrequirement);
+        leedsModel.setDownpayment(Sprdownpayment);
+
+        leedsModel.setPrpropertypin(Sprpin);
+        leedsModel.setPrpropertylandmark(Sprland);
+        leedsModel.setPrpropertyarea(Sprarea);
+        leedsModel.setPrprojectname(Sprprojectname);
+        leedsModel.setPrdescripiton(Sprdescriptio);
+        leedsModel.setPrpropertytype(Sprpropertytype);
+
+        leedsModel.setBanknName(Sbankname);
+        leedsModel.setBranchName(Sbranchname);
+        leedsModel.setIfscCode(Sifsccode);
+        leedsModel.setSalesPerson(Ssalespersone);
+
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
