@@ -29,6 +29,8 @@ import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Sales_Update_Activity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener {
@@ -216,6 +218,10 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
     RadioGroup groupRadioEmployed;
 
     RadioButton Rcoapplicant, Remployed;
+
+    List<String> salesPerson;
+
+    Button bankSubmit;
 
     @Override
     public void onClick(View v) {
@@ -575,7 +581,7 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.coordinator_updatelead_activity);
+        setContentView(R.layout.sales_updatelead_activity);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
@@ -588,6 +594,8 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
         String[] salesperson = new String[]{"Amit Kumar", "Rahul rathi", "Suraj chavan","sagar mule"};
+
+        salesPerson = new ArrayList<>();
 
         groupAboutproperty = (RadioGroup) findViewById(R.id.radioGroupaboutproperty);
         groupAboutpropetyYN = (RadioGroup) findViewById(R.id.radioGroupaboutpropertyYesNo);
@@ -782,8 +790,16 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         edtpropertyarea = (EditText) findViewById(R.id.txtpropertyarea1);
         edtprojectname = (EditText) findViewById(R.id.txtpropertyprojectname1);
 
+        bankSubmit = (Button) findViewById(R.id.buttonBankSubmit);
+
         getdata();
         btupdate.setOnClickListener(new C08031());
+        bankSubmit.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 //        btverify.setOnClickListener(this);
 //        btcancel.setOnClickListener( this);
     }
@@ -1345,17 +1361,6 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-//        leedsModel.setCustomerName(cNmae);
-//        leedsModel.setAddress(cAdress);
-//        leedsModel.setMobileNumber(cContatct);
-//        leedsModel.setDateOfBirth(cBdate);
-//        leedsModel.setPanCardNumber(cPanno);
-//        leedsModel.setLoanType(sploantype);
-//        leedsModel.setOccupation(spoccupation);
-//        leedsModel.setExpectedLoanAmount(cExamount);
-//        leedsModel.setLoanType(cAdress);
-//        leedsModel.setBankName(cBank);
-
 
         leedsModel.setCustomerName(Scusomername);
         leedsModel.setAddress(cAdress);
@@ -1476,6 +1481,133 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         leedsModel.setBranchName(Sbranchname);
         leedsModel.setIfscCode(Sifsccode);
         leedsModel.setSalesPerson(Ssalespersone);
+
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
+    }
+
+    private void updateLeadDetails2(LeedsModel leedsModel) {
+
+        leedsModel.setCustomerName(Scusomername);
+        leedsModel.setAddress(cAdress);
+        leedsModel.setMobileNumber(Scontactno);
+        leedsModel.setAlternetMobileNumber(Saltcontact);
+        leedsModel.setDateOfBirth(cBdate);
+        leedsModel.setOfficeAdderess(Sofficeaddress);
+        leedsModel.setRecidential(Sresidentialtype);
+        leedsModel.setCurrentpin(Scurrentpin);
+        leedsModel.setCurrentarea(Scurrentarea);
+        leedsModel.setCurrentlandmark(Scurrentland);
+        leedsModel.setCurrentstreet(Scurrentstreet);
+        if (SaddressYN.equalsIgnoreCase("No")) {
+            leedsModel.setPincode(Sperpin);
+            leedsModel.setArea(Sperarea);
+            leedsModel.setLandmark(Sperland);
+            leedsModel.setStreet(Sperstreet);
+        } else if (SaddressYN.equalsIgnoreCase("Yes")) {
+            leedsModel.setPincode(Scurrentpin);
+            leedsModel.setArea(Scurrentarea);
+            leedsModel.setLandmark(Scurrentland);
+            leedsModel.setStreet(Scurrentstreet);
+        }
+        leedsModel.setEmail(Semail);
+        leedsModel.setAdharNo(Skycadhar);
+        leedsModel.setCheckpanCardNumber(Skycpan);
+        leedsModel.setPanCardNumber(Akycpannumber);
+        leedsModel.setOtherEducation(Sotheredudetails);
+        leedsModel.setApvoterid(Skycvoterid);
+        leedsModel.setApdrivinglicence(SkycDL);
+        leedsModel.setAppassport(Skycpassport);
+        leedsModel.setProofadhar(Sproofadhar);
+        leedsModel.setProofvoterid(Sproofvoterid);
+        leedsModel.setProofdl(SproofDL);
+        leedsModel.setProofelectricitybill(Sproofelectricitybill);
+        leedsModel.setProofrentagmt(Sproofrentagmt);
+        leedsModel.setProofpassport(Sproofpassport);
+        leedsModel.setProofgevtid(Sproofgovtid);
+        leedsModel.setProofgumasta(Sproofgumasta);
+        leedsModel.setProofcurrentacctstmt(Sproofcurrentacctstmt);
+        leedsModel.setPrapplicantrelation(Scoapplicantrelation);
+        leedsModel.setCoapplicantotherrelation(Scoapplicantotherrelationdetails);
+        leedsModel.setPrreference1name(Sref1nmae);
+        leedsModel.setPrreference1address(Sref1address);
+        leedsModel.setPrreferencecontactno(Sref1contact);
+        leedsModel.setPrreferencerelationship(Sref1relation);
+        leedsModel.setPrreference2name(Sref2name);
+        leedsModel.setPrreference2address(Sref2address);
+        leedsModel.setPrreference2contactno(Sref2contact);
+        leedsModel.setPrreference2relationship(Sref2relation);
+        leedsModel.setEducation(SEducation);
+        leedsModel.setGender(Scustomergender);
+        leedsModel.setAddressYesNo(SaddressYN);
+        leedsModel.setCoApplicantYN(ScoapplicantYN);
+
+
+        leedsModel.setEmployed(Soccupationtype);
+        leedsModel.setCompanytype(Scompanytype);
+        leedsModel.setSalaytype(Ssalarycomesin);
+        leedsModel.setEmicar(Scarloan);
+        leedsModel.setEmihome(Shomelloan);
+        leedsModel.setEmisociety(Ssocietyloan);
+        leedsModel.setEmipersonal(Spersonalloan);
+        leedsModel.setCarLoanAmount(Scarloanamt);
+        leedsModel.setHomeLoanAmount(Shomeloanamt);
+        leedsModel.setSocietyLoanAmount(Ssocietyloanamt);
+        leedsModel.setPersonalLoanAmount(Spersonalloanamt);
+        leedsModel.setEmiother(Sotherloan);
+        leedsModel.setOthercompany(Sothercmptype);
+        leedsModel.setTenure(Stenure);
+        leedsModel.setExperience(Sworkexp);
+        leedsModel.setDepartment(Sdepartment);
+        leedsModel.setDesignation(Sdesignation);
+        leedsModel.setGrosssalary(Smonthlygrosssalary);
+        leedsModel.setNetsalary(Snetsalary);
+        leedsModel.setOvertime(Sovertime);
+        leedsModel.setIncentive(Sinsentive);
+        leedsModel.setBonus(Sbonus);
+        leedsModel.setRentalincome(Srentalincome);
+        leedsModel.setAnnualincome(Sannualincome);
+        leedsModel.setRental(Srentalexpence);
+        leedsModel.setSalarysleep(Ssalarysleep);
+        leedsModel.setBankstmt(Sbankstmt);
+        leedsModel.setForm(Sform16);
+        leedsModel.setAppointmentltr(Sappointmentletter);
+        leedsModel.setConformationltr(Sconfermationletter);
+        leedsModel.setExperinceltr(Sexperienceletter);
+        leedsModel.setVisa(Snrivisa);
+        leedsModel.setPassport(Snripassport);
+        leedsModel.setEmploerltr(Snriemployerletter);
+        leedsModel.setContractltr(Snricontractletter);
+        leedsModel.setPoa(Snripoa);
+        leedsModel.setNrebankstmt(SNREbankacct);
+        leedsModel.setOverseasbankdetail(Soverseasebankacct);
+        leedsModel.setItr(Sitr);
+        leedsModel.setCurrentbankstmt(Scurrentacctstmt);
+        leedsModel.setSavingacctstmt(Ssavingacctstmt);
+        leedsModel.setPartnersheepdeed(Spartnershipdeed);
+        leedsModel.setBusinessagmt(Sbusinessagmt);
+        leedsModel.setQualification(Squalificationcirtificate);
+        leedsModel.setAggrecultureIncome(Sagreeincome);
+        leedsModel.setOtherIncome(Sotherincome);
+        leedsModel.setEmiOtherDetails(Sotherloanamt);
+
+        leedsModel.setPropety(saboutpropety);
+        leedsModel.setPropetyYN(sYN);
+        leedsModel.setExpectedLoanAmount(Sprloanrequirement);
+        leedsModel.setDownpayment(Sprdownpayment);
+
+        leedsModel.setPrpropertypin(Sprpin);
+        leedsModel.setPrpropertylandmark(Sprland);
+        leedsModel.setPrpropertyarea(Sprarea);
+        leedsModel.setPrprojectname(Sprprojectname);
+        leedsModel.setPrdescripiton(Sprdescriptio);
+        leedsModel.setPrpropertytype(Sprpropertytype);
+
+        leedsModel.setBanknName(Sbankname);
+        leedsModel.setBranchName(Sbranchname);
+        leedsModel.setIfscCode(Sifsccode);
+        leedsModel.setSalesPerson(Ssalespersone);
+
+        leedsModel.setStatus("BANK_SUBMITED");
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
