@@ -15,7 +15,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +29,9 @@ import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
-import java.util.Collections;
 import java.util.Map;
 
-public class Coordinator_Update_Activity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener {
+public class Sales_Update_Activity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener {
     Spinner CoapplicantRalationship;
     RadioButton REducation;
     RadioButton RYN;
@@ -570,7 +568,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
         public void onError(Object object) {
             progressDialogClass.dismissDialog();
-            Context context = Coordinator_Update_Activity.this;
+            Context context = Sales_Update_Activity.this;
             Utility.showLongMessage(context, context.getString(R.string.server_error));
         }
     }

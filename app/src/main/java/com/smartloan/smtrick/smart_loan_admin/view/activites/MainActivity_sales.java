@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
@@ -32,6 +34,9 @@ public class MainActivity_sales extends AppCompatActivity
 
         NavigationView.OnNavigationItemSelectedListener {
 
+    private NavigationView navigationView;
+    TextView user_name,user_contact,user_email;
+
     private AppSharedPreference appSharedPreference;
 
 
@@ -42,6 +47,8 @@ public class MainActivity_sales extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        appSharedPreference = new AppSharedPreference(getApplicationContext());
+
         // NOTE : Just remove the fab button
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -49,17 +56,35 @@ public class MainActivity_sales extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //NOTE:  Checks first item in the navigation drawer initially
         navigationView.setCheckedItem(R.id.Leads);
-
+        updateNavigationHeader();
         //NOTE:  Open fragment1 initially.
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, new Sales_Fragment_leads());
         ft.commit();
 
+    }
+
+    public void updateNavigationHeader() {
+        try {
+            View header = navigationView.getHeaderView(0);
+
+            user_name = (TextView) header.findViewById(R.id.sales_name);
+            user_contact = (TextView)  header.findViewById(R.id.contact);
+            user_email = (TextView)  header.findViewById(R.id.email);
+
+            String name = appSharedPreference.getUserName();
+            String mobile = appSharedPreference.getMobileNo();
+            String email = appSharedPreference.getEmaiId();
+            user_email.setText(email);
+            user_contact.setText(mobile);
+            user_name.setText(name);
+
+        }catch (Exception e){}
     }
 
     @Override

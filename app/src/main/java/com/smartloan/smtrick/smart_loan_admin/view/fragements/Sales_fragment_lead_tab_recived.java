@@ -23,6 +23,7 @@ import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl
 import com.smartloan.smtrick.smart_loan_admin.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.activites.Coordinator_Update_Activity;
+import com.smartloan.smtrick.smart_loan_admin.view.activites.Sales_Update_Activity;
 import com.smartloan.smtrick.smart_loan_admin.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
@@ -42,6 +43,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
+    String name;
     ArrayList<LeedsModel> leedsModelArrayList;
 
     @Override
@@ -58,6 +60,8 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
+
+             name = appSharedPreference.getUserName();
             getteLeed();
         }
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
@@ -69,7 +73,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 
     private void getteLeed() {
         progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-        leedRepository.readLeedsByStatus(STATUS_SALES_SUBMITED, new CallBack() {
+        leedRepository.readLeedsByName(name, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -93,7 +97,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
-                Intent intent = new Intent(getActivity(),Coordinator_Update_Activity.class);
+                Intent intent = new Intent(getActivity(), Sales_Update_Activity.class);
                 intent.putExtra(LEED_MODEL, leedsModel);
                 startActivity(intent);
             }

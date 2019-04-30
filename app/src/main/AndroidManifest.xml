@@ -73,6 +73,10 @@
         <activity
             android:name=".view.activites.TL_Updatelead_property_Details_Activity"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".view.activites.Sales_Update_Activity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

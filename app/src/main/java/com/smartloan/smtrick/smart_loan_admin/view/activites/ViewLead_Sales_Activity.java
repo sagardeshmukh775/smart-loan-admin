@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
@@ -24,6 +25,7 @@ import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
+
 import java.util.Map;
 
 public class ViewLead_Sales_Activity extends AppCompatActivity implements OnItemSelectedListener {
@@ -77,35 +79,35 @@ public class ViewLead_Sales_Activity extends AppCompatActivity implements OnItem
         }
 
         public void onClick(View v) {
-            ViewLead_Sales_Activity viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cNmae = viewLead_Sales_Activity.etcname.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cAdress = viewLead_Sales_Activity.etaddress.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cPadress = viewLead_Sales_Activity.etpropaddress.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cOffaddress = viewLead_Sales_Activity.etoffaddress.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cContatct = viewLead_Sales_Activity.etcontatct.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cAltcontatct = viewLead_Sales_Activity.etalternatecontact.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cBdate = viewLead_Sales_Activity.etbirthdate.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cPanno = viewLead_Sales_Activity.etpanno.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cAdharno = viewLead_Sales_Activity.etadharno.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cIncome = viewLead_Sales_Activity.etincome.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cExamount = viewLead_Sales_Activity.etexammount.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cDescreption = viewLead_Sales_Activity.etdescription.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.cBank = viewLead_Sales_Activity.etbank.getText().toString();
-            viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.updateLeadDetails(viewLead_Sales_Activity.leedsModel);
-            Toast.makeText(ViewLead_Sales_Activity.this, "Lead Update Successfully", 0).show();
+
+            cNmae = etcname.getText().toString();
+
+            cAdress = etaddress.getText().toString();
+
+            cPadress = etpropaddress.getText().toString();
+
+            cOffaddress = etoffaddress.getText().toString();
+
+            cContatct = etcontatct.getText().toString();
+
+            cAltcontatct = etalternatecontact.getText().toString();
+
+            cBdate = etbirthdate.getText().toString();
+
+            cPanno = etpanno.getText().toString();
+
+            cAdharno = etadharno.getText().toString();
+
+            cIncome = etincome.getText().toString();
+
+            cExamount = etexammount.getText().toString();
+
+            cDescreption = etdescription.getText().toString();
+
+            cBank = etbank.getText().toString();
+
+            updateLeadDetails(leedsModel);
+            Toast.makeText(getApplicationContext(), "Lead Update Successfully", 0).show();
         }
     }
 
@@ -115,8 +117,7 @@ public class ViewLead_Sales_Activity extends AppCompatActivity implements OnItem
         }
 
         public void onClick(View v) {
-            ViewLead_Sales_Activity viewLead_Sales_Activity = ViewLead_Sales_Activity.this;
-            viewLead_Sales_Activity.setLeedStatus(viewLead_Sales_Activity.leedsModel);
+            setLeedStatus(leedsModel);
         }
     }
 
@@ -126,8 +127,8 @@ public class ViewLead_Sales_Activity extends AppCompatActivity implements OnItem
         }
 
         public void onClick(View v) {
-            ViewLead_Sales_Activity.this.startActivity(new Intent(ViewLead_Sales_Activity.this, MainActivity_sales.class));
-            ViewLead_Sales_Activity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            startActivity(new Intent(getApplicationContext(), MainActivity_sales.class));
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 
@@ -137,13 +138,13 @@ public class ViewLead_Sales_Activity extends AppCompatActivity implements OnItem
         }
 
         public void onSuccess(Object object) {
-            Toast.makeText(ViewLead_Sales_Activity.this, "Lead Successfully Submited to Bank", 0).show();
-            ViewLead_Sales_Activity.this.progressDialogClass.dismissDialog();
+            Toast.makeText(getApplicationContext(), "Lead Successfully Submited to Bank", 0).show();
+            progressDialogClass.dismissDialog();
         }
 
         public void onError(Object object) {
-            ViewLead_Sales_Activity.this.progressDialogClass.dismissDialog();
-            Context context = ViewLead_Sales_Activity.this;
+            progressDialogClass.dismissDialog();
+            Context context = getApplicationContext();
             Utility.showLongMessage(context, context.getString(R.string.server_error));
         }
     }

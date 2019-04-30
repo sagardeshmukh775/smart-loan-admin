@@ -24,7 +24,9 @@ public interface LeedRepository {
 
     void readLeedsByStatus(final String status, final CallBack callBack);
 
-    void readLeedsByID(final String id, final CallBack callBack);
+    void readLeedsByID(final String name, final CallBack callBack);
+
+    void readLeedsByName(final String id, final CallBack callBack);
 
 
     void createInvoice(final LeedsModel leedsModel, final CallBack callback);

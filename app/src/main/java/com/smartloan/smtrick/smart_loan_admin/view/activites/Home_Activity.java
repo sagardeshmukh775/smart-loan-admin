@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
@@ -27,6 +28,8 @@ public class Home_Activity extends AppCompatActivity
         implements
         OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+
+    TextView user_name,user_contact,user_email;
     private AppSharedPreference appSharedPreference;
 
 
@@ -42,6 +45,8 @@ public class Home_Activity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        appSharedPreference = new AppSharedPreference(getApplicationContext());
         // get our list view
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFrame, new LeedsTabsFragment());
