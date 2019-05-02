@@ -19,10 +19,12 @@ import com.smartloan.smtrick.smart_loan_admin.models.User;
 import com.smartloan.smtrick.smart_loan_admin.repository.FirebaseTemplateRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.EMAIL_POSTFIX;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.SALES;
 
 
 public class UserRepositoryImpl extends FirebaseTemplateRepository implements UserRepository {
@@ -30,6 +32,10 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
 
     public UserRepositoryImpl(final Activity activity) {
         _activity = activity;
+    }
+
+    public UserRepositoryImpl() {
+
     }
     /********************************************** Firebase Call ***************************************************/
     /**
@@ -302,6 +308,37 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 callback.onError(databaseError);
+            }
+        });
+    }
+
+    @Override
+    public void readsalesperson(String role, final CallBack callBack) {
+        final Query query = Constant.USER_TABLE_REF.orderByChild("role").equalTo(role);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<User> UserModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            User User1 = suggestionSnapshot.getValue(User.class);
+
+                            if (User1.getRole().equalsIgnoreCase("SALES")) {
+                                UserModelArrayList.add(User1);
+                            }
+                        }
+                        callBack.onSuccess(UserModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
             }
         });
     }

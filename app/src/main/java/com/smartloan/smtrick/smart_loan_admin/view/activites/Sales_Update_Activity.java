@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -22,16 +23,24 @@ import android.widget.Toast;
 import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin.models.User;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_BANK_SUBMITED;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_VERIFIED;
 
 public class Sales_Update_Activity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener {
     Spinner CoapplicantRalationship;
@@ -117,6 +126,7 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
     String lGenby;
     EditText landmark;
     LeedRepository leedRepository;
+    UserRepository userRepository;
     LeedsModel leedsModel;
     EditText pin;
     ProgressDialogClass progressDialogClass;
@@ -220,6 +230,7 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
     RadioButton Rcoapplicant, Remployed;
 
     List<String> salesPerson;
+    List<User> userlist;
 
     Button bankSubmit;
 
@@ -547,6 +558,12 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         }
 
         public void onClick(View v) {
+
+            if (TextUtils.isEmpty(Sbankname)) {
+                edtbankname.setError("Required");
+                Toast.makeText(getApplicationContext(), "Enter Bank Name!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             setLeedStatus(leedsModel);
         }
     }
@@ -587,15 +604,18 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
         progressDialogClass = new ProgressDialogClass(this);
         leedRepository = new LeedRepositoryImpl();
+        userRepository = new UserRepositoryImpl();
         appSharedPreference = new AppSharedPreference(this);
 
         String[] loanType = new String[]{"HL", "LAP"};
         String[] empType = new String[]{"Salaried", "Businessman"};
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
-        String[] salesperson = new String[]{"Amit Kumar", "Rahul rathi", "Suraj chavan","sagar mule"};
+     //   String[] salesperson = new String[]{"soma dornal", "vikas test user", "sagar mule"};
 
         salesPerson = new ArrayList<>();
+
+
 
         groupAboutproperty = (RadioGroup) findViewById(R.id.radioGroupaboutproperty);
         groupAboutpropetyYN = (RadioGroup) findViewById(R.id.radioGroupaboutpropertyYesNo);
@@ -612,15 +632,14 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
         edtifsccode = (EditText) findViewById(R.id.txtifsccode1);
         SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
-        ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, salesperson);
-        spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
+//        ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(this, R.layout.sppinner_layout_listitem,
+//                salesPerson);
+//        spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//        SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
 
         spinloantype = (Spinner) findViewById(R.id.sploantype1);
 
         btupdate = (Button) findViewById(R.id.buttonupdate);
-//        btverify = (Button) findViewById(R.id.buttonverify);
-//        btcancel = (Button) findViewById(R.id.buttoncancel);
 
         txtleadid = (TextView) findViewById(R.id.textheader);
 
@@ -698,7 +717,8 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         txtleedtime = (TextView) findViewById(R.id.txtleedtime1);
         txtgeneratedby = (TextView) findViewById(R.id.txtagentid1);
 
-        ArrayAdapter<String> spinnerArrayAdapterloantype = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, loanType);
+        ArrayAdapter<String> spinnerArrayAdapterloantype = new ArrayAdapter(this, R.layout.sppinner_layout_listitem,
+                loanType);
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinloantype.setAdapter(spinnerArrayAdapterloantype);
         spinloantype.setOnItemSelectedListener(this);
@@ -707,13 +727,14 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         //INCOME
         String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
         String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
-//        String[] EMI = new String[]{"Car", "Home Loan", "Sociaty Loan/Employer Loan", "Other"};
 
         Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
         Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
+
         SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
         SPcompanytype.setOnItemSelectedListener(this);
-        SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
+        SPsalarytype = (Spinner) findViewById(R.id.spsalarytype);
+
         edttenure = (EditText) findViewById(R.id.txttenure1);
         edtexperience = (EditText) findViewById(R.id.txtexperience1);
         edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
@@ -762,7 +783,8 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         ArrayAdapter<String> spinnerArrayAdaptercompanyType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, CompanyType);
         spinnerArrayAdaptercompanyType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         SPcompanytype.setAdapter(spinnerArrayAdaptercompanyType);
-        ArrayAdapter<String> spinnerArrayAdapterSalaryType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, SalaryType);
+        ArrayAdapter<String> spinnerArrayAdapterSalaryType = new ArrayAdapter(this, R.layout.sppinner_layout_listitem,
+                SalaryType);
         spinnerArrayAdapterSalaryType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
 
@@ -792,16 +814,43 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
 
         bankSubmit = (Button) findViewById(R.id.buttonBankSubmit);
 
-        getdata();
+        getSalesperson();
+
+//        getdata();
+
         btupdate.setOnClickListener(new C08031());
-        bankSubmit.setOnClickListener(new OnClickListener() {
+        bankSubmit.setOnClickListener(new C08042());
+
+    }
+
+    private void getSalesperson() {
+
+        userRepository.readsalesperson(SALES, new CallBack() {
             @Override
-            public void onClick(View view) {
+            public void onSuccess(Object object) {
+                if (object != null) {
+
+                    userlist = (ArrayList<User>) object;
+                    for (int i = 0; i < userlist.size(); i++) {
+                        salesPerson.add(userlist.get(i).getUserName());
+
+                    }
+
+                    ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(getApplicationContext(),
+                            R.layout.sppinner_layout_listitem, salesPerson);
+                    spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
+
+                    getdata();
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
 
             }
         });
-//        btverify.setOnClickListener(this);
-//        btcancel.setOnClickListener( this);
+
     }
 
     private void getdata() {
@@ -881,8 +930,6 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
             String prreference2address = leedsModel.getPrreference2address();
             String prreference2contactno = leedsModel.getPrreference2contactno();
             String prreference2relationship = leedsModel.getPrreference2relationship();
-
-            //   String permanataddress = leedsModel.getPeraddress();
 
             if (cname != null) {
                 etcname.setText(cname);
@@ -1126,13 +1173,13 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
             String ifsccode = leedsModel.getIfscCode();
             String salsepersone = leedsModel.getSalesPerson();
 
-            if (bankname != null){
+            if (bankname != null) {
                 edtbankname.setText(bankname);
             }
-            if (branchname != null){
+            if (branchname != null) {
                 edtbranchname.setText(branchname);
             }
-            if (ifsccode != null){
+            if (ifsccode != null) {
                 edtifsccode.setText(ifsccode);
             }
             ArrayAdapter myAdap0 = (ArrayAdapter) SPsalesperson.getAdapter();
@@ -1194,7 +1241,10 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
             if (sotherincome != null) {
                 edtotherincome.setText(sotherincome);
             }
-            SPsalarytype.setSelection(((ArrayAdapter) SPsalarytype.getAdapter()).getPosition(sSalarytype));
+
+            ArrayAdapter myAdap3 = (ArrayAdapter) SPsalarytype.getAdapter();
+            SPsalarytype.setSelection(myAdap3.getPosition(sSalarytype));
+   //         SPsalarytype.setSelection(((ArrayAdapter) SPsalarytype.getAdapter()).getPosition(sSalarytype));
 
             if (sRental != null) {
                 edtrental.setText(sRental);
@@ -1356,7 +1406,7 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
     }
 
     private void setLeedStatus(LeedsModel leedsModel) {
-        leedsModel.setStatus(Constant.STATUS_SALES_SUBMITED);
+        leedsModel.setStatus(Constant.STATUS_BANK_SUBMITED);
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
     }
 
@@ -1485,132 +1535,7 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
-    private void updateLeadDetails2(LeedsModel leedsModel) {
 
-        leedsModel.setCustomerName(Scusomername);
-        leedsModel.setAddress(cAdress);
-        leedsModel.setMobileNumber(Scontactno);
-        leedsModel.setAlternetMobileNumber(Saltcontact);
-        leedsModel.setDateOfBirth(cBdate);
-        leedsModel.setOfficeAdderess(Sofficeaddress);
-        leedsModel.setRecidential(Sresidentialtype);
-        leedsModel.setCurrentpin(Scurrentpin);
-        leedsModel.setCurrentarea(Scurrentarea);
-        leedsModel.setCurrentlandmark(Scurrentland);
-        leedsModel.setCurrentstreet(Scurrentstreet);
-        if (SaddressYN.equalsIgnoreCase("No")) {
-            leedsModel.setPincode(Sperpin);
-            leedsModel.setArea(Sperarea);
-            leedsModel.setLandmark(Sperland);
-            leedsModel.setStreet(Sperstreet);
-        } else if (SaddressYN.equalsIgnoreCase("Yes")) {
-            leedsModel.setPincode(Scurrentpin);
-            leedsModel.setArea(Scurrentarea);
-            leedsModel.setLandmark(Scurrentland);
-            leedsModel.setStreet(Scurrentstreet);
-        }
-        leedsModel.setEmail(Semail);
-        leedsModel.setAdharNo(Skycadhar);
-        leedsModel.setCheckpanCardNumber(Skycpan);
-        leedsModel.setPanCardNumber(Akycpannumber);
-        leedsModel.setOtherEducation(Sotheredudetails);
-        leedsModel.setApvoterid(Skycvoterid);
-        leedsModel.setApdrivinglicence(SkycDL);
-        leedsModel.setAppassport(Skycpassport);
-        leedsModel.setProofadhar(Sproofadhar);
-        leedsModel.setProofvoterid(Sproofvoterid);
-        leedsModel.setProofdl(SproofDL);
-        leedsModel.setProofelectricitybill(Sproofelectricitybill);
-        leedsModel.setProofrentagmt(Sproofrentagmt);
-        leedsModel.setProofpassport(Sproofpassport);
-        leedsModel.setProofgevtid(Sproofgovtid);
-        leedsModel.setProofgumasta(Sproofgumasta);
-        leedsModel.setProofcurrentacctstmt(Sproofcurrentacctstmt);
-        leedsModel.setPrapplicantrelation(Scoapplicantrelation);
-        leedsModel.setCoapplicantotherrelation(Scoapplicantotherrelationdetails);
-        leedsModel.setPrreference1name(Sref1nmae);
-        leedsModel.setPrreference1address(Sref1address);
-        leedsModel.setPrreferencecontactno(Sref1contact);
-        leedsModel.setPrreferencerelationship(Sref1relation);
-        leedsModel.setPrreference2name(Sref2name);
-        leedsModel.setPrreference2address(Sref2address);
-        leedsModel.setPrreference2contactno(Sref2contact);
-        leedsModel.setPrreference2relationship(Sref2relation);
-        leedsModel.setEducation(SEducation);
-        leedsModel.setGender(Scustomergender);
-        leedsModel.setAddressYesNo(SaddressYN);
-        leedsModel.setCoApplicantYN(ScoapplicantYN);
-
-
-        leedsModel.setEmployed(Soccupationtype);
-        leedsModel.setCompanytype(Scompanytype);
-        leedsModel.setSalaytype(Ssalarycomesin);
-        leedsModel.setEmicar(Scarloan);
-        leedsModel.setEmihome(Shomelloan);
-        leedsModel.setEmisociety(Ssocietyloan);
-        leedsModel.setEmipersonal(Spersonalloan);
-        leedsModel.setCarLoanAmount(Scarloanamt);
-        leedsModel.setHomeLoanAmount(Shomeloanamt);
-        leedsModel.setSocietyLoanAmount(Ssocietyloanamt);
-        leedsModel.setPersonalLoanAmount(Spersonalloanamt);
-        leedsModel.setEmiother(Sotherloan);
-        leedsModel.setOthercompany(Sothercmptype);
-        leedsModel.setTenure(Stenure);
-        leedsModel.setExperience(Sworkexp);
-        leedsModel.setDepartment(Sdepartment);
-        leedsModel.setDesignation(Sdesignation);
-        leedsModel.setGrosssalary(Smonthlygrosssalary);
-        leedsModel.setNetsalary(Snetsalary);
-        leedsModel.setOvertime(Sovertime);
-        leedsModel.setIncentive(Sinsentive);
-        leedsModel.setBonus(Sbonus);
-        leedsModel.setRentalincome(Srentalincome);
-        leedsModel.setAnnualincome(Sannualincome);
-        leedsModel.setRental(Srentalexpence);
-        leedsModel.setSalarysleep(Ssalarysleep);
-        leedsModel.setBankstmt(Sbankstmt);
-        leedsModel.setForm(Sform16);
-        leedsModel.setAppointmentltr(Sappointmentletter);
-        leedsModel.setConformationltr(Sconfermationletter);
-        leedsModel.setExperinceltr(Sexperienceletter);
-        leedsModel.setVisa(Snrivisa);
-        leedsModel.setPassport(Snripassport);
-        leedsModel.setEmploerltr(Snriemployerletter);
-        leedsModel.setContractltr(Snricontractletter);
-        leedsModel.setPoa(Snripoa);
-        leedsModel.setNrebankstmt(SNREbankacct);
-        leedsModel.setOverseasbankdetail(Soverseasebankacct);
-        leedsModel.setItr(Sitr);
-        leedsModel.setCurrentbankstmt(Scurrentacctstmt);
-        leedsModel.setSavingacctstmt(Ssavingacctstmt);
-        leedsModel.setPartnersheepdeed(Spartnershipdeed);
-        leedsModel.setBusinessagmt(Sbusinessagmt);
-        leedsModel.setQualification(Squalificationcirtificate);
-        leedsModel.setAggrecultureIncome(Sagreeincome);
-        leedsModel.setOtherIncome(Sotherincome);
-        leedsModel.setEmiOtherDetails(Sotherloanamt);
-
-        leedsModel.setPropety(saboutpropety);
-        leedsModel.setPropetyYN(sYN);
-        leedsModel.setExpectedLoanAmount(Sprloanrequirement);
-        leedsModel.setDownpayment(Sprdownpayment);
-
-        leedsModel.setPrpropertypin(Sprpin);
-        leedsModel.setPrpropertylandmark(Sprland);
-        leedsModel.setPrpropertyarea(Sprarea);
-        leedsModel.setPrprojectname(Sprprojectname);
-        leedsModel.setPrdescripiton(Sprdescriptio);
-        leedsModel.setPrpropertytype(Sprpropertytype);
-
-        leedsModel.setBanknName(Sbankname);
-        leedsModel.setBranchName(Sbranchname);
-        leedsModel.setIfscCode(Sifsccode);
-        leedsModel.setSalesPerson(Ssalespersone);
-
-        leedsModel.setStatus("BANK_SUBMITED");
-
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
-    }
 
     private void updateLeed(String leedId, Map leedsMap) {
         progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
@@ -1623,4 +1548,29 @@ public class Sales_Update_Activity extends AppCompatActivity implements OnItemSe
 
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
+
+//    private void getSalesperson() {
+//        UserRepository.readsalesperson(SALES, new CallBack() {
+//            @Override
+//            public void onSuccess(Object object) {
+//                if (object != null) {
+//
+//                    userlist = (ArrayList<User>) object;
+//                    for (int i = 0; i < userlist.size(); i++) {
+//                        salesPerson.add(userlist.get(i).getUserName());
+//
+//                    }
+//
+//                    ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(getApplicationContext(), R.layout.sppinner_layout_listitem, SalesPerson);
+//                    spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//                    SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//
+//            }
+//        });
+//    }
 }

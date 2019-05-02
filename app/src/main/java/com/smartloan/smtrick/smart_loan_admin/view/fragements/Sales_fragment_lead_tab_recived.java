@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.LEED_MODEL;
 import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_SALES_SUBMITED;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_VERIFIED;
 
 public class Sales_fragment_lead_tab_recived extends Fragment {
 
@@ -45,6 +46,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
     long fromDate, toDate;
     String name;
     ArrayList<LeedsModel> leedsModelArrayList;
+    ArrayList<LeedsModel> leedsModelArrayList1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
+
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
                     serAdapter(leedsModelArrayList);
                 }

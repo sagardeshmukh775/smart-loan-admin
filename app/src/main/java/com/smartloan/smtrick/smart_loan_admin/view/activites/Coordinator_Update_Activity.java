@@ -24,14 +24,21 @@ import com.smartloan.smtrick.smart_loan_admin.R;
 import com.smartloan.smtrick.smart_loan_admin.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin.models.User;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.dialog.ProgressDialogClass;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.SALES;
 
 public class Coordinator_Update_Activity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener {
     Spinner CoapplicantRalationship;
@@ -117,6 +124,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     String lGenby;
     EditText landmark;
     LeedRepository leedRepository;
+    UserRepository UserRepository;
     LeedsModel leedsModel;
     EditText pin;
     ProgressDialogClass progressDialogClass;
@@ -218,6 +226,8 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     RadioGroup groupRadioEmployed;
 
     RadioButton Rcoapplicant, Remployed;
+    List<String> SalesPerson;
+    List<User> userlist;
 
     @Override
     public void onClick(View v) {
@@ -470,7 +480,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
                 Squalificationcirtificate = chqualification.getText().toString();
             }
 
-
             groupAboutproperty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -493,7 +502,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
                 }
             });
-
 
             if (groupAboutproperty.getCheckedRadioButtonId() != -1) {
                 int id = groupAboutproperty.getCheckedRadioButtonId();
@@ -583,13 +591,17 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
         progressDialogClass = new ProgressDialogClass(this);
         leedRepository = new LeedRepositoryImpl();
+        UserRepository = new UserRepositoryImpl();
         appSharedPreference = new AppSharedPreference(this);
 
         String[] loanType = new String[]{"HL", "LAP"};
         String[] empType = new String[]{"Salaried", "Businessman"};
         String[] recidential = new String[]{"Owned", "Rented", "Allotted by Employer", "Family"};
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
-        String[] salesperson = new String[]{"Amit Kumar", "Rahul rathi", "Suraj chavan","sagar mule"};
+        String[] salesperson = new String[]{"Amit Kumar", "Rahul rathi", "Suraj chavan", "sagar mule"};
+
+        SalesPerson = new ArrayList<>();
+        getSalesperson();
 
         groupAboutproperty = (RadioGroup) findViewById(R.id.radioGroupaboutproperty);
         groupAboutpropetyYN = (RadioGroup) findViewById(R.id.radioGroupaboutpropertyYesNo);
@@ -601,20 +613,14 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
         groupRadioEmployed = (RadioGroup) findViewById(R.id.radioOccupation);
 
-
         edtbankname = (EditText) findViewById(R.id.txtbankname1);
         edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
         edtifsccode = (EditText) findViewById(R.id.txtifsccode1);
         SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
-        ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(this, R.layout.sppinner_layout_listitem, salesperson);
-        spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
 
         spinloantype = (Spinner) findViewById(R.id.sploantype1);
 
         btupdate = (Button) findViewById(R.id.buttonupdate);
-//        btverify = (Button) findViewById(R.id.buttonverify);
-//        btcancel = (Button) findViewById(R.id.buttoncancel);
 
         txtleadid = (TextView) findViewById(R.id.textheader);
 
@@ -701,13 +707,12 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         //INCOME
         String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
         String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
-//        String[] EMI = new String[]{"Car", "Home Loan", "Sociaty Loan/Employer Loan", "Other"};
 
         Rsalaried = (RadioButton) findViewById(R.id.radioSalaried);
         Rselfemployed = (RadioButton) findViewById(R.id.radioselfEmployed);
         SPcompanytype = (Spinner) findViewById(R.id.spinnercompanytype);
         SPcompanytype.setOnItemSelectedListener(this);
-        SPsalarytype = (Spinner) findViewById(R.id.sploantype1);
+        SPsalarytype = (Spinner) findViewById(R.id.spsalarytype);
         edttenure = (EditText) findViewById(R.id.txttenure1);
         edtexperience = (EditText) findViewById(R.id.txtexperience1);
         edtdepartment = (EditText) findViewById(R.id.txtdepartment1);
@@ -789,6 +794,7 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 //        btverify.setOnClickListener(this);
 //        btcancel.setOnClickListener( this);
     }
+
 
     private void getdata() {
         try {
@@ -1112,13 +1118,13 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             String ifsccode = leedsModel.getIfscCode();
             String salsepersone = leedsModel.getSalesPerson();
 
-            if (bankname != null){
+            if (bankname != null) {
                 edtbankname.setText(bankname);
             }
-            if (branchname != null){
+            if (branchname != null) {
                 edtbranchname.setText(branchname);
             }
-            if (ifsccode != null){
+            if (ifsccode != null) {
                 edtifsccode.setText(ifsccode);
             }
             ArrayAdapter myAdap0 = (ArrayAdapter) SPsalesperson.getAdapter();
@@ -1485,6 +1491,31 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     private void updateLeed(String leedId, Map leedsMap) {
         progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
         leedRepository.updateLeed(leedId, leedsMap, new C09234());
+    }
+
+    private void getSalesperson() {
+        UserRepository.readsalesperson(SALES, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+
+                    userlist = (ArrayList<User>) object;
+                    for (int i = 0; i < userlist.size(); i++) {
+                        SalesPerson.add(userlist.get(i).getUserName());
+
+                    }
+
+                    ArrayAdapter<String> spinnerArrayAdaptersalesperson = new ArrayAdapter(getApplicationContext(), R.layout.sppinner_layout_listitem, SalesPerson);
+                    spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
     }
 
     public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {

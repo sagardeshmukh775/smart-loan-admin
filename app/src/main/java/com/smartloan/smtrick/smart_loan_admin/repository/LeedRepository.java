@@ -28,7 +28,6 @@ public interface LeedRepository {
 
     void readLeedsByName(final String id, final CallBack callBack);
 
-
     void createInvoice(final LeedsModel leedsModel, final CallBack callback);
 
 }

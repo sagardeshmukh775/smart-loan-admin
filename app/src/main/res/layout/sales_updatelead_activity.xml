@@ -2237,7 +2237,7 @@
                                 android:textSize="14.0dip" />
 
                             <Spinner
-                                android:id="@id/sploantype1"
+                                android:id="@+id/spsalarytype"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5.0dip"
@@ -3193,7 +3193,7 @@
                                 android:layout_marginTop="5.0dip"
                                 android:layout_marginBottom="5.0dip"
                                 android:padding="10.0dip"
-                                android:text="Bank Name::"
+                                android:text="Bank Name:"
                                 android:textColor="@color/darkgraycolor"
                                 android:textSize="14.0dip" />
 
@@ -3289,6 +3289,7 @@
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"
+                            android:orientation="vertical"
                             android:weightSum="100.0">
 
                             <Button
@@ -3308,9 +3309,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="33.0"
                                 android:background="@color/btnRequest"
-                                android:text="UPDATE"
+                                android:text="Submit To Bank"
                                 android:textColor="#ffffffff"
                                 android:textSize="16.0sp"
+                                android:layout_marginTop="4dp"
                                 android:textStyle="bold" />
 
                             <!--<Button-->

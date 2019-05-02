@@ -8,11 +8,15 @@ import com.smartloan.smtrick.smart_loan_admin.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedModel;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin.models.LeedsModelCo;
+import com.smartloan.smtrick.smart_loan_admin.models.User;
 import com.smartloan.smtrick.smart_loan_admin.repository.FirebaseTemplateRepository;
 import com.smartloan.smtrick.smart_loan_admin.repository.LeedRepository;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.STATUS_VERIFIED;
 
 public class LeedRepositoryImpl extends FirebaseTemplateRepository implements LeedRepository {
     @Override
@@ -239,6 +243,8 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
                         ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             LeedsModel leedsModel = suggestionSnapshot.getValue(LeedsModel.class);
+
+                            if (leedsModel.getStatus().equalsIgnoreCase(STATUS_VERIFIED))
                             leedsModelArrayList.add(leedsModel);
                         }
                         callBack.onSuccess(leedsModelArrayList);
@@ -254,4 +260,6 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
             }
         });
     }
+
+
 }
