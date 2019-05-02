@@ -616,8 +616,8 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         edtbankname = (EditText) findViewById(R.id.txtbankname1);
         edtbranchname = (EditText) findViewById(R.id.txtbranchname1);
         edtifsccode = (EditText) findViewById(R.id.txtifsccode1);
-        SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
 
+        SPsalesperson = (Spinner) findViewById(R.id.txtsalespersonname1);
         spinloantype = (Spinner) findViewById(R.id.sploantype1);
 
         btupdate = (Button) findViewById(R.id.buttonupdate);
@@ -702,7 +702,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinloantype.setAdapter(spinnerArrayAdapterloantype);
         spinloantype.setOnItemSelectedListener(this);
-
 
         //INCOME
         String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
@@ -791,8 +790,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
 
         getdata();
         btupdate.setOnClickListener(new C08031());
-//        btverify.setOnClickListener(this);
-//        btcancel.setOnClickListener( this);
     }
 
 
@@ -873,8 +870,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
             String prreference2address = leedsModel.getPrreference2address();
             String prreference2contactno = leedsModel.getPrreference2contactno();
             String prreference2relationship = leedsModel.getPrreference2relationship();
-
-            //   String permanataddress = leedsModel.getPeraddress();
 
             if (cname != null) {
                 etcname.setText(cname);
@@ -1353,17 +1348,6 @@ public class Coordinator_Update_Activity extends AppCompatActivity implements On
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-//        leedsModel.setCustomerName(cNmae);
-//        leedsModel.setAddress(cAdress);
-//        leedsModel.setMobileNumber(cContatct);
-//        leedsModel.setDateOfBirth(cBdate);
-//        leedsModel.setPanCardNumber(cPanno);
-//        leedsModel.setLoanType(sploantype);
-//        leedsModel.setOccupation(spoccupation);
-//        leedsModel.setExpectedLoanAmount(cExamount);
-//        leedsModel.setLoanType(cAdress);
-//        leedsModel.setBankName(cBank);
-
 
         leedsModel.setCustomerName(Scusomername);
         leedsModel.setAddress(cAdress);
