@@ -55,7 +55,8 @@ public class Upload_Image_Activity extends AppCompatActivity implements View.OnC
 
     private static final int REQUEST_PICK_IMAGE = 1002;
     private static final String YOUR_SERVER_KEY = "AAAACaJGpDg:APA91bGx2DKBqQdf8rhESuBr0ZF17u7hxWOtoEZktHNWMEta70bBG5Knpx7l43HNZg9_0TuJnWLmDaPLbQ5LelKB_HPTaMfb-L6PRqbjqgor4ssXVe6sVftEon7tIJrs3DVs7LIB56mp";
-    private static final String FCM_TOKEN =  FirebaseInstanceId.getInstance().getToken(); ;
+    private static final String FCM_TOKEN = FirebaseInstanceId.getInstance().getToken();
+    ;
     Bitmap imageBitmap;
     String image;
 
@@ -102,12 +103,10 @@ public class Upload_Image_Activity extends AppCompatActivity implements View.OnC
 //          Boolean per = isStoragePermissionGranted();
 //        spinnervalue();
 //        subspinnervalue();
-            buttonChoose.setOnClickListener(this);
-            buttonUpload.setOnClickListener(this);
+        buttonChoose.setOnClickListener(this);
+        buttonUpload.setOnClickListener(this);
 
     }
-
-
 
 
     @Override
