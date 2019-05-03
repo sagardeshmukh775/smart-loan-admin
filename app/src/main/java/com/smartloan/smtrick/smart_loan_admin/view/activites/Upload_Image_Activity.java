@@ -271,7 +271,8 @@ public class Upload_Image_Activity extends AppCompatActivity implements View.OnC
 
                                     String mainitem = mainspinner.getSelectedItem().toString();
                                     String subnitem = Subspinner.getSelectedItem().toString();
-                                    Upload upload = new Upload(Idescription.getText().toString().trim(), editTextName.getText().toString().trim(), downloadurl);
+                                    Upload upload = new Upload(Idescription.getText().toString().trim(),
+                                            editTextName.getText().toString().trim(), downloadurl);
 
                                     String uploadId = mDatabase.push().getKey();
                                     mDatabase.child(uploadId).setValue(upload);
