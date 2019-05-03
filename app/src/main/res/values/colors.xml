@@ -30,5 +30,6 @@
     <color name="lightgraycolor">#0ee67a2c</color>
 
     <color name="btn_logut_bg">#ff6861</color>
+    <item type="color" name="black_color">#000000</item>
 
 </resources>
