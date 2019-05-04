@@ -123,6 +123,16 @@ public class AppSharedPreference {
         return (sharedPref.getString(PROFILE_LARGE_IMAGE, ""));
     }
 
+    public void setUserProfileImages(String imagePath) {
+        editor = sharedPref.edit();
+        if (imagePath != null) {
+            editor.putString(PROFILE_SMALL_IMAGE, imagePath);
+            editor.putString(PROFILE_LARGE_IMAGE, imagePath);
+        }
+        editor.apply();
+    }
+
+
     public String getUserId() { return (sharedPref.getString(USER_ID, "2iXUwm71jKbi0yy3594PTOTHgbR2")); }
 
     public String getCreatedDateTime() {

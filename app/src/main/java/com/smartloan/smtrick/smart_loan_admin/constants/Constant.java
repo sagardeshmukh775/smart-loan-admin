@@ -3,6 +3,8 @@ package com.smartloan.smtrick.smart_loan_admin.constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 
@@ -61,4 +63,21 @@ public class Constant {
 
     public static final String DATABASE_PATH_UPLOADS = "Advertise";
     public static final String STORAGE_PATH_UPLOADS = "NewImage/";
+
+    public static final int REQUEST_CODE = 101;
+    public static final int RESULT_CODE = 201;
+    public static final String STORAGE_PATH = "STORAGE_PATH";
+    public static final String BITMAP_IMG = "BITMAP_IMG";
+    public static final String LEED_ID = "LEED_ID";
+    public static final String IMAGE_COUNT = "IMAGE_COUNT";
+    public static final String TOTAL_IMAGE_COUNT = "TOTAL_IMAGE_COUNT";
+
+    public static final FirebaseStorage STORAGE = FirebaseStorage.getInstance();
+    public static final StorageReference STORAGE_REFERENCE = STORAGE.getReference();
+
+    public static final String DOCUMENTS_PATH = "images/documents";
+    public static final String CUSROMER_PROFILE_PATH = "images/customer";
+
+    public static final String USER_PROFILE_PATH = "images/user";
+    public static final String IMAGE_URI_LIST = "IMAGE_URI_LIST";
 }

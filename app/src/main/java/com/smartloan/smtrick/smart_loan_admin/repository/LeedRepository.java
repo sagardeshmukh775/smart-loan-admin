@@ -30,4 +30,6 @@ public interface LeedRepository {
 
     void createInvoice(final LeedsModel leedsModel, final CallBack callback);
 
+    void updateLeedDocuments(final String leedId, final Map leedMap, final CallBack callback);
+
 }

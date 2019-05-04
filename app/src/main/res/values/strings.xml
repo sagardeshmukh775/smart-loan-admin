@@ -80,5 +80,11 @@
     <string name="please_wait">Please wait</string>
     <string name="registration_fail">Registration fail, please try again.</string>
 
+    <string name="file_uploading_progress">Uploading in progress</string>
+    <string name="notification_message">Don\'t close the app.</string>
+
+    <string name="file_uploading_complited">Uploading to server done </string>
+    <string name="file_uploading_complited_message">Total uploaded files :&#160; </string>
+    <string name="data_updation_fails_message">Data updation failed, please try again.</string>
 
 </resources>

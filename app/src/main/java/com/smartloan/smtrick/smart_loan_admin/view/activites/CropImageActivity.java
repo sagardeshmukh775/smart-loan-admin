@@ -105,7 +105,7 @@ public class CropImageActivity extends AppCompatActivity implements CropImageVie
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_crop) {
-            mCropImageView.getCroppedImageAsync(mCropImageView.getCropShape(), 0, 0);
+        //    mCropImageView.getCroppedImageAsync(mCropImageView.getCropShape(), 0, 0);
             return true;
         } else if (id == R.id.action_cancel) {
             cropFailed();

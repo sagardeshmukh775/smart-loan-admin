@@ -1,7 +1,12 @@
 package com.smartloan.smtrick.smart_loan_admin.view.activites;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,13 +17,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin.R;
+import com.smartloan.smtrick.smart_loan_admin.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin.preferences.AppSharedPreference;
+import com.smartloan.smtrick.smart_loan_admin.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Coordinator_Fragment_lead;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Fragment_Calculator;
 import com.smartloan.smtrick.smart_loan_admin.view.fragements.Telecaller_fragment_Reports;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import static com.smartloan.smtrick.smart_loan_admin.constants.Constant.REQUEST_CODE;
 
 public class MainActivity_coordinator extends AppCompatActivity
 
@@ -31,6 +45,8 @@ public class MainActivity_coordinator extends AppCompatActivity
          Fragment_Calculator.OnFragmentInteractionListener,
 
         NavigationView.OnNavigationItemSelectedListener {
+
+    private NavigationView navigationView;
 
     private AppSharedPreference appSharedPreference;
 
@@ -48,11 +64,17 @@ public class MainActivity_coordinator extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //NOTE:  Checks first item in the navigation drawer initially
         navigationView.setCheckedItem(R.id.Leads);
+        updateNavigationHeader();
+
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//
+//        //NOTE:  Checks first item in the navigation drawer initially
+//        navigationView.setCheckedItem(R.id.Leads);
 
         //NOTE:  Open fragment1 initially.
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -141,5 +163,65 @@ public class MainActivity_coordinator extends AppCompatActivity
     public void onFragmentInteraction(String title) {
         // NOTE:  Code to replace the toolbar title based current visible fragment
         getSupportActionBar().setTitle(title);
+    }
+
+
+    public void updateNavigationHeader() {
+        try {
+            View header = navigationView.getHeaderView(0);
+            TextView textViewAgentId = header.findViewById(R.id.textView_agent_id);
+            TextView textViewUserName = header.findViewById(R.id.textView_user_name);
+            TextView textViewEmailId = header.findViewById(R.id.text_view_email);
+            TextView textViewMobileNumber = header.findViewById(R.id.textView_contact);
+            final ImageView imageViewProfile = header.findViewById(R.id.imageView6);
+            final ImageView ivProfileLayout = header.findViewById(R.id.ivProfileLayout);
+//            textViewUserName.setText(appSharedPreference.getUserName());
+//            textViewEmailId.setText(appSharedPreference.getEmaiId());
+//            textViewAgentId.setText(appSharedPreference.getAgeniId());
+//            textViewMobileNumber.setText(appSharedPreference.getMobileNo());
+//            if (!Utility.isEmptyOrNull(appSharedPreference.getProfileLargeImage())) {
+//                Picasso.with(this).load(appSharedPreference.getProfileLargeImage()).resize(200, 200).centerCrop().placeholder(R.drawable.imagelogo).into(imageViewProfile);
+//                Picasso.with(this)
+//                        .load(appSharedPreference.getProfileLargeImage())
+//                        .into(imageViewProfile, new Callback() {
+//                            @Override
+//                            public void onSuccess() {
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Bitmap innerBitmap = ((BitmapDrawable) imageViewProfile.getDrawable()).getBitmap();
+//                                        ivProfileLayout.setImageBitmap(Utility.blur(MainActivity_coordinator.this, innerBitmap));
+//                                    }
+//                                }, 100);
+//                            }
+//
+//                            @Override
+//                            public void onError() {
+//                            }
+//                        });
+//            } else {
+//                imageViewProfile.setImageResource(R.drawable.imagelogo);
+//                ivProfileLayout.setImageResource(0);
+//            }
+            imageViewProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity_coordinator.this, UpdateProfileActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
+            });
+        } catch (Exception ex) {
+            ExceptionUtil.logException(ex);
+        }
+    }
+
+
+    public class ImageUploadReceiver extends BroadcastReceiver {
+        public static final String PROCESS_RESPONSE = "com.smartloan.smtrick.smart_loan.intent.action.UPDATE_USER_DATA";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateNavigationHeader();
+        }
     }
 }

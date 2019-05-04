@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_view_profile"
+                android:id="@+id/image_view_profile1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/imagelogo"
@@ -39,7 +39,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image_view_profile"
+                android:layout_below="@+id/image_view_profile1"
                 android:orientation="vertical">
 
                 <TextView
