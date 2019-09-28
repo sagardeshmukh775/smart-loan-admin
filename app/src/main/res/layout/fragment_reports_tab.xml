@@ -17,7 +17,10 @@
             android:overScrollMode="ifContentScrolls"
             app:layout_collapseMode="parallax"
             app:layout_scrollFlags="snap"
+            app:tabIndicatorColor="@color/white"
             app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
+            android:layout_marginTop="20dp"
             app:tabMode="fixed" />
 
     </android.support.design.widget.AppBarLayout>
@@ -26,6 +29,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

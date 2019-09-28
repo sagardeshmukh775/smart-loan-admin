@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartloan.smtrick.smart_loan_admin">
+    package="com.smartloan.smtrick.smart_loan_admin_new">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +13,34 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activites.TL_Updatelead_Coapplicant_Detail_Activity"></activity>
+
+        <activity
+            android:name=".view.activites.Accountant_Bills_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Commission_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Expences_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Calculator_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".view.activites.MainActivity_Telecaller_new" />
+        <activity android:name=".view.activites.MainActivity_Coorinator_new" />
+        <activity android:name=".view.activites.MainActivity_Sales_new" />
+        <activity
+            android:name=".view.activites.Activity_Home_Main"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.View_Bank_Customers_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.View_Leed_Details_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.TL_Updatelead_Coapplicant_Detail_Activity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activites.SplashScreen"
             android:windowSoftInputMode="stateHidden">
@@ -33,7 +64,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activites.AccountantHomeActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".view.activites.AccountantUpdateLeedsActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -73,18 +104,30 @@
         <activity
             android:name=".view.activites.TL_Updatelead_property_Details_Activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.Sales_Update_Activity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".view.activites.UpdateProfileActivity"
             android:windowSoftInputMode="stateHidden" />
-
+        <activity
+            android:name=".view.activites.Coordinator_View_Leed_Details_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Bank_Submit_Update_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Update_User_Activity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activites.ImagePickerActivity"
+            android:label="Pick Image" />
+        <activity
+            android:name=".view.activites.CropImageActivity"
+            android:label="Crop Image" />
     </application>
 
 </manifest>

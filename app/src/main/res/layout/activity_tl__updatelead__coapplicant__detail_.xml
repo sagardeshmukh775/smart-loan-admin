@@ -574,7 +574,7 @@
                         <RelativeLayout
                             android:id="@+id/layoutpermenantaddress"
                             android:layout_width="match_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_height="0dp"
                             android:layout_below="@+id/layoutcurrentstreet"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
@@ -609,7 +609,7 @@
                             android:id="@+id/adress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/layoutpermenantaddress"
+                            android:layout_below="@id/layoutcurrentstreet"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="14dp"
                             android:text="If Same as above: "
@@ -621,7 +621,7 @@
                             android:id="@+id/layoutaddress1"
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:layout_below="@+id/layoutpermenantaddress"
+                            android:layout_below="@+id/layoutcurrentstreet"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="30dp"
                             android:layout_marginTop="14dp"
@@ -650,12 +650,44 @@
 
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutperaddress"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutaddress1"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtperaddress"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="Permanent Address:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <EditText
+                                android:id="@+id/txtperaddress1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtperaddress"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layoutpin"
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:layout_below="@+id/layoutaddress1"
+                            android:layout_below="@+id/layoutperaddress"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
 

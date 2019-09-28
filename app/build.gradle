@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.smartloan.smtrick.smart_loan_admin"
+        applicationId "com.smartloan.smtrick.smart_loan_admin_new"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
@@ -53,5 +53,12 @@ dependencies {
     implementation project(':cropper')
     implementation 'com.sangcomz:FishBun:0.8.6'
     implementation 'com.github.bumptech.glide:glide:4.5.0'
+
+    configurations.matching { it.name == '_internal_aapt2_binary' }.all { config ->
+        config.resolutionStrategy.eachDependency { details ->
+            details.useVersion("3.3.2-5309881")
+        }
+    }
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@id/layouttop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/hederbackground"
-        android:gravity="center_horizontal">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TextView
-            android:id="@id/textheader"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:padding="10.0dip"
-            android:text=""
-            android:textColor="#ffffffff"
-            android:textSize="18.0sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+    <!--<RelativeLayout-->
+        <!--android:id="@id/layouttop"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/hederbackground"-->
+        <!--android:gravity="center_horizontal">-->
+
+        <!--<TextView-->
+            <!--android:id="@id/textheader"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:padding="10.0dip"-->
+            <!--android:text=""-->
+            <!--android:textColor="#ffffffff"-->
+            <!--android:textSize="18.0sp"-->
+            <!--android:textStyle="bold" />-->
+    <!--</RelativeLayout>-->
 
     <LinearLayout
         android:id="@id/mainlayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/layouttop"
+        android:layout_below="@id/toolbar"
         android:layout_gravity="left"
         android:orientation="vertical"
         android:padding="5.0dip"
@@ -356,6 +365,7 @@
                                 android:inputType="date"
                                 android:padding="10.0dip"
                                 android:text=""
+                                android:focusable="false"
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
@@ -2239,9 +2249,9 @@
                             <Spinner
                                 android:id="@+id/spsalarytype"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
+                                android:layout_marginBottom="7.0dip"
                                 android:layout_toRightOf="@id/txtloantype"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10.0dip"
@@ -2330,7 +2340,7 @@
                                     android:gravity="center_vertical">
 
                                     <CheckBox
-                                       android:id="@+id/checkboxCarloan"
+                                        android:id="@+id/checkboxCarloan"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5.0dip"
@@ -3144,61 +3154,47 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+
+
                         <RelativeLayout
-                            android:id="@+id/layoutsalesperson"
+                            android:id="@+id/layoutbankname"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_below="@id/layotDescription"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
 
-                            <TextView
-                              android:id="@+id/txtsalespersonname"
+                            <!--<TextView-->
+                            <!--android:id="@+id/txtbankname"-->
+                            <!--android:layout_width="150.0dip"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="5.0dip"-->
+                            <!--android:layout_marginBottom="5.0dip"-->
+                            <!--android:padding="10.0dip"-->
+                            <!--android:text="Bank Name:"-->
+                            <!--android:textColor="@color/darkgraycolor"-->
+                            <!--android:textSize="14.0dip" />-->
+                            <Button
+                                android:id="@+id/txtbankname"
                                 android:layout_width="150.0dip"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
+                                android:layout_marginTop="1.0dip"
                                 android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Sales Person:"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
+                                android:text="Bank"
+                                android:textSize="14.0dip"/>
 
-                            <Spinner
-                                android:id="@+id/txtsalespersonname1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/txtsalespersonname"
-                                android:background="@drawable/edittextanimation"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                           android:id="@+id/layoutbankname"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_below="@id/layoutsalesperson"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                               android:id="@+id/txtbankname"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Bank Name::"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
+                            <!--<Spinner-->
+                                <!--android:id="@+id/spinner2"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_below="@+id/txtbankname"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:paddingRight="0dp"-->
+                                <!--android:layout_marginTop="5dp"-->
+                                <!--/>-->
 
                             <EditText
-                               android:id="@+id/txtbankname1"
+                                android:id="@+id/txtbankname1"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5.0dip"
@@ -3213,7 +3209,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                           android:id="@+id/layoutbranchname"
+                            android:id="@+id/layoutbranchname"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_below="@id/layoutbankname"
@@ -3280,12 +3276,141 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutappointment"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutifsccode"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/txtappointment"-->
+                                <!--android:layout_width="150.0dip"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="5.0dip"-->
+                                <!--android:layout_marginBottom="5.0dip"-->
+                                <!--android:padding="10.0dip"-->
+                                <!--android:text="Appointment Date:"-->
+                                <!--android:textColor="@color/darkgraycolor"-->
+                                <!--android:textSize="14.0dip" />-->
+                            <Button
+                                android:id="@+id/txtappointment"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:textSize="14.0dip"
+                                android:text="Appointment"/>
+
+                            <EditText
+                                android:id="@+id/txtappointment1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtappointment"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/layoutchecklist"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutappointment"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <Button
+                                android:id="@+id/txtchecklist"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:textSize="14.0dip"
+                                android:text="CheckList"/>
+
+                            <EditText
+                                android:id="@+id/txtchecklist1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtchecklist"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layoutsalesperson"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutchecklist"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/txtsalespersonname"-->
+                            <!--android:layout_width="150.0dip"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="5.0dip"-->
+                            <!--android:layout_marginBottom="5.0dip"-->
+                            <!--android:padding="10.0dip"-->
+                            <!--android:text="Sales Person:"-->
+                            <!--android:textColor="@color/darkgraycolor"-->
+                            <!--android:textSize="14.0dip" />-->
+                            <Button
+                                android:id="@+id/txtsalespersonname"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:text="Sales Person"
+                                android:textSize="14.0dip"/>
+
+                            <EditText
+                                android:id="@+id/txtsalespersonname1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtsalespersonname"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                            <!--<Spinner-->
+                            <!--android:id="@+id/txtsalespersonname1"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="5.0dip"-->
+                            <!--android:layout_marginBottom="5.0dip"-->
+                            <!--android:layout_toRightOf="@id/txtsalespersonname"-->
+                            <!--android:background="@drawable/edittextanimation"-->
+                            <!--android:padding="10.0dip"-->
+                            <!--android:text=""-->
+                            <!--android:textColor="@color/mainTextColor"-->
+                            <!--android:textSize="14.0dip" />-->
+
+                        </RelativeLayout>
 
                         <LinearLayout
                             android:id="@id/layoutbuttons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/layoutifsccode"
+                            android:layout_below="@id/layoutsalesperson"
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"
@@ -3303,30 +3428,30 @@
                                 android:textStyle="bold" />
 
                             <!--<Button-->
-                                <!--android:id="@id/buttonverify"-->
-                                <!--android:layout_width="fill_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginLeft="1.0sp"-->
-                                <!--android:layout_weight="33.0"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:hint="Enter Notice Description"-->
-                                <!--android:text="SUBMIT"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textSize="16.0sp"-->
-                                <!--android:textStyle="bold" />-->
+                            <!--android:id="@id/buttonverify"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="SUBMIT"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
 
                             <!--<Button-->
-                                <!--android:id="@id/buttoncancel"-->
-                                <!--android:layout_width="fill_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginLeft="1.0sp"-->
-                                <!--android:layout_weight="33.0"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:hint="Enter Notice Description"-->
-                                <!--android:text="CANCEL"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textSize="16.0sp"-->
-                                <!--android:textStyle="bold" />-->
+                            <!--android:id="@id/buttoncancel"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="CANCEL"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>

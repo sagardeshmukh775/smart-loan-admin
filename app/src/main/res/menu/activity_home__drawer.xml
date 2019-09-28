@@ -46,6 +46,22 @@
             android:textSize="22sp"
             android:textStyle="normal|bold"
             android:title="Settings" />
+
+        <item
+            android:id="@+id/Bank"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Add Banks" />
+
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/logout"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Logout" />
     </group>
 
 </menu>

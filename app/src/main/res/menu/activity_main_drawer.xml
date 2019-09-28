@@ -31,6 +31,14 @@
             android:textStyle="normal|bold"/>
 
         <item
+            android:id="@+id/Banks"
+            android:icon="@drawable/calculatoricon"
+            android:title="Banks"
+            android:textSize="22sp"
+            android:textColor="@color/textcolor"
+            android:textStyle="normal|bold"/>
+
+        <item
             android:id="@+id/Logout"
             android:icon="@drawable/calculatoricon"
             android:title="Logout"
