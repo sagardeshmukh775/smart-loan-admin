@@ -3963,12 +3963,47 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutappointmentreschedule"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutappointment"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtappointmentreschedule"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="Reschedule Reason:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <TextView
+                                android:id="@+id/txtappointmentreschedule1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtappointmentreschedule"
+                                android:background="@null"
+                                android:editable="false"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
 
                         <LinearLayout
                             android:id="@id/layoutbuttons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/layoutappointment"
+                            android:layout_below="@id/layoutappointmentreschedule"
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"

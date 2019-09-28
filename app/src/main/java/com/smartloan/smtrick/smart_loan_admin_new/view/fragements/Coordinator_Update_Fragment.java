@@ -53,6 +53,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepository
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_coordinator;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
@@ -99,7 +100,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
     LeedsModel leedsModel;
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
-//    CheckListAdapter checkdapter;
+    CheckListAdapter checkdapter;
     ArrayList<Bank> leedsArraylist;
     ArrayList<CheckList> checklistArraylist;
     ArrayList<User> userArraylist;
@@ -683,12 +684,12 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                         if (object != null) {
                             checklistArraylist = (ArrayList<CheckList>) object;
 
-//                            checkdapter = new CheckListAdapter(getContext(), checklistArraylist,checked);
-//                            //adding adapter to recyclerview
-//                            checklist.setAdapter(checkdapter);
-//                            // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
-//                            checklist.setHasFixedSize(true);
-//                            checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+                            checkdapter = new CheckListAdapter(getContext(), checklistArraylist,checked);
+                            //adding adapter to recyclerview
+                            checklist.setAdapter(checkdapter);
+                            // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                            checklist.setHasFixedSize(true);
+                            checklist.setLayoutManager(new LinearLayoutManager(getContext()));
 
                         }
 

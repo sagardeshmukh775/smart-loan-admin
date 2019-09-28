@@ -80,7 +80,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     //PROPERTY
     TextView SPpropertytype;
     TextView edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea,
-            edtprojectname, edtbankname, edtbranchname, edtifsccode, edtappointment;
+            edtprojectname, edtbankname, edtbranchname, edtifsccode, edtappointment,edtappointmentreschedule;
 
     List<String> SalesPerson;
     List<User> userlist;
@@ -98,7 +98,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             layoutLoanrequirement, layoutDownpayment, layotDescription, layoutsalesperson, layoutreferencefullname, layoutreferenceaddress, layoutreferencecontactno,
             layoutreferencerelationhsip, layoutreference2fullname, layoutreference2address, layoutreference2contactno, layoutreference2relationhsip,
             layoutCompanytype, layoutpermenantaddress, layoutotherrelationship,
-            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment,Layoutsalesperson;
+            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment,lauoutappointmentreschedule,Layoutsalesperson;
 
     RelativeLayout layoutMECarloan, layoutMEhomeloan, layoutMEsocietyloan, layoutMEpersonalloan, layoutMEotherlon,
             layoutkycadaar, layoutkycpan, layoutkycvoterid, layoutkycdl, layoutkycpassport;
@@ -137,6 +137,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
         edtifsccode = (TextView) view.findViewById(R.id.txtifsccode1);
         edtappointment = (TextView) view.findViewById(R.id.txtappointment1);
+        edtappointmentreschedule = (TextView) view.findViewById(R.id.txtappointmentreschedule1);
 
         SPsalesperson = (TextView) view.findViewById(R.id.txtsalespersonname1);
         spinloantype = (TextView) view.findViewById(R.id.sploantypevalue);
@@ -832,6 +833,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             String branchname = leedsModel.getBranchName();
             String ifsccode = leedsModel.getIfscCode();
             String appointment = leedsModel.getAppointment();
+        String appointmentreschedule = leedsModel.getAppointreschedualreason();
             String salsepersone = leedsModel.getSalesPerson();
 
             if (bankname != null && !bankname.equalsIgnoreCase("")) {
@@ -854,6 +856,11 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             } else {
                 HideFields(layoutappointment);
             }
+        if (appointmentreschedule != null && !appointmentreschedule.equalsIgnoreCase("")) {
+            edtappointmentreschedule.setText(appointmentreschedule);
+        } else {
+            HideFields(lauoutappointmentreschedule);
+        }
             try {
                 if (salsepersone != null  && !salsepersone.equalsIgnoreCase("")) {
                     SPsalesperson.setText(salsepersone);
