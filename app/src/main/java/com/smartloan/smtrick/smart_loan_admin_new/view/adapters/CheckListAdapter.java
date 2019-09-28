@@ -54,23 +54,23 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListViewHolder> 
             else
                 holder.checklistAdapterLayoutBinding.checklistitem.setText(getString(R.string.na));
 
-            holder.checklistAdapterLayoutBinding.checklistitem.setOnCheckedChangeListener(
-                    new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked){
-                                checkedArrayList.add(leedModel.getRule());
-                                Toast.makeText(holder.checklistAdapterLayoutBinding.checklistitem.getContext(),
-                                        String.valueOf(checkedArrayList.size()), Toast.LENGTH_SHORT).show();
-                            }else if (!isChecked){
-                                int i = checkedArrayList.indexOf(leedModel.getRule());
-                                checkedArrayList.remove(i);
-                                Toast.makeText(holder.checklistAdapterLayoutBinding.checklistitem.getContext(),
-                                        String.valueOf(checkedArrayList.size()), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-            );
+//            holder.checklistAdapterLayoutBinding.checklistitem.setOnCheckedChangeListener(
+//                    new CompoundButton.OnCheckedChangeListener() {
+//                        @Override
+//                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                            if (isChecked){
+//                                checkedArrayList.add(leedModel.getRule());
+//                                Toast.makeText(holder.checklistAdapterLayoutBinding.checklistitem.getContext(),
+//                                        String.valueOf(checkedArrayList.size()), Toast.LENGTH_SHORT).show();
+//                            }else if (!isChecked){
+//                                int i = checkedArrayList.indexOf(leedModel.getRule());
+//                                checkedArrayList.remove(i);
+//                                Toast.makeText(holder.checklistAdapterLayoutBinding.checklistitem.getContext(),
+//                                        String.valueOf(checkedArrayList.size()), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+//            );
 
         } catch (Exception e) {
             e.printStackTrace();

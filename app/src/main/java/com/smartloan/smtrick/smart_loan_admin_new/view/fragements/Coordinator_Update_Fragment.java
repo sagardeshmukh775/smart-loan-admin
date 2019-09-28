@@ -661,6 +661,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 dialog1.setContentView(R.layout.customdialogboxchecklist);
 
                 final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
+                final EditText edtchecklist = (EditText) dialog1.findViewById(R.id.txtaddchecklistitem);
+                final Button btnaddchecklistitem = (Button) dialog1.findViewById(R.id.buttonadditem);
                 String Rule = leedsModel.getOccupation();
                 String ruletype = null;
                 if (Rule.equalsIgnoreCase("Salaried")) {
@@ -697,6 +699,14 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
 
                     @Override
                     public void onError(Object object) {
+
+                    }
+                });
+
+                btnaddchecklistitem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String item = edtchecklist.getText().toString();
 
                     }
                 });
