@@ -344,6 +344,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         layoutbranchname = (RelativeLayout) view.findViewById(R.id.layoutbranchname);
         layoutifsccode = (RelativeLayout) view.findViewById(R.id.layoutifsccode);
         layoutappointment = (RelativeLayout) view.findViewById(R.id.layoutappointment);
+        lauoutappointmentreschedule = (RelativeLayout) view.findViewById(R.id.layoutappointmentreschedule);
         Layoutsalesperson = (RelativeLayout) view.findViewById(R.id.layoutsalesperson);
 
         layoutreferenceaddress = (RelativeLayout) view.findViewById(R.id.layoutreferenceaddress);
