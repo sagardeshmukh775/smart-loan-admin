@@ -72,6 +72,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
 
     private ArrayAdapter aAdapter;
 
+    ArrayList<String> checkedListitems = new ArrayList<>();
     Spinner CoapplicantRalationship;
     Spinner Recidential;
     RadioButton REducation, RYN, RcoapplicantNO, RcoapplicantYES, Rfemale, Rg, Rgender, Rmale, Rno, Rother, Rpg, Rpro,
@@ -654,7 +655,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
 
         btnchecklist.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
                 final Dialog dialog1 = new Dialog(getContext());
                 dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
@@ -663,6 +664,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
                 final EditText edtchecklist = (EditText) dialog1.findViewById(R.id.txtaddchecklistitem);
                 final Button btnaddchecklistitem = (Button) dialog1.findViewById(R.id.buttonadditem);
+                final Button btnsubmitchecklist = (Button) dialog1.findViewById(R.id.buttonaddchecklist);
                 String Rule = leedsModel.getOccupation();
                 String ruletype = null;
                 if (Rule.equalsIgnoreCase("Salaried")) {
@@ -685,8 +687,11 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                         ArrayList<String> check = new ArrayList<>();
                         if (object != null) {
                             checklistArraylist = (ArrayList<CheckList>) object;
+                            for (CheckList checked1: checklistArraylist) {
+                                checked.add(checked1.getRule());
+                            }
 
-                            checkdapter = new CheckListAdapter(getContext(), checklistArraylist,checked);
+                            checkdapter = new CheckListAdapter(getContext(), checked);
                             //adding adapter to recyclerview
                             checklist.setAdapter(checkdapter);
                             // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
@@ -706,8 +711,331 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 btnaddchecklistitem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String item = edtchecklist.getText().toString();
 
+                        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+                        String item = edtchecklist.getText().toString();
+                        checked.add(item);
+
+                        checkdapter = new CheckListAdapter(getContext(), checked);
+                        //adding adapter to recyclerview
+                        checklist.setAdapter(checkdapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        checklist.setHasFixedSize(true);
+                        checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        edtchecklist.setText("");
+                        progressDialogClass.dismissDialog();
+
+                    }
+                });
+
+                btnsubmitchecklist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Update();
+                    }
+
+                    private void Update() {
+
+
+                        Sagenname = txtgeneratedby.getText().toString();
+                        Sloantype = spinloantype.getSelectedItem().toString();
+                        Scusomername = etcname.getText().toString();
+
+                        if (groupRadioGender.getCheckedRadioButtonId() != -1) {
+                            RadioButton btn = (RadioButton) groupRadioGender.getChildAt(groupRadioGender.indexOfChild(groupRadioGender.findViewById(groupRadioGender.getCheckedRadioButtonId())));
+                            Scustomergender = btn.getText().toString();
+                        }
+                        groupRadioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                Rgender = (RadioButton) view.findViewById(checkedId);
+                                Scustomergender = Rgender.getText().toString();
+                            }
+                        });
+
+                        Sbirthdate = etbirthdate.getText().toString();
+                        Scontactno = etcontatct.getText().toString();
+                        Saltcontact = etalternatecontact.getText().toString();
+                        Semail = etcEmail.getText().toString();
+
+                        //  SEducation = txtgeneratedby.getText().toString();
+                        if (groupRadioEducation.getCheckedRadioButtonId() != -1) {
+                            RadioButton btn = (RadioButton) groupRadioEducation.getChildAt(groupRadioEducation.indexOfChild(groupRadioEducation.findViewById(groupRadioEducation.getCheckedRadioButtonId())));
+                            SEducation = btn.getText().toString();
+                        }
+                        groupRadioEducation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                REducation = (RadioButton) view.findViewById(checkedId);
+                                SEducation = REducation.getText().toString();
+                            }
+                        });
+
+                        Sotheredudetails = etother.getText().toString();
+                        Scurrentpin = Currentpin.getText().toString();
+                        Scurrentland = Currentlandmark.getText().toString();
+                        Scurrentarea = Currentarea.getText().toString();
+                        Scurrentstreet = Currentstreet.getText().toString();
+
+                        //  SaddressYN = txtgeneratedby.getText().toString();
+                        if (groupRadio.getCheckedRadioButtonId() != -1) {
+                            RadioButton btn = (RadioButton) groupRadio.getChildAt(groupRadio.indexOfChild(groupRadio.findViewById(groupRadio.getCheckedRadioButtonId())));
+                            SaddressYN = btn.getText().toString();
+                        }
+                        groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                RYN = (RadioButton) view.findViewById(checkedId);
+
+                                SaddressYN = RYN.getText().toString();
+                            }
+                        });
+
+                        Sperpin = pin.getText().toString();
+                        Sperland = landmark.getText().toString();
+                        Sperarea = area.getText().toString();
+                        Sperstreet = street.getText().toString();
+                        Sresidentialtype = Recidential.getSelectedItem().toString();
+                        Sofficeaddress = etoffaddress.getText().toString();
+                        if (chAdhar.isChecked()) {
+                            Skycadhar = chAdhar.getText().toString();
+                        }
+                        if (chPAN.isChecked()) {
+                            Skycpan = chPAN.getText().toString();
+                        }
+                        if (chAdhar.isChecked()) {
+                            Akycpannumber = txtpannumber.getText().toString();
+                        }
+                        if (chVoterID.isChecked()) {
+                            Skycvoterid = chVoterID.getText().toString();
+                        }
+                        if (chDL.isChecked()) {
+                            SkycDL = chDL.getText().toString();
+                        }
+                        if (chPassport.isChecked()) {
+                            Skycpassport = chPassport.getText().toString();
+                        }
+                        if (chProofAdhar.isChecked()) {
+                            Sproofadhar = chProofAdhar.getText().toString();
+                        }
+                        if (chProofVoterid.isChecked()) {
+                            Sproofvoterid = chProofVoterid.getText().toString();
+                        }
+                        if (chProofdl.isChecked()) {
+                            SproofDL = chProofdl.getText().toString();
+                        }
+                        if (chProofElectricitybill.isChecked()) {
+                            Sproofelectricitybill = chProofElectricitybill.getText().toString();
+                        }
+                        if (chProofRntagmt.isChecked()) {
+                            Sproofrentagmt = chProofRntagmt.getText().toString();
+                        }
+                        if (chProofPassport.isChecked()) {
+                            Sproofpassport = chProofPassport.getText().toString();
+                        }
+                        if (chProofGovtEmpid.isChecked()) {
+                            Sproofgovtid = chProofGovtEmpid.getText().toString();
+                        }
+                        if (chProofGumasta.isChecked()) {
+                            Sproofgumasta = chProofGumasta.getText().toString();
+                        }
+                        if (chProofCurrentacctStmt.isChecked()) {
+                            Sproofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
+                        }
+
+                        //  ScoapplicantYN = txtgeneratedby.getText().toString();
+                        if (groupRadiocoapplicant.getCheckedRadioButtonId() != -1) {
+                            RadioButton btn2 = (RadioButton) groupRadiocoapplicant.getChildAt(groupRadiocoapplicant.indexOfChild(groupRadiocoapplicant.findViewById(groupRadiocoapplicant.getCheckedRadioButtonId())));
+                            ScoapplicantYN = btn2.getText().toString();
+                        }
+                        groupRadiocoapplicant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                Rcoapplicant = (RadioButton) view.findViewById(checkedId);
+                                ScoapplicantYN = Rcoapplicant.getText().toString();
+                            }
+                        });
+
+                        Scoapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
+                        Scoapplicantotherrelationdetails = edtotherrelationship.getText().toString();
+                        Sref1nmae = edtreferencename.getText().toString();
+                        Sref1address = edtreferenceaddress.getText().toString();
+                        Sref1contact = edtreferencecontactno.getText().toString();
+                        Sref1relation = edtreferencerelationship.getText().toString();
+                        Sref2name = edtreferencename2.getText().toString();
+                        Sref2address = edtreferenceaddress2.getText().toString();
+                        Sref2contact = edtreferencecontactno2.getText().toString();
+                        Sref2relation = edtreferencerelationship2.getText().toString();
+
+                        //   Soccupationtype = txtgeneratedby.getText().toString();
+                        if (groupRadioEmployed.getCheckedRadioButtonId() != -1) {
+                            RadioButton btn = (RadioButton) groupRadioEmployed.getChildAt(groupRadioEmployed.indexOfChild(groupRadioEmployed.findViewById(groupRadioEmployed.getCheckedRadioButtonId())));
+                            Soccupationtype = btn.getText().toString();
+                        }
+                        groupRadioEmployed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                Remployed = (RadioButton) view.findViewById(checkedId);
+                                Soccupationtype = Remployed.getText().toString();
+                            }
+                        });
+
+                        Scompanytype = SPcompanytype.getSelectedItem().toString();
+                        Sothercmptype = edtothercompany.getText().toString();
+                        Stenure = edttenure.getText().toString();
+                        Sworkexp = edtexperience.getText().toString();
+                        Sdepartment = edtdepartment.getText().toString();
+                        Sdesignation = edtdesignation.getText().toString();
+                        Smonthlygrosssalary = edtgrosssalary.getText().toString();
+                        Snetsalary = edtnetsalary.getText().toString();
+                        Sovertime = edtovertime.getText().toString();
+                        Sinsentive = edtincentive.getText().toString();
+                        Sbonus = edtbonus.getText().toString();
+                        Srentalincome = edtrentalincome.getText().toString();
+                        Sagreeincome = edtagrreculturincom.getText().toString();
+                        Sannualincome = edtannualincome.getText().toString();
+                        Sotherincome = edtotherincome.getText().toString();
+                        Ssalarycomesin = SPsalarytype.getSelectedItem().toString();
+                        Srentalexpence = edtrental.getText().toString();
+                        if (chcarloan.isChecked()) {
+                            Scarloan = chcarloan.getText().toString();
+                            Scarloanamt = txtCarloan.getText().toString();
+                        }
+                        if (chhomloan.isChecked()) {
+                            Shomelloan = chhomloan.getText().toString();
+                            Shomeloanamt = txtHomeloan.getText().toString();
+                        }
+                        if (chsocietyloan.isChecked()) {
+                            Ssocietyloan = chsocietyloan.getText().toString();
+                            Ssocietyloanamt = txtsocietyloan.getText().toString();
+                        }
+                        if (chpersonalloan.isChecked()) {
+                            Spersonalloan = chpersonalloan.getText().toString();
+                            Spersonalloanamt = txtpersonalloan.getText().toString();
+                        }
+                        if (chotherloan.isChecked()) {
+                            Sotherloan = chotherloan.getText().toString();
+                            Sotherloanamt = edtotheremidetails.getText().toString();
+                        }
+                        if (chsalarysleep.isChecked()) {
+                            Ssalarysleep = chsalarysleep.getText().toString();
+                        }
+                        if (chbankstatement.isChecked()) {
+                            Sbankstmt = chbankstatement.getText().toString();
+                        }
+                        if (chformno16.isChecked()) {
+                            Sform16 = chformno16.getText().toString();
+                        }
+                        if (chappointmentletter.isChecked()) {
+                            Sappointmentletter = chappointmentletter.getText().toString();
+                        }
+                        if (chconfermationletter.isChecked()) {
+                            Sconfermationletter = chconfermationletter.getText().toString();
+                        }
+                        if (chexperieceletter.isChecked()) {
+                            Sexperienceletter = chexperieceletter.getText().toString();
+                        }
+                        if (chvisa.isChecked()) {
+                            Snrivisa = chvisa.getText().toString();
+                        }
+                        if (chpasspoet.isChecked()) {
+                            Snripassport = chpasspoet.getText().toString();
+                        }
+                        if (chemployerletter.isChecked()) {
+                            Snriemployerletter = chemployerletter.getText().toString();
+                        }
+                        if (chcontractletter.isChecked()) {
+                            Snricontractletter = chcontractletter.getText().toString();
+                        }
+                        if (chPOA.isChecked()) {
+                            Snripoa = chPOA.getText().toString();
+                        }
+                        if (chbankstatement.isChecked()) {
+                            SNREbankacct = chbankstatement.getText().toString();
+                        }
+                        if (choverbankdetails.isChecked()) {
+                            Soverseasebankacct = choverbankdetails.getText().toString();
+                        }
+                        if (chitr.isChecked()) {
+                            Sitr = chitr.getText().toString();
+                        }
+                        if (chcurrentbankstatement.isChecked()) {
+                            Scurrentacctstmt = chcurrentbankstatement.getText().toString();
+                        }
+                        if (chsavingacctstatement.isChecked()) {
+                            Ssavingacctstmt = chsavingacctstatement.getText().toString();
+                        }
+                        if (chpartnersheepdeed.isChecked()) {
+                            Spartnershipdeed = chpartnersheepdeed.getText().toString();
+                        }
+                        if (chbisunessagreement.isChecked()) {
+                            Sbusinessagmt = chbisunessagreement.getText().toString();
+                        }
+                        if (chqualification.isChecked()) {
+                            Squalificationcirtificate = chqualification.getText().toString();
+                        }
+
+                        groupAboutproperty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                Rproperty = (RadioButton) view.findViewById(checkedId);
+                                saboutpropety = Rproperty.getText().toString();
+                                if (Rproperty.getText().toString().equalsIgnoreCase("Purchase Propety identified")) {
+
+                                } else if (Rproperty.getText().toString().equalsIgnoreCase("Pre-Sanction")) {
+
+                                    Rno.setChecked(true);
+                                    Ryes.setChecked(false);
+                                }
+                            }
+                        });
+                        groupAboutpropetyYN.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                Ryn = (RadioButton) view.findViewById(checkedId);
+                                sYN = Ryn.getText().toString();
+
+                            }
+                        });
+                        if (groupAboutproperty.getCheckedRadioButtonId() != -1) {
+                            int id = groupAboutproperty.getCheckedRadioButtonId();
+                            View radioButton = groupAboutproperty.findViewById(id);
+                            int radioId = groupAboutproperty.indexOfChild(radioButton);
+                            RadioButton btn = (RadioButton) groupAboutproperty.getChildAt(radioId);
+                            saboutpropety = btn.getText().toString();
+
+                            if (saboutpropety.equalsIgnoreCase("Purchase Propety identified")) {
+
+                            } else if (saboutpropety.equalsIgnoreCase("Pre-Sanction")) {
+                                Rno.setChecked(true);
+                                Ryes.setChecked(false);
+                            }
+                        }
+                        if (groupAboutpropetyYN.getCheckedRadioButtonId() != -1) {
+                            int id = groupAboutpropetyYN.getCheckedRadioButtonId();
+                            View radioButton = groupAboutpropetyYN.findViewById(id);
+                            int radioId = groupAboutpropetyYN.indexOfChild(radioButton);
+                            RadioButton btn = (RadioButton) groupAboutpropetyYN.getChildAt(radioId);
+                            sYN = btn.getText().toString();
+                        }
+                        Sprpin = edtpropertypin.getText().toString();
+                        Sprland = edtpropertylandmark.getText().toString();
+                        Sprarea = edtpropertyarea.getText().toString();
+                        Sprprojectname = edtprojectname.getText().toString();
+                        Sprpropertytype = SPpropertytype.getSelectedItem().toString();
+                        Sprloanrequirement = edtloanrequirement.getText().toString();
+                        Sprdownpayment = edtdownpayment.getText().toString();
+                        Sprdescriptio = edtdescription.getText().toString();
+                        Sbankname = edtbankname.getText().toString();
+                        Sbranchname = edtbranchname.getText().toString();
+                        Sifsccode = edtifsccode.getText().toString();
+                        Sappointment = edtappointment.getText().toString();
+                        Ssalespersone = SPsalesperson.getText().toString();
+
+                        checkedListitems.clear();
+                        checkedListitems.addAll(checked);
+                        updateLeadDetails(leedsModel);
                     }
                 });
 
@@ -1036,6 +1364,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         setFromDateClickListner();
         return view;
     }
+
 
     private Bank getModel(int position) {
         return leedsArraylist.get(leedsArraylist.size() - 1 - position);
@@ -1707,6 +2036,12 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         leedsModel.setEmployed(Soccupationtype);
         leedsModel.setOccupation(Soccupationtype);
         leedsModel.setCompanytype(Scompanytype);
+        leedsModel.setOthercompany(Sothercmptype);
+        leedsModel.setTenure(Stenure);
+        leedsModel.setExperience(Sworkexp);
+        leedsModel.setDepartment(Sdepartment);
+        leedsModel.setDesignation(Sdesignation);
+
         leedsModel.setSalaytype(Ssalarycomesin);
         leedsModel.setEmicar(Scarloan);
         leedsModel.setEmihome(Shomelloan);
@@ -1717,11 +2052,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         leedsModel.setSocietyLoanAmount(Ssocietyloanamt);
         leedsModel.setPersonalLoanAmount(Spersonalloanamt);
         leedsModel.setEmiother(Sotherloan);
-        leedsModel.setOthercompany(Sothercmptype);
-        leedsModel.setTenure(Stenure);
-        leedsModel.setExperience(Sworkexp);
-        leedsModel.setDepartment(Sdepartment);
-        leedsModel.setDesignation(Sdesignation);
+
         leedsModel.setGrosssalary(Smonthlygrosssalary);
         leedsModel.setNetsalary(Snetsalary);
         leedsModel.setOvertime(Sovertime);
@@ -1770,6 +2101,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         leedsModel.setIfscCode(Sifsccode);
         leedsModel.setAppointment(Sappointment);
         leedsModel.setSalesPerson(Ssalespersone);
+
+        leedsModel.setChecklist(checkedListitems);
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }

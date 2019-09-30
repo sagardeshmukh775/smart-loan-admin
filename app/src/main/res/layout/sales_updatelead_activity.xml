@@ -3348,11 +3348,46 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutsaleschecklist"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@id/layoutappointmentreschedualreason"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtsaleschecklistitems"
+                                android:layout_width="150.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:padding="10.0dip"
+                                android:text="CheckList:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14.0dip" />
+
+                            <EditText
+                                android:id="@+id/txtsaleschecklistitems1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:layout_marginBottom="5.0dip"
+                                android:layout_toRightOf="@id/txtsaleschecklistitems"
+                                android:background="@drawable/edittextanimation"
+                                android:inputType="textMultiLine"
+                                android:padding="10.0dip"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:editable="false"
+                                android:textSize="14.0dip" />
+                        </RelativeLayout>
+
                         <LinearLayout
                             android:id="@id/layoutbuttons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/layoutappointmentreschedualreason"
+                            android:layout_below="@id/layoutsaleschecklist"
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"
