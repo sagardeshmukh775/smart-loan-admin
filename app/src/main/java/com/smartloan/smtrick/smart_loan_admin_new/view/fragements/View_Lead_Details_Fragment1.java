@@ -441,11 +441,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         layout.setLayoutParams(params1);
     }
 
-//    private void HideLiFields(RelativeLayout layout) {
-//        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layout.getLayoutParams();
-//        params1.height = 0;
-//        layout.setLayoutParams(params1);
-//    }
 
     private void getdata() {
 //        try {
