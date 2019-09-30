@@ -131,7 +131,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
     Spinner SPpropertytype;
     RadioButton Rpresanctioned, Rpurchasepropety;
     EditText edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea, edtprojectname;
-    EditText edtbankname, edtbranchname, edtifsccode, edtappointment;
+    EditText edtbankname, edtbranchname, edtifsccode, edtappointment, edtchecklist;
     EditText SPsalesperson;
     String Sagenname, Sloantype, Scusomername, Scustomergender, Sbirthdate, Scontactno, Saltcontact,
             Semail, SEducation, Sotheredudetails, Scurrentpin, Scurrentland, Scurrentarea, Scurrentstreet, SaddressYN,
@@ -258,6 +258,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         edtbranchname = (EditText) view.findViewById(R.id.txtbranchname1);
         edtifsccode = (EditText) view.findViewById(R.id.txtifsccode1);
         edtappointment = (EditText) view.findViewById(R.id.txtappointment1);
+        edtchecklist = (EditText) view.findViewById(R.id.txtchecklist1);
 
         SPsalesperson = (EditText) view.findViewById(R.id.txtsalespersonname1);
         spinloantype = (Spinner) view.findViewById(R.id.sploantype1);
@@ -1419,7 +1420,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
     private void getdata() {
         try {
 
-            //LEED DETAILS
+            ////////////////////////////////////////LEED DETAILS///////////////////////////////////////////////////
             String leedid = leedsModel.getLeedNumber();
             String agentname = leedsModel.getAgentName();
             Long ldatetime = leedsModel.getCreatedDateTimeLong();
@@ -1441,7 +1442,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 txtgeneratedby.setText(agentname);
             }
 
-            //APPLICANT DETAILS
+            ////////////////////////////////////////APPLICANT DETAILS//////////////////////////////////////////////////////
 
             String cname = leedsModel.getCustomerName();
             String gender = leedsModel.getGender();
@@ -1677,7 +1678,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
             }
 
 
-            //INCOME DETAILS
+            ///////////////////////////////////////////////////INCOME DETAILS/////////////////////////////////////////////////////
 
             String sEmployed = leedsModel.getEmployed();
             String sCompanytype = leedsModel.getCompanytype();
@@ -1735,6 +1736,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
             String branchname = leedsModel.getBranchName();
             String ifsccode = leedsModel.getIfscCode();
             String appointment = leedsModel.getAppointment();
+            String checklistgot = leedsModel.getAppointment();
             String salsepersone = leedsModel.getSalesPerson();
 
             if (bankname != null) {
@@ -1749,6 +1751,9 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
             if (appointment != null) {
                 edtappointment.setText(appointment);
             }
+
+
+
             if (salsepersone != null) {
                 SPsalesperson.setText(salsepersone);
             }
@@ -1896,8 +1901,7 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 chqualification.setChecked(true);
             }
 
-
-            //PROPERTY DETAILS
+            /////////////////////////////////////////////////PROPERTY DETAILS//////////////////////////////////////////////
             String property = leedsModel.getPropety();
             String YN = leedsModel.getPropetyYN();
             String loanrequirement = leedsModel.getExpectedLoanAmount();
@@ -1964,6 +1968,16 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 edtdescription.setText(description);
 
             }
+
+            ArrayList<String> checkelist = new ArrayList<>();
+            checkelist = leedsModel.getChecklist();
+
+            if (checkelist != null) {
+                edtchecklist.setText("Checklist Submitted");
+            }else{
+                edtchecklist.setText("Submit Checklist");
+            }
+
 
         } catch (Exception e) {
         }

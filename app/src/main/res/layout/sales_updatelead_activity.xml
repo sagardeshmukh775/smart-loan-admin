@@ -357,6 +357,7 @@
                                 android:padding="10.0dip"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
+                                android:focusable="false"
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
@@ -2330,7 +2331,7 @@
                                     android:gravity="center_vertical">
 
                                     <CheckBox
-                                       android:id="@+id/checkboxCarloan"
+                                        android:id="@+id/checkboxCarloan"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5.0dip"
@@ -3153,7 +3154,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
-                              android:id="@+id/txtsalespersonname"
+                                android:id="@+id/txtsalespersonname"
                                 android:layout_width="150.0dip"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5.0dip"
@@ -3179,7 +3180,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                           android:id="@+id/layoutbankname"
+                            android:id="@+id/layoutbankname"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_below="@id/layoutsalesperson"
@@ -3187,7 +3188,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
-                               android:id="@+id/txtbankname"
+                                android:id="@+id/txtbankname"
                                 android:layout_width="150.0dip"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5.0dip"
@@ -3198,7 +3199,7 @@
                                 android:textSize="14.0dip" />
 
                             <EditText
-                               android:id="@+id/txtbankname1"
+                                android:id="@+id/txtbankname1"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5.0dip"
@@ -3213,7 +3214,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                           android:id="@+id/layoutbranchname"
+                            android:id="@+id/layoutbranchname"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_below="@id/layoutbankname"
@@ -3375,11 +3376,11 @@
                                 android:layout_marginBottom="5.0dip"
                                 android:layout_toRightOf="@id/txtsaleschecklistitems"
                                 android:background="@drawable/edittextanimation"
+                                android:focusable="false"
                                 android:inputType="textMultiLine"
                                 android:padding="10.0dip"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
-                                android:editable="false"
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
@@ -3409,39 +3410,39 @@
                                 android:id="@+id/buttonBankSubmit"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
                                 android:layout_weight="33.0"
                                 android:background="@color/btnRequest"
                                 android:text="Submit To Bank"
                                 android:textColor="#ffffffff"
                                 android:textSize="16.0sp"
-                                android:layout_marginTop="4dp"
                                 android:textStyle="bold" />
 
                             <!--<Button-->
-                                <!--android:id="@id/buttonverify"-->
-                                <!--android:layout_width="fill_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginLeft="1.0sp"-->
-                                <!--android:layout_weight="33.0"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:hint="Enter Notice Description"-->
-                                <!--android:text="SUBMIT"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textSize="16.0sp"-->
-                                <!--android:textStyle="bold" />-->
+                            <!--android:id="@id/buttonverify"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="SUBMIT"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
 
                             <!--<Button-->
-                                <!--android:id="@id/buttoncancel"-->
-                                <!--android:layout_width="fill_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginLeft="1.0sp"-->
-                                <!--android:layout_weight="33.0"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:hint="Enter Notice Description"-->
-                                <!--android:text="CANCEL"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textSize="16.0sp"-->
-                                <!--android:textStyle="bold" />-->
+                            <!--android:id="@id/buttoncancel"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="CANCEL"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>

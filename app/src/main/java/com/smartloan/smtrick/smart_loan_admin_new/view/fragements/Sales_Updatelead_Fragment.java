@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.text.SimpleDateFormat;
@@ -128,6 +131,7 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
     List<String> salesPerson;
     List<User> userlist;
 
+    CheckListAdapter checkdapter;
     Button bankSubmit;
     int fromYear, fromMonth, fromDay;
     long fromDate, toDate;
@@ -180,6 +184,7 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
             groupRadioEmployed = (RadioGroup) view.findViewById(R.id.radioOccupation);
 
             edtChecklist = (EditText) view.findViewById(R.id.txtsaleschecklistitems1);
+//            edtChecklist.seted(false);
 
             edtbankname = (EditText) view.findViewById(R.id.txtbankname1);
             edtbranchname = (EditText) view.findViewById(R.id.txtbranchname1);
@@ -277,7 +282,7 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
             txtgeneratedby = (TextView) view.findViewById(R.id.txtagentid1);
 
 
-            //INCOME
+            //////////////////////////////////////////INCOME///////////////////////////////////////////////////////
             String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
             String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
 
@@ -341,7 +346,7 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
             spinnerArrayAdapterSalaryType.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
 
-//PROPERTY
+////////////////////////////////////////////////////////////PROPERTY///////////////////////////////////////////////////////////
             String[] APPropertytype = new String[]{"Perchase of flat", "Purchase of vila", "Purchase of plot", "Balance transfer",
                     "Balance transfer +Top-Up", "Self Construction", "Renovation/Improvement", "Top-Up existing home loan", "loan for resale property",
                     "Ready posession flat", "Under construction flat"};
@@ -371,7 +376,17 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
 
 //        getdata();
             setDateTimeField();
+            setDateTimeField1();
             edtappointment.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    mDatePickerDialog.show();
+
+                    return false;
+                }
+            });
+
+            etbirthdate.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     mDatePickerDialog.show();
@@ -710,6 +725,17 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
                 final Dialog dialog1 = new Dialog(getContext());
                 dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
                 dialog1.setContentView(R.layout.customdialogbox);
+
+                RecyclerView recyclechecklist = (RecyclerView) dialog1.findViewById(R.id.dialog_recycle);
+
+                checkdapter = new CheckListAdapter(getContext(), leedsModel.getChecklist());
+                //adding adapter to recyclerview
+                recyclechecklist.setAdapter(checkdapter);
+                // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                recyclechecklist.setHasFixedSize(true);
+                recyclechecklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dialog1.show();
             }
         });
 
@@ -730,6 +756,23 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
 
 
                 timePicker();
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+    private void setDateTimeField1() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = newDate.getTime();
+                fdate = sd.format(startDate);
+                etbirthdate.setText(fdate);
+
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
@@ -1344,6 +1387,12 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
 
             ArrayList<String> checkelist = new ArrayList<>();
             checkelist = leedsModel.getChecklist();
+            if (checkelist != null){
+                edtChecklist.setText("!Click Here");
+            }else {
+                edtChecklist.setText("Empty");
+
+            }
 
         } catch (Exception e) {
         }
@@ -1361,7 +1410,7 @@ public class Sales_Updatelead_Fragment extends Fragment implements View.OnClickL
         leedsModel.setAddress(cAdress);
         leedsModel.setMobileNumber(Scontactno);
         leedsModel.setAlternetMobileNumber(Saltcontact);
-        leedsModel.setDateOfBirth(cBdate);
+        leedsModel.setDateOfBirth(Sbirthdate);
         leedsModel.setOfficeAdderess(Sofficeaddress);
         leedsModel.setRecidential(Sresidentialtype);
         leedsModel.setCurrentpin(Scurrentpin);
