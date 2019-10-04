@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="15"
-8-->D:\New folder\smart-loan-admin\cropper\src\main\AndroidManifest.xml
+8-->C:\Users\Smtrick\StudioProjects\smart-loan-admin\cropper\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="26" />
-9-->D:\New folder\smart-loan-admin\cropper\src\main\AndroidManifest.xml
+9-->C:\Users\Smtrick\StudioProjects\smart-loan-admin\cropper\src\main\AndroidManifest.xml
 10
 11</manifest>
