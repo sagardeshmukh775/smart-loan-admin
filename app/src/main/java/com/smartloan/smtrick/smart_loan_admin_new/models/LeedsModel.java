@@ -352,7 +352,7 @@ public class LeedsModel implements Serializable {
         this.prrecidenttype = "na";
         this.prdescripiton = "na";
 
-        this.checklist = new ArrayList<String>();;
+        this.checklist = new ArrayList<String>();
     }
 
     public LeedsModel() {
