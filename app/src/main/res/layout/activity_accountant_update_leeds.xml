@@ -378,7 +378,6 @@
                             android:id="@+id/txtattachdoc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/layoutlogin"
                             android:layout_gravity="center_vertical"
                             android:gravity="center_horizontal"
                             android:padding="5sp"

@@ -90,47 +90,34 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1061683255156:android:40b3b46c655e1b68",
-        "android_client_info": {
-          "package_name": "com.smartloan.smtrick.smart_loan_admin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1061683255156-ski3acjc71hlc1jrh9ll47n1bfen6i2r.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDHkufqbEfAUNCuSHFNDrmfCQqMXWmsqJs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1061683255156-ski3acjc71hlc1jrh9ll47n1bfen6i2r.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1061683255156:android:7f6a85a930c9881c",
+        "mobilesdk_app_id": "1:1061683255156:android:3b44b3050fed6d39b6be21",
         "android_client_info": {
           "package_name": "com.smartloan.smtrick.smart_loan_admin_new"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1061683255156-60cmarepcd81qgc8ud811a5f2v6nc3bd.apps.googleusercontent.com",
+          "client_id": "1061683255156-ogtvc4vi4589re89nh0c5f2m6tldf9gq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartloan.smtrick.smart_loan_admin_new",
+            "certificate_hash": "10c86955a9071cfbe3491fa96d4dffd699b175de"
+          }
+        },
+        {
+          "client_id": "1061683255156-t2qhhb94obbje3u2q9uej4frb0fci1kg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.smartloan.smtrick.smart_loan_admin_new",
             "certificate_hash": "c73a204bb4c1b49eac316b439ae1c0be99d7acd2"
+          }
+        },
+        {
+          "client_id": "1061683255156-9c8q6v32r24psa74rd6gv7f4gm2pimi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartloan.smtrick.smart_loan_admin_new",
+            "certificate_hash": "a058c77ec79e3080dd24bca3ee8567f802573eb9"
           }
         },
         {

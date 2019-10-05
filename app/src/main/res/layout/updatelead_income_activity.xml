@@ -1282,7 +1282,6 @@
                             android:id="@+id/layoutbuttons"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_below="@+id/layoutbuttonnext"
                             android:layout_marginTop="20dp"
                             android:layout_weight="15"
                             android:gravity="bottom"
