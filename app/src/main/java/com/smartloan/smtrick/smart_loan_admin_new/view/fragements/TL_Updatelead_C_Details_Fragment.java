@@ -440,7 +440,9 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
             if (chProofCurrentacctStmt.isChecked()) {
                 cProofcurrentacctstmt = chProofCurrentacctStmt.getText().toString();
             }
-            sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
+            if (scoapplicantYN.equalsIgnoreCase("Yes")) {
+                sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
+            }
             sotherrelationship = edtotherrelationship.getText().toString();
             sreference1name = edtreferencename.getText().toString();
             sreference1address = edtreferenceaddress.getText().toString();

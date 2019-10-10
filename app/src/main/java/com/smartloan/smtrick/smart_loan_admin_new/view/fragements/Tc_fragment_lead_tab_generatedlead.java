@@ -76,25 +76,6 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
         }
     }
 
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Tc_fragment_lead_tab_generatedlead$2 */
-    class C09532 extends CallBack {
-        C09532() {
-        }
-
-        public void onSuccess(Object object) {
-            if (object != null) {
-                Tc_fragment_lead_tab_generatedlead tc_fragment_lead_tab_generatedlead = Tc_fragment_lead_tab_generatedlead.this;
-                tc_fragment_lead_tab_generatedlead.leedsModelArrayList = (ArrayList) object;
-                tc_fragment_lead_tab_generatedlead.serAdapter(tc_fragment_lead_tab_generatedlead.leedsModelArrayList);
-            }
-            Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
-        }
-
-        public void onError(Object object) {
-            Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
-        }
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (this.tcFragmentLeadTabGeneratedleadBinding == null) {
             this.tcFragmentLeadTabGeneratedleadBinding = (TcFragmentLeadTabGeneratedleadBinding) DataBindingUtil.inflate(inflater, R.layout.tc_fragment_lead_tab_generatedlead, container, false);
@@ -122,7 +103,23 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
 
     private void getteLeed() {
         this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
-        this.leedRepository.readLeedsByStatus(Constant.STATUS_GENERATED, new C09532());
+        this.leedRepository.readLeedsByStatus(Constant.STATUS_GENERATED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    Tc_fragment_lead_tab_generatedlead tc_fragment_lead_tab_generatedlead = Tc_fragment_lead_tab_generatedlead.this;
+                    tc_fragment_lead_tab_generatedlead.leedsModelArrayList = (ArrayList) object;
+                    tc_fragment_lead_tab_generatedlead.serAdapter(tc_fragment_lead_tab_generatedlead.leedsModelArrayList);
+                }
+                Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
+
+            }
+        });
     }
 
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {

@@ -112,41 +112,41 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
             e.printStackTrace();
         }
 
-        holder.telecallerLeedsAdapterLayoutBinding.agentCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final int REQUEST_PHONE_CALL = 1;
-                Intent my_callIntent = new Intent(Intent.ACTION_CALL);
-                my_callIntent.setData(Uri.parse("tel:" + user.getMobileNumber()));
-                //here the word 'tel' is important for making a call...
-                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
-                }
-                else
-                {
-                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(my_callIntent);
-                }
-            }
-        });
-        holder.telecallerLeedsAdapterLayoutBinding.clientCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final int REQUEST_PHONE_CALL = 1;
-                LeedsModel leedModel = getModel(listPosition);
-                String mobileNo = "+91" + leedModel.getMobileNumber();
-                String uri = "tel:" + mobileNo.trim();
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse(uri));
-                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
-                }
-                else
-                {
-                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(intent);
-                }
-
-            }
-        });
+//        holder.telecallerLeedsAdapterLayoutBinding.agentCall.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final int REQUEST_PHONE_CALL = 1;
+//                Intent my_callIntent = new Intent(Intent.ACTION_CALL);
+//                my_callIntent.setData(Uri.parse("tel:" + user.getMobileNumber()));
+//                //here the word 'tel' is important for making a call...
+//                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+//                }
+//                else
+//                {
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(my_callIntent);
+//                }
+//            }
+//        });
+//        holder.telecallerLeedsAdapterLayoutBinding.clientCall.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final int REQUEST_PHONE_CALL = 1;
+//                LeedsModel leedModel = getModel(listPosition);
+//                String mobileNo = "+91" + leedModel.getMobileNumber();
+//                String uri = "tel:" + mobileNo.trim();
+//                Intent intent = new Intent(Intent.ACTION_CALL);
+//                intent.setData(Uri.parse(uri));
+//                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+//                }
+//                else
+//                {
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(intent);
+//                }
+//
+//            }
+//        });
     }
 
     private void readagent(String agentName) {

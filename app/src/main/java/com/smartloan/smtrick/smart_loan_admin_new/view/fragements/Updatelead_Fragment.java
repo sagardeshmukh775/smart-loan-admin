@@ -39,12 +39,8 @@ import java.util.Map;
 public class Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     AppSharedPreference appSharedPreference;
-    Button btcancel;
-    Button btnupdatenext;
-    Button btupdate;
-    Button btverify;
-    String cPartner;
-    String lGenby;
+    Button btcancel, btnupdatenext, btupdate, btverify;
+    String cPartner,lGenby;
     LeedRepository leedRepository;
     LeedsModel leedsModel;
     ArrayList<LeedsModel> leedsModelArrayList;
@@ -52,13 +48,7 @@ public class Updatelead_Fragment extends Fragment implements View.OnClickListene
     SimpleDateFormat sfd;
     Spinner spinloantype;
     String sploantype;
-    TextView txtgeneratedby;
-    TextView txtldate;
-    TextView txtleadid;
-    TextView txtleadidtop;
-    TextView txttime;
-
-
+    TextView txtgeneratedby, txtldate, txtleadid, txtleadidtop, txttime;
 
     @Override
     public void onClick(View view) {
@@ -119,22 +109,6 @@ public class Updatelead_Fragment extends Fragment implements View.OnClickListene
         }
     }
 
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity$5 */
-//    class C09325 extends CallBack {
-//        C09325() {
-//        }
-//
-//        public void onSuccess(Object object) {
-//            progressDialogClass.dismissDialog();
-//        }
-//
-//        public void onError(Object object) {
-//            progressDialogClass.dismissDialog();
-//            Context context = getContext();
-//            Utility.showLongMessage(context, context.getString(R.string.server_error));
-//        }
-//    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -150,7 +124,7 @@ public class Updatelead_Fragment extends Fragment implements View.OnClickListene
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
-        String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY"};
+        String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY","BALANCE TRANSFER"};
         btupdate = (Button) view.findViewById(R.id.buttonupdate);
         btverify = (Button) view.findViewById(R.id.buttonverify);
         btcancel = (Button) view.findViewById(R.id.buttoncancel);

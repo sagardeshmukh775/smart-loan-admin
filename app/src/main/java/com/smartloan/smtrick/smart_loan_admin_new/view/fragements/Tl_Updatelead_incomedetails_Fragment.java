@@ -2,6 +2,7 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,125 +46,36 @@ import java.util.Map;
 
 public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    RadioButton Remployed;
-    RadioButton Rsalaried;
-    RadioButton Rselfemployed;
-    Spinner SPEMI;
-    Spinner SPcompanytype;
-    Spinner SPsalarytype;
+    RadioButton Remployed, Rsalaried, Rselfemployed;
+    Spinner SPEMI, SPcompanytype, SPsalarytype, spinloantype;
     AppSharedPreference appSharedPreference;
-    Button btcancel;
-    Button btnupdatenext;
-    Button btupdate;
-    Button btverify;
-    String cAgrreIncome;
-    String cAnnualincome;
-    String cAnual;
-    String cAppointmentltr;
-    String cBankstmt;
-    String cBisunessagmt;
-    String cBonus;
-    String cCarloan;
-    String cCarloanamt;
-    String cCompanytype;
-    String cConfermationltr;
-    String cContractltr;
-    String cCurrentbnkstmt;
-    String cDept;
-    String cDesignation;
-    String cEMI;
-    String cEcperience;
-    String cEmployedtype;
-    String cEmployerltr;
-    String cExperinceltr;
-    String cForm16;
-    String cGrossslr;
-    String cHomeloan;
-    String cHomeloanamt;
-    String cITR;
-    String cIncentive;
-    String cMonthly;
-    String cNRAbankstmt;
-    String cNetslr;
-    String cOtherEMIdetails;
-    String cOthercompany;
-    String cOtherincome;
-    String cOtherloan;
-    String cOverbank;
-    String cOvertime;
-    String cPOA;
-    String cPartnerdeed;
-    String cPassport;
-    String cPersonalloan;
-    String cPersonalloanamt;
-    String cQulification;
-    String cRental;
-    String cRentalincome;
-    String cSalaried;
-    String cSalaryType;
-    String cSalarysleep;
-    String cSavingbnkstmt;
-    String cSelfEmployed;
-    String cSocietyloan;
-    String cSocietyloanamt;
-    String cTenure;
-    String cVisa;
-    CheckBox chNREbankstatement;
-    CheckBox chPOA;
-    CheckBox chappointmentletter;
-    CheckBox chbankstatement;
-    CheckBox chbisunessagreement;
-    CheckBox chcarloan;
-    CheckBox chconfermationletter;
-    CheckBox chcontractletter;
-    CheckBox chcurrentbankstatement;
-    CheckBox chemployerletter;
-    CheckBox chexperieceletter;
-    CheckBox chformno16;
-    CheckBox chhomloan;
-    CheckBox chitr;
-    CheckBox chotherloan;
-    CheckBox choverbankdetails;
-    CheckBox chpartnersheepdeed;
-    CheckBox chpasspoet;
-    CheckBox chpersonalloan;
-    CheckBox chqualification;
-    CheckBox chsalarysleep;
-    CheckBox chsavingacctstatement;
-    CheckBox chsocietyloan;
-    CheckBox chvisa;
-    EditText edtagrreculturincom;
-    EditText edtannualincome;
-    EditText edtbonus;
-    EditText edtdepartment;
-    EditText edtdesignation;
-    EditText edtexperience;
-    EditText edtgrosssalary;
-    EditText edtincentive;
-    EditText edtnetsalary;
-    EditText edtothercompany;
-    EditText edtotheremidetails;
-    EditText edtotherincome;
-    EditText edtovertime;
-    EditText edtrental;
-    EditText edtrentalincome;
-    EditText edttenure;
+    Button btcancel, btnupdatenext, btupdate, btverify;
+
+    String cAgrreIncome, cAnnualincome, cAnual, cAppointmentltr, cBankstmt, cBisunessagmt, cBonus, cCarloan, cCarloanamt, cCompanytype,
+            cConfermationltr, cContractltr, cCurrentbnkstmt, cDept, cDesignation, cEMI, cEcperience, cEmployedtype, cEmployerltr,
+            cExperinceltr, cForm16, cGrossslr, cHomeloan, cHomeloanamt, cITR, cIncentive, cMonthly, cNRAbankstmt, cNetslr, cOtherEMIdetails,
+            cOthercompany, cOtherincome, cOtherloan, cOverbank, cOvertime, cPOA, cPartnerdeed, cPassport, cPersonalloan, cPersonalloanamt,
+            cQulification, cRental, cRentalincome, cSalaried, cSalaryType, cSalarysleep, cSavingbnkstmt, cSelfEmployed, cSocietyloan,
+            cSocietyloanamt, cTenure, cVisa;
+
+    CheckBox chNREbankstatement, chPOA, chappointmentletter, chbankstatement, chbisunessagreement, chcarloan, chconfermationletter,
+            chcontractletter, chcurrentbankstatement, chemployerletter, chexperieceletter, chformno16, chhomloan, chitr, chotherloan,
+            choverbankdetails, chpartnersheepdeed, chpasspoet, chpersonalloan, chqualification, chsalarysleep, chsavingacctstatement,
+            chsocietyloan, chvisa;
+
+    EditText edtagrreculturincom, edtannualincome, edtbonus, edtdepartment, edtdesignation, edtexperience, edtgrosssalary,
+            edtincentive, edtnetsalary, edtothercompany, edtotheremidetails, edtotherincome, edtovertime, edtrental, edtrentalincome,
+            edttenure, txtCarloan, txtHomeloan, txtpersonalloan, txtsocietyloan;
+
     RadioGroup groupRadioEmployed;
-    RelativeLayout layoutothercompany;
-    RelativeLayout layoutotheremi;
+    RelativeLayout layoutothercompany, layoutotheremi;
     LeedRepository leedRepository;
-    String leedid;
+    String leedid, sploantype;
     LeedsModel leedsModel;
     ProgressDialogClass progressDialogClass;
-    Spinner spinloantype;
-    String sploantype;
-    EditText txtCarloan;
-    EditText txtHomeloan;
-    TextView txtgeneratedby;
-    TextView txtldate;
-    TextView txtleadid;
-    EditText txtpersonalloan;
-    EditText txtsocietyloan;
+
+
+    TextView txtgeneratedby, txtldate, txtleadid;
 
     /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Tl_Updatelead_incomedetails_Activity$1 */
     class C08331 implements RadioGroup.OnCheckedChangeListener {
@@ -430,7 +343,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.updatelead_income_activity, container, false);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
+        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 //        leedsModel = (LeedsModel) getActivity().getIntent().getSerializableExtra(Constant.LEED_MODEL);
         Bundle args = this.getArguments();
         if (args != null) {
@@ -509,6 +422,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
         SPsalarytype.setAdapter(spinnerArrayAdapterSalaryType);
         btnupdatenext.setOnClickListener(new C08342());
         getdata();
+//        new GetWeather().execute();
         Loanvisibility();
         return view;
     }
@@ -621,13 +535,17 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             if (cleedid != null) {
                 txtleadid.setText(cleedid);
             }
-            if (sEmployed == null) {
-            } else if (sEmployed.equalsIgnoreCase("Salaried")) {
-                Rsalaried.setChecked(true);
-            } else {
-                if (sEmployed.equalsIgnoreCase("Self Employed")) {
-                    Rselfemployed.setChecked(true);
+            try {
+                if (sEmployed == null) {
+                } else if (sEmployed.equalsIgnoreCase("Salaried")) {
+                    Rsalaried.setChecked(true);
+                } else {
+                    if (sEmployed.equalsIgnoreCase("Self Employed")) {
+                        Rselfemployed.setChecked(true);
+                    }
                 }
+            }catch (Exception e){
+
             }
             if (othercompany != null) {
                 edtothercompany.setText(othercompany);
@@ -786,20 +704,25 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
                 chpersonalloan.setChecked(true);
                 txtpersonalloan.setText(personalloanamt2);
             }
-            if (sEMIother2 != null) {
-                chotherloan.setChecked(true);
-                ShowotherEMI();
-            } else {
-                hideotherEMI();
+            try {
+                if (sEMIother2 != null) {
+                    chotherloan.setChecked(true);
+                    ShowotherEMI();
+                } else {
+                    hideotherEMI();
+                }
+            }catch (Exception e){
+                Toast.makeText(getContext(),"checkbox",Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
         try {
             leedsModel.setEmployed(cEmployedtype);
+            leedsModel.setOccupation(cEmployedtype);
             leedsModel.setCompanytype(cCompanytype);
             leedsModel.setSalaytype(cSalaryType);
             leedsModel.setEmicar(cCarloan);
@@ -900,5 +823,25 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
 
     }
 
+    private class GetWeather extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        }
 
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getdata();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progressDialogClass.dismissDialog();
+        }
+    }
 }

@@ -133,82 +133,82 @@
                         android:layout_margin="10dp"
                         android:background="@color/lightgray" />
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="100"
-                        android:padding="5dp">
+<!--                    <LinearLayout-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:weightSum="100"-->
+<!--                        android:padding="5dp">-->
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                           >
+<!--                        <LinearLayout-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="50"-->
+<!--                           >-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Agent:"
-                                android:textSize="14dp"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:textColor="@color/whitetextcolor"
-                                />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Agent:"-->
+<!--                                android:textSize="14dp"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:gravity="center"-->
+<!--                                android:textColor="@color/whitetextcolor"-->
+<!--                                />-->
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/agent_number"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textColor="@color/whitetextcolor"-->
-                            <!--android:layout_weight="22"-->
-                            <!--android:textSize="14dp"/>-->
+<!--                        &lt;!&ndash;<TextView&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:id="@+id/agent_number"&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:textColor="@color/whitetextcolor"&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:layout_weight="22"&ndash;&gt;-->
+<!--                            &lt;!&ndash;android:textSize="14dp"/>&ndash;&gt;-->
 
-                            <ImageView
-                                android:id="@+id/agent_call"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="10dp"
-                                android:src="@drawable/call"/>
+<!--                            <ImageView-->
+<!--                                android:id="@+id/agent_call"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:src="@drawable/call"/>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            >
+<!--                        <LinearLayout-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="50"-->
+<!--                            >-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Client:"
-                                android:textSize="14dp"
-                                android:textColor="@color/whitetextcolor"
-                                />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Client:"-->
+<!--                                android:textSize="14dp"-->
+<!--                                android:textColor="@color/whitetextcolor"-->
+<!--                                />-->
 
-                            <!--<TextView-->
-                                <!--android:id="@+id/client_number"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:textColor="@color/whitetextcolor"-->
-                                <!--android:layout_weight="22"-->
-                                <!--android:textSize="14dp"/>-->
+<!--                            &lt;!&ndash;<TextView&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:id="@+id/client_number"&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:textColor="@color/whitetextcolor"&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:layout_weight="22"&ndash;&gt;-->
+<!--                                &lt;!&ndash;android:textSize="14dp"/>&ndash;&gt;-->
 
-                            <ImageView
-                                android:id="@+id/client_call"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:src="@drawable/call"/>
+<!--                            <ImageView-->
+<!--                                android:id="@+id/client_call"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:src="@drawable/call"/>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
-                    </LinearLayout>
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
