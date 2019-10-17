@@ -33,6 +33,73 @@
         android:padding="5dp"
         android:weightSum="100">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Agent:"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/whitetextcolor"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/agent_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/call" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Client:"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/whitetextcolor"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/client_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/call" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="10dp"
+            android:background="@color/lightgray" />
+
         <ScrollView
             android:id="@+id/scrollviewrightleft"
             android:layout_width="wrap_content"
@@ -110,8 +177,8 @@
                             android:id="@+id/layoutleadtime"
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
                             android:layout_below="@+id/layoutleaddate"
+                            android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
 
                             <TextView
@@ -200,45 +267,45 @@
                                 android:layout_marginBottom="5dp"
                                 android:layout_toRightOf="@+id/txtagentid"
                                 android:background="@drawable/edittextanimation"
+                                android:editable="false"
                                 android:padding="10dp"
                                 android:text=""
-                                android:editable="false"
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
 
                         </RelativeLayout>
 
                         <!--<RelativeLayout-->
-                            <!--android:id="@+id/layoutchannelpartner"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="fill_parent"-->
-                            <!--android:layout_below="@+id/layoutagentid"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:gravity="center_vertical">-->
+                        <!--android:id="@+id/layoutchannelpartner"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="fill_parent"-->
+                        <!--android:layout_below="@+id/layoutagentid"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--android:gravity="center_vertical">-->
 
-                            <!--<TextView-->
-                                <!--android:id="@+id/txtchannelpartner"-->
-                                <!--android:layout_width="150dp"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginTop="5dp"-->
-                                <!--android:layout_marginBottom="5dp"-->
-                                <!--android:padding="10dp"-->
-                                <!--android:text="Channel Partner:"-->
-                                <!--android:textColor="@color/darkgraycolor"-->
-                                <!--android:textSize="14dp" />-->
+                        <!--<TextView-->
+                        <!--android:id="@+id/txtchannelpartner"-->
+                        <!--android:layout_width="150dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:padding="10dp"-->
+                        <!--android:text="Channel Partner:"-->
+                        <!--android:textColor="@color/darkgraycolor"-->
+                        <!--android:textSize="14dp" />-->
 
-                            <!--&lt;!&ndash;<EditText&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/txtchannelpartner1"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_marginBottom="5dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_toRightOf="@+id/txtchannelpartner"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:background="@drawable/edittextanimation"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:padding="10dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/mainTextColor"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="14dp" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/txtchannelpartner1"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginBottom="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_toRightOf="@+id/txtchannelpartner"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@drawable/edittextanimation"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text=""&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/mainTextColor"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14dp" />&ndash;&gt;-->
 
                         <!--</RelativeLayout>-->
 

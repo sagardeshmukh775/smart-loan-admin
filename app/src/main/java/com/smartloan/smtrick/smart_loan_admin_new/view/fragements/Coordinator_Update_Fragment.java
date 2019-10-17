@@ -131,7 +131,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
     Spinner SPpropertytype;
     RadioButton Rpresanctioned, Rpurchasepropety;
     EditText edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea, edtprojectname;
-    EditText edtbankname, edtbranchname, edtifsccode, edtappointment, edtchecklist;
+    EditText edtbankname,  edtappointment, edtchecklist;
+//    EditText edtbranchname, edtifsccode;
     EditText SPsalesperson;
     String Sagenname, Sloantype, Scusomername, Scustomergender, Sbirthdate, Scontactno, Saltcontact,
             Semail, SEducation, Sotheredudetails, Scurrentpin, Scurrentland, Scurrentarea, Scurrentstreet, SaddressYN,
@@ -147,8 +148,9 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
             Snriemployerletter, Snricontractletter, Snripoa, SNREbankacct, Soverseasebankacct, Sitr, Scurrentacctstmt,
             Ssavingacctstmt, Spartnershipdeed, Sbusinessagmt, Squalificationcirtificate, Spropertytype, SpropertyYN, Sprpin,
             Sprland, Sprarea, Sprprojectname, Sprpropertytype, Sprloanrequirement, Sprdownpayment,
-            Sprdescriptio, Sbankname, Sbranchname, Sifsccode, Ssalespersone, Sappointment,
+            Sprdescriptio, Sbankname, Ssalespersone, Sappointment,
             saboutpropety, sYN;
+//    String Sbranchname, Sifsccode;
 
     RadioGroup groupAboutproperty, groupAboutpropetyYN, groupRadioGender, groupRadioEducation, groupRadio, groupRadiocoapplicant,
             groupRadioEmployed;
@@ -162,29 +164,9 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
     int mHour;
     int mMinute;
     String date_time = "";
+
     String fdate;
 
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Coordinator_Update_Activity$2 */
-    class C08042 implements View.OnClickListener {
-        C08042() {
-        }
-
-        public void onClick(View v) {
-            setLeedStatus(leedsModel);
-        }
-    }
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Coordinator_Update_Activity$3 */
-    class C08053 implements View.OnClickListener {
-        C08053() {
-        }
-
-        public void onClick(View v) {
-            startActivity(new Intent(getContext(), MainActivity_coordinator.class));
-            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-    }
 
     /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Coordinator_Update_Activity$4 */
     class C09234 extends CallBack {
@@ -255,8 +237,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         groupRadioEmployed = (RadioGroup) view.findViewById(R.id.radioOccupation);
 
         edtbankname = (EditText) view.findViewById(R.id.txtbankname1);
-        edtbranchname = (EditText) view.findViewById(R.id.txtbranchname1);
-        edtifsccode = (EditText) view.findViewById(R.id.txtifsccode1);
+//        edtbranchname = (EditText) view.findViewById(R.id.txtbranchname1);
+//        edtifsccode = (EditText) view.findViewById(R.id.txtifsccode1);
         edtappointment = (EditText) view.findViewById(R.id.txtappointment1);
         edtchecklist = (EditText) view.findViewById(R.id.txtchecklist1);
 
@@ -1029,8 +1011,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                         Sprdownpayment = edtdownpayment.getText().toString();
                         Sprdescriptio = edtdescription.getText().toString();
                         Sbankname = edtbankname.getText().toString();
-                        Sbranchname = edtbranchname.getText().toString();
-                        Sifsccode = edtifsccode.getText().toString();
+//                        Sbranchname = edtbranchname.getText().toString();
+//                        Sifsccode = edtifsccode.getText().toString();
                         Sappointment = edtappointment.getText().toString();
                         Ssalespersone = SPsalesperson.getText().toString();
 
@@ -1351,8 +1333,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
                 Sprdescriptio = edtdescription.getText().toString();
 
                 Sbankname = edtbankname.getText().toString();
-                Sbranchname = edtbranchname.getText().toString();
-                Sifsccode = edtifsccode.getText().toString();
+//                Sbranchname = edtbranchname.getText().toString();
+//                Sifsccode = edtifsccode.getText().toString();
                 Sappointment = edtappointment.getText().toString();
                 Ssalespersone = SPsalesperson.getText().toString();
 
@@ -1742,12 +1724,12 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
             if (bankname != null) {
                 edtbankname.setText(bankname);
             }
-            if (branchname != null) {
-                edtbranchname.setText(branchname);
-            }
-            if (ifsccode != null) {
-                edtifsccode.setText(ifsccode);
-            }
+//            if (branchname != null) {
+//                edtbranchname.setText(branchname);
+//            }
+//            if (ifsccode != null) {
+//                edtifsccode.setText(ifsccode);
+//            }
             if (appointment != null) {
                 edtappointment.setText(appointment);
             }
@@ -2111,8 +2093,8 @@ public class Coordinator_Update_Fragment extends Fragment implements View.OnClic
         leedsModel.setPrpropertytype(Sprpropertytype);
 
         leedsModel.setBanknName(Sbankname);
-        leedsModel.setBranchName(Sbranchname);
-        leedsModel.setIfscCode(Sifsccode);
+//        leedsModel.setBranchName(Sbranchname);
+//        leedsModel.setIfscCode(Sifsccode);
         leedsModel.setAppointment(Sappointment);
         leedsModel.setSalesPerson(Ssalespersone);
 
