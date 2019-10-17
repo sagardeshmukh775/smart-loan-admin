@@ -237,9 +237,9 @@
                                 android:textColor="@color/darkgraycolor"
                                 android:textSize="14dp" />
 
-                            <EditText
+                            <Spinner
                                 android:id="@+id/txtexperience1"
-                                android:layout_width="match_parent"
+                                android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
@@ -248,6 +248,43 @@
                                 android:padding="10dp"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/txtyear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Years"
+                                android:layout_toRightOf="@+id/txtexperience1"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14dp" />
+
+                            <Spinner
+                                android:id="@+id/txtmonths1"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_toRightOf="@+id/txtyear"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/txtmonths"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Months"
+                                android:layout_toRightOf="@+id/txtmonths1"
+                                android:textColor="@color/darkgraycolor"
                                 android:textSize="14dp" />
                         </RelativeLayout>
 

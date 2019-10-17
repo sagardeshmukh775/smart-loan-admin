@@ -36,7 +36,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class
+Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     AppSharedPreference appSharedPreference;
     Button btcancel, btnupdatenext, btupdate, btverify;

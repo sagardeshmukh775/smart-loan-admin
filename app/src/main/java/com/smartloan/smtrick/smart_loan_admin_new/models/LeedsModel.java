@@ -70,6 +70,7 @@ public class LeedsModel implements Serializable {
     private String expectedLoanAmount;
     private String disbusedLoanAmount;
     private String experience;
+    private String experiencemonths;
     private String experinceltr;
     private String flatno;
     private String form;
@@ -284,6 +285,7 @@ public class LeedsModel implements Serializable {
         this.emiOtherDetails = "na";
         this.tenure = "na";
         this.experience = "na";
+        this.experiencemonths = "na";
         this.department = "na";
         this.designation = "na";
         this.grosssalary = "na";
@@ -1054,6 +1056,14 @@ public class LeedsModel implements Serializable {
         this.experience = experience;
     }
 
+    public String getExperiencemonths() {
+        return experiencemonths;
+    }
+
+    public void setExperiencemonths(String experiencemonths) {
+        this.experiencemonths = experiencemonths;
+    }
+
     public String getDepartment() {
         return this.department;
     }
@@ -1816,6 +1826,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("personalLoanAmount", getPersonalLoanAmount());
         leedMap.put("tenure", getTenure());
         leedMap.put("experience", getExperience());
+        leedMap.put("experiencemonths", getExperiencemonths());
         leedMap.put("department", getDepartment());
         leedMap.put("designation", getDesignation());
         leedMap.put("grosssalary", getGrosssalary());

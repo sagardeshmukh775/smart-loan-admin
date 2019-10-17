@@ -60,7 +60,7 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
     Spinner Recidential;
     RadioButton Rfemale, Rg, Rgender, Rmale, Rno, Rother, Rpg, Rpro, Rug, Ryes;
     AppSharedPreference appSharedPreference;
-    ;
+
     Button btnnext, btnsave;
     String cAdhar, cAdress, cAltcontatct, cBdate, cContatct, cCurrentPIN, cCurrentarea, cCurrentlandmark, cCurrentstreet, cDL,
             cEducation, cEmail, cGender, cNmae, cOffaddress, cOther, cPAN, cPANnumber, cPIN, cPadress, cPassport, cProofDL,

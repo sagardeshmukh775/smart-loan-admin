@@ -52,7 +52,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
     Button btcancel, btnupdatenext, btupdate, btverify;
 
     String cAgrreIncome, cAnnualincome, cAnual, cAppointmentltr, cBankstmt, cBisunessagmt, cBonus, cCarloan, cCarloanamt, cCompanytype,
-            cConfermationltr, cContractltr, cCurrentbnkstmt, cDept, cDesignation, cEMI, cEcperience, cEmployedtype, cEmployerltr,
+            cConfermationltr, cContractltr, cCurrentbnkstmt, cDept, cDesignation, cEMI, cEcperience, cEcperiencemonths, cEmployedtype, cEmployerltr,
             cExperinceltr, cForm16, cGrossslr, cHomeloan, cHomeloanamt, cITR, cIncentive, cMonthly, cNRAbankstmt, cNetslr, cOtherEMIdetails,
             cOthercompany, cOtherincome, cOtherloan, cOverbank, cOvertime, cPOA, cPartnerdeed, cPassport, cPersonalloan, cPersonalloanamt,
             cQulification, cRental, cRentalincome, cSalaried, cSalaryType, cSalarysleep, cSavingbnkstmt, cSelfEmployed, cSocietyloan,
@@ -63,9 +63,11 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             choverbankdetails, chpartnersheepdeed, chpasspoet, chpersonalloan, chqualification, chsalarysleep, chsavingacctstatement,
             chsocietyloan, chvisa;
 
-    EditText edtagrreculturincom, edtannualincome, edtbonus, edtdepartment, edtdesignation, edtexperience, edtgrosssalary,
+    EditText edtagrreculturincom, edtannualincome, edtbonus, edtdepartment, edtdesignation, edtgrosssalary,
             edtincentive, edtnetsalary, edtothercompany, edtotheremidetails, edtotherincome, edtovertime, edtrental, edtrentalincome,
             edttenure, txtCarloan, txtHomeloan, txtpersonalloan, txtsocietyloan;
+
+    Spinner edtexperience, edtexperiencemonths;
 
     RadioGroup groupRadioEmployed;
     RelativeLayout layoutothercompany, layoutotheremi;
@@ -102,7 +104,8 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             cSalaryType = SPsalarytype.getSelectedItem().toString();
             cOthercompany = edtothercompany.getText().toString();
             cTenure = edttenure.getText().toString();
-            cEcperience = edtexperience.getText().toString();
+            cEcperience = edtexperience.getSelectedItem().toString();
+            cEcperiencemonths = edtexperiencemonths.getSelectedItem().toString();
 
             cDept = edtdepartment.getText().toString();
 
@@ -358,6 +361,8 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
         String[] CompanyType = new String[]{"Private ltd", "Public ltd", "Limited Liability Partnership", "Partnership", "Sole Partnership", "Liason office/Repesentative office", "Project Office", "Branch Office", "joint venture company", "Subsidiary company", "Unilimited Company", "Other"};
         String[] SalaryType = new String[]{"AC Credit/Cheque", "Cash", "Comission"};
         String[] EMI = new String[]{"Car", "Home Loan", "Sociaty Loan/Employer Loan", "Other"};
+        String[] EXyear = new String[]{"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"};
+        String[] EXmonth = new String[]{"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
         layoutothercompany = (RelativeLayout) view.findViewById(R.id.layoutothercompany);
         layoutotheremi = (RelativeLayout) view.findViewById(R.id.layoutotheremidetails);
         groupRadioEmployed = (RadioGroup) view.findViewById(R.id.radioOccupation);
@@ -367,7 +372,18 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
         SPcompanytype.setOnItemSelectedListener(this);
         SPsalarytype = (Spinner) view.findViewById(R.id.sploantype1);
         edttenure = (EditText) view.findViewById(R.id.txttenure1);
-        edtexperience = (EditText) view.findViewById(R.id.txtexperience1);
+
+        edtexperience = (Spinner) view.findViewById(R.id.txtexperience1);
+        edtexperiencemonths = (Spinner) view.findViewById(R.id.txtmonths1);
+
+        ArrayAdapter<String> spinnerArrayAdapterExperienceyear = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, EXyear);
+        spinnerArrayAdapterExperienceyear.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        edtexperience.setAdapter(spinnerArrayAdapterExperienceyear);
+
+        ArrayAdapter<String> spinnerArrayAdapterExperiencemonth = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, EXmonth);
+        spinnerArrayAdapterExperiencemonth.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        edtexperiencemonths.setAdapter(spinnerArrayAdapterExperiencemonth);
+
         edtdepartment = (EditText) view.findViewById(R.id.txtdepartment1);
         edtdesignation = (EditText) view.findViewById(R.id.txtdesignation1);
         edtgrosssalary = (EditText) view.findViewById(R.id.txtmontlygrossincome1);
@@ -516,6 +532,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             String sQualification = leedsModel.getQualification();
             String sAgreeincome = leedsModel.getAggrecultureIncome();
             String sotherincome = leedsModel.getOtherIncome();
+            String exmonths = leedsModel.getExperiencemonths();
             sEMIcar = leedsModel.getEmiOtherDetails();
             String sBonus = carloanamt;
             String sInsentive = sEMIhome;
@@ -544,7 +561,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
                         Rselfemployed.setChecked(true);
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
             if (othercompany != null) {
@@ -557,8 +574,14 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
                 edttenure.setText(sTenure);
             }
             if (sEMIother != null) {
-                edtexperience.setText(sEMIother);
+//                edtexperience.setText(sEMIother);
+                edtexperience.setSelection(myAdap.getPosition(sEMIother));
             }
+            if (exmonths != null) {
+//                edtexperience.setText(sEMIother);
+                edtexperiencemonths.setSelection(myAdap.getPosition(exmonths));
+            }
+
             if (personalloanamt != null) {
                 edtdepartment.setText(personalloanamt);
             }
@@ -711,8 +734,8 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
                 } else {
                     hideotherEMI();
                 }
-            }catch (Exception e){
-                Toast.makeText(getContext(),"checkbox",Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "checkbox", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -737,6 +760,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             leedsModel.setOthercompany(cOthercompany);
             leedsModel.setTenure(cTenure);
             leedsModel.setExperience(cEcperience);
+            leedsModel.setExperiencemonths(cEcperiencemonths);
             leedsModel.setDepartment(cDept);
             leedsModel.setDesignation(cDesignation);
             leedsModel.setGrosssalary(cGrossslr);
