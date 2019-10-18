@@ -204,9 +204,9 @@
                                 android:textColor="@color/darkgraycolor"
                                 android:textSize="14dp" />
 
-                            <EditText
+                            <Spinner
                                 android:id="@+id/txttenure1"
-                                android:layout_width="match_parent"
+                                android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
@@ -216,6 +216,44 @@
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/txttenureyear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Years"
+                                android:layout_toRightOf="@+id/txttenure1"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14dp" />
+
+                            <Spinner
+                                android:id="@+id/txttenuremonth"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_toRightOf="@+id/txttenureyear"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/texttenuremonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Months"
+                                android:layout_toRightOf="@+id/txttenuremonth"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14dp" />
+
                         </RelativeLayout>
 
                         <RelativeLayout

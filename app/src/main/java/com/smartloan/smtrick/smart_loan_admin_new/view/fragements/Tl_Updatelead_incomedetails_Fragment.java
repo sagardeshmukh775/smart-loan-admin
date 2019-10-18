@@ -56,7 +56,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             cExperinceltr, cForm16, cGrossslr, cHomeloan, cHomeloanamt, cITR, cIncentive, cMonthly, cNRAbankstmt, cNetslr, cOtherEMIdetails,
             cOthercompany, cOtherincome, cOtherloan, cOverbank, cOvertime, cPOA, cPartnerdeed, cPassport, cPersonalloan, cPersonalloanamt,
             cQulification, cRental, cRentalincome, cSalaried, cSalaryType, cSalarysleep, cSavingbnkstmt, cSelfEmployed, cSocietyloan,
-            cSocietyloanamt, cTenure, cVisa;
+            cSocietyloanamt, cTenure,cTenuremonth, cVisa;
 
     CheckBox chNREbankstatement, chPOA, chappointmentletter, chbankstatement, chbisunessagreement, chcarloan, chconfermationletter,
             chcontractletter, chcurrentbankstatement, chemployerletter, chexperieceletter, chformno16, chhomloan, chitr, chotherloan,
@@ -65,9 +65,9 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
 
     EditText edtagrreculturincom, edtannualincome, edtbonus, edtdepartment, edtdesignation, edtgrosssalary,
             edtincentive, edtnetsalary, edtothercompany, edtotheremidetails, edtotherincome, edtovertime, edtrental, edtrentalincome,
-            edttenure, txtCarloan, txtHomeloan, txtpersonalloan, txtsocietyloan;
+             txtCarloan, txtHomeloan, txtpersonalloan, txtsocietyloan;
 
-    Spinner edtexperience, edtexperiencemonths;
+    Spinner edttenure,edttenuremonth,edtexperience, edtexperiencemonths;
 
     RadioGroup groupRadioEmployed;
     RelativeLayout layoutothercompany, layoutotheremi;
@@ -103,7 +103,8 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             cCompanytype = SPcompanytype.getSelectedItem().toString();
             cSalaryType = SPsalarytype.getSelectedItem().toString();
             cOthercompany = edtothercompany.getText().toString();
-            cTenure = edttenure.getText().toString();
+            cTenure = edttenure.getSelectedItem().toString();
+            cTenuremonth = edttenuremonth.getSelectedItem().toString();
             cEcperience = edtexperience.getSelectedItem().toString();
             cEcperiencemonths = edtexperiencemonths.getSelectedItem().toString();
 
@@ -371,7 +372,16 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
         SPcompanytype = (Spinner) view.findViewById(R.id.spinnercompanytype);
         SPcompanytype.setOnItemSelectedListener(this);
         SPsalarytype = (Spinner) view.findViewById(R.id.sploantype1);
-        edttenure = (EditText) view.findViewById(R.id.txttenure1);
+        edttenure = (Spinner) view.findViewById(R.id.txttenure1);
+        edttenuremonth = (Spinner) view.findViewById(R.id.txttenuremonth);
+
+        ArrayAdapter<String> spinnerArrayAdapterTenureyear = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, EXyear);
+        spinnerArrayAdapterTenureyear.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        edttenure.setAdapter(spinnerArrayAdapterTenureyear);
+
+        ArrayAdapter<String> spinnerArrayAdapterTenuremonth = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, EXmonth);
+        spinnerArrayAdapterTenuremonth.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        edttenuremonth.setAdapter(spinnerArrayAdapterTenuremonth);
 
         edtexperience = (Spinner) view.findViewById(R.id.txtexperience1);
         edtexperiencemonths = (Spinner) view.findViewById(R.id.txtmonths1);
@@ -491,6 +501,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             String sEMIother = leedsModel.getEmiother();
             String othercompany = leedsModel.getOthercompany();
             String sTenure = leedsModel.getTenure();
+            String sTenuremonth = leedsModel.getTenuremonth();
             String sEMIother2 = sEMIother;
             sEMIother = leedsModel.getExperience();
             String personalloanamt2 = personalloanamt;
@@ -570,16 +581,24 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             if (sEMIcar != null) {
                 edtotheremidetails.setText(sEMIcar);
             }
+            ArrayAdapter myAdap5 = (ArrayAdapter) edttenure.getAdapter();
             if (sTenure != null) {
-                edttenure.setText(sTenure);
+                edttenure.setSelection(myAdap5.getPosition(sTenure));
             }
-            if (sEMIother != null) {
+            ArrayAdapter myAdap6 = (ArrayAdapter) edttenuremonth.getAdapter();
+            if (sTenuremonth != null) {
+                edttenuremonth.setSelection(myAdap6.getPosition(sTenuremonth));
+            }
+
+            ArrayAdapter myAdap1 = (ArrayAdapter) edtexperience.getAdapter();
+            if (sEMIother != null && sEMIother != "") {
 //                edtexperience.setText(sEMIother);
-                edtexperience.setSelection(myAdap.getPosition(sEMIother));
+                edtexperience.setSelection(myAdap1.getPosition(sEMIother));
             }
+            ArrayAdapter myAdap2 = (ArrayAdapter) edtexperiencemonths.getAdapter();
             if (exmonths != null) {
 //                edtexperience.setText(sEMIother);
-                edtexperiencemonths.setSelection(myAdap.getPosition(exmonths));
+                edtexperiencemonths.setSelection(myAdap2.getPosition(exmonths));
             }
 
             if (personalloanamt != null) {
@@ -759,6 +778,7 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             leedsModel.setEmiother(cOtherloan);
             leedsModel.setOthercompany(cOthercompany);
             leedsModel.setTenure(cTenure);
+            leedsModel.setTenuremonth(cTenuremonth);
             leedsModel.setExperience(cEcperience);
             leedsModel.setExperiencemonths(cEcperiencemonths);
             leedsModel.setDepartment(cDept);
