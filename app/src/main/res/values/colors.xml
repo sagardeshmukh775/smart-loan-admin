@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#1E88E5</color>
     <color name="bgBackSideColor">#f4f0ff</color>
     <color name="bgTitleLeft">#594691</color>
     <color name="bgTitleRight">#ffffff</color>
@@ -46,5 +46,7 @@
     <color name="background">#34495E</color>
 
     <color name="app">#EC6F70</color>
+    <color name="green_">#48C9B0</color>
+
 
 </resources>

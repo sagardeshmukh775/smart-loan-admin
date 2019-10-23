@@ -4,14 +4,23 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener.ClickListener;
@@ -45,6 +54,7 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
     int toDay;
     int toMonth;
     int toYear;
+    EditText Search;
 
     /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Tc_fragment_lead_tab_generatedlead$1 */
     class C09521 implements ClickListener {
@@ -87,9 +97,61 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(new LinearLayoutManager(getActivity()));
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(), 1));
+            this.tcFragmentLeadTabGeneratedleadBinding.txtsearch1.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!s.toString().isEmpty()) {
+                        setAdapter(s.toString());
+                    } else {
+                        /*
+                         * Clear the list when editText is empty
+                         * */
+                        leedsModelArrayList.clear();
+                        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.removeAllViews();
+
+                    }
+                }
+            });
             getteLeed();
         }
         return this.tcFragmentLeadTabGeneratedleadBinding.getRoot();
+    }
+
+    private void setAdapter(final String toString) {
+
+        FirebaseDatabase.getInstance().getReference("users").orderByChild("role").equalTo("SERVICE PROVIDER").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                leedsModelArrayList.clear();
+                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.removeAllViews();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    LeedsModel leedsModel = snapshot.getValue(LeedsModel.class);
+                    if (leedsModel.getCustomerName() != null) {
+                        if (leedsModel.getCustomerName().toLowerCase().contains(toString)) {
+                            leedsModelArrayList.add(leedsModel);
+                        }
+                    }
+                }
+                serAdapter(leedsModelArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private LeedsModel getModel(int position) {

@@ -41,7 +41,7 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
 
     AppSharedPreference appSharedPreference;
     Button btcancel, btnupdatenext, btupdate, btverify;
-    String cPartner,lGenby;
+    String cPartner, lGenby;
     LeedRepository leedRepository;
     LeedsModel leedsModel;
     ArrayList<LeedsModel> leedsModelArrayList;
@@ -50,6 +50,7 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
     Spinner spinloantype;
     String sploantype;
     TextView txtgeneratedby, txtldate, txtleadid, txtleadidtop, txttime;
+    TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent,txtLoanType;
 
     @Override
     public void onClick(View view) {
@@ -104,7 +105,7 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
             fragment2.setArguments(bundle);
 
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.detailContainer,  fragment2);
+            ft.replace(R.id.detailContainer, fragment2);
             ft.commit();
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
@@ -115,7 +116,7 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.updatelead_activity, container, false);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
+        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 //        leedsModel = (LeedsModel) getActivity().getIntent().getSerializableExtra(Constant.LEED_MODEL);
         Bundle args = this.getArguments();
         if (args != null) {
@@ -125,7 +126,7 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
-        String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY","BALANCE TRANSFER"};
+        String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY", "BALANCE TRANSFER"};
         btupdate = (Button) view.findViewById(R.id.buttonupdate);
         btverify = (Button) view.findViewById(R.id.buttonverify);
         btcancel = (Button) view.findViewById(R.id.buttoncancel);
@@ -136,15 +137,32 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         spinloantype = (Spinner) view.findViewById(R.id.sploantype1);
         txtgeneratedby = (TextView) view.findViewById(R.id.txtagentid1);
         txtleadidtop = (TextView) view.findViewById(R.id.textheader);
+
+        txtLeedId = (TextView) view.findViewById(R.id.txt_id_value);
+        txtCustomerName = (TextView) view.findViewById(R.id.txtcnamevalue);
+        txtLoanRequirement = (TextView) view.findViewById(R.id.txt_loan_requirement_value);
+        txtAgent = (TextView) view.findViewById(R.id.txt_bp_value);
+        txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
+
+        txtLeedId.setText(leedsModel.getLeedNumber());
+        txtCustomerName.setText(leedsModel.getCustomerName());
+        if (leedsModel.getLoanrequirement() != null) {
+            txtLoanRequirement.setText(leedsModel.getLoanrequirement());
+        }else {
+            txtLoanRequirement.setText("Null");
+        }
+        txtAgent.setText(leedsModel.getAgentName());
+        txtLoanType.setText(leedsModel.getLoanType());
+
         spinloantype.setOnItemSelectedListener(this);
         ArrayAdapter<String> spinnerArrayAdapterloantype = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, loanType);
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinloantype.setAdapter(spinnerArrayAdapterloantype);
         getdata();
-        btupdate.setOnClickListener( new C08401());
-        btverify.setOnClickListener( new C08412());
-        btcancel.setOnClickListener( new C08423());
-        btnupdatenext.setOnClickListener( new C08434());
+        btupdate.setOnClickListener(new C08401());
+        btverify.setOnClickListener(new C08412());
+        btcancel.setOnClickListener(new C08423());
+        btnupdatenext.setOnClickListener(new C08434());
         return view;
     }
 

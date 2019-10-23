@@ -25,6 +25,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleTint="@color/hederbackground"
+            android:backgroundTint="@color/hederbackground"
             android:layout_marginTop="16dp">
 
             <android.support.design.widget.TextInputEditText
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:passwordToggleTint="@color/hederbackground"
+            android:backgroundTint="@color/hederbackground"
             app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText

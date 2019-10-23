@@ -83,10 +83,10 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getLoanrequirement()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getLoanrequirement());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
+//            if (!Utility.isEmptyOrNull(leedModel.getLoanrequirement()))
+//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getLoanrequirement());
+//            else
+//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
 //            if (!Utility.isEmptyOrNull(leedModel.getMobileNumber()))
 //                holder.telecallerLeedsAdapterLayoutBinding.agentNumber.setText(leedModel.getMobileNumber());
 //            else
