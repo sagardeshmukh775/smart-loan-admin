@@ -1,6 +1,7 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -40,6 +42,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClas
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
 
@@ -126,8 +129,14 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
+    Button UpdateBankAndSales;
+
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
+    }
+
+    private Bank getModel(int position) {
+        return leedsArraylist.get(leedsArraylist.size() - 1 - position);
     }
 
     @Nullable
@@ -165,6 +174,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtBank = (EditText) view.findViewById(R.id.edtbank);
         edtSalesPerson = (EditText) view.findViewById(R.id.edtsalespersonname);
+        UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -208,6 +218,21 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                 });
 
                 dialog1.show();
+
+                banksRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), banksRecycler, new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Bank leedsModel = getModel(position);
+                        edtBank.setText(leedsModel.getBankname());
+                        dialog1.dismiss();
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                    }
+
+                }));
             }
         });
 
@@ -568,15 +593,41 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             }
         });
 
+        UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLeadDetails(leedsModel);
+            }
+        });
+
         return view;
     }
 
-    private void HideFields(RelativeLayout layout) {
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layout.getLayoutParams();
-        params1.height = 0;
-        layout.setLayoutParams(params1);
+    private void updateLeadDetails(LeedsModel leedsModel) {
+        leedsModel.setBanknName(edtBank.getText().toString());
+        if (edtSalesPerson.getText().toString() != null) {
+            leedsModel.setSalesPerson(edtSalesPerson.getText().toString());
+        }
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
+    private void updateLeed(String leedId, Map leedsMap) {
+        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+                Context context = getContext();
+                Utility.showLongMessage(context, context.getString(R.string.server_error));
+
+            }
+        });
+    }
 
     private void getdata() {
 //        try {
@@ -1320,6 +1371,13 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
             }
         });
+    }
+
+
+    private void HideFields(RelativeLayout layout) {
+        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+        params1.height = 0;
+        layout.setLayoutParams(params1);
     }
 
     public void onItemSelected(AdapterView<?> adapterView, View arg1, int position, long id) {
