@@ -69,7 +69,6 @@
                         android:orientation="horizontal"
                         android:weightSum="100">
 
-
                             <ImageView
                                 android:id="@+id/profile_image"
                                 android:layout_width="match_parent"
@@ -79,8 +78,6 @@
                                 android:layout_weight="80"
                                 android:src="@drawable/avatar" />
 
-
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -89,7 +86,6 @@
                             android:layout_weight="20"
                             android:orientation="horizontal"
                             android:weightSum="100">
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -139,7 +135,6 @@
                                     android:text="B.P."
                                     android:textColor="@color/whitetextcolor"
                                     android:textSize="14dp" />
-
 
                             </LinearLayout>
 
@@ -209,7 +204,6 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -255,7 +249,6 @@
                         android:text="Leed Details:"
                         android:textColor="@color/hederbackground"
                         android:textSize="20dp" />
-
 
                     <RelativeLayout
                         android:id="@+id/layoutmainlead"
@@ -362,7 +355,6 @@
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
                         </RelativeLayout>
-
 
                         <RelativeLayout
                             android:id="@+id/layoutagentid"
@@ -480,7 +472,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="30dp"
-                                android:background="@color/btnRequest"
+                                android:background="@color/hederbackground"
                                 android:gravity="center_horizontal"
                                 android:padding="10dp"
                                 android:text="UPDATE/NEXT"
@@ -542,8 +534,8 @@
 
                 </RelativeLayout>
 
-
             </RelativeLayout>
+
         </ScrollView>
 
     </LinearLayout>

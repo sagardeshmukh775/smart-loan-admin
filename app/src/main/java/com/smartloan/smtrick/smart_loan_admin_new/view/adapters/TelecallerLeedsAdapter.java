@@ -50,10 +50,10 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getExpectedLoanAmount()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getExpectedLoanAmount());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
+//            if (!Utility.isEmptyOrNull(leedModel.getExpectedLoanAmount()))
+//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getExpectedLoanAmount());
+//            else
+//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
 //            if (!Utility.isEmptyOrNull(leedModel.getExpectedLoanAmount()))
 //                holder.telecallerLeedsAdapterLayoutBinding.txtAmountValue.setText(leedModel.getExpectedLoanAmount());
 //            else

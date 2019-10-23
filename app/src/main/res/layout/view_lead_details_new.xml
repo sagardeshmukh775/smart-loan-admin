@@ -41,6 +41,248 @@
         android:padding="5.0dip"
         android:weightSum="100.0">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="1dp"
+            android:weightSum="100">
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:clickable="true"
+                android:focusable="true"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="3dp"
+                card_view:cardMaxElevation="3dp"
+                card_view:cardUseCompatPadding="true"
+                android:layout_weight="50"
+                card_view:contentPadding="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:padding="2dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="80"
+                            android:src="@drawable/avatar" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_margin="5dp"
+                            android:layout_weight="20"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/txtcnamevalue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="C Name:"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/whitetextcolor"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/txt_id_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Id:"
+                                    android:background="@drawable/button_bg"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/txt_loan_type_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="loan type"
+                                    android:textColor="@color/whitetextcolor"
+                                    android:textSize="17dp" />
+
+                                <TextView
+                                    android:id="@+id/txt_loan_requirement_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="loan requirement"
+                                    android:textColor="@color/whitetextcolor"
+                                    android:textSize="14dp" />
+
+                                <TextView
+                                    android:id="@+id/txt_bp_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="B.P."
+                                    android:textColor="@color/whitetextcolor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="6dp"
+                        android:background="@color/lightgray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        android:weightSum="100">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Agent:"
+                                android:textColor="@color/whitetextcolor"
+                                android:textSize="14dp" />
+
+                            <ImageView
+                                android:id="@+id/agent_call"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/call" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Client:"
+                                android:textColor="@color/whitetextcolor"
+                                android:textSize="14dp" />
+
+                            <ImageView
+                                android:id="@+id/client_call"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/call" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:padding="3dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="50">
+
+                <EditText
+                    android:id="@+id/edtbank"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_marginBottom="5.0dip"
+                    android:layout_toRightOf="@id/txtbankname"
+                    android:background="@drawable/edittextanimation"
+                    android:inputType="textMultiLine"
+                    android:padding="10.0dip"
+                    android:text=""
+                    android:hint="Tap to select the bank"
+                    android:focusable="false"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="14.0dip" />
+
+                <EditText
+                    android:id="@+id/edtsalespersonname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_marginBottom="5.0dip"
+                    android:layout_toRightOf="@id/txtsalespersonname"
+                    android:background="@drawable/edittextanimation"
+                    android:inputType="textMultiLine"
+                    android:padding="10.0dip"
+                    android:text=""
+                    android:hint="Tap to select the Sales Person"
+                    android:focusable="false"
+                    android:textColor="@color/mainTextColor"
+                    android:textSize="14.0dip" />
+
+                <Button
+                    android:id="@+id/buttonupdate2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33.0"
+                    android:background="@drawable/button_bg"
+                    android:text="UPDATE"
+                    android:textColor="#ffffffff"
+                    android:textSize="16.0sp"
+                    android:textStyle="bold" />
+                <!--<Spinner-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="6dp"
+            android:background="@color/lightgray" />
+
         <ScrollView
             android:id="@id/scrollviewrightleft"
             android:layout_width="wrap_content"

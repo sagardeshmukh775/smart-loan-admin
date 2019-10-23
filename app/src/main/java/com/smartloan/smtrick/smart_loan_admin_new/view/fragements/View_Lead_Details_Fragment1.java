@@ -1,24 +1,31 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
+import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -27,6 +34,8 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
@@ -46,7 +55,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     TextView chAdhar, chDL, chPAN, chPassport, chProofAdhar, chProofCurrentacctStmt, chProofElectricitybill, chProofGovtEmpid,
             chProofGumasta, chProofPassport, chProofRntagmt, chProofVoterid, chProofdl, chVoterID;
 
-    TextView Currentarea, Currentlandmark, Currentpin, Currentstreet,AddressYN, edtotherrelationship, edtreferenceaddress, edtreferenceaddress2, edtreferencecontactno,
+    TextView Currentarea, Currentlandmark, Currentpin, Currentstreet, AddressYN, edtotherrelationship, edtreferenceaddress, edtreferenceaddress2, edtreferencecontactno,
             edtreferencecontactno2, edtreferencename, edtreferencename2, edtreferencerelationship, edtreferencerelationship2,
             etaddress, etalternatecontact, etbirthdate, etcEmail, etcname, etcontatct,
             etoffaddress, etother, etpermanantaddress;
@@ -80,7 +89,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     //PROPERTY
     TextView SPpropertytype;
     TextView edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea,
-            edtprojectname, edtbankname, edtbranchname, edtifsccode, edtappointment,edtappointmentreschedule;
+            edtprojectname, edtbankname, edtbranchname, edtifsccode, edtappointment, edtappointmentreschedule;
 
     List<String> SalesPerson;
     List<User> userlist;
@@ -98,7 +107,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             layoutLoanrequirement, layoutDownpayment, layotDescription, layoutsalesperson, layoutreferencefullname, layoutreferenceaddress, layoutreferencecontactno,
             layoutreferencerelationhsip, layoutreference2fullname, layoutreference2address, layoutreference2contactno, layoutreference2relationhsip,
             layoutCompanytype, layoutpermenantaddress, layoutotherrelationship,
-            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment,lauoutappointmentreschedule,Layoutsalesperson;
+            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
 
     RelativeLayout layoutMECarloan, layoutMEhomeloan, layoutMEsocietyloan, layoutMEpersonalloan, layoutMEotherlon,
             layoutkycadaar, layoutkycpan, layoutkycvoterid, layoutkycdl, layoutkycpassport;
@@ -107,6 +116,19 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             layoutsalarysalarysleep, layoutsalarybankstmt, layoutsalaryform16, layoutsalaryappointment, layoutsalaryconfermation, layoutsalaryreleiving,
             layoutnrivisa, layoutnripassport, layoutnriemployerletter, layoutnricontractletter, layoutnriPOA, layoutnriNREbankacctstmt, layoutnrioverseasebank,
             layoutselfITR, layoutselfcurrentacctstmt, layoutselfsavingacct, layoutselfpartnersheepdeed, layoutselfbusinessagreement, layoutselfqualificationcertificate;
+
+    TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
+    EditText edtBank, edtSalesPerson;
+
+    ArrayList<Bank> leedsArraylist;
+    ArrayList<User> userArraylist;
+    private List<String> listmaritalstatus;
+    BanksAdapter adapter;
+    SalesPersonAdapter useradapter;
+
+    private User getUserModel(int position) {
+        return userArraylist.get(userArraylist.size() - 1 - position);
+    }
 
     @Nullable
     @Override
@@ -131,7 +153,121 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         String[] CoapplicantRelation = new String[]{"Spouse", "Parents", "Children", "Power of Attorney", "Please specify"};
 
         SalesPerson = new ArrayList<>();
+        leedsArraylist = new ArrayList<>();
+        userArraylist = new ArrayList<>();
+        listmaritalstatus = new ArrayList<>();
         getSalesperson();
+
+        txtLeedId = (TextView) view.findViewById(R.id.txt_id_value);
+        txtCustomerName = (TextView) view.findViewById(R.id.txtcnamevalue);
+        txtLoanRequirement = (TextView) view.findViewById(R.id.txt_loan_requirement_value);
+        txtAgent = (TextView) view.findViewById(R.id.txt_bp_value);
+        txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
+        edtBank = (EditText) view.findViewById(R.id.edtbank);
+        edtSalesPerson = (EditText) view.findViewById(R.id.edtsalespersonname);
+
+        txtLeedId.setText(leedsModel.getLeedNumber());
+        txtCustomerName.setText(leedsModel.getCustomerName());
+        if (leedsModel.getLoanrequirement() != null) {
+            txtLoanRequirement.setText(leedsModel.getLoanrequirement());
+        } else {
+            txtLoanRequirement.setText("Null");
+        }
+        txtAgent.setText(leedsModel.getAgentName());
+        txtLoanType.setText(leedsModel.getLoanType());
+
+        edtBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog1 = new Dialog(getContext());
+                dialog1.setContentView(R.layout.customdialogboxbanks);
+
+                final RecyclerView banksRecycler = (RecyclerView) dialog1.findViewById(R.id.bank_recycle);
+                EditText search = (EditText) dialog1.findViewById(R.id.txtsearchbank);
+
+                leedRepository.readAllBanks(new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+
+                        if (object != null) {
+                            leedsArraylist = (ArrayList<Bank>) object;
+                        }
+                        adapter = new BanksAdapter(getContext(), leedsArraylist);
+
+                        //adding adapter to recyclerview
+                        banksRecycler.setAdapter(adapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        banksRecycler.setHasFixedSize(true);
+                        banksRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
+                dialog1.show();
+            }
+        });
+
+        edtSalesPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.customdialogboxsalesperson);
+
+                final RecyclerView salespersonRecycler = (RecyclerView) dialog.findViewById(R.id.dialog_recycle_salesperson);
+
+                leedRepository.readUserByRole(SALES, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+
+                        if (object != null) {
+                            userArraylist = (ArrayList<User>) object;
+                        }
+
+                        for (int i = 0; i < userArraylist.size(); i++) {
+                            String user = userArraylist.get(i).getUserName();
+                            listmaritalstatus.add(user);
+                        }
+
+                        useradapter = new SalesPersonAdapter(getContext(), userArraylist);
+                        //adding adapter to recyclerview
+                        salespersonRecycler.setAdapter(useradapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        salespersonRecycler.setHasFixedSize(true);
+                        salespersonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                salespersonRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), salespersonRecycler, new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        User leedsModel = getUserModel(position);
+                        SPsalesperson.setText(leedsModel.getUserName());
+                        dialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                    }
+
+                }));
+            }
+        });
+
 
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
@@ -445,718 +581,718 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     private void getdata() {
 //        try {
 
-            ////////////////////////////////////LEED DETAILS////////////////////////////////////////////////
+        ////////////////////////////////////LEED DETAILS////////////////////////////////////////////////
 
-            String leedid = leedsModel.getLeedNumber();
-            String agentname = leedsModel.getAgentName();
-            Long ldatetime = leedsModel.getCreatedDateTimeLong();
-            Long time = leedsModel.getCreatedDateTimeLong();
-            spinloantype.setText(leedsModel.getLoanType());
+        String leedid = leedsModel.getLeedNumber();
+        String agentname = leedsModel.getAgentName();
+        Long ldatetime = leedsModel.getCreatedDateTimeLong();
+        Long time = leedsModel.getCreatedDateTimeLong();
+        spinloantype.setText(leedsModel.getLoanType());
 
 
-            if (ldatetime != null) {
-                txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
-            }
-            if (time != null) {
-                txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
-            }
-            if (leedid != null) {
+        if (ldatetime != null) {
+            txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
+        }
+        if (time != null) {
+            txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
+        }
+        if (leedid != null) {
 //                txtleadid.setText(leedid);
-                txtleadidvalue.setText(leedid);
-            }
-            if (agentname != null) {
-                txtgeneratedby.setText(agentname);
-            }
+            txtleadidvalue.setText(leedid);
+        }
+        if (agentname != null) {
+            txtgeneratedby.setText(agentname);
+        }
 
-            ///////////////////////////////////////APPLICANT DETAILS/////////////////////////////////////////////////////
+        ///////////////////////////////////////APPLICANT DETAILS/////////////////////////////////////////////////////
 
-            String cname = leedsModel.getCustomerName();
-            String gender = leedsModel.getGender();
-            String birthdate = leedsModel.getDateOfBirth();
-            String contact = leedsModel.getMobileNumber();
-            String altcontact = leedsModel.getAlternetMobileNumber();
-            String email = leedsModel.getEmail();
-            String education = leedsModel.getEducation();
-            String otherEdu = leedsModel.getOtherEducation();
-            String caddress = leedsModel.getAddress();
-            String peraddress = leedsModel.getPeraddress();
-            String currentpin = leedsModel.getCurrentpin();
-            String currentlandmark = leedsModel.getCurrentlandmark();
-            String currentarea = leedsModel.getCurrentarea();
-            String currentstreet = leedsModel.getCurrentstreet();
-            String addressYN = leedsModel.getAddressYesNo();
-            String perPIN = leedsModel.getPincode();
-            String perLand = leedsModel.getLandmark();
-            String perArea = leedsModel.getArea();
-            String perStreet = leedsModel.getStreet();
-            String residencial = leedsModel.getRecidential();
-            String officeaddress = leedsModel.getofficeAdderess();
+        String cname = leedsModel.getCustomerName();
+        String gender = leedsModel.getGender();
+        String birthdate = leedsModel.getDateOfBirth();
+        String contact = leedsModel.getMobileNumber();
+        String altcontact = leedsModel.getAlternetMobileNumber();
+        String email = leedsModel.getEmail();
+        String education = leedsModel.getEducation();
+        String otherEdu = leedsModel.getOtherEducation();
+        String caddress = leedsModel.getAddress();
+        String peraddress = leedsModel.getPeraddress();
+        String currentpin = leedsModel.getCurrentpin();
+        String currentlandmark = leedsModel.getCurrentlandmark();
+        String currentarea = leedsModel.getCurrentarea();
+        String currentstreet = leedsModel.getCurrentstreet();
+        String addressYN = leedsModel.getAddressYesNo();
+        String perPIN = leedsModel.getPincode();
+        String perLand = leedsModel.getLandmark();
+        String perArea = leedsModel.getArea();
+        String perStreet = leedsModel.getStreet();
+        String residencial = leedsModel.getRecidential();
+        String officeaddress = leedsModel.getofficeAdderess();
 
-            String adhar = leedsModel.getadharNo();
-            String pan = leedsModel.getCheckpanCardNumber();
-            String pannumber = leedsModel.getPanCardNumber();
-            String apvoterid = leedsModel.getApvoterid();
-            String apdrivinglicence = leedsModel.getApdrivinglicence();
-            String passport = leedsModel.getAppassport();
+        String adhar = leedsModel.getadharNo();
+        String pan = leedsModel.getCheckpanCardNumber();
+        String pannumber = leedsModel.getPanCardNumber();
+        String apvoterid = leedsModel.getApvoterid();
+        String apdrivinglicence = leedsModel.getApdrivinglicence();
+        String passport = leedsModel.getAppassport();
 
-            String proofadhar = leedsModel.getProofadhar();
-            String proofvoterid = leedsModel.getProofvoterid();
-            String dlproof = leedsModel.getProofdl();
-            String electricitybillproof = leedsModel.getProofelectricitybill();
-            String rentagmtproof = leedsModel.getProofrentagmt();
-            String passportproof = leedsModel.getProofpassport();
-            String gevtidproof = leedsModel.getProofgevtid();
-            String gumastaproof = leedsModel.getProofgumasta();
-            String currentacctprrof = leedsModel.getProofcurrentacctstmt();
+        String proofadhar = leedsModel.getProofadhar();
+        String proofvoterid = leedsModel.getProofvoterid();
+        String dlproof = leedsModel.getProofdl();
+        String electricitybillproof = leedsModel.getProofelectricitybill();
+        String rentagmtproof = leedsModel.getProofrentagmt();
+        String passportproof = leedsModel.getProofpassport();
+        String gevtidproof = leedsModel.getProofgevtid();
+        String gumastaproof = leedsModel.getProofgumasta();
+        String currentacctprrof = leedsModel.getProofcurrentacctstmt();
 
-            String applicantYN = leedsModel.getCoApplicantYN();
-            String prapplicantrelation = leedsModel.getPrapplicantrelation();
-            String coapplicantotherrelation = leedsModel.getCoapplicantotherrelation();
+        String applicantYN = leedsModel.getCoApplicantYN();
+        String prapplicantrelation = leedsModel.getPrapplicantrelation();
+        String coapplicantotherrelation = leedsModel.getCoapplicantotherrelation();
 
-            String prreference1name = leedsModel.getPrreference1name();
-            String prreference1address = leedsModel.getPrreference1address();
-            String prreferencecontactno = leedsModel.getPrreferencecontactno();
-            String prreferencerelationship = leedsModel.getPrreferencerelationship();
-            String prreference2name = leedsModel.getPrreference2name();
-            String prreference2address = leedsModel.getPrreference2address();
-            String prreference2contactno = leedsModel.getPrreference2contactno();
-            String prreference2relationship = leedsModel.getPrreference2relationship();
+        String prreference1name = leedsModel.getPrreference1name();
+        String prreference1address = leedsModel.getPrreference1address();
+        String prreferencecontactno = leedsModel.getPrreferencecontactno();
+        String prreferencerelationship = leedsModel.getPrreferencerelationship();
+        String prreference2name = leedsModel.getPrreference2name();
+        String prreference2address = leedsModel.getPrreference2address();
+        String prreference2contactno = leedsModel.getPrreference2contactno();
+        String prreference2relationship = leedsModel.getPrreference2relationship();
 
-            if (cname != null) {
-                etcname.setText(cname);
-            }
-            if (gender != null) {
-                txtGender.setText(gender);
-            }
-            if (birthdate != null) {
-                etbirthdate.setText(birthdate);
-            } else {
-                HideFields(layoutDate);
-            }
-            if (contact != null) {
-                etcontatct.setText(contact);
-            } else {
-                HideFields(layoutContact);
-            }
-            if (altcontact != null) {
-                etalternatecontact.setText(altcontact);
-            } else {
-                HideFields(layoutAltContact);
-            }
-            if (email != null) {
-                etcEmail.setText(email);
-            } else {
-                HideFields(layoutEmail);
-            }
-            if (education != null) {
-                txtEducation.setText(education);
-            } else {
-                HideFields(layoutEducation);
-            }
-            if (otherEdu != null && !otherEdu.equalsIgnoreCase("")) {
-                etother.setText(otherEdu);
-            } else {
-                HideFields(layoutOtherDetails);
-            }
-            if (caddress != null && !caddress.equalsIgnoreCase("")) {
-                etaddress.setText(caddress);
-            } else {
-                HideFields(layoutCurrentAddress);
-            }
-            if (peraddress != null && !peraddress.equalsIgnoreCase("")) {
-                etpermanantaddress.setText(peraddress);
-            } else {
-                HideFields(layoutpermenantaddress);
-            }
-            if (currentpin != null && !currentpin.equalsIgnoreCase("")) {
-                Currentpin.setText(currentpin);
-            } else {
-                HideFields(layoutPin);
-            }
-            if (currentlandmark != null && !currentlandmark.equalsIgnoreCase("")) {
+        if (cname != null) {
+            etcname.setText(cname);
+        }
+        if (gender != null) {
+            txtGender.setText(gender);
+        }
+        if (birthdate != null) {
+            etbirthdate.setText(birthdate);
+        } else {
+            HideFields(layoutDate);
+        }
+        if (contact != null) {
+            etcontatct.setText(contact);
+        } else {
+            HideFields(layoutContact);
+        }
+        if (altcontact != null) {
+            etalternatecontact.setText(altcontact);
+        } else {
+            HideFields(layoutAltContact);
+        }
+        if (email != null) {
+            etcEmail.setText(email);
+        } else {
+            HideFields(layoutEmail);
+        }
+        if (education != null) {
+            txtEducation.setText(education);
+        } else {
+            HideFields(layoutEducation);
+        }
+        if (otherEdu != null && !otherEdu.equalsIgnoreCase("")) {
+            etother.setText(otherEdu);
+        } else {
+            HideFields(layoutOtherDetails);
+        }
+        if (caddress != null && !caddress.equalsIgnoreCase("")) {
+            etaddress.setText(caddress);
+        } else {
+            HideFields(layoutCurrentAddress);
+        }
+        if (peraddress != null && !peraddress.equalsIgnoreCase("")) {
+            etpermanantaddress.setText(peraddress);
+        } else {
+            HideFields(layoutpermenantaddress);
+        }
+        if (currentpin != null && !currentpin.equalsIgnoreCase("")) {
+            Currentpin.setText(currentpin);
+        } else {
+            HideFields(layoutPin);
+        }
+        if (currentlandmark != null && !currentlandmark.equalsIgnoreCase("")) {
 
-                Currentlandmark.setText(currentlandmark);
-            } else {
-                HideFields(layoutLandmark);
-            }
-            if (currentarea != null && !currentarea.equalsIgnoreCase("")) {
-                Currentarea.setText(currentarea);
-            } else {
-                HideFields(layoutArea);
-            }
-            if (currentstreet != null && !currentstreet.equalsIgnoreCase("")) {
-                Currentstreet.setText(currentstreet);
-            } else {
-                HideFields(layoutStreet);
-            }
-            if (addressYN != null) {
-                AddressYN.setText("Yes");
-            } else {
-                HideFields(layoutIfSame);
-            }
+            Currentlandmark.setText(currentlandmark);
+        } else {
+            HideFields(layoutLandmark);
+        }
+        if (currentarea != null && !currentarea.equalsIgnoreCase("")) {
+            Currentarea.setText(currentarea);
+        } else {
+            HideFields(layoutArea);
+        }
+        if (currentstreet != null && !currentstreet.equalsIgnoreCase("")) {
+            Currentstreet.setText(currentstreet);
+        } else {
+            HideFields(layoutStreet);
+        }
+        if (addressYN != null) {
+            AddressYN.setText("Yes");
+        } else {
+            HideFields(layoutIfSame);
+        }
 
-            if (perPIN != null && !perPIN.equalsIgnoreCase("")) {
-                pin.setText(perPIN);
-            } else {
-                HideFields(layoutpin1);
-            }
-            if (perLand != null && !perLand.equalsIgnoreCase("")) {
+        if (perPIN != null && !perPIN.equalsIgnoreCase("")) {
+            pin.setText(perPIN);
+        } else {
+            HideFields(layoutpin1);
+        }
+        if (perLand != null && !perLand.equalsIgnoreCase("")) {
 
-                landmark.setText(perLand);
-            } else {
-                HideFields(layoutland);
-            }
-            if (perArea != null && !perArea.equalsIgnoreCase("")) {
-                area.setText(perArea);
-            } else {
-                HideFields(layoutSameArea);
-            }
-            if (perStreet != null && !perStreet.equalsIgnoreCase("")) {
-                street.setText(perStreet);
-            } else {
-                HideFields(layoutSameStreet);
-            }
-            if (officeaddress != null && !officeaddress.equalsIgnoreCase("")) {
-                etoffaddress.setText(officeaddress);
-            } else {
-                HideFields(layoutOfficeAddress);
-            }
+            landmark.setText(perLand);
+        } else {
+            HideFields(layoutland);
+        }
+        if (perArea != null && !perArea.equalsIgnoreCase("")) {
+            area.setText(perArea);
+        } else {
+            HideFields(layoutSameArea);
+        }
+        if (perStreet != null && !perStreet.equalsIgnoreCase("")) {
+            street.setText(perStreet);
+        } else {
+            HideFields(layoutSameStreet);
+        }
+        if (officeaddress != null && !officeaddress.equalsIgnoreCase("")) {
+            etoffaddress.setText(officeaddress);
+        } else {
+            HideFields(layoutOfficeAddress);
+        }
 
-            try {
-                if (residencial != null) {
+        try {
+            if (residencial != null) {
 
-                    Recidential.setText(residencial);
+                Recidential.setText(residencial);
 
-                } else {
-                    HideFields(layoutResidentialtype);
-                }
-            } catch (Exception e) {
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+                HideFields(layoutResidentialtype);
             }
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
-            if (adhar != null) {
-                chAdhar.setText("✔");
-            } else {
-                HideFields(layoutkycadaar);
-            }
-            if (pannumber != null) {
-                chPAN.setText("✔");
-                txtpannumber.setText(pannumber);
-            } else {
-                HideFields(layoutkycpan);
-            }
-            if (apvoterid != null) {
-                chVoterID.setText("✔");
-            } else {
-                HideFields(layoutkycvoterid);
-            }
-            if (apdrivinglicence != null) {
-                chDL.setText("✔");
-            } else {
-                HideFields(layoutkycdl);
-            }
-            if (passport != null) {
-                chPassport.setText("✔");
-            } else {
-                HideFields(layoutkycpassport);
-            }
+        if (adhar != null) {
+            chAdhar.setText("✔");
+        } else {
+            HideFields(layoutkycadaar);
+        }
+        if (pannumber != null) {
+            chPAN.setText("✔");
+            txtpannumber.setText(pannumber);
+        } else {
+            HideFields(layoutkycpan);
+        }
+        if (apvoterid != null) {
+            chVoterID.setText("✔");
+        } else {
+            HideFields(layoutkycvoterid);
+        }
+        if (apdrivinglicence != null) {
+            chDL.setText("✔");
+        } else {
+            HideFields(layoutkycdl);
+        }
+        if (passport != null) {
+            chPassport.setText("✔");
+        } else {
+            HideFields(layoutkycpassport);
+        }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if (proofadhar != null) {
-                chProofAdhar.setText("✔");
-            } else {
-                HideFields(layoutkycproofadhar);
+        if (proofadhar != null) {
+            chProofAdhar.setText("✔");
+        } else {
+            HideFields(layoutkycproofadhar);
+        }
+        if (proofvoterid != null) {
+            chProofVoterid.setText("✔");
+        } else {
+            HideFields(layoutkycproofvoterid);
+        }
+        if (dlproof != null) {
+            chProofdl.setText("✔");
+        } else {
+            HideFields(layoutkycproofdl);
+        }
+        if (electricitybillproof != null) {
+            chProofElectricitybill.setText("✔");
+        } else {
+            HideFields(layoutkycproofelectricitybill);
+        }
+        if (rentagmtproof != null) {
+            chProofRntagmt.setText("✔");
+        } else {
+            HideFields(layoutkycproofrentaggrement);
+        }
+        if (passportproof != null) {
+            chProofPassport.setText("✔");
+        } else {
+            HideFields(layoutkycproofpassport);
+        }
+        if (gevtidproof != null) {
+            chProofGovtEmpid.setText("✔");
+        } else {
+            HideFields(layoutkycproofgovid);
+        }
+        if (gumastaproof != null) {
+            chProofGumasta.setText("✔");
+        } else {
+            HideFields(layoutkycproofgumasta);
+        }
+        if (currentacctprrof != null) {
+            chProofCurrentacctStmt.setText("✔");
+        } else {
+            HideFields(layoutkycproofcurrentacctstmt);
+        }
+        if (applicantYN != null) {
+            txtCoApplicant.setText(applicantYN);
+            if (applicantYN.equalsIgnoreCase("No")) {
+                HideFields(layoutcoapplicantrelation);
             }
-            if (proofvoterid != null) {
-                chProofVoterid.setText("✔");
-            } else {
-                HideFields(layoutkycproofvoterid);
-            }
-            if (dlproof != null) {
-                chProofdl.setText("✔");
-            } else {
-                HideFields(layoutkycproofdl);
-            }
-            if (electricitybillproof != null) {
-                chProofElectricitybill.setText("✔");
-            } else {
-                HideFields(layoutkycproofelectricitybill);
-            }
-            if (rentagmtproof != null) {
-                chProofRntagmt.setText("✔");
-            } else {
-                HideFields(layoutkycproofrentaggrement);
-            }
-            if (passportproof != null) {
-                chProofPassport.setText("✔");
-            } else {
-                HideFields(layoutkycproofpassport);
-            }
-            if (gevtidproof != null) {
-                chProofGovtEmpid.setText("✔");
-            } else {
-                HideFields(layoutkycproofgovid);
-            }
-            if (gumastaproof != null) {
-                chProofGumasta.setText("✔");
-            } else {
-                HideFields(layoutkycproofgumasta);
-            }
-            if (currentacctprrof != null) {
-                chProofCurrentacctStmt.setText("✔");
-            } else {
-                HideFields(layoutkycproofcurrentacctstmt);
-            }
-            if (applicantYN != null) {
-                txtCoApplicant.setText(applicantYN);
-                if (applicantYN.equalsIgnoreCase("No")){
-                    HideFields(layoutcoapplicantrelation);
-                }
 //                HideFields(layoutDate );
 
-            }
-            try {
-                if (prapplicantrelation != null) {
-                    CoapplicantRalationship.setText((prapplicantrelation));
-                } else {
-                    HideFields(layoutcoapplicantrelation);
-                }
-            } catch (Exception e) {
-
-            }
-            if (coapplicantotherrelation != null && !coapplicantotherrelation.equalsIgnoreCase("")) {
-                edtotherrelationship.setText(coapplicantotherrelation);
+        }
+        try {
+            if (prapplicantrelation != null) {
+                CoapplicantRalationship.setText((prapplicantrelation));
             } else {
-                HideFields(layoutotherrelationship);
+                HideFields(layoutcoapplicantrelation);
             }
-            if (prreference1name != null && !prreference1name.equalsIgnoreCase("")) {
-                edtreferencename.setText(prreference1name);
-            } else {
-                HideFields(layoutreferencefullname);
-            }
+        } catch (Exception e) {
 
-            if (prreference1address != null && !prreference1address.equalsIgnoreCase("")) {
-                edtreferenceaddress.setText(prreference1address);
-            } else {
-                HideFields(layoutreferenceaddress);
-            }
-            if (prreferencecontactno != null && !prreferencecontactno.equalsIgnoreCase("")) {
-                edtreferencecontactno.setText(prreferencecontactno);
-            } else {
-                HideFields(layoutreferencecontactno);
-            }
-            if (prreferencerelationship != null && !prreferencerelationship.equalsIgnoreCase("")) {
-                edtreferencerelationship.setText(prreferencerelationship);
-            } else {
-                HideFields(layoutreferencerelationhsip);
-            }
-            if (prreference2name != null && !prreference2name.equalsIgnoreCase("")) {
-                edtreferencename2.setText(prreference2name);
-            } else {
-                HideFields(layoutreference2fullname);
-            }
-            if (prreference2address != null && !prreference2address.equalsIgnoreCase("")) {
-                edtreferenceaddress2.setText(prreference2address);
-            } else {
-                HideFields(layoutreference2address);
-            }
-            if (prreference2contactno != null && !prreference2contactno.equalsIgnoreCase("")) {
-                edtreferencecontactno2.setText(prreference2contactno);
-            } else {
-                HideFields(layoutreference2contactno);
-            }
-            if (prreference2relationship != null && !prreference2relationship.equalsIgnoreCase("")) {
-                edtreferencerelationship2.setText(prreference2relationship);
-            } else {
-                HideFields(layoutreference2relationhsip);
-            }
+        }
+        if (coapplicantotherrelation != null && !coapplicantotherrelation.equalsIgnoreCase("")) {
+            edtotherrelationship.setText(coapplicantotherrelation);
+        } else {
+            HideFields(layoutotherrelationship);
+        }
+        if (prreference1name != null && !prreference1name.equalsIgnoreCase("")) {
+            edtreferencename.setText(prreference1name);
+        } else {
+            HideFields(layoutreferencefullname);
+        }
+
+        if (prreference1address != null && !prreference1address.equalsIgnoreCase("")) {
+            edtreferenceaddress.setText(prreference1address);
+        } else {
+            HideFields(layoutreferenceaddress);
+        }
+        if (prreferencecontactno != null && !prreferencecontactno.equalsIgnoreCase("")) {
+            edtreferencecontactno.setText(prreferencecontactno);
+        } else {
+            HideFields(layoutreferencecontactno);
+        }
+        if (prreferencerelationship != null && !prreferencerelationship.equalsIgnoreCase("")) {
+            edtreferencerelationship.setText(prreferencerelationship);
+        } else {
+            HideFields(layoutreferencerelationhsip);
+        }
+        if (prreference2name != null && !prreference2name.equalsIgnoreCase("")) {
+            edtreferencename2.setText(prreference2name);
+        } else {
+            HideFields(layoutreference2fullname);
+        }
+        if (prreference2address != null && !prreference2address.equalsIgnoreCase("")) {
+            edtreferenceaddress2.setText(prreference2address);
+        } else {
+            HideFields(layoutreference2address);
+        }
+        if (prreference2contactno != null && !prreference2contactno.equalsIgnoreCase("")) {
+            edtreferencecontactno2.setText(prreference2contactno);
+        } else {
+            HideFields(layoutreference2contactno);
+        }
+        if (prreference2relationship != null && !prreference2relationship.equalsIgnoreCase("")) {
+            edtreferencerelationship2.setText(prreference2relationship);
+        } else {
+            HideFields(layoutreference2relationhsip);
+        }
 
 
-            /////////////////////////////////////////INCOME DETAILS//////////////////////////////////////////////////////////
+        /////////////////////////////////////////INCOME DETAILS//////////////////////////////////////////////////////////
 
-            String sEmployed = leedsModel.getEmployed();
-            String sCompanytype = leedsModel.getCompanytype();
-            String othercompany = leedsModel.getOthercompany();
-            String sTenure = leedsModel.getTenure();
-            String experience = leedsModel.getExperience();
-            String department = leedsModel.getDepartment();
-            String designation = leedsModel.getDesignation();
-            String grosssalary = leedsModel.getGrosssalary();
-            String netsalary = leedsModel.getNetsalary();
-            String overtime = leedsModel.getOvertime();
-            String incentive = leedsModel.getIncentive();
-            String bonus = leedsModel.getBonus();
-            String sRentalincom = leedsModel.getRentalincome();
-            String sAgreeincome = leedsModel.getAggrecultureIncome();
-            String sAnnualincome = leedsModel.getAnnualincome();
-            String sotherincome = leedsModel.getOtherIncome();
-            String sSalarytype = leedsModel.getSalaytype();
+        String sEmployed = leedsModel.getEmployed();
+        String sCompanytype = leedsModel.getCompanytype();
+        String othercompany = leedsModel.getOthercompany();
+        String sTenure = leedsModel.getTenure();
+        String experience = leedsModel.getExperience();
+        String department = leedsModel.getDepartment();
+        String designation = leedsModel.getDesignation();
+        String grosssalary = leedsModel.getGrosssalary();
+        String netsalary = leedsModel.getNetsalary();
+        String overtime = leedsModel.getOvertime();
+        String incentive = leedsModel.getIncentive();
+        String bonus = leedsModel.getBonus();
+        String sRentalincom = leedsModel.getRentalincome();
+        String sAgreeincome = leedsModel.getAggrecultureIncome();
+        String sAnnualincome = leedsModel.getAnnualincome();
+        String sotherincome = leedsModel.getOtherIncome();
+        String sSalarytype = leedsModel.getSalaytype();
 
-            String sRental = leedsModel.getRental();
-            String sEMIcar = leedsModel.getEmicar();
-            String sEMIhome = leedsModel.getEmihome();
-            String sEMIsociety = leedsModel.getEmisociety();
-            String sEMIpersonal = leedsModel.getEmipersonal();
-            String carloanamt = leedsModel.getCarLoanAmount();
-            String homeloanamt = leedsModel.getHomeLoanAmount();
-            String societyloanamt = leedsModel.getSocietyLoanAmount();
-            String personalloanamt = leedsModel.getPersonalLoanAmount();
-            String sEMIother = leedsModel.getEmiother();
-            String emiOtherDetails = leedsModel.getEmiOtherDetails();
+        String sRental = leedsModel.getRental();
+        String sEMIcar = leedsModel.getEmicar();
+        String sEMIhome = leedsModel.getEmihome();
+        String sEMIsociety = leedsModel.getEmisociety();
+        String sEMIpersonal = leedsModel.getEmipersonal();
+        String carloanamt = leedsModel.getCarLoanAmount();
+        String homeloanamt = leedsModel.getHomeLoanAmount();
+        String societyloanamt = leedsModel.getSocietyLoanAmount();
+        String personalloanamt = leedsModel.getPersonalLoanAmount();
+        String sEMIother = leedsModel.getEmiother();
+        String emiOtherDetails = leedsModel.getEmiOtherDetails();
 
-            String sSalrysleep = leedsModel.getSalarysleep();
-            String sBankstmt = leedsModel.getBankstmt();
-            String sForm = leedsModel.getForm();
-            String sAppointmentltr = leedsModel.getAppointmentltr();
-            String sConfermationltr = leedsModel.getConformationltr();
-            String sExperinceltr = leedsModel.getExperinceltr();
+        String sSalrysleep = leedsModel.getSalarysleep();
+        String sBankstmt = leedsModel.getBankstmt();
+        String sForm = leedsModel.getForm();
+        String sAppointmentltr = leedsModel.getAppointmentltr();
+        String sConfermationltr = leedsModel.getConformationltr();
+        String sExperinceltr = leedsModel.getExperinceltr();
 
-            String sVisa = leedsModel.getVisa();
-            String sPassport = leedsModel.getPassport();
-            String sEmployerltr = leedsModel.getEmploerltr();
-            String sContractltr = leedsModel.getContractltr();
-            String sPOA = leedsModel.getPoa();
-            String sNREbank = leedsModel.getNrebankstmt();
-            String sOverseasebank = leedsModel.getOverseasbankdetail();
+        String sVisa = leedsModel.getVisa();
+        String sPassport = leedsModel.getPassport();
+        String sEmployerltr = leedsModel.getEmploerltr();
+        String sContractltr = leedsModel.getContractltr();
+        String sPOA = leedsModel.getPoa();
+        String sNREbank = leedsModel.getNrebankstmt();
+        String sOverseasebank = leedsModel.getOverseasbankdetail();
 
-            String sITR = leedsModel.getItr();
-            String sCurrentbank = leedsModel.getCurrentbankstmt();
-            String sSavingbank = leedsModel.getSavingacctstmt();
-            String sPartnerdeed = leedsModel.getPartnersheepdeed();
-            String sBusinessagmt = leedsModel.getBusinessagmt();
-            String sQualification = leedsModel.getQualification();
+        String sITR = leedsModel.getItr();
+        String sCurrentbank = leedsModel.getCurrentbankstmt();
+        String sSavingbank = leedsModel.getSavingacctstmt();
+        String sPartnerdeed = leedsModel.getPartnersheepdeed();
+        String sBusinessagmt = leedsModel.getBusinessagmt();
+        String sQualification = leedsModel.getQualification();
 
-            String bankname = leedsModel.getBanknName();
-            String branchname = leedsModel.getBranchName();
-            String ifsccode = leedsModel.getIfscCode();
-            String appointment = leedsModel.getAppointment();
+        String bankname = leedsModel.getBanknName();
+        String branchname = leedsModel.getBranchName();
+        String ifsccode = leedsModel.getIfscCode();
+        String appointment = leedsModel.getAppointment();
         String appointmentreschedule = leedsModel.getAppointreschedualreason();
-            String salsepersone = leedsModel.getSalesPerson();
+        String salsepersone = leedsModel.getSalesPerson();
 
-            if (bankname != null && !bankname.equalsIgnoreCase("")) {
-                edtbankname.setText(bankname);
-            } else {
-                HideFields(layoutbankname);
-            }
-            if (branchname != null && !branchname.equalsIgnoreCase("")) {
-                edtbranchname.setText(branchname);
-            } else {
-                HideFields(layoutbranchname);
-            }
-            if (ifsccode != null && !ifsccode.equalsIgnoreCase("")) {
-                edtifsccode.setText(ifsccode);
-            } else {
-                HideFields(layoutifsccode);
-            }
-            if (appointment != null && !appointment.equalsIgnoreCase("")) {
-                edtappointment.setText(appointment);
-            } else {
-                HideFields(layoutappointment);
-            }
+        if (bankname != null && !bankname.equalsIgnoreCase("")) {
+            edtbankname.setText(bankname);
+        } else {
+            HideFields(layoutbankname);
+        }
+        if (branchname != null && !branchname.equalsIgnoreCase("")) {
+            edtbranchname.setText(branchname);
+        } else {
+            HideFields(layoutbranchname);
+        }
+        if (ifsccode != null && !ifsccode.equalsIgnoreCase("")) {
+            edtifsccode.setText(ifsccode);
+        } else {
+            HideFields(layoutifsccode);
+        }
+        if (appointment != null && !appointment.equalsIgnoreCase("")) {
+            edtappointment.setText(appointment);
+        } else {
+            HideFields(layoutappointment);
+        }
         if (appointmentreschedule != null && !appointmentreschedule.equalsIgnoreCase("")) {
             edtappointmentreschedule.setText(appointmentreschedule);
         } else {
             HideFields(lauoutappointmentreschedule);
         }
-            try {
-                if (salsepersone != null  && !salsepersone.equalsIgnoreCase("")) {
-                    SPsalesperson.setText(salsepersone);
-                }else {
-                      HideFields(Layoutsalesperson);
-                }
-            } catch (Exception e) {
-
+        try {
+            if (salsepersone != null && !salsepersone.equalsIgnoreCase("")) {
+                SPsalesperson.setText(salsepersone);
+            } else {
+                HideFields(Layoutsalesperson);
             }
-            if (sCompanytype != null) {
+        } catch (Exception e) {
+
+        }
+        if (sCompanytype != null) {
 //                ArrayAdapter myAdap = (ArrayAdapter) SPcompanytype.getAdapter();
-                SPcompanytype.setText(sCompanytype);
-            }
+            SPcompanytype.setText(sCompanytype);
+        }
 
-            if (sEmployed != null) {
-                txtOccupationtype.setText(sEmployed);
-            }
-            if (othercompany != null && !othercompany.equalsIgnoreCase("")) {
-                edtothercompany.setText(othercompany);
-            } else {
-                HideFields(layoutothercompany);
-            }
-            if (sTenure != null && !sTenure.equalsIgnoreCase("")) {
-                edttenure.setText(sTenure);
-            } else {
-                HideFields(layouttenure);
-            }
-            if (experience != null && !experience.equalsIgnoreCase("")) {
-                edtexperience.setText(experience);
-            } else {
-                HideFields(layoutexperience);
-            }
-            if (department != null && !department.equalsIgnoreCase("")) {
-                edtdepartment.setText(department);
-            } else {
-                HideFields(layoutdepartment);
-            }
-            if (designation != null && !designation.equalsIgnoreCase("")) {
-                edtdesignation.setText(designation);
-            } else {
-                HideFields(layoutdesignation);
-            }
+        if (sEmployed != null) {
+            txtOccupationtype.setText(sEmployed);
+        }
+        if (othercompany != null && !othercompany.equalsIgnoreCase("")) {
+            edtothercompany.setText(othercompany);
+        } else {
+            HideFields(layoutothercompany);
+        }
+        if (sTenure != null && !sTenure.equalsIgnoreCase("")) {
+            edttenure.setText(sTenure);
+        } else {
+            HideFields(layouttenure);
+        }
+        if (experience != null && !experience.equalsIgnoreCase("")) {
+            edtexperience.setText(experience);
+        } else {
+            HideFields(layoutexperience);
+        }
+        if (department != null && !department.equalsIgnoreCase("")) {
+            edtdepartment.setText(department);
+        } else {
+            HideFields(layoutdepartment);
+        }
+        if (designation != null && !designation.equalsIgnoreCase("")) {
+            edtdesignation.setText(designation);
+        } else {
+            HideFields(layoutdesignation);
+        }
 
-            if (grosssalary != null && !grosssalary.equalsIgnoreCase("")) {
-                edtgrosssalary.setText(grosssalary);
-            } else {
-                HideFields(layoutgrosssalary);
-            }
-            if (netsalary != null && !netsalary.equalsIgnoreCase("")) {
-                edtnetsalary.setText(netsalary);
-            } else {
-                HideFields(layoutnetsalary);
-            }
-            if (overtime != null && !overtime.equalsIgnoreCase("")) {
-                edtovertime.setText(overtime);
-            } else {
-                HideFields(layoutovertime);
-            }
-            if (incentive != null && !incentive.equalsIgnoreCase("")) {
-                edtincentive.setText(incentive);
-            } else {
-                HideFields(layoutincentive);
-            }
-            if (bonus != null && !bonus.equalsIgnoreCase("")) {
+        if (grosssalary != null && !grosssalary.equalsIgnoreCase("")) {
+            edtgrosssalary.setText(grosssalary);
+        } else {
+            HideFields(layoutgrosssalary);
+        }
+        if (netsalary != null && !netsalary.equalsIgnoreCase("")) {
+            edtnetsalary.setText(netsalary);
+        } else {
+            HideFields(layoutnetsalary);
+        }
+        if (overtime != null && !overtime.equalsIgnoreCase("")) {
+            edtovertime.setText(overtime);
+        } else {
+            HideFields(layoutovertime);
+        }
+        if (incentive != null && !incentive.equalsIgnoreCase("")) {
+            edtincentive.setText(incentive);
+        } else {
+            HideFields(layoutincentive);
+        }
+        if (bonus != null && !bonus.equalsIgnoreCase("")) {
 
-                edtbonus.setText(bonus);
-            } else {
-                HideFields(layoutbonus);
-            }
-            if (sRentalincom != null && !sRentalincom.equalsIgnoreCase("")) {
-                edtrentalincome.setText(sRentalincom);
-            } else {
-                HideFields(layoutrent);
-            }
-            if (sAnnualincome != null && !sAnnualincome.equalsIgnoreCase("")) {
-                edtannualincome.setText(sAnnualincome);
-            } else {
-                HideFields(layoutannualincome);
-            }
-            if (sAgreeincome != null && !sAgreeincome.equalsIgnoreCase("")) {
-                edtagrreculturincom.setText(sAgreeincome);
-            } else {
-                HideFields(layoutagreecultureincome);
-            }
-            if (sotherincome != null && !sotherincome.equalsIgnoreCase("")) {
-                edtotherincome.setText(sotherincome);
-            } else {
-                HideFields(layoutotherincome);
-            }
-            if (sSalarytype != null) {
-                SPsalarytype.setText(sSalarytype);
-            } else {
+            edtbonus.setText(bonus);
+        } else {
+            HideFields(layoutbonus);
+        }
+        if (sRentalincom != null && !sRentalincom.equalsIgnoreCase("")) {
+            edtrentalincome.setText(sRentalincom);
+        } else {
+            HideFields(layoutrent);
+        }
+        if (sAnnualincome != null && !sAnnualincome.equalsIgnoreCase("")) {
+            edtannualincome.setText(sAnnualincome);
+        } else {
+            HideFields(layoutannualincome);
+        }
+        if (sAgreeincome != null && !sAgreeincome.equalsIgnoreCase("")) {
+            edtagrreculturincom.setText(sAgreeincome);
+        } else {
+            HideFields(layoutagreecultureincome);
+        }
+        if (sotherincome != null && !sotherincome.equalsIgnoreCase("")) {
+            edtotherincome.setText(sotherincome);
+        } else {
+            HideFields(layoutotherincome);
+        }
+        if (sSalarytype != null) {
+            SPsalarytype.setText(sSalarytype);
+        } else {
 //                HideFields(layoutDate );
-            }
+        }
 
-            if (sRental != null && !sRental.equalsIgnoreCase("")) {
-                edtrental.setText(sRental);
-            } else {
-                HideFields(layoutrentalexpence);
-            }
-            if (sEMIcar != null && !sEMIcar.equalsIgnoreCase("")) {
-                chcarloan.setText("✔");
-                txtCarloan.setText(carloanamt);
-            } else {
-                HideFields(layoutMECarloan);
-            }
-            if (sEMIhome != null && !sEMIhome.equalsIgnoreCase("")) {
+        if (sRental != null && !sRental.equalsIgnoreCase("")) {
+            edtrental.setText(sRental);
+        } else {
+            HideFields(layoutrentalexpence);
+        }
+        if (sEMIcar != null && !sEMIcar.equalsIgnoreCase("")) {
+            chcarloan.setText("✔");
+            txtCarloan.setText(carloanamt);
+        } else {
+            HideFields(layoutMECarloan);
+        }
+        if (sEMIhome != null && !sEMIhome.equalsIgnoreCase("")) {
 
-                chhomloan.setText("✔");
-                txtHomeloan.setText(homeloanamt);
-            } else {
-                HideFields(layoutMEhomeloan);
-            }
-            if (sEMIsociety != null && !sEMIsociety.equalsIgnoreCase("")) {
-                chsocietyloan.setText("✔");
-                txtsocietyloan.setText(societyloanamt);
-            } else {
-                HideFields(layoutMEsocietyloan);
-            }
-            if (sEMIpersonal != null && !sEMIpersonal.equalsIgnoreCase("")) {
-                chpersonalloan.setText("✔");
-                txtpersonalloan.setText(personalloanamt);
-            } else {
-                HideFields(layoutMEpersonalloan);
-            }
-            if (sEMIother != null && !sEMIother.equalsIgnoreCase("")) {
-                chotherloan.setText("✔");
-                edtotheremidetails.setText(emiOtherDetails);
+            chhomloan.setText("✔");
+            txtHomeloan.setText(homeloanamt);
+        } else {
+            HideFields(layoutMEhomeloan);
+        }
+        if (sEMIsociety != null && !sEMIsociety.equalsIgnoreCase("")) {
+            chsocietyloan.setText("✔");
+            txtsocietyloan.setText(societyloanamt);
+        } else {
+            HideFields(layoutMEsocietyloan);
+        }
+        if (sEMIpersonal != null && !sEMIpersonal.equalsIgnoreCase("")) {
+            chpersonalloan.setText("✔");
+            txtpersonalloan.setText(personalloanamt);
+        } else {
+            HideFields(layoutMEpersonalloan);
+        }
+        if (sEMIother != null && !sEMIother.equalsIgnoreCase("")) {
+            chotherloan.setText("✔");
+            edtotheremidetails.setText(emiOtherDetails);
 
-            } else {
-                HideFields(layoutMEotherlon);
-            }
-            if (sSalrysleep != null) {
-                chsalarysleep.setText("✔");
-            } else {
-                HideFields(layoutsalarysalarysleep);
-            }
-            if (sBankstmt != null) {
-                chbankstatement.setText("✔");
-            } else {
-                HideFields(layoutsalarybankstmt);
-            }
-            if (sForm != null) {
-                chformno16.setText("✔");
-            } else {
-                HideFields(layoutsalaryform16);
-            }
-            if (sAppointmentltr != null) {
-                chappointmentletter.setText("✔");
-            } else {
-                HideFields(layoutsalaryappointment);
-            }
-            if (sConfermationltr != null) {
-                chconfermationletter.setText("✔");
-            } else {
-                HideFields(layoutsalaryconfermation);
-            }
-            if (sExperinceltr != null) {
-                chexperieceletter.setText("✔");
-            } else {
-                HideFields(layoutsalaryreleiving);
-            }
+        } else {
+            HideFields(layoutMEotherlon);
+        }
+        if (sSalrysleep != null) {
+            chsalarysleep.setText("✔");
+        } else {
+            HideFields(layoutsalarysalarysleep);
+        }
+        if (sBankstmt != null) {
+            chbankstatement.setText("✔");
+        } else {
+            HideFields(layoutsalarybankstmt);
+        }
+        if (sForm != null) {
+            chformno16.setText("✔");
+        } else {
+            HideFields(layoutsalaryform16);
+        }
+        if (sAppointmentltr != null) {
+            chappointmentletter.setText("✔");
+        } else {
+            HideFields(layoutsalaryappointment);
+        }
+        if (sConfermationltr != null) {
+            chconfermationletter.setText("✔");
+        } else {
+            HideFields(layoutsalaryconfermation);
+        }
+        if (sExperinceltr != null) {
+            chexperieceletter.setText("✔");
+        } else {
+            HideFields(layoutsalaryreleiving);
+        }
 
-            if (sVisa != null) {
-                chvisa.setText("✔");
-            } else {
-                HideFields(layoutnrivisa);
-            }
-            if (sPassport != null) {
-                chpassport.setText("✔");
-            } else {
-                HideFields(layoutnripassport);
-            }
-            if (sEmployerltr != null) {
-                chemployerletter.setText("✔");
-            } else {
-                HideFields(layoutnriemployerletter);
-            }
-            if (sContractltr != null) {
-                chcontractletter.setText("✔");
-            } else {
-                HideFields(layoutnricontractletter);
-            }
-            if (sPOA != null) {
-                chPOA.setText("✔");
-            } else {
-                HideFields(layoutnriPOA);
-            }
-            if (sNREbank != null) {
-                chNREbankstatement.setText("✔");
-            } else {
-                HideFields(layoutnriNREbankacctstmt);
-            }
-            if (sOverseasebank != null) {
-                choverbankdetails.setText("✔");
-            } else {
-                HideFields(layoutnrioverseasebank);
-            }
+        if (sVisa != null) {
+            chvisa.setText("✔");
+        } else {
+            HideFields(layoutnrivisa);
+        }
+        if (sPassport != null) {
+            chpassport.setText("✔");
+        } else {
+            HideFields(layoutnripassport);
+        }
+        if (sEmployerltr != null) {
+            chemployerletter.setText("✔");
+        } else {
+            HideFields(layoutnriemployerletter);
+        }
+        if (sContractltr != null) {
+            chcontractletter.setText("✔");
+        } else {
+            HideFields(layoutnricontractletter);
+        }
+        if (sPOA != null) {
+            chPOA.setText("✔");
+        } else {
+            HideFields(layoutnriPOA);
+        }
+        if (sNREbank != null) {
+            chNREbankstatement.setText("✔");
+        } else {
+            HideFields(layoutnriNREbankacctstmt);
+        }
+        if (sOverseasebank != null) {
+            choverbankdetails.setText("✔");
+        } else {
+            HideFields(layoutnrioverseasebank);
+        }
 
-            if (sITR != null) {
-                chitr.setText("✔");
-            } else {
-                HideFields(layoutselfITR);
-            }
-            if (sCurrentbank != null) {
-                chcurrentbankstatement.setText("✔");
-            } else {
-                HideFields(layoutselfcurrentacctstmt);
-            }
-            if (sSavingbank != null) {
-                chsavingacctstatement.setText("✔");
-            } else {
-                HideFields(layoutselfsavingacct);
-            }
-            if (sPartnerdeed != null) {
-                chpartnersheepdeed.setText("✔");
-            } else {
-                HideFields(layoutselfpartnersheepdeed);
-            }
-            if (sBusinessagmt != null) {
-                chbisunessagreement.setText("✔");
-            } else {
-                HideFields(layoutselfbusinessagreement);
-            }
-            if (sQualification != null) {
-                chqualification.setText("✔");
-            } else {
-                HideFields(layoutselfqualificationcertificate);
-            }
+        if (sITR != null) {
+            chitr.setText("✔");
+        } else {
+            HideFields(layoutselfITR);
+        }
+        if (sCurrentbank != null) {
+            chcurrentbankstatement.setText("✔");
+        } else {
+            HideFields(layoutselfcurrentacctstmt);
+        }
+        if (sSavingbank != null) {
+            chsavingacctstatement.setText("✔");
+        } else {
+            HideFields(layoutselfsavingacct);
+        }
+        if (sPartnerdeed != null) {
+            chpartnersheepdeed.setText("✔");
+        } else {
+            HideFields(layoutselfpartnersheepdeed);
+        }
+        if (sBusinessagmt != null) {
+            chbisunessagreement.setText("✔");
+        } else {
+            HideFields(layoutselfbusinessagreement);
+        }
+        if (sQualification != null) {
+            chqualification.setText("✔");
+        } else {
+            HideFields(layoutselfqualificationcertificate);
+        }
 
 
-            //////////////////////////////////////////////PROPERTY DETAILS///////////////////////////////////////////////////////
+        //////////////////////////////////////////////PROPERTY DETAILS///////////////////////////////////////////////////////
 
-            String property = leedsModel.getPropety();
-            String YN = leedsModel.getPropetyYN();
-            String loanrequirement = leedsModel.getExpectedLoanAmount();
-            String downpayment = leedsModel.getDownpayment();
+        String property = leedsModel.getPropety();
+        String YN = leedsModel.getPropetyYN();
+        String loanrequirement = leedsModel.getExpectedLoanAmount();
+        String downpayment = leedsModel.getDownpayment();
 
-            String propertypin = leedsModel.getPrpropertypin();
-            String propertylandmark = leedsModel.getPrpropertylandmark();
-            String propertyarea = leedsModel.getPrpropertyarea();
-            String projectname = leedsModel.getPrprojectname();
-            String description = leedsModel.getPrdescripiton();
-            String propertytype = leedsModel.getPrpropertytype();
+        String propertypin = leedsModel.getPrpropertypin();
+        String propertylandmark = leedsModel.getPrpropertylandmark();
+        String propertyarea = leedsModel.getPrpropertyarea();
+        String projectname = leedsModel.getPrprojectname();
+        String description = leedsModel.getPrdescripiton();
+        String propertytype = leedsModel.getPrpropertytype();
 
 //            ArrayAdapter myAdap4 = (ArrayAdapter) SPpropertytype.getAdapter();
 //            int spinnerPosition = myAdap4.getPosition(propertytype);
-            SPpropertytype.setText(propertytype);
+        SPpropertytype.setText(propertytype);
 
-            if (property != null) {
-                txtAboutProperty.setText(property);
-            }
+        if (property != null) {
+            txtAboutProperty.setText(property);
+        }
 
-            if (YN != null) {
+        if (YN != null) {
 
-            }
+        }
 
-            if (loanrequirement != null && !loanrequirement.equalsIgnoreCase("")) {
-                edtloanrequirement.setText(loanrequirement);
+        if (loanrequirement != null && !loanrequirement.equalsIgnoreCase("")) {
+            edtloanrequirement.setText(loanrequirement);
 
-            } else {
-                HideFields(layoutLoanrequirement);
-            }
+        } else {
+            HideFields(layoutLoanrequirement);
+        }
 
-            if (downpayment != null && !downpayment.equalsIgnoreCase("")) {
-                edtdownpayment.setText(downpayment);
+        if (downpayment != null && !downpayment.equalsIgnoreCase("")) {
+            edtdownpayment.setText(downpayment);
 
-            } else {
-                HideFields(layoutDownpayment);
-            }
-            if (propertypin != null && !propertypin.equalsIgnoreCase("")) {
-                edtpropertypin.setText(propertypin);
+        } else {
+            HideFields(layoutDownpayment);
+        }
+        if (propertypin != null && !propertypin.equalsIgnoreCase("")) {
+            edtpropertypin.setText(propertypin);
 
-            } else {
-                HideFields(layoutpropertyaddresspin);
-            }
-            if (propertylandmark != null && !propertylandmark.equalsIgnoreCase("")) {
-                edtpropertylandmark.setText(propertylandmark);
+        } else {
+            HideFields(layoutpropertyaddresspin);
+        }
+        if (propertylandmark != null && !propertylandmark.equalsIgnoreCase("")) {
+            edtpropertylandmark.setText(propertylandmark);
 
-            } else {
-                HideFields(layoutpropertyaddresslandmark);
-            }
-            if (propertyarea != null && !propertyarea.equalsIgnoreCase("")) {
-                edtpropertyarea.setText(propertyarea);
+        } else {
+            HideFields(layoutpropertyaddresslandmark);
+        }
+        if (propertyarea != null && !propertyarea.equalsIgnoreCase("")) {
+            edtpropertyarea.setText(propertyarea);
 
-            } else {
-                HideFields(layoutpropertyaddressarea);
-            }
-            if (projectname != null && !projectname.equalsIgnoreCase("")) {
-                edtprojectname.setText(projectname);
+        } else {
+            HideFields(layoutpropertyaddressarea);
+        }
+        if (projectname != null && !projectname.equalsIgnoreCase("")) {
+            edtprojectname.setText(projectname);
 
-            } else {
-                HideFields(layoutpropertyaddressprojectname);
-            }
-            if (description != null && !description.equalsIgnoreCase("")) {
-                edtdescription.setText(description);
+        } else {
+            HideFields(layoutpropertyaddressprojectname);
+        }
+        if (description != null && !description.equalsIgnoreCase("")) {
+            edtdescription.setText(description);
 
-            } else {
-                HideFields(layotDescription);
-            }
+        } else {
+            HideFields(layotDescription);
+        }
 
 //        } catch (Exception e) {
 //            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
