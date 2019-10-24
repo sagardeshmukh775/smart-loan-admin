@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -97,7 +98,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     List<String> SalesPerson;
     List<User> userlist;
 
-    ImageButton btnUpdate;
+    ImageView btnUpdate;
 
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
@@ -447,7 +448,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         edtprojectname = (TextView) view.findViewById(R.id.txtpropertyprojectname1);
         edtprojectname.setEnabled(false);
 
-        btnUpdate = (ImageButton) view.findViewById(R.id.buttonupdate);
+        btnUpdate = (ImageView) view.findViewById(R.id.buttonupdateimage);
 
         layoutDate = (RelativeLayout) view.findViewById(R.id.layoutbirthdate);
         layoutContact = (RelativeLayout) view.findViewById(R.id.layoutcontact);

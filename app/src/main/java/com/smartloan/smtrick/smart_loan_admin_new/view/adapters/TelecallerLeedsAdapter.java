@@ -2,8 +2,10 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
@@ -18,6 +20,7 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
 
     private ArrayList<LeedsModel> leedModelArrayList;
     private Context context;
+    int index = -1;
 
     public TelecallerLeedsAdapter(){}
 
@@ -41,6 +44,29 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
     @Override
     public void onBindViewHolder(final TelecallerLeedsViewHolder holder, final int listPosition) {
         try {
+
+            holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    index = listPosition;
+                    notifyDataSetChanged();
+                }
+            });
+
+            if(index==listPosition){
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
+            }else{
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
+            }
+
             LeedsModel leedModel = getModel(listPosition);
             if (!Utility.isEmptyOrNull(leedModel.getCustomerName()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel.getCustomerName());

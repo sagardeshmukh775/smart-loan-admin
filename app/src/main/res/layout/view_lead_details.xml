@@ -3399,7 +3399,6 @@
                                 android:id="@+id/buttonupdate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/edit"
                                 android:background="@color/hederbackground"
                                 />
                             <!--<Button-->

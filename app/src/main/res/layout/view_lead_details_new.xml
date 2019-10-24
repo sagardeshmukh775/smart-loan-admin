@@ -283,6 +283,15 @@
             android:layout_margin="6dp"
             android:background="@color/lightgray" />
 
+        <ImageView
+            android:id="@+id/buttonupdateimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="3dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/edit" />
+
         <ScrollView
             android:id="@id/scrollviewrightleft"
             android:layout_width="wrap_content"
@@ -4256,7 +4265,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@color/hederbackground"
-                                android:src="@drawable/edit" />
+                               />
                             <!--<Button-->
                             <!--android:id="@id/buttonupdate"-->
                             <!--android:layout_width="fill_parent"-->
