@@ -47,6 +47,7 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
     int fromYear;
     LeedRepository leedRepository;
     ArrayList<LeedsModel> leedsModelArrayList;
+    ArrayList<LeedsModel> leedsModelArrayList1;
     ProgressDialogClass progressDialogClass;
     TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
     TelecallerGeneratedLeedsAdapter telecallerLeedsAdapter;
@@ -93,6 +94,8 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             this.appSingleton = AppSingleton.getInstance(getActivity());
             this.leedRepository = new LeedRepositoryImpl();
             this.appSharedPreference = new AppSharedPreference(getActivity());
+            leedsModelArrayList = new ArrayList<>();
+            leedsModelArrayList1 = new ArrayList<>();
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(new LinearLayoutManager(getActivity()));
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
@@ -128,29 +131,54 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
     }
 
     private void setAdapter(final String toString) {
-
-        FirebaseDatabase.getInstance().getReference("users").orderByChild("role").equalTo("SERVICE PROVIDER").addListenerForSingleValueEvent(new ValueEventListener() {
+        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        leedsModelArrayList1.clear();
+        this.leedRepository.readLeedsByStatus(Constant.STATUS_GENERATED, new CallBack() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                leedsModelArrayList.clear();
-                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.removeAllViews();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            public void onSuccess(Object object) {
+                if (object != null) {
 
-                    LeedsModel leedsModel = snapshot.getValue(LeedsModel.class);
-                    if (leedsModel.getCustomerName() != null) {
-                        if (leedsModel.getCustomerName().toLowerCase().contains(toString)) {
-                            leedsModelArrayList.add(leedsModel);
+                    leedsModelArrayList = (ArrayList) object;
+                    for (LeedsModel leedsModel: leedsModelArrayList
+                         ) {
+                        if (leedsModel.getCustomerName().toLowerCase().contains(toString)){
+                            leedsModelArrayList1.add(leedsModel);
                         }
+
                     }
+                    serAdapter(leedsModelArrayList1);
                 }
-                serAdapter(leedsModelArrayList);
+                progressDialogClass.dismissDialog();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
 
             }
         });
+//        FirebaseDatabase.getInstance().getReference("users").orderByChild("role").equalTo("SERVICE PROVIDER").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                leedsModelArrayList.clear();
+//                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.removeAllViews();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//
+//                    LeedsModel leedsModel = snapshot.getValue(LeedsModel.class);
+//                    if (leedsModel.getCustomerName() != null) {
+//                        if (leedsModel.getCustomerName().toLowerCase().contains(toString)) {
+//                            leedsModelArrayList.add(leedsModel);
+//                        }
+//                    }
+//                }
+//                serAdapter(leedsModelArrayList);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 

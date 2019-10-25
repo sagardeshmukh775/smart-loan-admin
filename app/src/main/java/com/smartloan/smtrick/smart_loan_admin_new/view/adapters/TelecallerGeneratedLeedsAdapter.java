@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +35,7 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
     AppSharedPreference appSharedPreference;
     UserRepository userRepository;
     User user;
+    int index = -1;
 
     public TelecallerGeneratedLeedsAdapter() {
     }
@@ -60,6 +62,32 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
         try {
             this.appSharedPreference = new AppSharedPreference(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext());
             this.userRepository = new UserRepositoryImpl();
+
+
+            holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    index = listPosition;
+                    notifyDataSetChanged();
+                }
+            });
+
+            if(index==listPosition){
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
+            }else{
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
+            }
+
+
+
             LeedsModel leedModel = getModel(listPosition);
 //            readagent(leedModel.getAgentName());
             userRepository.readUserByName(leedModel.getAgentName(), new CallBack() {

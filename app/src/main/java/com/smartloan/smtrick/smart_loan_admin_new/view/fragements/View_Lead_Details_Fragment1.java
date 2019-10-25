@@ -179,8 +179,8 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
-        if (leedsModel.getLoanrequirement() != null) {
-            txtLoanRequirement.setText(leedsModel.getLoanrequirement());
+        if (leedsModel.getExpectedLoanAmount() != null) {
+            txtLoanRequirement.setText(leedsModel.getExpectedLoanAmount());
         } else {
             txtLoanRequirement.setText("Null");
         }
