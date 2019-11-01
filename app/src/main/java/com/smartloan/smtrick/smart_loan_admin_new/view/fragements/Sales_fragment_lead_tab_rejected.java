@@ -185,7 +185,7 @@ private void getteLeed() {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+                View_Rejected_Lead_Details_Fragment fragment2 = new View_Rejected_Lead_Details_Fragment();
                 fragment2.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer,  fragment2);
