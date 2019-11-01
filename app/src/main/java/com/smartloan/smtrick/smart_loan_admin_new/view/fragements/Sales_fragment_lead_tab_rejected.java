@@ -182,13 +182,11 @@ private void getteLeed() {
 //                Intent intent = new Intent(getActivity(), Sales_Update_Activity.class);
 //                intent.putExtra(LEED_MODEL, leedsModel);
 //                startActivity(intent);
-                Bundle bundle = new Bundle();
-//            bundle.putString("key","abc");
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
                 View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
                 fragment2.setArguments(bundle);
-
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer,  fragment2);
                 ft.commit();

@@ -729,7 +729,7 @@ public class Bank_Submit_Update_Fragement extends Fragment implements View.OnCli
                     spinnerArrayAdaptersalesperson.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     SPsalesperson.setAdapter(spinnerArrayAdaptersalesperson);
 
-                    getdata();
+
                 }
             }
 
@@ -738,7 +738,7 @@ public class Bank_Submit_Update_Fragement extends Fragment implements View.OnCli
 
             }
         });
-
+        getdata();
     }
 
     private void getdata() {
