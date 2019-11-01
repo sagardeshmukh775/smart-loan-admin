@@ -123,13 +123,35 @@ public class MainActivity_coordinator extends AppCompatActivity
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new Coordinator_Fragment_lead());
 //        ft.commit();
-        getteLeed();
+//        getteLeed();
+        geteAllLeed();
 
     }
 
     private void getteLeed() {
         this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
         this.leedRepository.readLeedsByStatus(Constant.STATUS_VERIFIED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+
+                if (object != null) {
+                    leedsModelArrayList = (ArrayList) object;
+                }
+                int a = leedsModelArrayList.size();
+                leedscount.setText( String.valueOf(a));
+                progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+            }
+        });
+    }
+
+    private void geteAllLeed() {
+        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        this.leedRepository.readAllLeeds( new CallBack() {
             @Override
             public void onSuccess(Object object) {
 

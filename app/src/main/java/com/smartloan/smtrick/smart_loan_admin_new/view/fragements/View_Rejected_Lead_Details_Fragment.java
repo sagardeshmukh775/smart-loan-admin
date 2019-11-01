@@ -66,14 +66,12 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
     TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
 
 
-    String lGenby;
     TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;
     LeedsModel leedsModel;
     ProgressDialogClass progressDialogClass;
     TextView spinloantype;
-    String sploantype;
     TextView etleednumber, txtgeneratedby, txtldate, txtleadid, txtleadidvalue, txtleedtime;
 
     //////////////////////////////INCOME///////////////////////////////////
@@ -125,9 +123,7 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
-    private List<String> listmaritalstatus;
     BanksAdapter adapter;
-    SalesPersonAdapter useradapter;
 
     Button UpdateBankAndSales;
 
@@ -164,7 +160,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         SalesPerson = new ArrayList<>();
         leedsArraylist = new ArrayList<>();
         userArraylist = new ArrayList<>();
-        listmaritalstatus = new ArrayList<>();
         getSalesperson();
 
         txtLeedId = (TextView) view.findViewById(R.id.txt_id_value);
