@@ -103,7 +103,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
-            layoutpancard, layoutcoapplicantrelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
+            layoutpancard, layoutcoapplicantrelation,layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
             layoutdesignation, layoutgrosssalary, layoutnetsalary, layoutovertime, layoutincentive, layoutbonus, layoutrent,
             layoutagreecultureincome, layoutannualincome, layoutotherincome, layoutothers, layoutrentalexpence, layoutcarloan,
             layouthomeloan, layoutsocietyloan, layoutpersonalloan, layoutotheremidetails, layoutpropertyaddresspin,
@@ -471,6 +471,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         layoutOfficeAddress = (RelativeLayout) view.findViewById(R.id.layoutofficeaddress);
         layoutpancard = (RelativeLayout) view.findViewById(R.id.layoutpancard);
         layoutcoapplicantrelation = (RelativeLayout) view.findViewById(R.id.layoutcoapplicant);
+        layoutRelation = (RelativeLayout) view.findViewById(R.id.layoutcoapplicantrelation);
         layoutotherrelationship = (RelativeLayout) view.findViewById(R.id.layoutotherrelationship);
         layoutothercompany = (RelativeLayout) view.findViewById(R.id.layoutothercompany);
         layouttenure = (RelativeLayout) view.findViewById(R.id.layouttenure);
@@ -896,21 +897,25 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         }
         if (applicantYN != null) {
             txtCoApplicant.setText(applicantYN);
+
             if (applicantYN.equalsIgnoreCase("No")) {
                 HideFields(layoutcoapplicantrelation);
+                HideFields(layoutRelation);
+            }else if (applicantYN.equalsIgnoreCase("Yes")){
+                CoapplicantRalationship.setText((prapplicantrelation));
             }
 //                HideFields(layoutDate );
 
         }
-        try {
-            if (prapplicantrelation != null) {
-                CoapplicantRalationship.setText((prapplicantrelation));
-            } else {
-                HideFields(layoutcoapplicantrelation);
-            }
-        } catch (Exception e) {
-
-        }
+//        try {
+//            if (prapplicantrelation != null) {
+//                CoapplicantRalationship.setText((prapplicantrelation));
+//            } else {
+//                HideFields(layoutcoapplicantrelation);
+//            }
+//        } catch (Exception e) {
+//
+//        }
         if (coapplicantotherrelation != null && !coapplicantotherrelation.equalsIgnoreCase("")) {
             edtotherrelationship.setText(coapplicantotherrelation);
         } else {
