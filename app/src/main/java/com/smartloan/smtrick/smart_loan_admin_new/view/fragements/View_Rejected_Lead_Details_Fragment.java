@@ -186,114 +186,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         txtAgent.setText(leedsModel.getAgentName());
         txtLoanType.setText(leedsModel.getLoanType());
 
-//        edtBank.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Dialog dialog1 = new Dialog(getContext());
-//                dialog1.setContentView(R.layout.customdialogboxbanks);
-//
-//                final RecyclerView banksRecycler = (RecyclerView) dialog1.findViewById(R.id.bank_recycle);
-//                EditText search = (EditText) dialog1.findViewById(R.id.txtsearchbank);
-//
-//                leedRepository.readAllBanks(new CallBack() {
-//                    @Override
-//                    public void onSuccess(Object object) {
-//
-//                        if (object != null) {
-//                            leedsArraylist = (ArrayList<Bank>) object;
-//                        }
-//                        adapter = new BanksAdapter(getContext(), leedsArraylist);
-//
-//                        //adding adapter to recyclerview
-//                        banksRecycler.setAdapter(adapter);
-//                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
-//                        banksRecycler.setHasFixedSize(true);
-//                        banksRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-//                    }
-//
-//                    @Override
-//                    public void onError(Object object) {
-//
-//                    }
-//                });
-//
-//                dialog1.show();
-//
-//                banksRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), banksRecycler, new RecyclerTouchListener.ClickListener() {
-//                    @Override
-//                    public void onClick(View view, int position) {
-//                        Bank leedsModel = getModel(position);
-//                        edtBank.setText(leedsModel.getBankname());
-//                        dialog1.dismiss();
-//
-//                    }
-//
-//                    @Override
-//                    public void onLongClick(View view, int position) {
-//                    }
-//
-//                }));
-//            }
-//        });
-
-//        edtSalesPerson.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Dialog dialog = new Dialog(getContext());
-//                dialog.setContentView(R.layout.customdialogboxsalesperson);
-//
-//                final RecyclerView salespersonRecycler = (RecyclerView) dialog.findViewById(R.id.dialog_recycle_salesperson);
-//
-//                leedRepository.readUserByRole(SALES, new CallBack() {
-//                    @Override
-//                    public void onSuccess(Object object) {
-//
-//                        if (object != null) {
-//                            userArraylist = (ArrayList<User>) object;
-//                        }
-//
-//                        for (int i = 0; i < userArraylist.size(); i++) {
-//                            String user = userArraylist.get(i).getUserName();
-//                            listmaritalstatus.add(user);
-//                        }
-//
-//                        useradapter = new SalesPersonAdapter(getContext(), userArraylist);
-//                        //adding adapter to recyclerview
-//                        salespersonRecycler.setAdapter(useradapter);
-//                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
-//                        salespersonRecycler.setHasFixedSize(true);
-//                        salespersonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Object object) {
-//
-//                    }
-//                });
-//
-//                dialog.show();
-//                Window window = dialog.getWindow();
-//                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//                salespersonRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), salespersonRecycler, new RecyclerTouchListener.ClickListener() {
-//                    @Override
-//                    public void onClick(View view, int position) {
-//                        User leedsModel = getUserModel(position);
-//                        SPsalesperson.setText(leedsModel.getUserName());
-//                        dialog.dismiss();
-//
-//                    }
-//
-//                    @Override
-//                    public void onLongClick(View view, int position) {
-//                    }
-//
-//                }));
-//            }
-//        });
-
-
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
         edtifsccode = (TextView) view.findViewById(R.id.txtifsccode1);
@@ -325,9 +217,7 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
         Recidential = (TextView) view.findViewById(R.id.spinnerrecidencialvalue);
 
-
         CoapplicantRalationship = (TextView) view.findViewById(R.id.txtcoapplicantrelation1);
-
 
         edtotherrelationship = (TextView) view.findViewById(R.id.txtotherrelationship1);
         edtreferencename = (TextView) view.findViewById(R.id.txtreferencefullname1);
@@ -420,7 +310,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         chpersonalloan = (TextView) view.findViewById(R.id.checkboxPersonalloan);
         chotherloan = (TextView) view.findViewById(R.id.txtotheremi1);
 
-
 ///////////////////////////////////////////PROPERTY/////////////////////////////////////////////////////////////////
 
         String[] APPropertytype = new String[]{"Perchase of flat", "Purchase of vila", "Purchase of plot", "Balance transfer",
@@ -429,7 +318,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
         SPpropertytype = (TextView) view.findViewById(R.id.txtpropertytype1);
         SPpropertytype.setEnabled(false);
-
 
         edtloanrequirement = (TextView) view.findViewById(R.id.txtloanrequirement1);
         edtloanrequirement.setEnabled(false);
@@ -574,41 +462,7 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
         getdata();
 
-//        btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent Bintent = new Intent(getContext(), Coordinator_Update_Activity.class);
-////                Bintent.putExtra(Constant.LEED_MODEL, leedsModel);
-////                startActivity(Bintent);
-//                Bundle bundle = new Bundle();
-////            bundle.putString("key","abc");
-//                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-//
-//                Coordinator_Update_Fragment fragment2 = new Coordinator_Update_Fragment();
-//                fragment2.setArguments(bundle);
-//
-//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.detailContainer, fragment2);
-//                ft.commit();
-//            }
-//        });
-
-//        UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updateLeadDetails(leedsModel);
-//            }
-//        });
-
         return view;
-    }
-
-    private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setBanknName(edtBank.getText().toString());
-        if (edtSalesPerson.getText().toString() != null) {
-            leedsModel.setSalesPerson(edtSalesPerson.getText().toString());
-        }
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
     private void updateLeed(String leedId, Map leedsMap) {
@@ -957,7 +811,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
             HideFields(layoutreference2relationhsip);
         }
 
-
         /////////////////////////////////////////INCOME DETAILS//////////////////////////////////////////////////////////
 
         String sEmployed = leedsModel.getEmployed();
@@ -1274,7 +1127,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
             HideFields(layoutselfqualificationcertificate);
         }
 
-
         //////////////////////////////////////////////PROPERTY DETAILS///////////////////////////////////////////////////////
 
         String property = leedsModel.getPropety();
@@ -1289,8 +1141,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         String description = leedsModel.getPrdescripiton();
         String propertytype = leedsModel.getPrpropertytype();
 
-//            ArrayAdapter myAdap4 = (ArrayAdapter) SPpropertytype.getAdapter();
-//            int spinnerPosition = myAdap4.getPosition(propertytype);
         SPpropertytype.setText(propertytype);
 
         if (property != null) {
@@ -1345,10 +1195,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
             HideFields(layotDescription);
         }
 
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
-
     }
 
     private void getSalesperson() {
@@ -1362,7 +1208,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
                         SalesPerson.add(userlist.get(i).getUserName());
 
                     }
-
                 }
             }
 

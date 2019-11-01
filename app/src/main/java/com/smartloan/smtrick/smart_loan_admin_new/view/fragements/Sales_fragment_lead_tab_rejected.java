@@ -74,72 +74,8 @@ SalesLeedsAdapter telecallerLeedsAdapter;
         }
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
     }
-//        View view= inflater.inflate(R.layout.tc_fragment_lead_tab_generatedlead, container, false);
-//        listleads = (ListView) view.findViewById(R.id.listleads);
-//        listleads.setAdapter(new CustumadapterReports(getActivity(), searchResults));
-//        listleads.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-//
-//                Object o = listleads.getItemAtPosition(position);
-//
-//
-//                listleads.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-//                        Intent i = new Intent(getActivity(), ViewLead_Sales_Activity.class);
-//                        startActivity(i);
-//
-//
-//                    }
-//                });
-//
-//            }
-//        });
 
-//        return view;
-//    }
 
-//    private ArrayList<GetterSetterInvoice> GetSearchResults(){
-//        ArrayList<GetterSetterInvoice> results = new ArrayList<GetterSetterInvoice>();
-//
-//        GetterSetterInvoice sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("India Buls");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Axis Bank");
-//        sr.setPhone("Mr Pratik Patel");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Axis Bank");
-//        sr.setPhone("Mr Pratik Patel");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Axis Bank");
-//        sr.setPhone("Mr Pratik Patel");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Axis Bank");
-//        sr.setPhone("Mr Pratik Patel");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Axis Bank");
-//        sr.setPhone("Mr Pratik Patel");
-//        results.add(sr);
-//        return results;
-//    }
 private void getteLeed() {
     progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
     leedRepository.readLeedsByStatus(STATUS_REJECTED, new CallBack() {

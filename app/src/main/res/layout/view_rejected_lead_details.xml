@@ -4183,46 +4183,12 @@
                                 android:layout_height="wrap_content"
                                 android:background="@color/hederbackground"
                                />
-                            <!--<Button-->
-                            <!--android:id="@id/buttonupdate"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="33.0"-->
-                            <!--android:background="@color/hederbackground"-->
-                            <!--android:text="UPDATE"-->
-                            <!--android:textColor="#ffffffff"-->
-                            <!--android:drawableLeft="@drawable/edit"-->
-                            <!--android:textSize="16.0sp"-->
-                            <!--android:textStyle="bold" />-->
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:weightSum="2">
-
-                                <!--<Button-->
-                                <!--android:id="@+id/btnBank"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_margin="2dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:gravity="center"-->
-                                <!--android:text="BANK"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textStyle="bold" />-->
-
-                                <!--<Button-->
-                                <!--android:id="@+id/btnCheckList"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_margin="2dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:text="CHECK LIST"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textStyle="bold" />-->
 
                             </LinearLayout>
 
@@ -4232,55 +4198,9 @@
                                 android:orientation="horizontal"
                                 android:weightSum="2">
 
-                                <!--<Button-->
-                                <!--android:id="@+id/btnAppointment"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_margin="2dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:text="APPOINTMENT"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textStyle="bold" />-->
-
-                                <!--<Button-->
-                                <!--android:id="@+id/btnSales"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_margin="2dp"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@color/btnRequest"-->
-                                <!--android:text="SALES"-->
-                                <!--android:textColor="#ffffffff"-->
-                                <!--android:textStyle="bold" />-->
-
                             </LinearLayout>
 
-                            <!--<Button-->
-                            <!--android:id="@id/buttonverify"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="1.0sp"-->
-                            <!--android:layout_weight="33.0"-->
-                            <!--android:background="@color/btnRequest"-->
-                            <!--android:hint="Enter Notice Description"-->
-                            <!--android:text="SUBMIT"-->
-                            <!--android:textColor="#ffffffff"-->
-                            <!--android:textSize="16.0sp"-->
-                            <!--android:textStyle="bold" />-->
 
-                            <!--<Button-->
-                            <!--android:id="@id/buttoncancel"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="1.0sp"-->
-                            <!--android:layout_weight="33.0"-->
-                            <!--android:background="@color/btnRequest"-->
-                            <!--android:hint="Enter Notice Description"-->
-                            <!--android:text="CANCEL"-->
-                            <!--android:textColor="#ffffffff"-->
-                            <!--android:textSize="16.0sp"-->
-                            <!--android:textStyle="bold" />-->
                         </LinearLayout>
                     </RelativeLayout>
                 </RelativeLayout>
