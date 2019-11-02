@@ -15,7 +15,7 @@
             android:padding="10dp"
             android:text=""
             android:hint="Search....."
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="7dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:textColor="@color/mainTextColor"
@@ -25,7 +25,7 @@
             android:id="@+id/recycler_view_leeds"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="55dp"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </android.support.design.widget.CoordinatorLayout>

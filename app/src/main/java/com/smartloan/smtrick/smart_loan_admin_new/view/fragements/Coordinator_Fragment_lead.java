@@ -29,7 +29,6 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
     private ViewPager viewPager;
 
     Spinner spinloantype, spinemptype, spinincome;
-    Button emiCalcBtn;
     ProgressBar progressBar;
 
 
@@ -63,10 +62,31 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
 //        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(-1);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Nothing needed here.
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Nothing needed here.
+            }
+        });
 
         return view;
     }
+
 
 //    @Override
 //    public void onAttach(Context context) {

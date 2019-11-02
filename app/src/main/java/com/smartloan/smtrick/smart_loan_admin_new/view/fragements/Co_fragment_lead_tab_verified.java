@@ -3,6 +3,7 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -45,6 +46,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
     int toYear, toMonth, toDay;
     long fromDate, toDate;
     ArrayList<LeedsModel> leedsModelArrayList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,13 +99,11 @@ public class Co_fragment_lead_tab_verified extends Fragment {
 //                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
 //                intent.putExtra(LEED_MODEL, leedsModel);
 //                startActivity(intent);
-                Bundle bundle = new Bundle();
-//            bundle.putString("key","abc");
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
                 View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
                 fragment2.setArguments(bundle);
-
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer,  fragment2);
                 ft.commit();
@@ -121,6 +121,8 @@ public class Co_fragment_lead_tab_verified extends Fragment {
             if (telecallerLeedsAdapter == null) {
                 telecallerLeedsAdapter = new TelecallerLeedsAdapter(getActivity(), leedsModels);
                 tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+//                postAndNotifyAdapter(new Handler(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
+
                 onClickListner();
             } else {
                 ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
@@ -129,4 +131,19 @@ public class Co_fragment_lead_tab_verified extends Fragment {
             }
         }
     }
+
+
+//    protected void postAndNotifyAdapter(final Handler handler, final RecyclerView recyclerView) {
+//        handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (!recyclerView.isComputingLayout()) {
+//                    // This will call first item by calling "performClick()" of view.
+//                    ((TelecallerLeedsAdapter.) recyclerView.findViewHolderForLayoutPosition(0)).mView.performClick();
+//                } else {
+//                    postAndNotifyAdapter(handler, recyclerView);
+//                }
+//            }
+//        });
+//    }
 }

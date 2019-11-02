@@ -115,7 +115,7 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 
-                Bank_Submit_Update_Fragement fragment2 = new Bank_Submit_Update_Fragement();
+                View_Bank_Submited_Lead_Details_Fragment fragment2 = new View_Bank_Submited_Lead_Details_Fragment();
                 fragment2.setArguments(bundle);
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
