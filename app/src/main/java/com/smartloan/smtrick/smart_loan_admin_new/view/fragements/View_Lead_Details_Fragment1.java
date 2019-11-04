@@ -326,9 +326,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
         Recidential = (TextView) view.findViewById(R.id.spinnerrecidencialvalue);
 
-
         CoapplicantRalationship = (TextView) view.findViewById(R.id.txtcoapplicantrelation1);
-
 
         edtotherrelationship = (TextView) view.findViewById(R.id.txtotherrelationship1);
         edtreferencename = (TextView) view.findViewById(R.id.txtreferencefullname1);
@@ -421,7 +419,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         chpersonalloan = (TextView) view.findViewById(R.id.checkboxPersonalloan);
         chotherloan = (TextView) view.findViewById(R.id.txtotheremi1);
 
-
 ///////////////////////////////////////////PROPERTY/////////////////////////////////////////////////////////////////
 
         String[] APPropertytype = new String[]{"Perchase of flat", "Purchase of vila", "Purchase of plot", "Balance transfer",
@@ -430,7 +427,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
         SPpropertytype = (TextView) view.findViewById(R.id.txtpropertytype1);
         SPpropertytype.setEnabled(false);
-
 
         edtloanrequirement = (TextView) view.findViewById(R.id.txtloanrequirement1);
         edtloanrequirement.setEnabled(false);
@@ -963,7 +959,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             HideFields(layoutreference2relationhsip);
         }
 
-
         /////////////////////////////////////////INCOME DETAILS//////////////////////////////////////////////////////////
 
         String sEmployed = leedsModel.getEmployed();
@@ -1027,6 +1022,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
         if (bankname != null && !bankname.equalsIgnoreCase("")) {
             edtbankname.setText(bankname);
+            edtBank.setText(bankname);
         } else {
             HideFields(layoutbankname);
         }
@@ -1053,6 +1049,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         try {
             if (salsepersone != null && !salsepersone.equalsIgnoreCase("")) {
                 SPsalesperson.setText(salsepersone);
+                edtSalesPerson.setText(salsepersone);
             } else {
                 HideFields(Layoutsalesperson);
             }
@@ -1279,7 +1276,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         } else {
             HideFields(layoutselfqualificationcertificate);
         }
-
 
         //////////////////////////////////////////////PROPERTY DETAILS///////////////////////////////////////////////////////
 

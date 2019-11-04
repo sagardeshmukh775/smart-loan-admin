@@ -29,6 +29,8 @@ public class SalesLeedsAdapter extends RecyclerView.Adapter<SalesLeedsViewHolder
     private Context context;
     int index = -1;
     private int selectedPosition = 0;
+    int m = 0;
+
 
     public SalesLeedsAdapter(Context context, ArrayList<LeedsModel> data) {
         this.leedModelArrayList = data;
@@ -50,6 +52,7 @@ public class SalesLeedsAdapter extends RecyclerView.Adapter<SalesLeedsViewHolder
     @Override
     public void onBindViewHolder(final SalesLeedsViewHolder holder, final int listPosition) {
         try {
+
             LeedsModel leedModel2 = getModel(listPosition);
 
             holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +77,7 @@ public class SalesLeedsAdapter extends RecyclerView.Adapter<SalesLeedsViewHolder
                 holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
             }
 
+//            if (m == 0) {
 //            if(listPosition == selectedPosition){
 //                holder.itemView.setSelected(true);
 //                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
@@ -114,6 +118,8 @@ public class SalesLeedsAdapter extends RecyclerView.Adapter<SalesLeedsViewHolder
 //                    }
 //                }
 //            });
+//                m++;
+//            }
 
 
             LeedsModel leedModel = getModel(listPosition);

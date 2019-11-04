@@ -27,6 +27,7 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
     private Context context;
     int index = -1;
     private int selectedPosition = 0;
+    int m = 0;
 
     public TelecallerLeedsAdapter(){}
 
@@ -53,6 +54,14 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
 
             LeedsModel leedModel2 = getModel(listPosition);
 
+            holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    index = listPosition;
+                    notifyDataSetChanged();
+                }
+            });
+
             if(index==listPosition){
                 holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
@@ -66,55 +75,53 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
                 holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
             }
-//
-//            if(listPosition == selectedPosition){
-//                holder.itemView.setSelected(true);
-//                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
-//                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
-//                fragment2.setArguments(bundle);
-//                FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.detailContainer,  fragment2);
-//                ft.commit();
-//
-//            } else {
-//                holder.itemView.setSelected(false);
-//                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
-//                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
-//
-//            }
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int currentPosition = holder.getLayoutPosition();
-//                    if(selectedPosition != currentPosition){
-//                        // Temporarily save the last selected position
-//                        int lastSelectedPosition = selectedPosition;
-//                        // Save the new selected position
-//                        selectedPosition = currentPosition;
-//                        // update the previous selected row
-//                        notifyItemChanged(lastSelectedPosition);
-//                        // select the clicked row
-//                        holder.itemView.setSelected(true);
-//                    }
-//                }
-//            });
 
-            holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    index = listPosition;
-                    notifyDataSetChanged();
-                }
-            });
+//            if (m == 0) {
+//                if(listPosition == selectedPosition){
+//                    holder.itemView.setSelected(true);
+//                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
+//                    View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+//                    fragment2.setArguments(bundle);
+//                    FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.detailContainer,  fragment2);
+//                    ft.commit();
+//
+//                } else {
+//                    holder.itemView.setSelected(false);
+//                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
+//                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
+//
+//                }
+//                holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        int currentPosition = holder.getLayoutPosition();
+//                        if(selectedPosition != currentPosition){
+//                            // Temporarily save the last selected position
+//                            int lastSelectedPosition = selectedPosition;
+//                            // Save the new selected position
+//                            selectedPosition = currentPosition;
+//                            // update the previous selected row
+//                            notifyItemChanged(lastSelectedPosition);
+//                            // select the clicked row
+//                            holder.itemView.setSelected(true);
+//                        }
+//                    }
+//                });
+//                m++;
+//            }
+
+
+
 
             LeedsModel leedModel = getModel(listPosition);
             if (!Utility.isEmptyOrNull(leedModel.getCustomerName()))

@@ -56,33 +56,15 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Co_fragment_lead_tab_verified(), "Verified");
-//        adapter.addFragment(new Co_fragment_lead_tab_submited(), "Rejected");
         adapter.addFragment(new Coordinator_fragment_lead_tab_submited(), "Bank Submitted");
         adapter.addFragment(new Sales_fragment_lead_tab_rejected(), "Rejected");
-//        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(-1);
+//        viewPager.setOffscreenPageLimit(0);
         tabLayout.setupWithViewPager(viewPager);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // Nothing needed here.
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // Nothing needed here.
-            }
-        });
 
         return view;
     }

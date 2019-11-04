@@ -139,7 +139,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
 //            public void run() {
 //                if (!recyclerView.isComputingLayout()) {
 //                    // This will call first item by calling "performClick()" of view.
-//                    ((TelecallerLeedsAdapter.) recyclerView.findViewHolderForLayoutPosition(0)).mView.performClick();
+//                    ((TelecallerLeedsAdapter.TelecallerLeedsViewHolder) recyclerView.findViewHolderForLayoutPosition(0)).mView.performClick();
 //                } else {
 //                    postAndNotifyAdapter(handler, recyclerView);
 //                }

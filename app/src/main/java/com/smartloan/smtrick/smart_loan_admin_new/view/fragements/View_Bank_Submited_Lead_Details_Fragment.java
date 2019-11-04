@@ -1171,7 +1171,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             HideFields(layoutselfqualificationcertificate);
         }
 
-
         //////////////////////////////////////////////PROPERTY DETAILS///////////////////////////////////////////////////////
 
         String property = leedsModel.getPropety();
@@ -1186,8 +1185,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         String description = leedsModel.getPrdescripiton();
         String propertytype = leedsModel.getPrpropertytype();
 
-//            ArrayAdapter myAdap4 = (ArrayAdapter) SPpropertytype.getAdapter();
-//            int spinnerPosition = myAdap4.getPosition(propertytype);
         SPpropertytype.setText(propertytype);
 
         if (property != null) {
@@ -1240,6 +1237,11 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
         } else {
             HideFields(layotDescription);
+        }
+
+        String loginid = leedsModel.getLoginid();
+        if (loginid != null){
+            edtloginId.setText(loginid);
         }
 
 //        } catch (Exception e) {

@@ -54,6 +54,7 @@ SalesLeedsAdapter telecallerLeedsAdapter;
     ArrayList<LeedsModel> leedsModelArrayList1;
 
     ListView listleads;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (tcFragmentLeadTabGeneratedleadBinding == null) {

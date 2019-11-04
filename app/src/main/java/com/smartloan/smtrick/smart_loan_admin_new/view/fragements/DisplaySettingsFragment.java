@@ -16,20 +16,20 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 public class DisplaySettingsFragment extends Fragment {
 
     LeedsModel invoice;
-    TextView name;
+//    TextView name;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_display_settings, container, false);
 
-        name = (TextView) rootView.findViewById(R.id.name);
+//        name = (TextView) rootView.findViewById(R.id.name);
         Bundle args = this.getArguments();
         if (args != null) {
             invoice = (LeedsModel) args.getSerializable(Constant.LEED_MODEL);
 
         }
         try {
-            name.setText(invoice.getCustomerName());
+//            name.setText(invoice.getCustomerName());
         }catch (Exception e){}
 
         return rootView;
