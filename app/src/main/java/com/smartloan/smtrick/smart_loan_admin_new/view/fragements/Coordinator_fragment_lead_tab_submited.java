@@ -1,6 +1,8 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -23,9 +25,11 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_BANK_SUBMITED;
@@ -42,6 +46,20 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
     int toYear, toMonth, toDay;
     long fromDate, toDate;
     ArrayList<LeedsModel> leedsModelArrayList;
+    private boolean _hasLoadedOnce= false;
+    private ProgressDialog progress;
+
+    @Override
+    public void setUserVisibleHint(boolean isFragmentVisible_) {
+        super.setUserVisibleHint(true);
+        if (this.isVisible()) {
+// we check that the fragment is becoming visible
+            if (isFragmentVisible_ && !_hasLoadedOnce) {
+                new Loaddata().execute();
+                _hasLoadedOnce = true;
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +75,7 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-            getteLeed();
+//            getteLeed();
         }
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
     }
@@ -67,7 +85,7 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
     }
 
     private void getteLeed() {
-        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+//        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
         leedRepository.readLeedsByStatus(STATUS_BANK_SUBMITED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -75,12 +93,12 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
                     serAdapter(leedsModelArrayList);
                 }
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
                 Utility.showLongMessage(getActivity(), getString(R.string.server_error));
             }
         });
@@ -127,5 +145,36 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
             }
 
         }));
+    }
+
+    private class Loaddata extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Downloading Data");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getteLeed();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+
+
+        }
     }
 }

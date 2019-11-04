@@ -1,7 +1,9 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -52,8 +54,22 @@ SalesLeedsAdapter telecallerLeedsAdapter;
     String name;
     ArrayList<LeedsModel> leedsModelArrayList;
     ArrayList<LeedsModel> leedsModelArrayList1;
+    private boolean _hasLoadedOnce= false;
+    private ProgressDialog progress;
 
     ListView listleads;
+
+    @Override
+    public void setUserVisibleHint(boolean isFragmentVisible_) {
+        super.setUserVisibleHint(true);
+        if (this.isVisible()) {
+// we check that the fragment is becoming visible
+            if (isFragmentVisible_ && !_hasLoadedOnce) {
+                new Loaddata().execute();
+                _hasLoadedOnce = true;
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,14 +87,14 @@ SalesLeedsAdapter telecallerLeedsAdapter;
                     DividerItemDecoration.VERTICAL));
 
             name = appSharedPreference.getUserName();
-            getteLeed();
+//            getteLeed();
         }
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
     }
 
 
 private void getteLeed() {
-    progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+//    progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
     leedRepository.readLeedsByStatus(STATUS_REJECTED, new CallBack() {
         @Override
         public void onSuccess(Object object) {
@@ -87,12 +103,12 @@ private void getteLeed() {
                 leedsModelArrayList = (ArrayList<LeedsModel>) object;
                 serAdapter(leedsModelArrayList);
             }
-            progressDialogClass.dismissDialog();
+//            progressDialogClass.dismissDialog();
         }
 
         @Override
         public void onError(Object object) {
-            progressDialogClass.dismissDialog();
+//            progressDialogClass.dismissDialog();
             Utility.showLongMessage(getActivity(), getString(R.string.server_error));
         }
     });
@@ -137,5 +153,36 @@ private void getteLeed() {
     }
     private LeedsModel getModel(int position) {
         return leedsModelArrayList.get(leedsModelArrayList.size() - 1 - position);
+    }
+
+    private class Loaddata extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Downloading Data");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getteLeed();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+
+
+        }
     }
 }

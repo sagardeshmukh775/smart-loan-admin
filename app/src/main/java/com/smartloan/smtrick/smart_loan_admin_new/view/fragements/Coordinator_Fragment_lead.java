@@ -51,7 +51,7 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
 
-
+        viewPager.setOffscreenPageLimit(0);
         //adapter = new Tab_Adapter(getSupportFragmentManager());
         adapter = new Tab_Adapter(getChildFragmentManager());
 
@@ -60,7 +60,7 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
         adapter.addFragment(new Sales_fragment_lead_tab_rejected(), "Rejected");
 
         viewPager.setAdapter(adapter);
-//        viewPager.setOffscreenPageLimit(0);
+//
         tabLayout.setupWithViewPager(viewPager);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
