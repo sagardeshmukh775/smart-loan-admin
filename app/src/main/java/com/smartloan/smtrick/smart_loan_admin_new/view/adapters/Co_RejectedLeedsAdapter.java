@@ -13,15 +13,17 @@ import android.view.ViewGroup;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
-import com.smartloan.smtrick.smart_loan_admin_new.databinding.TelecallerLeedsAdapterLayoutBinding;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.CoRejectedLeedsAdapterLayoutBinding;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesLeedsAdapterLayoutBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Lead_Details_Fragment1;
-import com.smartloan.smtrick.smart_loan_admin_new.view.holders.TelecallerLeedsViewHolder;
+import com.smartloan.smtrick.smart_loan_admin_new.view.holders.CoRejectedLeedsViewHolder;
+import com.smartloan.smtrick.smart_loan_admin_new.view.holders.SalesLeedsViewHolder;
 
 import java.util.ArrayList;
 
-public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeedsViewHolder> {
+public class Co_RejectedLeedsAdapter extends RecyclerView.Adapter<CoRejectedLeedsViewHolder> {
 
     private ArrayList<LeedsModel> leedModelArrayList;
     private Context context;
@@ -29,19 +31,18 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
     private int selectedPosition = 0;
     static int m = 0;
 
-    public TelecallerLeedsAdapter(){}
 
-    public TelecallerLeedsAdapter(Context context, ArrayList<LeedsModel> data) {
+    public Co_RejectedLeedsAdapter(Context context, ArrayList<LeedsModel> data) {
         this.leedModelArrayList = data;
         this.context = context;
     }
 
     @Override
-    public TelecallerLeedsViewHolder onCreateViewHolder(ViewGroup parent,
-                                                        int viewType) {
-        TelecallerLeedsAdapterLayoutBinding telecallerLeedsAdapterLayoutBinding;
-        telecallerLeedsAdapterLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.telecaller_leeds_adapter_layout, parent, false);
-        return new TelecallerLeedsViewHolder(telecallerLeedsAdapterLayoutBinding);
+    public CoRejectedLeedsViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
+        CoRejectedLeedsAdapterLayoutBinding telecallerLeedsAdapterLayoutBinding;
+        telecallerLeedsAdapterLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.co_rejected_leeds_adapter_layout, parent, false);
+        return new CoRejectedLeedsViewHolder(telecallerLeedsAdapterLayoutBinding);
     }
 
     private LeedsModel getModel(int position) {
@@ -49,7 +50,7 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
     }
 
     @Override
-    public void onBindViewHolder(final TelecallerLeedsViewHolder holder, final int listPosition) {
+    public void onBindViewHolder(final CoRejectedLeedsViewHolder holder, final int listPosition) {
         try {
 
             LeedsModel leedModel2 = getModel(listPosition);
@@ -77,50 +78,48 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
             }
 
             if (m == 0) {
-                if(listPosition == selectedPosition){
-                    holder.itemView.setSelected(true);
-                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
-                    View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
-                    fragment2.setArguments(bundle);
-                    FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.detailContainer,  fragment2);
-                    ft.commit();
+            if(listPosition == selectedPosition){
+                holder.itemView.setSelected(true);
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
+                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+                fragment2.setArguments(bundle);
+                FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer,  fragment2);
+                ft.commit();
 
-                } else {
-                    holder.itemView.setSelected(false);
-                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
-                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
+            } else {
+                holder.itemView.setSelected(false);
+                holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
+                holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
 
-                }
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int currentPosition = holder.getLayoutPosition();
-                        if(selectedPosition != currentPosition){
-                            // Temporarily save the last selected position
-                            int lastSelectedPosition = selectedPosition;
-                            // Save the new selected position
-                            selectedPosition = currentPosition;
-                            // update the previous selected row
-                            notifyItemChanged(lastSelectedPosition);
-                            // select the clicked row
-                            holder.itemView.setSelected(true);
-                        }
+            }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int currentPosition = holder.getLayoutPosition();
+                    if(selectedPosition != currentPosition){
+                        // Temporarily save the last selected position
+                        int lastSelectedPosition = selectedPosition;
+                        // Save the new selected position
+                        selectedPosition = currentPosition;
+                        // update the previous selected row
+                        notifyItemChanged(lastSelectedPosition);
+                        // select the clicked row
+                        holder.itemView.setSelected(true);
                     }
-                });
+                }
+            });
                 m++;
             }
-
-
 
 
             LeedsModel leedModel = getModel(listPosition);
@@ -128,12 +127,11 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel.getCustomerName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getLoanType()))
+            if (!Utility.isEmptyOrNull(leedModel.getMobileNumber()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
-
-            if (!Utility.isEmptyOrNull(leedModel.getAgentName()))
+            if (!Utility.isEmptyOrNull(leedModel.getCurrentarea()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(leedModel.getAgentName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(getString(R.string.na));

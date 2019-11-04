@@ -30,6 +30,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_Update_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.ViewLead_Sales_Activity;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.Co_RejectedLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.GetterSetterInvoice;
@@ -42,7 +43,7 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STAT
 public class Sales_fragment_lead_tab_rejected extends Fragment {
 
 //    ArrayList<GetterSetterInvoice> searchResults = GetSearchResults();
-SalesLeedsAdapter telecallerLeedsAdapter;
+Co_RejectedLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
@@ -117,7 +118,7 @@ private void getteLeed() {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new SalesLeedsAdapter(getActivity(), leedsModels);
+                telecallerLeedsAdapter = new Co_RejectedLeedsAdapter(getActivity(), leedsModels);
                 tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {
