@@ -60,6 +60,17 @@ Co_RejectedLeedsAdapter telecallerLeedsAdapter;
 
     ListView listleads;
 
+
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            new Loaddata().execute();
+//        }
+//        else {
+//        }
+//    }
+
     @Override
     public void setUserVisibleHint(boolean isFragmentVisible_) {
         super.setUserVisibleHint(true);

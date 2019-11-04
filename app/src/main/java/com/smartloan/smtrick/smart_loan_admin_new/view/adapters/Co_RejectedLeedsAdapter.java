@@ -18,6 +18,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesLeedsAdapterL
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Lead_Details_Fragment1;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Rejected_Lead_Details_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.CoRejectedLeedsViewHolder;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.SalesLeedsViewHolder;
 
@@ -87,7 +88,7 @@ public class Co_RejectedLeedsAdapter extends RecyclerView.Adapter<CoRejectedLeed
                 holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
-                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+                View_Rejected_Lead_Details_Fragment fragment2 = new View_Rejected_Lead_Details_Fragment();
                 fragment2.setArguments(bundle);
                 FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer,  fragment2);

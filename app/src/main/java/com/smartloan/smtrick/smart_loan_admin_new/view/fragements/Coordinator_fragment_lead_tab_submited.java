@@ -48,7 +48,16 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
     ArrayList<LeedsModel> leedsModelArrayList;
     private boolean _hasLoadedOnce= false;
     private ProgressDialog progress;
-
+//
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            new Loaddata().execute();
+//        }
+//        else {
+//        }
+//    }
     @Override
     public void setUserVisibleHint(boolean isFragmentVisible_) {
         super.setUserVisibleHint(true);
