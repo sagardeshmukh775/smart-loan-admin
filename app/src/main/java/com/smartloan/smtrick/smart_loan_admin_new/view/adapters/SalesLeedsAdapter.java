@@ -128,11 +128,11 @@ public class SalesLeedsAdapter extends RecyclerView.Adapter<SalesLeedsViewHolder
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel.getCustomerName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getMobileNumber()))
+            if (!Utility.isEmptyOrNull(leedModel.getLoanType()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getCurrentarea()))
+            if (!Utility.isEmptyOrNull(leedModel.getAgentName()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(leedModel.getAgentName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(getString(R.string.na));
