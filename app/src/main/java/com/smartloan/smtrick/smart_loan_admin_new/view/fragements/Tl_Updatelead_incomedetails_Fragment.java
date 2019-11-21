@@ -107,40 +107,24 @@ public class Tl_Updatelead_incomedetails_Fragment extends Fragment implements Vi
             cTenuremonth = edttenuremonth.getSelectedItem().toString();
             cEcperience = edtexperience.getSelectedItem().toString();
             cEcperiencemonths = edtexperiencemonths.getSelectedItem().toString();
-
             cDept = edtdepartment.getText().toString();
-
             cDesignation = edtdesignation.getText().toString();
-
             cGrossslr = edtgrosssalary.getText().toString();
-
             cNetslr = edtnetsalary.getText().toString();
-
             cOvertime = edtovertime.getText().toString();
-
             cIncentive = edtincentive.getText().toString();
-
             cBonus = edtbonus.getText().toString();
-
             cRentalincome = edtrentalincome.getText().toString();
-
             cAnnualincome = edtannualincome.getText().toString();
-
             cRental = edtrental.getText().toString();
-
             cAgrreIncome = edtagrreculturincom.getText().toString();
-
             cOtherincome = edtotherincome.getText().toString();
-
             cOtherEMIdetails = edtotheremidetails.getText().toString();
-
             cCarloanamt = txtCarloan.getText().toString();
-
             cHomeloanamt = txtHomeloan.getText().toString();
-
             cSocietyloanamt = txtsocietyloan.getText().toString();
-
             cPersonalloanamt = txtpersonalloan.getText().toString();
+
             if (chcarloan.isChecked()) {
 
                 cCarloan = chcarloan.getText().toString();

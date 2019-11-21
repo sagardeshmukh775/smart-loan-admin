@@ -1,6 +1,5 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,13 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
-import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
@@ -46,7 +41,7 @@ import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
 
-public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
+public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
 
     TextView CoapplicantRalationship;
 
@@ -110,7 +105,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             layoutLoanrequirement, layoutDownpayment, layotDescription, layoutsalesperson, layoutreferencefullname, layoutreferenceaddress, layoutreferencecontactno,
             layoutreferencerelationhsip, layoutreference2fullname, layoutreference2address, layoutreference2contactno, layoutreference2relationhsip,
             layoutCompanytype, layoutpermenantaddress, layoutotherrelationship,
-            layoutbankname, layoutbranchname, layoutifsccode,layoutlognid, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
+            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
 
     RelativeLayout layoutMECarloan, layoutMEhomeloan, layoutMEsocietyloan, layoutMEpersonalloan, layoutMEotherlon,
             layoutkycadaar, layoutkycpan, layoutkycvoterid, layoutkycdl, layoutkycpassport;
@@ -122,7 +117,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
     EditText edtloginId;
-    TextView txtLoginId;
 
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
@@ -144,7 +138,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.view_bank_submited_lead_details, container, false);
+        View view = inflater.inflate(R.layout.view_sales_received_lead_details, container, false);
 
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 
@@ -192,7 +186,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
         edtifsccode = (TextView) view.findViewById(R.id.txtifsccode1);
-        txtLoginId = (TextView) view.findViewById(R.id.txtloginid1);
         edtappointment = (TextView) view.findViewById(R.id.txtappointment1);
         edtappointmentreschedule = (TextView) view.findViewById(R.id.txtappointmentreschedule1);
 
@@ -401,7 +394,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         layoutbankname = (RelativeLayout) view.findViewById(R.id.layoutbankname);
         layoutbranchname = (RelativeLayout) view.findViewById(R.id.layoutbranchname);
         layoutifsccode = (RelativeLayout) view.findViewById(R.id.layoutifsccode);
-        layoutlognid = (RelativeLayout) view.findViewById(R.id.layoutloginid);
         layoutappointment = (RelativeLayout) view.findViewById(R.id.layoutappointment);
         lauoutappointmentreschedule = (RelativeLayout) view.findViewById(R.id.layoutappointmentreschedule);
         Layoutsalesperson = (RelativeLayout) view.findViewById(R.id.layoutsalesperson);
@@ -915,7 +907,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         String bankname = leedsModel.getBanknName();
         String branchname = leedsModel.getBranchName();
         String ifsccode = leedsModel.getIfscCode();
-        String loginid1 = leedsModel.getLoginid();
         String appointment = leedsModel.getAppointment();
         String appointmentreschedule = leedsModel.getAppointreschedualreason();
         String salsepersone = leedsModel.getSalesPerson();
@@ -934,11 +925,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             edtifsccode.setText(ifsccode);
         } else {
             HideFields(layoutifsccode);
-        }
-        if (loginid1 != null && !loginid1.equalsIgnoreCase("")) {
-            txtLoginId.setText(loginid1);
-        } else {
-            HideFields(layoutlognid);
         }
         if (appointment != null && !appointment.equalsIgnoreCase("")) {
             edtappointment.setText(appointment);

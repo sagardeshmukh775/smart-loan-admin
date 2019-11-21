@@ -192,49 +192,32 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
         public void onClick(View v) {
 
             cNmae = etcname.getText().toString();
-
             cAdress = etaddress.getText().toString();
-
             cCurrentPIN = currentpin.getText().toString();
-
             cCurrentlandmark = currentlandmark.getText().toString();
-
             cCurrentarea = currentarea.getText().toString();
-
             cCurrentstreet = currentstreet.getText().toString();
-
             cPadress = PerAddress.getText().toString();
-
             cPIN = pin.getText().toString();
-
             clandmark = landmark.getText().toString();
-
             carea = area.getText().toString();
-
             cstreet = street.getText().toString();
-
             cOffaddress = etoffaddress.getText().toString();
-
             cBdate = etbirthdate.getText().toString();
-
             cContatct = etcontatct.getText().toString();
-
             cAltcontatct = etalternatecontact.getText().toString();
-
             cEmail = etcEmail.getText().toString();
-
             cPANnumber = txtpannumber.getText().toString();
+
             if (!cEmail.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
                 etcEmail.setError("Invalid Email");
             }
 
             cresidencial = Recidential.getSelectedItem().toString();
-
             sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
-
             sotherrelationship = edtotherrelationship.getText().toString();
-
             cOther = etother.getText().toString();
+
             if (chAdhar.isChecked()) {
 
                 cAdhar = chAdhar.getText().toString();
@@ -340,31 +323,18 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
 
         public void onClick(View v) {
             cNmae = etcname.getText().toString();
-
             cAdress = etaddress.getText().toString();
-
             cCurrentPIN = currentpin.getText().toString();
-
             cCurrentlandmark = currentlandmark.getText().toString();
-
             cCurrentarea = currentarea.getText().toString();
-
             cCurrentstreet = currentstreet.getText().toString();
-
             cPadress = PerAddress.getText().toString();
-
             cPIN = pin.getText().toString();
-
             clandmark = landmark.getText().toString();
-
             carea = area.getText().toString();
-
             cstreet = street.getText().toString();
-
             cOffaddress = etoffaddress.getText().toString();
-
             cBdate = etbirthdate.getText().toString();
-
             cPANnumber = txtpannumber.getText().toString();
 
             if (groupRadioGender.getCheckedRadioButtonId() != -1) {
@@ -385,14 +355,11 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
             }
 
             cContatct = etcontatct.getText().toString();
-
             cAltcontatct = etalternatecontact.getText().toString();
-
             cEmail = etcEmail.getText().toString();
-
             cresidencial = Recidential.getSelectedItem().toString();
-
             cOther = etother.getText().toString();
+
             if (chAdhar.isChecked()) {
 
                 cAdhar = chAdhar.getText().toString();
@@ -443,6 +410,7 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
             if (scoapplicantYN.equalsIgnoreCase("Yes")) {
                 sapplicantrelation = CoapplicantRalationship.getSelectedItem().toString();
             }
+
             sotherrelationship = edtotherrelationship.getText().toString();
             sreference1name = edtreferencename.getText().toString();
             sreference1address = edtreferenceaddress.getText().toString();
@@ -452,6 +420,7 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
             sreference2address = edtreferenceaddress2.getText().toString();
             sreference2contactno = edtreferencecontactno2.getText().toString();
             sreference2relationship = edtreferencerelationship2.getText().toString();
+
             if (TextUtils.isEmpty(cNmae)) {
                 etcname.setError("Required");
                 Toast.makeText(getContext(), "Enter Name!", Toast.LENGTH_SHORT).show();

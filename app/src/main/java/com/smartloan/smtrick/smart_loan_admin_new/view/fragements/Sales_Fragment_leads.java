@@ -49,6 +49,7 @@ public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItem
 
         viewPager = (ViewPager)view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        viewPager.setOffscreenPageLimit(0);
         //adapter = new Tab_Adapter(getSupportFragmentManager());
         adapter = new Tab_Adapter(getChildFragmentManager());
 

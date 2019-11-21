@@ -17,6 +17,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesFragmentLeadTabReceivedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentLeadTabGeneratedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -26,6 +27,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_Update_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsReceivedAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
@@ -34,12 +36,12 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LEED
 
 public class Sales_fragment_lead_tab_recived extends Fragment {
 
-    SalesLeedsAdapter telecallerLeedsAdapter;
+    SalesLeedsReceivedAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
     AppSharedPreference appSharedPreference;
-    TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
+    SalesFragmentLeadTabReceivedleadBinding salesFragmentLeadTabGeneratedleadBinding;
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
@@ -49,23 +51,23 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (tcFragmentLeadTabGeneratedleadBinding == null) {
-            tcFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.tc_fragment_lead_tab_generatedlead, container, false);
+        if (salesFragmentLeadTabGeneratedleadBinding == null) {
+            salesFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.sales_fragment_lead_tab_receivedlead, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
             appSingleton = AppSingleton.getInstance(getActivity());
             leedRepository = new LeedRepositoryImpl();
             appSharedPreference = new AppSharedPreference(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
+            salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
+            salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
+            salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
+            salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
 
              name = appSharedPreference.getUserName();
             getteLeed();
         }
-        return tcFragmentLeadTabGeneratedleadBinding.getRoot();
+        return salesFragmentLeadTabGeneratedleadBinding.getRoot();
     }
 
     private LeedsModel getModel(int position) {
@@ -95,7 +97,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 
 
     private void onClickListner() {
-        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
+        salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
@@ -105,7 +107,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 
-                Sales_Updatelead_Fragment fragment2 = new Sales_Updatelead_Fragment();
+                View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
                 fragment2.setArguments(bundle);
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -124,8 +126,8 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new SalesLeedsAdapter(getActivity(), leedsModels);
-                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                telecallerLeedsAdapter = new SalesLeedsReceivedAdapter(getActivity(), leedsModels);
+                salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {
                 ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
