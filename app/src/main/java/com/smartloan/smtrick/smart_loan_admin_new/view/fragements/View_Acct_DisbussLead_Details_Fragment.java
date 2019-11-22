@@ -481,6 +481,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                Toast.makeText(getContext(), "Comission Updated", Toast.LENGTH_SHORT).show();
                 progressDialogClass.dismissDialog();
             }
 
