@@ -46,6 +46,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_DISBUSED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_REJECTED;
 
 public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
@@ -481,6 +483,8 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
         btnRejectReason = (Button) view.findViewById(R.id.buttonreject);
         btnDisbussAmount = (Button) view.findViewById(R.id.buttondisbuss);
+        btnDISBUSS = (Button) view.findViewById(R.id.buttonsubmit);
+        btnREJECT = (Button) view.findViewById(R.id.buttonsubmitrejectreason);
 
         getdata();
 
@@ -546,9 +550,11 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         if (data.equalsIgnoreCase("updateBank")) {
             leedsModel.setLoginid(edtloginId.getText().toString());
         } else if (data.equalsIgnoreCase("disbuss")) {
+            leedsModel.setStatus(STATUS_DISBUSED);
             leedsModel.setDisbusedLoanAmount(edtdisbussamount.getText().toString());
         } else if (data.equalsIgnoreCase("reject")) {
             leedsModel.setRejectionReason(edtrejectionreason.getText().toString());
+            leedsModel.setStatus(STATUS_REJECTED);
         }
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
