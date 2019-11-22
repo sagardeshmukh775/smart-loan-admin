@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,9 +39,10 @@ import java.util.List;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
-import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_BANK_SUBMITED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_DISBUSED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_REJECTED;
 
-public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
+public class View_Sales_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
     TextView CoapplicantRalationship;
 
@@ -98,7 +98,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
-            layoutpancard, layoutcoapplicantrelation,layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
+            layoutpancard, layoutcoapplicantrelation, layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
             layoutdesignation, layoutgrosssalary, layoutnetsalary, layoutovertime, layoutincentive, layoutbonus, layoutrent,
             layoutagreecultureincome, layoutannualincome, layoutotherincome, layoutothers, layoutrentalexpence, layoutcarloan,
             layouthomeloan, layoutsocietyloan, layoutpersonalloan, layoutotheremidetails, layoutpropertyaddresspin,
@@ -106,7 +106,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
             layoutLoanrequirement, layoutDownpayment, layotDescription, layoutsalesperson, layoutreferencefullname, layoutreferenceaddress, layoutreferencecontactno,
             layoutreferencerelationhsip, layoutreference2fullname, layoutreference2address, layoutreference2contactno, layoutreference2relationhsip,
             layoutCompanytype, layoutpermenantaddress, layoutotherrelationship,
-            layoutbankname, layoutbranchname, layoutifsccode, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
+            layoutbankname, layoutbranchname, layoutifsccode, layoutlognid, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
 
     RelativeLayout layoutMECarloan, layoutMEhomeloan, layoutMEsocietyloan, layoutMEpersonalloan, layoutMEotherlon,
             layoutkycadaar, layoutkycpan, layoutkycvoterid, layoutkycdl, layoutkycpassport;
@@ -118,6 +118,9 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
 
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
     EditText edtloginId;
+    TextView txtLoginId;
+
+//    LinearLayout layoutDisbussAmount, layoutRejectionReason;
 
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
@@ -125,7 +128,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales,btnBankSubmit;
+    Button UpdateBankAndSales;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -139,7 +142,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.view_sales_received_lead_details, container, false);
+        View view = inflater.inflate(R.layout.view_sales_bank_submited_lead_details, container, false);
 
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 
@@ -170,8 +173,8 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtloginId = (EditText) view.findViewById(R.id.edtloginid);
 
+
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
-        btnBankSubmit = (Button) view.findViewById(R.id.buttonsubmitbank);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -184,15 +187,18 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         txtLoanType.setText(leedsModel.getLoanType());
 
 
-
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
         edtifsccode = (TextView) view.findViewById(R.id.txtifsccode1);
+        txtLoginId = (TextView) view.findViewById(R.id.txtloginid1);
         edtappointment = (TextView) view.findViewById(R.id.txtappointment1);
         edtappointmentreschedule = (TextView) view.findViewById(R.id.txtappointmentreschedule1);
+
         SPsalesperson = (TextView) view.findViewById(R.id.txtsalespersonname1);
         spinloantype = (TextView) view.findViewById(R.id.sploantypevalue);
+
         txtleadid = (TextView) view.findViewById(R.id.textheader);
+
         etcname = (TextView) view.findViewById(R.id.txtcamevalue);
         etaddress = (TextView) view.findViewById(R.id.txtcurrentaddressvalue);
         etpermanantaddress = (TextView) view.findViewById(R.id.txtpermenantaddressvalue);
@@ -210,8 +216,13 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         etcontatct = (TextView) view.findViewById(R.id.txtcontatctvalue);
         etalternatecontact = (TextView) view.findViewById(R.id.edtaltcontact);
         etcEmail = (TextView) view.findViewById(R.id.txtemail1);
+
         Recidential = (TextView) view.findViewById(R.id.spinnerrecidencialvalue);
+
+
         CoapplicantRalationship = (TextView) view.findViewById(R.id.txtcoapplicantrelation1);
+
+
         edtotherrelationship = (TextView) view.findViewById(R.id.txtotherrelationship1);
         edtreferencename = (TextView) view.findViewById(R.id.txtreferencefullname1);
         edtreferenceaddress = (TextView) view.findViewById(R.id.txtreferenceaddress1);
@@ -223,6 +234,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         edtreferencerelationship2 = (TextView) view.findViewById(R.id.txtreferencec2relationship1);
         txtpannumber = (TextView) view.findViewById(R.id.txtpannumber);
         etother = (TextView) view.findViewById(R.id.txtOthervalue);
+
         chAdhar = (TextView) view.findViewById(R.id.checkboxadhar);
         chPAN = (TextView) view.findViewById(R.id.checkboxpan);
         chVoterID = (TextView) view.findViewById(R.id.checkboxvoterid);
@@ -276,6 +288,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         txtHomeloan = (TextView) view.findViewById(R.id.txthomeloanamount);
         txtsocietyloan = (TextView) view.findViewById(R.id.txtsocietyloanamount);
         txtpersonalloan = (TextView) view.findViewById(R.id.txtpersonalloanamount);
+
         chsalarysleep = (TextView) view.findViewById(R.id.checkboxsalarysleep);
         chbankstatement = (TextView) view.findViewById(R.id.checkboxbankstatement);
         chformno16 = (TextView) view.findViewById(R.id.checkboxform16);
@@ -311,12 +324,14 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         SPpropertytype = (TextView) view.findViewById(R.id.txtpropertytype1);
         SPpropertytype.setEnabled(false);
 
+
         edtloanrequirement = (TextView) view.findViewById(R.id.txtloanrequirement1);
         edtloanrequirement.setEnabled(false);
         edtdownpayment = (TextView) view.findViewById(R.id.txtdownpayment1);
         edtdownpayment.setEnabled(false);
         edtdescription = (TextView) view.findViewById(R.id.txtdescription1);
         edtdescription.setEnabled(false);
+
         edtpropertypin = (TextView) view.findViewById(R.id.txtpropertyaddresspin1);
         edtpropertypin.setEnabled(false);
         edtpropertylandmark = (TextView) view.findViewById(R.id.txtpropertylandmark1);
@@ -384,6 +399,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         layoutbankname = (RelativeLayout) view.findViewById(R.id.layoutbankname);
         layoutbranchname = (RelativeLayout) view.findViewById(R.id.layoutbranchname);
         layoutifsccode = (RelativeLayout) view.findViewById(R.id.layoutifsccode);
+        layoutlognid = (RelativeLayout) view.findViewById(R.id.layoutloginid);
         layoutappointment = (RelativeLayout) view.findViewById(R.id.layoutappointment);
         lauoutappointmentreschedule = (RelativeLayout) view.findViewById(R.id.layoutappointmentreschedule);
         Layoutsalesperson = (RelativeLayout) view.findViewById(R.id.layoutsalesperson);
@@ -446,6 +462,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         layoutselfbusinessagreement = (RelativeLayout) view.findViewById(R.id.layoutcheckboxbusinessagreement);
         layoutselfqualificationcertificate = (RelativeLayout) view.findViewById(R.id.layoutcheckboxqualification);
 
+
         txtGender = (TextView) view.findViewById(R.id.txtgender);
         txtEducation = (TextView) view.findViewById(R.id.educationvalue);
         txtCoApplicant = (TextView) view.findViewById(R.id.coapplicantYN);
@@ -479,23 +496,13 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
                 updateLeadDetails(leedsModel);
             }
         });
-        btnBankSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setLeedStatus(leedsModel);
-            }
-        });
+
 
         return view;
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setLoginid(edtloginId.getText().toString());
-
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
-    }
-    private void setLeedStatus(LeedsModel leedsModel) {
-        leedsModel.setStatus(STATUS_BANK_SUBMITED);
+            leedsModel.setLoginid(edtloginId.getText().toString());
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
@@ -788,7 +795,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
             if (applicantYN.equalsIgnoreCase("No")) {
                 HideFields(layoutcoapplicantrelation);
                 HideFields(layoutRelation);
-            }else if (applicantYN.equalsIgnoreCase("Yes")){
+            } else if (applicantYN.equalsIgnoreCase("Yes")) {
                 CoapplicantRalationship.setText((prapplicantrelation));
             }
 //                HideFields(layoutDate );
@@ -908,6 +915,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         String bankname = leedsModel.getBanknName();
         String branchname = leedsModel.getBranchName();
         String ifsccode = leedsModel.getIfscCode();
+        String loginid1 = leedsModel.getLoginid();
         String appointment = leedsModel.getAppointment();
         String appointmentreschedule = leedsModel.getAppointreschedualreason();
         String salsepersone = leedsModel.getSalesPerson();
@@ -926,6 +934,11 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
             edtifsccode.setText(ifsccode);
         } else {
             HideFields(layoutifsccode);
+        }
+        if (loginid1 != null && !loginid1.equalsIgnoreCase("")) {
+            txtLoginId.setText(loginid1);
+        } else {
+            HideFields(layoutlognid);
         }
         if (appointment != null && !appointment.equalsIgnoreCase("")) {
             edtappointment.setText(appointment);
@@ -1236,7 +1249,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         }
 
         String loginid = leedsModel.getLoginid();
-        if (loginid != null){
+        if (loginid != null) {
             edtloginId.setText(loginid);
         }
 

@@ -282,6 +282,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                     public void onClick(View view, int position) {
                         User leedsModel = getUserModel(position);
                         SPsalesperson.setText(leedsModel.getUserName());
+                        edtSalesPerson.setText(leedsModel.getUserName());
                         dialog.dismiss();
 
                     }
