@@ -55,13 +55,13 @@
                 android:layout_margin="4dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
-                android:layout_weight="50"
                 android:clickable="true"
                 android:focusable="true"
                 card_view:cardCornerRadius="3dp"
                 card_view:cardElevation="3dp"
                 card_view:cardMaxElevation="3dp"
                 card_view:cardUseCompatPadding="true"
+                android:layout_weight="50"
                 card_view:contentPadding="2dp">
 
                 <LinearLayout
@@ -73,9 +73,9 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
+                        android:padding="2dp"
                         android:baselineAligned="false"
                         android:orientation="horizontal"
-                        android:padding="2dp"
                         android:weightSum="100">
 
                         <ImageView
@@ -107,17 +107,17 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="C Name:"
+                                    android:textStyle="bold"
                                     android:textColor="@color/whitetextcolor"
-                                    android:textSize="20dp"
-                                    android:textStyle="bold" />
+                                    android:textSize="20dp" />
 
                                 <TextView
                                     android:id="@+id/txt_id_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:text="Id:"
                                     android:background="@drawable/text_background"
                                     android:padding="5dp"
-                                    android:text="Id:"
                                     android:textColor="@color/white"
                                     android:textSize="12dp" />
 
@@ -167,9 +167,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:layout_weight="50"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:orientation="horizontal">
 
                             <TextView
@@ -220,30 +220,45 @@
             </android.support.v7.widget.CardView>
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                android:layout_weight="50"
+                android:padding="3dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:layout_weight="50">
 
                 <EditText
-                    android:id="@+id/edtloginid"
+                    android:id="@+id/edtcommisionamount"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5.0dip"
                     android:layout_marginBottom="5.0dip"
                     android:layout_toRightOf="@id/txtbankname"
                     android:background="@drawable/edittextanimation"
-                    android:hint="Enter Login Id"
                     android:inputType="textMultiLine"
                     android:padding="10.0dip"
                     android:text=""
+                    android:hint="Tap to Enter The Comission"
                     android:textColor="@color/mainTextColor"
                     android:textSize="14.0dip" />
 
+<!--                <EditText-->
+<!--                    android:id="@+id/edtsalespersonname"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5.0dip"-->
+<!--                    android:layout_marginBottom="5.0dip"-->
+<!--                    android:layout_toRightOf="@id/txtsalespersonname"-->
+<!--                    android:background="@drawable/edittextanimation"-->
+<!--                    android:inputType="textMultiLine"-->
+<!--                    android:padding="10.0dip"-->
+<!--                    android:text=""-->
+<!--                    android:hint="Tap to select the Sales Person"-->
+<!--                    android:focusable="false"-->
+<!--                    android:textColor="@color/mainTextColor"-->
+<!--                    android:textSize="14.0dip" />-->
 
                 <Button
                     android:id="@+id/buttonupdate2"
@@ -267,14 +282,14 @@
             android:layout_margin="6dp"
             android:background="@color/lightgray" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/buttonupdateimage"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="right"-->
-        <!--            android:layout_margin="3dp"-->
-        <!--            android:layout_marginTop="3dp"-->
-        <!--            android:src="@drawable/edit" />-->
+        <ImageView
+            android:id="@+id/buttonupdateimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="3dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/edit" />
 
         <ScrollView
             android:id="@id/scrollviewrightleft"
@@ -533,31 +548,31 @@
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
 
-                            <TextView
-                                android:id="@id/gender"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Gender:"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@id/gender"
+                            android:layout_width="150.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:padding="10.0dip"
+                            android:text="Gender:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14.0dip" />
 
 
-                            <TextView
-                                android:id="@+id/txtgender"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/gender"
-                                android:background="@null"
-                                android:editable="false"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@+id/txtgender"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/gender"
+                            android:background="@null"
+                            android:editable="false"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -709,32 +724,31 @@
                             android:layout_below="@id/layoutemail"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
+                        <TextView
+                            android:id="@id/education"
+                            android:layout_width="150.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:padding="10.0dip"
+                            android:text="Education:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14.0dip" />
 
-                            <TextView
-                                android:id="@id/education"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Education:"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
-
-                            <TextView
-                                android:id="@+id/educationvalue"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/education"
-                                android:background="@null"
-                                android:editable="false"
-                                android:inputType="textEmailAddress"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@+id/educationvalue"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/education"
+                            android:background="@null"
+                            android:editable="false"
+                            android:inputType="textEmailAddress"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -984,31 +998,30 @@
                             android:layout_below="@id/layoutpermenantaddress"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
+                        <TextView
+                            android:id="@id/adress"
+                            android:layout_width="150.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:padding="10.0dip"
+                            android:text="Same as Above:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14.0dip" />
 
-                            <TextView
-                                android:id="@id/adress"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Same as Above:"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
-
-                            <TextView
-                                android:id="@+id/adressYN"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/adress"
-                                android:background="@null"
-                                android:editable="false"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@+id/adressYN"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/adress"
+                            android:background="@null"
+                            android:editable="false"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -1273,9 +1286,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/layoutcheckboxadhar"
                                 android:orientation="horizontal">
-
                                 <TextView
-                                    android:id="@+id/txtboxpan"
+                                   android:id="@+id/txtboxpan"
                                     android:layout_width="150.0dip"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
@@ -1383,7 +1395,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/checkboxpassport1"
+                                  android:id="@+id/checkboxpassport1"
                                     android:layout_width="150.0dip"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
@@ -1447,11 +1459,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofAdhar"
+                                    android:layout_toRightOf="@+id/checkboxproofAdhar1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofAdhar1"
                                     android:padding="10.0dip"
                                     android:text="Adhar Card"
                                     android:textColor="@color/mainTextColor"
@@ -1479,11 +1491,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofVoterid"
+                                    android:layout_toRightOf="@+id/checkboxproofVoterid1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofVoterid1"
                                     android:padding="10.0dip"
                                     android:text="Voter ID"
                                     android:textColor="@color/mainTextColor"
@@ -1512,11 +1524,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofDL"
+                                    android:layout_toRightOf="@+id/checkboxproofDL1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofDL1"
                                     android:padding="10.0dip"
                                     android:text="Driving licence of Current Recidence"
                                     android:textColor="@color/mainTextColor"
@@ -1531,7 +1543,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/checkboxproofElectricitybill1"
+                                  android:id="@+id/checkboxproofElectricitybill1"
                                     android:layout_width="150.0dip"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
@@ -1543,11 +1555,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofElectricitybill"
+                                    android:layout_toRightOf="@+id/checkboxproofElectricitybill1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofElectricitybill1"
                                     android:padding="10.0dip"
                                     android:text="Electricity Bill of Current Recidence"
                                     android:textColor="@color/mainTextColor"
@@ -1574,11 +1586,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxpeoofRentAgmt"
+                                    android:layout_toRightOf="@+id/checkboxpeoofRentAgmt1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxpeoofRentAgmt1"
                                     android:padding="10.0dip"
                                     android:text="Rent Agreement Notarized or registered"
                                     android:textColor="@color/mainTextColor"
@@ -1605,11 +1617,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofPassport"
+                                    android:layout_toRightOf="@+id/checkboxproofPassport1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofPassport1"
                                     android:padding="10.0dip"
                                     android:text="Passport"
                                     android:textColor="@color/mainTextColor"
@@ -1636,11 +1648,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofGevtEmpID"
+                                    android:layout_toRightOf="@+id/checkboxproofGevtEmpID1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofGevtEmpID1"
                                     android:padding="10.0dip"
                                     android:text="Government Employee ID of Current Recidential Address"
                                     android:textColor="@color/mainTextColor"
@@ -1667,11 +1679,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofGumasta"
+                                    android:layout_toRightOf="@+id/checkboxproofGumasta1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofGumasta1"
                                     android:padding="10.0dip"
                                     android:text="Gumasta"
                                     android:textColor="@color/mainTextColor"
@@ -1686,7 +1698,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/checkboxproofCurrentAcctStmt1"
+                                   android:id="@+id/checkboxproofCurrentAcctStmt1"
                                     android:layout_width="150.0dip"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
@@ -1698,11 +1710,11 @@
 
                                 <TextView
                                     android:id="@id/checkboxproofCurrentAcctStmt"
+                                    android:layout_toRightOf="@+id/checkboxproofCurrentAcctStmt1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxproofCurrentAcctStmt1"
                                     android:padding="10.0dip"
                                     android:text="Current Account Statement"
                                     android:textColor="@color/mainTextColor"
@@ -1730,30 +1742,30 @@
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_vertical">
 
-                            <TextView
-                                android:id="@+id/coapplicant"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:padding="10.0dip"
-                                android:text="Co-Applicant:"
-                                android:textColor="@color/darkgraycolor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@+id/coapplicant"
+                            android:layout_width="150.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:padding="10.0dip"
+                            android:text="Co-Applicant:"
+                            android:textColor="@color/darkgraycolor"
+                            android:textSize="14.0dip" />
 
-                            <TextView
-                                android:id="@+id/coapplicantYN"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/coapplicant"
-                                android:background="@null"
-                                android:editable="false"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
+                        <TextView
+                            android:id="@+id/coapplicantYN"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/coapplicant"
+                            android:background="@null"
+                            android:editable="false"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -2932,11 +2944,11 @@
 
                                     <TextView
                                         android:id="@+id/checkboxSocietyloan"
+                                        android:layout_toRightOf="@+id/txtSocietyloan"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5.0dip"
                                         android:layout_marginBottom="5.0dip"
-                                        android:layout_toRightOf="@+id/txtSocietyloan"
                                         android:padding="10.0dip"
                                         android:text="Society/Employer Loan"
                                         android:textColor="@color/mainTextColor"
@@ -3091,11 +3103,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxsalarysleep"
+                                    android:layout_toRightOf="@+id/checkboxsalarysleep1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxsalarysleep1"
                                     android:padding="10.0dip"
                                     android:text="Salary Sleep of last 6 Months"
                                     android:textColor="@color/mainTextColor"
@@ -3122,11 +3134,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxbankstatement"
+                                    android:layout_toRightOf="@+id/checkboxbankstatement1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxbankstatement1"
                                     android:padding="10.0dip"
                                     android:text="Bank Statement of last 6 months Updated till date"
                                     android:textColor="@color/mainTextColor"
@@ -3153,11 +3165,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxform16"
+                                    android:layout_toRightOf="@+id/checkboxform161"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxform161"
                                     android:padding="10.0dip"
                                     android:text="Form No. 16 of last 2 years or ITR of last 2 years"
                                     android:textColor="@color/mainTextColor"
@@ -3184,11 +3196,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxappointmentletter"
+                                    android:layout_toRightOf="@+id/checkboxappointmentletter1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxappointmentletter1"
                                     android:padding="10.0dip"
                                     android:text="Appointment Letter"
                                     android:textColor="@color/mainTextColor"
@@ -3215,11 +3227,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxconfermationletter"
+                                    android:layout_toRightOf="@+id/checkboxconfermationletter1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxconfermationletter1"
                                     android:padding="10.0dip"
                                     android:text="Confermation Letter"
                                     android:textColor="@color/mainTextColor"
@@ -3246,11 +3258,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxexpletter"
+                                    android:layout_toRightOf="@+id/checkboxexpletter1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxexpletter1"
                                     android:padding="10.0dip"
                                     android:text="Relieving letter/Experience Letter"
                                     android:textColor="@color/mainTextColor"
@@ -3297,11 +3309,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxvisa"
+                                    android:layout_toRightOf="@+id/checkboxvisa1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxvisa1"
                                     android:padding="10.0dip"
                                     android:text="Valid VISA"
                                     android:textColor="@color/mainTextColor"
@@ -3328,11 +3340,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxnripassport"
+                                    android:layout_toRightOf="@+id/checkboxnripassport1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxnripassport1"
                                     android:enabled="false"
                                     android:padding="10.0dip"
                                     android:text="Passport"
@@ -3360,11 +3372,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxEmployerletter"
+                                    android:layout_toRightOf="@+id/checkboxEmployerletter1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxEmployerletter1"
                                     android:padding="10.0dip"
                                     android:text="Employer Letter for address proof"
                                     android:textColor="@color/mainTextColor"
@@ -3391,11 +3403,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxcontractletter"
+                                    android:layout_toRightOf="@+id/checkboxcontractletter1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxcontractletter1"
                                     android:padding="10.0dip"
                                     android:text="Contract Letter"
                                     android:textColor="@color/mainTextColor"
@@ -3422,11 +3434,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxPOA"
+                                    android:layout_toRightOf="@+id/checkboxPOA1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxPOA1"
                                     android:padding="10.0dip"
                                     android:text="POA as per Format"
                                     android:textColor="@color/mainTextColor"
@@ -3453,11 +3465,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxNREbank"
+                                    android:layout_toRightOf="@+id/checkboxNREbank1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxNREbank1"
                                     android:padding="10.0dip"
                                     android:text="NRE/NRO Bank Account Details"
                                     android:textColor="@color/mainTextColor"
@@ -3484,11 +3496,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxOverseasbank"
+                                    android:layout_toRightOf="@+id/checkboxOverseasbank1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxOverseasbank1"
                                     android:padding="10.0dip"
                                     android:text="Oversease Bank Account Details"
                                     android:textColor="@color/mainTextColor"
@@ -3535,11 +3547,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxITR"
+                                    android:layout_toRightOf="@+id/checkboxITR1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxITR1"
                                     android:padding="10.0dip"
                                     android:text="ITR of last 3 yearsCA Attested"
                                     android:textColor="@color/mainTextColor"
@@ -3566,11 +3578,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxcurrentaccountstatement"
+                                    android:layout_toRightOf="@+id/checkboxcurrentaccountstatement1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxcurrentaccountstatement1"
                                     android:padding="10.0dip"
                                     android:text="Current Account Statement of last 1 years updated till date"
                                     android:textColor="@color/mainTextColor"
@@ -3597,11 +3609,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxsavingacctstatement"
+                                    android:layout_toRightOf="@+id/checkboxsavingacctstatement1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxsavingacctstatement1"
                                     android:padding="10.0dip"
                                     android:text="Saving Account statement of last one year"
                                     android:textColor="@color/mainTextColor"
@@ -3628,11 +3640,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxpartnerdeed"
+                                    android:layout_toRightOf="@+id/checkboxpartnerdeed1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxpartnerdeed1"
                                     android:padding="10.0dip"
                                     android:text="Partnersheep Deed if applicable"
                                     android:textColor="@color/mainTextColor"
@@ -3659,11 +3671,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxbusinessagreement"
+                                    android:layout_toRightOf="@+id/checkboxbusinessagreement1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxbusinessagreement1"
                                     android:padding="10.0dip"
                                     android:text="Business Conducting Agreement if any"
                                     android:textColor="@color/mainTextColor"
@@ -3690,11 +3702,11 @@
 
                                 <TextView
                                     android:id="@+id/checkboxqualification"
+                                    android:layout_toRightOf="@+id/checkboxqualification1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5.0dip"
                                     android:layout_marginBottom="5.0dip"
-                                    android:layout_toRightOf="@+id/checkboxqualification1"
                                     android:padding="10.0dip"
                                     android:text="Qualification Certificate for professionals"
                                     android:textColor="@color/mainTextColor"
@@ -4241,25 +4253,117 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/layoutappointmentreschedule"
-                            android:layout_marginTop="5dip"
+                            android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"
                             android:orientation="vertical"
                             android:weightSum="100.0">
 
-                            <Button
-                                android:id="@+id/buttonsubmitbank"
-                                android:layout_width="fill_parent"
+                            <ImageButton
+                                android:id="@+id/buttonupdate"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="33.0"
-                                android:background="@drawable/button_bg"
-                                android:text="SUBMIT TO BANK"
-                                android:textColor="#ffffffff"
-                                android:textSize="16.0sp"
-                                android:textStyle="bold" />
+                                android:background="@color/hederbackground"
+                               />
+                            <!--<Button-->
+                            <!--android:id="@id/buttonupdate"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/hederbackground"-->
+                            <!--android:text="UPDATE"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:drawableLeft="@drawable/edit"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btnBank"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:gravity="center"-->
+                                <!--android:text="BANK"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textStyle="bold" />-->
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btnCheckList"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:text="CHECK LIST"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textStyle="bold" />-->
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btnAppointment"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:text="APPOINTMENT"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textStyle="bold" />-->
+
+                                <!--<Button-->
+                                <!--android:id="@+id/btnSales"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:background="@color/btnRequest"-->
+                                <!--android:text="SALES"-->
+                                <!--android:textColor="#ffffffff"-->
+                                <!--android:textStyle="bold" />-->
+
+                            </LinearLayout>
+
+                            <!--<Button-->
+                            <!--android:id="@id/buttonverify"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="SUBMIT"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
+
+                            <!--<Button-->
+                            <!--android:id="@id/buttoncancel"-->
+                            <!--android:layout_width="fill_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="1.0sp"-->
+                            <!--android:layout_weight="33.0"-->
+                            <!--android:background="@color/btnRequest"-->
+                            <!--android:hint="Enter Notice Description"-->
+                            <!--android:text="CANCEL"-->
+                            <!--android:textColor="#ffffffff"-->
+                            <!--android:textSize="16.0sp"-->
+                            <!--android:textStyle="bold" />-->
                         </LinearLayout>
-
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>

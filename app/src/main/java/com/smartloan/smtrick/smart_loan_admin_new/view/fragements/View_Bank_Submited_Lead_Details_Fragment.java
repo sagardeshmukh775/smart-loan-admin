@@ -557,7 +557,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             leedsModel.setStatus(STATUS_REJECTED);
         }
 
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
     }
 
     private void updateLeed(String leedId, Map leedsMap) {

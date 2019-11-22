@@ -75,38 +75,38 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 //        userscount = (TextView) findViewById(R.id.txtactiveusersvalue);
         reportscount = (TextView) findViewById(R.id.txtreportsvalue);
 
-        cardExpences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Expences_Activity.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
+//        cardExpences.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
+//                intent.putExtra("value", "leeds");
+//                startActivity(intent);
+//            }
+//        });
         cardComission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Commission_Activity.class);
+                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
                 intent.putExtra("value", "leeds");
                 startActivity(intent);
             }
         });
-        cardBills.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
-        cardInvoices.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        cardBills.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
 //                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
 //                intent.putExtra("value", "leeds");
 //                startActivity(intent);
-            }
-        });
+//            }
+//        });
+//        cardInvoices.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
+////                intent.putExtra("value", "leeds");
+////                startActivity(intent);
+//            }
+//        });
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());

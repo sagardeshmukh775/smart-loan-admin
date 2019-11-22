@@ -66,6 +66,9 @@
             android:name=".view.activites.AccountantHomeActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".view.activites.MainActivity_Accountant_new"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".view.activites.AccountantUpdateLeedsActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
