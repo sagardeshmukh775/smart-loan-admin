@@ -97,8 +97,6 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
     List<String> SalesPerson;
     List<User> userlist;
 
-    ImageView btnUpdate;
-
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
@@ -335,8 +333,6 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         edtprojectname = (TextView) view.findViewById(R.id.txtpropertyprojectname1);
         edtprojectname.setEnabled(false);
 
-        btnUpdate = (ImageView) view.findViewById(R.id.buttonupdateimage);
-
         layoutDate = (RelativeLayout) view.findViewById(R.id.layoutbirthdate);
         layoutContact = (RelativeLayout) view.findViewById(R.id.layoutcontact);
         layoutAltContact = (RelativeLayout) view.findViewById(R.id.layoutaltcontact);
@@ -463,24 +459,6 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
 
         getdata();
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent Bintent = new Intent(getContext(), Coordinator_Update_Activity.class);
-//                Bintent.putExtra(Constant.LEED_MODEL, leedsModel);
-//                startActivity(Bintent);
-                Bundle bundle = new Bundle();
-//            bundle.putString("key","abc");
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-
-                Coordinator_Update_Fragment fragment2 = new Coordinator_Update_Fragment();
-                fragment2.setArguments(bundle);
-
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.detailContainer, fragment2);
-                ft.commit();
-            }
-        });
 
         UpdateComission.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -493,11 +471,9 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-//        leedsModel.setBanknName(edtBank.getText().toString());
-//        if (edtSalesPerson.getText().toString() != null) {
-//            leedsModel.setSalesPerson(edtSalesPerson.getText().toString());
-//        }
-//        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
+        leedsModel.setComissionamount(edtComissionAmount.getText().toString());
+
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
     private void updateLeed(String leedId, Map leedsMap) {

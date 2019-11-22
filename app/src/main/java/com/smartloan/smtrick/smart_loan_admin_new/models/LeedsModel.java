@@ -189,6 +189,7 @@ public class LeedsModel implements Serializable {
     private String loginid;
     private String salesPerson;
     private String rejectionReason;
+    private String comissionamount;
 
     private ArrayList<String> checklist;
 
@@ -357,6 +358,7 @@ public class LeedsModel implements Serializable {
         this.prrecidenttype = "na";
         this.prdescripiton = "na";
         this.rejectionReason = "na";
+        this.comissionamount = "na";
 
         this.checklist = new ArrayList<String>();
     }
@@ -1748,6 +1750,14 @@ public class LeedsModel implements Serializable {
         this.rejectionReason = rejectionReason;
     }
 
+    public String getComissionamount() {
+        return comissionamount;
+    }
+
+    public void setComissionamount(String comissionamount) {
+        this.comissionamount = comissionamount;
+    }
+
     public ArrayList<String> getChecklist() {
         return checklist;
     }
@@ -1940,6 +1950,7 @@ public class LeedsModel implements Serializable {
 
         leedMap.put("checklist",getChecklist() );
         leedMap.put("rejectionReason",getRejectionReason());
+        leedMap.put("comissionamount",getComissionamount());
         return leedMap;
     }
 
