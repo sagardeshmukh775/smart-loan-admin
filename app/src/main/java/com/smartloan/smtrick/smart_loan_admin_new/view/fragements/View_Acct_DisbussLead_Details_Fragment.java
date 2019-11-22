@@ -1215,6 +1215,11 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
             HideFields(layotDescription);
         }
 
+        String comission = leedsModel.getComissionamount();
+        if (comission != null){
+            edtComissionAmount.setText(comission);
+        }
+
 //        } catch (Exception e) {
 //            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 //        }
