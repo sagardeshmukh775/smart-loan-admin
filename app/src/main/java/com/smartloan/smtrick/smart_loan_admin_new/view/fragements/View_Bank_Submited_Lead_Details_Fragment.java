@@ -122,7 +122,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             layoutselfITR, layoutselfcurrentacctstmt, layoutselfsavingacct, layoutselfpartnersheepdeed, layoutselfbusinessagreement, layoutselfqualificationcertificate;
 
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
-    EditText edtloginId;
+    EditText edtloginId, edtdisbussamount, edtrejectionreason;
     TextView txtLoginId;
 
     LinearLayout layoutDisbussAmount, layoutRejectionReason;
@@ -133,7 +133,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount;
+    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount, btnDISBUSS, btnREJECT;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -177,6 +177,8 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         txtAgent = (TextView) view.findViewById(R.id.txt_bp_value);
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtloginId = (EditText) view.findViewById(R.id.edtloginid);
+        edtdisbussamount = (EditText) view.findViewById(R.id.edtapprovedamount);
+        edtrejectionreason = (EditText) view.findViewById(R.id.edtreejctreason);
 
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
 
@@ -504,7 +506,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateLeadDetails(leedsModel);
+                updateLeadDetails(leedsModel, "updateBank");
             }
         });
 
@@ -524,11 +526,30 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             }
         });
 
+        btnDISBUSS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLeadDetails(leedsModel, "disbuss");
+            }
+        });
+        btnREJECT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLeadDetails(leedsModel, "reject");
+            }
+        });
+
         return view;
     }
 
-    private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setLoginid(edtloginId.getText().toString());
+    private void updateLeadDetails(LeedsModel leedsModel, String data) {
+        if (data.equalsIgnoreCase("updateBank")) {
+            leedsModel.setLoginid(edtloginId.getText().toString());
+        } else if (data.equalsIgnoreCase("disbuss")) {
+            leedsModel.setDisbusedLoanAmount(edtdisbussamount.getText().toString());
+        } else if (data.equalsIgnoreCase("reject")) {
+            leedsModel.setRejectionReason(edtrejectionreason.getText().toString());
+        }
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
