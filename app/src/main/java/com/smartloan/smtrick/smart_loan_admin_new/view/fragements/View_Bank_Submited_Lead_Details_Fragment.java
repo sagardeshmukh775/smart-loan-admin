@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,7 +103,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
-            layoutpancard, layoutcoapplicantrelation,layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
+            layoutpancard, layoutcoapplicantrelation, layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
             layoutdesignation, layoutgrosssalary, layoutnetsalary, layoutovertime, layoutincentive, layoutbonus, layoutrent,
             layoutagreecultureincome, layoutannualincome, layoutotherincome, layoutothers, layoutrentalexpence, layoutcarloan,
             layouthomeloan, layoutsocietyloan, layoutpersonalloan, layoutotheremidetails, layoutpropertyaddresspin,
@@ -110,7 +111,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             layoutLoanrequirement, layoutDownpayment, layotDescription, layoutsalesperson, layoutreferencefullname, layoutreferenceaddress, layoutreferencecontactno,
             layoutreferencerelationhsip, layoutreference2fullname, layoutreference2address, layoutreference2contactno, layoutreference2relationhsip,
             layoutCompanytype, layoutpermenantaddress, layoutotherrelationship,
-            layoutbankname, layoutbranchname, layoutifsccode,layoutlognid, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
+            layoutbankname, layoutbranchname, layoutifsccode, layoutlognid, layoutappointment, lauoutappointmentreschedule, Layoutsalesperson;
 
     RelativeLayout layoutMECarloan, layoutMEhomeloan, layoutMEsocietyloan, layoutMEpersonalloan, layoutMEotherlon,
             layoutkycadaar, layoutkycpan, layoutkycvoterid, layoutkycdl, layoutkycpassport;
@@ -124,13 +125,15 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
     EditText edtloginId;
     TextView txtLoginId;
 
+    LinearLayout layoutDisbussAmount, layoutRejectionReason;
+
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
     private List<String> listmaritalstatus;
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales;
+    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -186,7 +189,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         }
         txtAgent.setText(leedsModel.getAgentName());
         txtLoanType.setText(leedsModel.getLoanType());
-
 
 
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
@@ -464,11 +466,19 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         layoutselfbusinessagreement = (RelativeLayout) view.findViewById(R.id.layoutcheckboxbusinessagreement);
         layoutselfqualificationcertificate = (RelativeLayout) view.findViewById(R.id.layoutcheckboxqualification);
 
+        layoutDisbussAmount = (LinearLayout) view.findViewById(R.id.layoutapprovedamount);
+        layoutRejectionReason = (LinearLayout) view.findViewById(R.id.layoutrejectreason);
+        layoutDisbussAmount.setVisibility(LinearLayout.GONE);
+        layoutRejectionReason.setVisibility(LinearLayout.GONE);
+
         txtGender = (TextView) view.findViewById(R.id.txtgender);
         txtEducation = (TextView) view.findViewById(R.id.educationvalue);
         txtCoApplicant = (TextView) view.findViewById(R.id.coapplicantYN);
         txtOccupationtype = (TextView) view.findViewById(R.id.txtoccupationvalue);
         txtAboutProperty = (TextView) view.findViewById(R.id.txtaboutpropertyvalue);
+
+        btnRejectReason = (Button) view.findViewById(R.id.buttonreject);
+        btnDisbussAmount = (Button) view.findViewById(R.id.buttondisbuss);
 
         getdata();
 
@@ -495,6 +505,22 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 updateLeadDetails(leedsModel);
+            }
+        });
+
+        btnRejectReason.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutDisbussAmount.setVisibility(LinearLayout.GONE);
+                layoutRejectionReason.setVisibility(LinearLayout.VISIBLE);
+
+            }
+        });
+        btnDisbussAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutRejectionReason.setVisibility(LinearLayout.GONE);
+                layoutDisbussAmount.setVisibility(LinearLayout.VISIBLE);
             }
         });
 
@@ -795,7 +821,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             if (applicantYN.equalsIgnoreCase("No")) {
                 HideFields(layoutcoapplicantrelation);
                 HideFields(layoutRelation);
-            }else if (applicantYN.equalsIgnoreCase("Yes")){
+            } else if (applicantYN.equalsIgnoreCase("Yes")) {
                 CoapplicantRalationship.setText((prapplicantrelation));
             }
 //                HideFields(layoutDate );
@@ -1249,7 +1275,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         }
 
         String loginid = leedsModel.getLoginid();
-        if (loginid != null){
+        if (loginid != null) {
             edtloginId.setText(loginid);
         }
 
