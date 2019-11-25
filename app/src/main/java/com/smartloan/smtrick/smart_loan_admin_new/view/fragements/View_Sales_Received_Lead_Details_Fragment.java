@@ -1,5 +1,8 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,22 +10,29 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
+import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -32,10 +42,14 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -98,7 +112,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
-            layoutpancard, layoutcoapplicantrelation,layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
+            layoutpancard, layoutcoapplicantrelation, layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
             layoutdesignation, layoutgrosssalary, layoutnetsalary, layoutovertime, layoutincentive, layoutbonus, layoutrent,
             layoutagreecultureincome, layoutannualincome, layoutotherincome, layoutothers, layoutrentalexpence, layoutcarloan,
             layouthomeloan, layoutsocietyloan, layoutpersonalloan, layoutotheremidetails, layoutpropertyaddresspin,
@@ -124,8 +138,16 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     private List<String> listmaritalstatus;
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
+    CheckListAdapter checkdapter;
 
-    Button UpdateBankAndSales,btnBankSubmit;
+    Button UpdateBankAndSales, btnBankSubmit;
+    Button btnUpdatAppointment;
+    EditText edtupdateAppointment, edtViewChecklist;
+
+    private DatePickerDialog mDatePickerDialog;
+    int mHour;
+    int mMinute;
+    String fdate;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -182,7 +204,6 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         }
         txtAgent.setText(leedsModel.getAgentName());
         txtLoanType.setText(leedsModel.getLoanType());
-
 
 
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
@@ -452,51 +473,86 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         txtOccupationtype = (TextView) view.findViewById(R.id.txtoccupationvalue);
         txtAboutProperty = (TextView) view.findViewById(R.id.txtaboutpropertyvalue);
 
+        edtupdateAppointment = (EditText) view.findViewById(R.id.edtappointment1);
+        edtViewChecklist = (EditText) view.findViewById(R.id.edtviewchecklist);
+        btnUpdatAppointment = (Button) view.findViewById(R.id.btnappontment);
+
         getdata();
 
-//        btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent Bintent = new Intent(getContext(), Coordinator_Update_Activity.class);
-////                Bintent.putExtra(Constant.LEED_MODEL, leedsModel);
-////                startActivity(Bintent);
-//                Bundle bundle = new Bundle();
-////            bundle.putString("key","abc");
-//                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-//
-//                Coordinator_Update_Fragment fragment2 = new Coordinator_Update_Fragment();
-//                fragment2.setArguments(bundle);
-//
-//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.detailContainer, fragment2);
-//                ft.commit();
-//            }
-//        });
+
+        setDateTimeField();
+        edtViewChecklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        edtViewChecklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                final Dialog dialog1 = new Dialog(getContext());
+                dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
+                dialog1.setContentView(R.layout.customdialogboxviewchecklist);
+
+                final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
+
+                ArrayList<String> checked = new ArrayList<>();
+
+                checked = leedsModel.getChecklist();
+                checkdapter = new CheckListAdapter(getContext(), checked);
+                //adding adapter to recyclerview
+                checklist.setAdapter(checkdapter);
+                // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                checklist.setHasFixedSize(true);
+                checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                dialog1.show();
+
+            }
+        });
+        edtupdateAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDatePickerDialog.show();
+            }
+        });
+
+
+        btnUpdatAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLeadDetails(leedsModel,"appointment");
+            }
+        });
 
         UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateLeadDetails(leedsModel,"bankandsale");
+                updateLeadDetails(leedsModel, "loginid");
             }
         });
         btnBankSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateLeadDetails(leedsModel,"banksubmit");
+                updateLeadDetails(leedsModel, "banksubmit");
             }
         });
 
         return view;
     }
 
-    private void updateLeadDetails(LeedsModel leedsModel,String data) {
-        if (data.equalsIgnoreCase("bankandsale")) {
+    private void updateLeadDetails(LeedsModel leedsModel, String data) {
+        if (data.equalsIgnoreCase("loginid")) {
             leedsModel.setLoginid(edtloginId.getText().toString());
-        }else if (data.equalsIgnoreCase("banksubmit")){
+        } else if (data.equalsIgnoreCase("banksubmit")) {
             leedsModel.setStatus(STATUS_BANK_SUBMITED);
+        }else if (data.equalsIgnoreCase("appointment")) {
+            String app = edtupdateAppointment.getText().toString();
+            leedsModel.setAppointment(app);
         }
 
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
 
@@ -516,6 +572,47 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
 
             }
         });
+    }
+
+    private void setDateTimeField() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = newDate.getTime();
+                fdate = sd.format(startDate);
+
+
+                timePicker();
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    private void timePicker() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        mHour = hourOfDay;
+                        mMinute = minute;
+
+                        edtupdateAppointment.setText(fdate + " " + hourOfDay + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
     }
 
     private void getdata() {
@@ -788,7 +885,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
             if (applicantYN.equalsIgnoreCase("No")) {
                 HideFields(layoutcoapplicantrelation);
                 HideFields(layoutRelation);
-            }else if (applicantYN.equalsIgnoreCase("Yes")){
+            } else if (applicantYN.equalsIgnoreCase("Yes")) {
                 CoapplicantRalationship.setText((prapplicantrelation));
             }
 //                HideFields(layoutDate );
@@ -1236,7 +1333,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         }
 
         String loginid = leedsModel.getLoginid();
-        if (loginid != null){
+        if (loginid != null) {
             edtloginId.setText(loginid);
         }
 

@@ -31,6 +31,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.View_Leed_Details_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminGeneratedLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminVerifiedLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
@@ -41,7 +42,7 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STAT
 
 public class Add_fragment_Admin_lead_tab_verified extends Fragment {
 
-    AdminGeneratedLeedsAdapter telecallerLeedsAdapter;
+    AdminVerifiedLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
@@ -207,7 +208,7 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new AdminGeneratedLeedsAdapter(getActivity(), leedsModels);
+                telecallerLeedsAdapter = new AdminVerifiedLeedsAdapter(getActivity(), leedsModels);
                 tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {
