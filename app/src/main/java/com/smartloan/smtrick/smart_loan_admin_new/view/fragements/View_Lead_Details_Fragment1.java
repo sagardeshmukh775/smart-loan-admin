@@ -184,6 +184,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         leedsArraylist = new ArrayList<>();
         userArraylist = new ArrayList<>();
         listmaritalstatus = new ArrayList<>();
+        checklistArraylist = new ArrayList<>();
         getSalesperson();
 
         txtLeedId = (TextView) view.findViewById(R.id.txt_id_value);
@@ -487,16 +488,11 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent Bintent = new Intent(getContext(), Coordinator_Update_Activity.class);
-//                Bintent.putExtra(Constant.LEED_MODEL, leedsModel);
-//                startActivity(Bintent);
-                Bundle bundle = new Bundle();
-//            bundle.putString("key","abc");
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
                 Coordinator_Update_Fragment fragment2 = new Coordinator_Update_Fragment();
                 fragment2.setArguments(bundle);
-
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer, fragment2);
                 ft.commit();
@@ -1519,13 +1515,13 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             HideFields(layotDescription);
         }
 
-        ArrayList<String> checkelist = new ArrayList<>();
-        checkelist = leedsModel.getChecklist();
-        if (checkelist != null) {
-            edtChecklist.setText("Checklist Submitted");
-        }else{
-            edtChecklist.setText("Submit Checklist");
-        }
+//        ArrayList<String> checkelist = new ArrayList<>();
+//        checkelist = leedsModel.getChecklist();
+//        if (checkelist != null) {
+//            edtChecklist.setText("Checklist Submitted");
+//        }else{
+//            edtChecklist.setText("Submit Checklist");
+//        }
 
 //        } catch (Exception e) {
 //            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

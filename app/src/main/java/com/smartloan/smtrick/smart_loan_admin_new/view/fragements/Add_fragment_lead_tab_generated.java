@@ -188,44 +188,4 @@ public class Add_fragment_lead_tab_generated extends Fragment {
         }
     }
 
-//    private ArrayList<GetterSetterInvoice> GetSearchResults(){
-//        ArrayList<GetterSetterInvoice> results = new ArrayList<GetterSetterInvoice>();
-//
-//        GetterSetterInvoice sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);;
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//        return results;
-//    }
 }
