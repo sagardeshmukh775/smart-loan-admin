@@ -1,9 +1,7 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +16,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.CoFragmentLeadTabVerifiedBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentLeadTabGeneratedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -25,13 +24,11 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
-import com.smartloan.smtrick.smart_loan_admin_new.view.activites.View_Leed_Details_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
 
-import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LEED_MODEL;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class Co_fragment_lead_tab_verified extends Fragment {
@@ -41,7 +38,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
     AppSharedPreference appSharedPreference;
-    TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
+    CoFragmentLeadTabVerifiedBinding coFragmentLeadTabVerifiedBinding;
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
@@ -50,21 +47,21 @@ public class Co_fragment_lead_tab_verified extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (tcFragmentLeadTabGeneratedleadBinding == null) {
-            tcFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.tc_fragment_lead_tab_generatedlead, container, false);
+        if (coFragmentLeadTabVerifiedBinding == null) {
+            coFragmentLeadTabVerifiedBinding = DataBindingUtil.inflate(inflater, R.layout.co_fragment_lead_tab_verified, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
             appSingleton = AppSingleton.getInstance(getActivity());
             leedRepository = new LeedRepositoryImpl();
             appSharedPreference = new AppSharedPreference(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
+            coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.setHasFixedSize(true);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
+            coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
+            coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
+            coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
             getteLeed();
         }
-        return tcFragmentLeadTabGeneratedleadBinding.getRoot();
+        return coFragmentLeadTabVerifiedBinding.getRoot();
     }
 
     private LeedsModel getModel(int position) {
@@ -92,7 +89,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
     }
 
     private void onClickListner() {
-        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
+        coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), coFragmentLeadTabVerifiedBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
@@ -105,7 +102,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
                 View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
                 fragment2.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.detailContainer,  fragment2);
+                ft.replace(R.id.detailContainer, fragment2);
                 ft.commit();
             }
 
@@ -120,7 +117,7 @@ public class Co_fragment_lead_tab_verified extends Fragment {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
                 telecallerLeedsAdapter = new TelecallerLeedsAdapter(getActivity(), leedsModels);
-                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                coFragmentLeadTabVerifiedBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
 //                postAndNotifyAdapter(new Handler(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
 
                 onClickListner();

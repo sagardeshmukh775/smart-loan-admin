@@ -1,6 +1,8 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,11 +19,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
@@ -29,6 +35,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouch
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
+import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -38,10 +45,14 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -103,7 +114,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     RelativeLayout layoutDate, layoutContact, layoutAltContact, layoutEmail, layoutEducation, layoutOtherDetails,
             layoutCurrentAddress, layoutPin, layoutLandmark, layoutArea, layoutStreet, layoutIfSame,
             layoutpin1, layoutland, layoutSameArea, layoutSameStreet, layoutResidentialtype, layoutOfficeAddress,
-            layoutpancard, layoutcoapplicantrelation,layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
+            layoutpancard, layoutcoapplicantrelation, layoutRelation, layoutothercompany, layouttenure, layoutexperience, layoutdepartment,
             layoutdesignation, layoutgrosssalary, layoutnetsalary, layoutovertime, layoutincentive, layoutbonus, layoutrent,
             layoutagreecultureincome, layoutannualincome, layoutotherincome, layoutothers, layoutrentalexpence, layoutcarloan,
             layouthomeloan, layoutsocietyloan, layoutpersonalloan, layoutotheremidetails, layoutpropertyaddresspin,
@@ -122,7 +133,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             layoutselfITR, layoutselfcurrentacctstmt, layoutselfsavingacct, layoutselfpartnersheepdeed, layoutselfbusinessagreement, layoutselfqualificationcertificate;
 
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
-    EditText edtBank, edtSalesPerson;
+    EditText edtBank, edtSalesPerson, edtAppointment, edtChecklist;
 
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
@@ -131,6 +142,13 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     SalesPersonAdapter useradapter;
 
     Button UpdateBankAndSales;
+    private DatePickerDialog mDatePickerDialog;
+    int mHour;
+    int mMinute;
+    String fdate;
+    CheckListAdapter checkdapter;
+    ArrayList<CheckList> checklistArraylist;
+    ArrayList<String> checkedListitems = new ArrayList<>();
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -175,6 +193,8 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtBank = (EditText) view.findViewById(R.id.edtbank);
         edtSalesPerson = (EditText) view.findViewById(R.id.edtsalespersonname);
+        edtAppointment = (EditText) view.findViewById(R.id.edtappointment);
+        edtChecklist = (EditText) view.findViewById(R.id.edtchecklist);
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
@@ -186,115 +206,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         }
         txtAgent.setText(leedsModel.getAgentName());
         txtLoanType.setText(leedsModel.getLoanType());
-
-        edtBank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog1 = new Dialog(getContext());
-                dialog1.setContentView(R.layout.customdialogboxbanks);
-
-                final RecyclerView banksRecycler = (RecyclerView) dialog1.findViewById(R.id.bank_recycle);
-                EditText search = (EditText) dialog1.findViewById(R.id.txtsearchbank);
-
-                leedRepository.readAllBanks(new CallBack() {
-                    @Override
-                    public void onSuccess(Object object) {
-
-                        if (object != null) {
-                            leedsArraylist = (ArrayList<Bank>) object;
-                        }
-                        adapter = new BanksAdapter(getContext(), leedsArraylist);
-
-                        //adding adapter to recyclerview
-                        banksRecycler.setAdapter(adapter);
-                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
-                        banksRecycler.setHasFixedSize(true);
-                        banksRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-                    }
-
-                    @Override
-                    public void onError(Object object) {
-
-                    }
-                });
-
-                dialog1.show();
-
-                banksRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), banksRecycler, new RecyclerTouchListener.ClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-                        Bank leedsModel = getModel(position);
-                        edtBank.setText(leedsModel.getBankname());
-                        dialog1.dismiss();
-
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
-                    }
-
-                }));
-            }
-        });
-
-        edtSalesPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.customdialogboxsalesperson);
-
-                final RecyclerView salespersonRecycler = (RecyclerView) dialog.findViewById(R.id.dialog_recycle_salesperson);
-
-                leedRepository.readUserByRole(SALES, new CallBack() {
-                    @Override
-                    public void onSuccess(Object object) {
-
-                        if (object != null) {
-                            userArraylist = (ArrayList<User>) object;
-                        }
-
-                        for (int i = 0; i < userArraylist.size(); i++) {
-                            String user = userArraylist.get(i).getUserName();
-                            listmaritalstatus.add(user);
-                        }
-
-                        useradapter = new SalesPersonAdapter(getContext(), userArraylist);
-                        //adding adapter to recyclerview
-                        salespersonRecycler.setAdapter(useradapter);
-                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
-                        salespersonRecycler.setHasFixedSize(true);
-                        salespersonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
-                    }
-
-                    @Override
-                    public void onError(Object object) {
-
-                    }
-                });
-
-                dialog.show();
-                Window window = dialog.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                salespersonRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), salespersonRecycler, new RecyclerTouchListener.ClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-                        User leedsModel = getUserModel(position);
-                        SPsalesperson.setText(leedsModel.getUserName());
-                        edtSalesPerson.setText(leedsModel.getUserName());
-                        dialog.dismiss();
-
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
-                    }
-
-                }));
-            }
-        });
-
 
         edtbankname = (TextView) view.findViewById(R.id.txtbankname1);
         edtbranchname = (TextView) view.findViewById(R.id.txtbranchname1);
@@ -599,13 +510,273 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             }
         });
 
+
+        edtBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog1 = new Dialog(getContext());
+                dialog1.setContentView(R.layout.customdialogboxbanks);
+
+                final RecyclerView banksRecycler = (RecyclerView) dialog1.findViewById(R.id.bank_recycle);
+                EditText search = (EditText) dialog1.findViewById(R.id.txtsearchbank);
+
+                leedRepository.readAllBanks(new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+
+                        if (object != null) {
+                            leedsArraylist = (ArrayList<Bank>) object;
+                        }
+                        adapter = new BanksAdapter(getContext(), leedsArraylist);
+
+                        //adding adapter to recyclerview
+                        banksRecycler.setAdapter(adapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        banksRecycler.setHasFixedSize(true);
+                        banksRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
+                dialog1.show();
+
+                banksRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), banksRecycler, new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Bank leedsModel = getModel(position);
+                        edtBank.setText(leedsModel.getBankname());
+                        dialog1.dismiss();
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                    }
+
+                }));
+            }
+        });
+
+        edtSalesPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.customdialogboxsalesperson);
+
+                final RecyclerView salespersonRecycler = (RecyclerView) dialog.findViewById(R.id.dialog_recycle_salesperson);
+                leedRepository.readUserByRole(SALES, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+
+                        if (object != null) {
+                            userArraylist = (ArrayList<User>) object;
+                        }
+
+                        for (int i = 0; i < userArraylist.size(); i++) {
+                            String user = userArraylist.get(i).getUserName();
+                            listmaritalstatus.add(user);
+                        }
+
+                        useradapter = new SalesPersonAdapter(getContext(), userArraylist);
+                        //adding adapter to recyclerview
+                        salespersonRecycler.setAdapter(useradapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        salespersonRecycler.setHasFixedSize(true);
+                        salespersonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                salespersonRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), salespersonRecycler, new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        User leedsModel = getUserModel(position);
+                        SPsalesperson.setText(leedsModel.getUserName());
+                        edtSalesPerson.setText(leedsModel.getUserName());
+                        dialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                    }
+
+                }));
+            }
+        });
+        setDateTimeField();
+        edtAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDatePickerDialog.show();
+            }
+        });
+
+
+        edtChecklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                final Dialog dialog1 = new Dialog(getContext());
+                dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
+                dialog1.setContentView(R.layout.customdialogboxchecklist);
+
+                final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
+                final EditText edtchecklist = (EditText) dialog1.findViewById(R.id.txtaddchecklistitem);
+                final Button btnaddchecklistitem = (Button) dialog1.findViewById(R.id.buttonadditem);
+                final Button btnsubmitchecklist = (Button) dialog1.findViewById(R.id.buttonaddchecklist);
+                String Rule = leedsModel.getOccupation();
+                String ruletype = null;
+                if (Rule.equalsIgnoreCase("Salaried")) {
+                    ruletype = "SALARIED";
+                } else if (Rule.equalsIgnoreCase("Self Employed")) {
+                    ruletype = "SELF EMPLOYED";
+                }
+//                else  if (Rule.equalsIgnoreCase("Self Employed")){
+//                    ruletype = "NRI SALARIED";
+//                }else  if (Rule.equalsIgnoreCase("Self Employed")){
+//                    ruletype = "SALARIED(BT OR BT+TOPUP)";
+//                }else  if (Rule.equalsIgnoreCase("Self Employed")){
+//                    ruletype = "SELF EMPLOYED(BT OR BT+TOPUP)";
+//                }
+                final ArrayList<String> checked = new ArrayList<>();
+
+                leedRepository.readChecklistByRule(ruletype, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        ArrayList<String> check = new ArrayList<>();
+                        if (object != null) {
+                            checklistArraylist = (ArrayList<CheckList>) object;
+                            for (CheckList checked1: checklistArraylist) {
+                                checked.add(checked1.getRule());
+                            }
+
+                            checkdapter = new CheckListAdapter(getContext(), checked);
+                            //adding adapter to recyclerview
+                            checklist.setAdapter(checkdapter);
+                            // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                            checklist.setHasFixedSize(true);
+                            checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
+                btnaddchecklistitem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+                        String item = edtchecklist.getText().toString();
+                        checked.add(item);
+
+                        checkdapter = new CheckListAdapter(getContext(), checked);
+                        //adding adapter to recyclerview
+                        checklist.setAdapter(checkdapter);
+                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
+                        checklist.setHasFixedSize(true);
+                        checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        edtchecklist.setText("");
+                        progressDialogClass.dismissDialog();
+
+                    }
+                });
+
+                btnsubmitchecklist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updatechecklist(leedsModel);
+                    }
+                    private void updatechecklist(LeedsModel leedsModel) {
+                        checkedListitems.clear();
+                        checkedListitems.addAll(checked);
+
+
+//                        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
+                    }
+
+                });
+
+                dialog1.show();
+
+            }
+        });
+
         return view;
+    }
+
+
+
+    private void setDateTimeField() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = newDate.getTime();
+                fdate = sd.format(startDate);
+
+
+                timePicker();
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+    private void timePicker() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        mHour = hourOfDay;
+                        mMinute = minute;
+
+                        edtAppointment.setText(fdate + " " + hourOfDay + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
         leedsModel.setBanknName(edtBank.getText().toString());
         if (edtSalesPerson.getText().toString() != null) {
             leedsModel.setSalesPerson(edtSalesPerson.getText().toString());
+        }
+        if (edtAppointment.getText().toString() != null){
+            leedsModel.setAppointment(edtAppointment.getText().toString());
+        }
+        if (checkedListitems != null){
+            leedsModel.setChecklist(checkedListitems);
         }
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
@@ -898,7 +1069,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             if (applicantYN.equalsIgnoreCase("No")) {
                 HideFields(layoutcoapplicantrelation);
                 HideFields(layoutRelation);
-            }else if (applicantYN.equalsIgnoreCase("Yes")){
+            } else if (applicantYN.equalsIgnoreCase("Yes")) {
                 CoapplicantRalationship.setText((prapplicantrelation));
             }
 //                HideFields(layoutDate );
@@ -1346,6 +1517,14 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
         } else {
             HideFields(layotDescription);
+        }
+
+        ArrayList<String> checkelist = new ArrayList<>();
+        checkelist = leedsModel.getChecklist();
+        if (checkelist != null) {
+            edtChecklist.setText("Checklist Submitted");
+        }else{
+            edtChecklist.setText("Submit Checklist");
         }
 
 //        } catch (Exception e) {
