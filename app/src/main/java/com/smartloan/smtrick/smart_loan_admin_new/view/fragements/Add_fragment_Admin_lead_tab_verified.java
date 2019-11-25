@@ -1,9 +1,12 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentAdminLeadTabGeneratedleadBindingImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -26,6 +30,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.View_Leed_Details_Activity;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminGeneratedLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
@@ -36,7 +41,7 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STAT
 
 public class Add_fragment_Admin_lead_tab_verified extends Fragment {
 
-    TelecallerLeedsAdapter telecallerLeedsAdapter;
+    AdminGeneratedLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
@@ -44,6 +49,20 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
     TcFragmentAdminLeadTabGeneratedleadBindingImpl tcFragmentLeadTabGeneratedleadBinding;
     ArrayList<LeedsModel> leedsModelArrayList;
     ArrayList<LeedsModel> leedsModelArrayList1;
+    private boolean _hasLoadedOnce= false;
+    private ProgressDialog progress;
+
+    @Override
+    public void setUserVisibleHint(boolean isFragmentVisible_) {
+        super.setUserVisibleHint(true);
+        if (this.isVisible()) {
+// we check that the fragment is becoming visible
+            if (isFragmentVisible_ && !_hasLoadedOnce) {
+                new Loaddata().execute();
+                _hasLoadedOnce = true;
+            }
+        }
+    }
 
 //    ArrayList<GetterSetterInvoice> searchResults = GetSearchResults();
 
@@ -94,7 +113,7 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
 
 
             });
-            getteLeed();
+//            getteLeed();
         }
 
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
@@ -142,7 +161,7 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
     }
 
     private void getteLeed() {
-        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+//        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
         leedRepository.readLeedsByStatus(STATUS_VERIFIED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -150,12 +169,12 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
                     serAdapter(leedsModelArrayList);
                 }
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
                 Utility.showLongMessage(getActivity(), getString(R.string.server_error));
             }
         });
@@ -166,9 +185,16 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
-                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
-                intent.putExtra(LEED_MODEL, leedsModel);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
+//                intent.putExtra(LEED_MODEL, leedsModel);
+//                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+                View_Admin_Generated_Lead_Details_Fragment fragment2 = new View_Admin_Generated_Lead_Details_Fragment();
+                fragment2.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer,  fragment2);
+                ft.commit();
             }
 
             @Override
@@ -181,7 +207,7 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new TelecallerLeedsAdapter(getActivity(), leedsModels);
+                telecallerLeedsAdapter = new AdminGeneratedLeedsAdapter(getActivity(), leedsModels);
                 tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {
@@ -192,44 +218,34 @@ public class Add_fragment_Admin_lead_tab_verified extends Fragment {
         }
     }
 
-//    private ArrayList<GetterSetterInvoice> GetSearchResults(){
-//        ArrayList<GetterSetterInvoice> results = new ArrayList<GetterSetterInvoice>();
-//
-//        GetterSetterInvoice sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);;
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//
-//        sr = new GetterSetterInvoice();
-//        sr.setName("2345");
-//        sr.setCityState("Mr Pratik Patel");
-//        sr.setPhone("AG 37383");
-//        results.add(sr);
-//        return results;
-//    }
+    private class Loaddata extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Downloading Data");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getteLeed();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+
+
+        }
+    }
 }

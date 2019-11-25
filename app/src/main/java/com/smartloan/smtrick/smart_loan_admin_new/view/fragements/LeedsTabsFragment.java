@@ -24,6 +24,7 @@ public class LeedsTabsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_tabs, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        viewPager.setOffscreenPageLimit(0);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         viewPagerAdapter.addFragement(new Add_fragment_lead_tab_generated(), "Generated");
         viewPagerAdapter.addFragement(new Add_fragment_Admin_lead_tab_verified(), "Verified");

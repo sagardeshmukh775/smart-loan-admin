@@ -44,9 +44,12 @@ public class Activity_Home_Main extends AppCompatActivity
         Intent intent = getIntent();
         String value = intent.getStringExtra("value");
         if (value.equalsIgnoreCase("leeds")) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainFrame, new LeedsTabsFragment());
-            ft.commit();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.mainFrame, new LeedsTabsFragment());
+//            ft.commit();
+            Intent intent1 = new Intent(Activity_Home_Main.this, MainActivity_Admin_new.class);
+            intent1.putExtra("value", "leeds");
+            startActivity(intent1);
 
         } else if (value.equalsIgnoreCase("banks")) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

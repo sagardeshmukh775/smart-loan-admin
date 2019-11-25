@@ -131,6 +131,9 @@
         <activity
             android:name=".view.activites.CropImageActivity"
             android:label="Crop Image" />
+        <activity
+            android:name=".view.activites.MainActivity_Admin_new"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>
