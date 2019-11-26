@@ -82,22 +82,22 @@ public class ExpenceAdapter extends RecyclerView.Adapter<ExpenceAdapter.ViewHold
     private void updateLeed(String leedId, Map leedsMap,String billname) {
 
         leedRepository = new LeedRepositoryImpl();
-//        leedRepository.updateExpence(leedId, leedsMap, new CallBack() {
-//            @Override
-//            public void onSuccess(Object object) {
+        leedRepository.updateExpence(leedId, leedsMap, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
 //                progressDialogClass.dismissDialog();
-//                Intent intent = new Intent(context, Home_Activity.class);
-//                context.startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
+                Intent intent = new Intent(context, Home_Activity.class);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onError(Object object) {
 //                progressDialogClass.dismissDialog();
-//                Context context1 = context;
-//                Utility.showLongMessage(context1, context1.getString(R.string.server_error));
-//
-//            }
-//        });
+                Context context1 = context;
+                Utility.showLongMessage(context1, context1.getString(R.string.server_error));
+
+            }
+        });
     }
 
     @Override

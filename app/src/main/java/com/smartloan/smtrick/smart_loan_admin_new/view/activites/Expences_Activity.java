@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -183,7 +184,8 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
             leedRepository.createSalary(salary, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-
+                    Toast.makeText(Expences_Activity.this, "Bill Sent for aprovel", Toast.LENGTH_SHORT).show();
+                    edtemployeesalary.setText("");
                 }
 
                 @Override
@@ -211,7 +213,8 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
             leedRepository.createTravellingAllowance(salary, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-
+                    Toast.makeText(Expences_Activity.this, "Travelling Allowence Sent for aprovel", Toast.LENGTH_SHORT).show();
+                    edttravellingallowence.setText("");
                 }
 
                 @Override
@@ -238,7 +241,8 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
             leedRepository.createlightBill(salary, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-
+                    Toast.makeText(Expences_Activity.this, "Bill Sent for aprovel", Toast.LENGTH_SHORT).show();
+                    edtlightbill.setText("");
                 }
 
                 @Override
@@ -266,7 +270,8 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
             leedRepository.createRent(salary, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-
+                    Toast.makeText(Expences_Activity.this, "Rent Bill Sent for approvel", Toast.LENGTH_SHORT).show();
+                    edtrent.setText("");
                 }
 
                 @Override
@@ -294,7 +299,8 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
             leedRepository.createOtherExpence(salary, new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
-
+                    Toast.makeText(Expences_Activity.this, "Other Bill Sent for approvel", Toast.LENGTH_SHORT).show();
+                    edtother.setText("");
                 }
 
                 @Override

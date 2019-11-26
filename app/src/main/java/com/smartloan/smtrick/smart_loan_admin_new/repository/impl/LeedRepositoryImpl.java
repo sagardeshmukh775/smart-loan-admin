@@ -550,9 +550,10 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
         });
     }
 
+
     @Override
     public void updateExpence(String leedId, Map leedMap, final CallBack callBack) {
-        final DatabaseReference databaseReference = Constant.LEEDS_TABLE_REF.child(leedId).child("documentImages");
+        final DatabaseReference databaseReference = Constant.EXPENCE_TABLE_REF.child(leedId);
         fireBaseUpdateChildren(databaseReference, leedMap, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -565,6 +566,7 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
             }
         });
     }
+
 
     @Override
     public void updateCommission(String leedId, Map leedMap, final CallBack callBack) {
