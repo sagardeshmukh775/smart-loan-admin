@@ -192,6 +192,7 @@ public class LeedsModel implements Serializable {
     private String comissionamount;
 
     private ArrayList<String> checklist;
+    private ArrayList<String> checklistCollected;
 
     public LeedsModel(int id) {
         this.bankName = "bank";
@@ -361,6 +362,7 @@ public class LeedsModel implements Serializable {
         this.comissionamount = "na";
 
         this.checklist = new ArrayList<String>();
+        this.checklistCollected = new ArrayList<String>();
     }
 
     public LeedsModel() {
@@ -1766,6 +1768,14 @@ public class LeedsModel implements Serializable {
         this.checklist = checklist;
     }
 
+    public ArrayList<String> getChecklistCollected() {
+        return checklistCollected;
+    }
+
+    public void setChecklistCollected(ArrayList<String> checklistCollected) {
+        this.checklistCollected = checklistCollected;
+    }
+
     public static ArrayList<LeedsModel> getLeeds() {
         ArrayList<LeedsModel> leedsModelArrayList = new ArrayList();
         for (int i = 0; i < 10; i++) {
@@ -1949,6 +1959,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("salesPerson", getSalesPerson());
 
         leedMap.put("checklist",getChecklist() );
+        leedMap.put("checklistCollected",getChecklistCollected() );
         leedMap.put("rejectionReason",getRejectionReason());
         leedMap.put("comissionamount",getComissionamount());
         return leedMap;

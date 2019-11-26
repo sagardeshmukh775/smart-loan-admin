@@ -12,26 +12,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <!--<RelativeLayout-->
-        <!--android:id="@id/layouttop"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/hederbackground"-->
-        <!--android:gravity="center_horizontal">-->
-
-        <!--<TextView-->
-            <!--android:id="@id/textheader"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:padding="10.0dip"-->
-            <!--android:text=""-->
-            <!--android:textColor="#ffffffff"-->
-            <!--android:textSize="18.0sp"-->
-            <!--android:textStyle="bold" />-->
-    <!--</RelativeLayout>-->
-
     <LinearLayout
         android:id="@id/mainlayout"
         android:layout_width="fill_parent"
@@ -3154,86 +3134,96 @@
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
 
+<!--                        <RelativeLayout-->
+<!--                            android:id="@+id/layoutbankname"-->
+<!--                            android:layout_width="fill_parent"-->
+<!--                            android:layout_height="fill_parent"-->
+<!--                            android:layout_below="@id/layotDescription"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:gravity="center_vertical">-->
+<!--                            -->
+<!--                            <Button-->
+<!--                                android:id="@+id/txtbankname"-->
+<!--                                android:layout_width="150.0dip"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="1.0dip"-->
+<!--                                android:layout_marginBottom="5.0dip"-->
+<!--                                android:text="Bank"-->
+<!--                                android:textSize="14.0dip"/>-->
 
+<!--                            <EditText-->
+<!--                                android:id="@+id/txtbankname1"-->
+<!--                                android:layout_width="fill_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="5.0dip"-->
+<!--                                android:layout_marginBottom="5.0dip"-->
+<!--                                android:layout_toRightOf="@id/txtbankname"-->
+<!--                                android:background="@drawable/edittextanimation"-->
+<!--                                android:inputType="textMultiLine"-->
+<!--                                android:padding="10.0dip"-->
+<!--                                android:text=""-->
+<!--                                android:textColor="@color/mainTextColor"-->
+<!--                                android:textSize="14.0dip" />-->
+<!--                        </RelativeLayout>-->
 
-                        <RelativeLayout
-                            android:id="@+id/layoutbankname"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_below="@id/layotDescription"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/txtbankname"-->
-                            <!--android:layout_width="150.0dip"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="5.0dip"-->
-                            <!--android:layout_marginBottom="5.0dip"-->
-                            <!--android:padding="10.0dip"-->
-                            <!--android:text="Bank Name:"-->
-                            <!--android:textColor="@color/darkgraycolor"-->
-                            <!--android:textSize="14.0dip" />-->
-                            <Button
-                                android:id="@+id/txtbankname"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:text="Bank"
-                                android:textSize="14.0dip"/>
-
-                            <!--<Spinner-->
-                                <!--android:id="@+id/spinner2"-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_below="@+id/txtbankname"-->
-                                <!--android:layout_alignParentRight="true"-->
-                                <!--android:paddingRight="0dp"-->
-                                <!--android:layout_marginTop="5dp"-->
-                                <!--/>-->
-
-                            <EditText
-                                android:id="@+id/txtbankname1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/txtbankname"
-                                android:background="@drawable/edittextanimation"
-                                android:inputType="textMultiLine"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
-                        </RelativeLayout>
 
 <!--                        <RelativeLayout-->
-<!--                            android:id="@+id/layoutbranchname"-->
+<!--                            android:id="@+id/layoutappointment"-->
 <!--                            android:layout_width="fill_parent"-->
 <!--                            android:layout_height="fill_parent"-->
 <!--                            android:layout_below="@id/layoutbankname"-->
 <!--                            android:layout_gravity="center_horizontal"-->
 <!--                            android:gravity="center_vertical">-->
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/txtbranchname"-->
+<!--                            -->
+<!--                            <Button-->
+<!--                                android:id="@+id/txtappointment"-->
 <!--                                android:layout_width="150.0dip"-->
 <!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="5.0dip"-->
+<!--                                android:layout_marginTop="1.0dip"-->
 <!--                                android:layout_marginBottom="5.0dip"-->
-<!--                                android:padding="10.0dip"-->
-<!--                                android:text="Branch Name:"-->
-<!--                                android:textColor="@color/darkgraycolor"-->
-<!--                                android:textSize="14.0dip" />-->
+<!--                                android:textSize="14.0dip"-->
+<!--                                android:text="Appointment"/>-->
 
 <!--                            <EditText-->
-<!--                                android:id="@+id/txtbranchname1"-->
+<!--                                android:id="@+id/txtappointment1"-->
 <!--                                android:layout_width="fill_parent"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:layout_marginTop="5.0dip"-->
 <!--                                android:layout_marginBottom="5.0dip"-->
-<!--                                android:layout_toRightOf="@id/txtbranchname"-->
+<!--                                android:layout_toRightOf="@id/txtappointment"-->
+<!--                                android:background="@drawable/edittextanimation"-->
+<!--                                android:inputType="textMultiLine"-->
+<!--                                android:padding="10.0dip"-->
+<!--                                android:text=""-->
+<!--                                android:textColor="@color/mainTextColor"-->
+<!--                                android:textSize="14.0dip" />-->
+<!--                        </RelativeLayout>-->
+
+
+<!--                        <RelativeLayout-->
+<!--                            android:id="@+id/layoutchecklist"-->
+<!--                            android:layout_width="fill_parent"-->
+<!--                            android:layout_height="fill_parent"-->
+<!--                            android:layout_below="@id/layoutappointment"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:gravity="center_vertical">-->
+
+<!--                            <Button-->
+<!--                                android:id="@+id/txtchecklist"-->
+<!--                                android:layout_width="150.0dip"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="1.0dip"-->
+<!--                                android:layout_marginBottom="5.0dip"-->
+<!--                                android:textSize="14.0dip"-->
+<!--                                android:text="CheckList"/>-->
+
+<!--                            <EditText-->
+<!--                                android:id="@+id/txtchecklist1"-->
+<!--                                android:layout_width="fill_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="5.0dip"-->
+<!--                                android:layout_marginBottom="5.0dip"-->
+<!--                                android:layout_toRightOf="@id/txtchecklist"-->
 <!--                                android:background="@drawable/edittextanimation"-->
 <!--                                android:inputType="textMultiLine"-->
 <!--                                android:padding="10.0dip"-->
@@ -3243,175 +3233,43 @@
 <!--                        </RelativeLayout>-->
 
 <!--                        <RelativeLayout-->
-<!--                            android:id="@+id/layoutifsccode"-->
+<!--                            android:id="@+id/layoutsalesperson"-->
 <!--                            android:layout_width="fill_parent"-->
 <!--                            android:layout_height="fill_parent"-->
-<!--                            android:layout_below="@id/layoutbranchname"-->
+<!--                            android:layout_below="@id/layoutchecklist"-->
 <!--                            android:layout_gravity="center_horizontal"-->
 <!--                            android:gravity="center_vertical">-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/txtifsccode"-->
+<!--                            <Button-->
+<!--                                android:id="@+id/txtsalespersonname"-->
 <!--                                android:layout_width="150.0dip"-->
 <!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="5.0dip"-->
+<!--                                android:layout_marginTop="1.0dip"-->
 <!--                                android:layout_marginBottom="5.0dip"-->
-<!--                                android:padding="10.0dip"-->
-<!--                                android:text="IFSC Code:"-->
-<!--                                android:textColor="@color/darkgraycolor"-->
-<!--                                android:textSize="14.0dip" />-->
+<!--                                android:text="Sales Person"-->
+<!--                                android:textSize="14.0dip"/>-->
 
 <!--                            <EditText-->
-<!--                                android:id="@+id/txtifsccode1"-->
+<!--                                android:id="@+id/txtsalespersonname1"-->
 <!--                                android:layout_width="fill_parent"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:layout_marginTop="5.0dip"-->
 <!--                                android:layout_marginBottom="5.0dip"-->
-<!--                                android:layout_toRightOf="@id/txtifsccode"-->
+<!--                                android:layout_toRightOf="@id/txtsalespersonname"-->
 <!--                                android:background="@drawable/edittextanimation"-->
 <!--                                android:inputType="textMultiLine"-->
 <!--                                android:padding="10.0dip"-->
 <!--                                android:text=""-->
 <!--                                android:textColor="@color/mainTextColor"-->
 <!--                                android:textSize="14.0dip" />-->
+
 <!--                        </RelativeLayout>-->
-
-                        <RelativeLayout
-                            android:id="@+id/layoutappointment"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_below="@id/layoutbankname"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                            <!--<TextView-->
-                                <!--android:id="@+id/txtappointment"-->
-                                <!--android:layout_width="150.0dip"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginTop="5.0dip"-->
-
-                                <!--android:layout_marginBottom="5.0dip"-->
-                                <!--android:padding="10.0dip"-->
-                                <!--android:text="Appointment Date:"-->
-                                <!--android:textColor="@color/darkgraycolor"-->
-                                <!--android:textSize="14.0dip" />-->
-                            <Button
-                                android:id="@+id/txtappointment"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:textSize="14.0dip"
-                                android:text="Appointment"/>
-
-                            <EditText
-                                android:id="@+id/txtappointment1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/txtappointment"
-                                android:background="@drawable/edittextanimation"
-                                android:inputType="textMultiLine"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/layoutchecklist"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_below="@id/layoutappointment"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                            <Button
-                                android:id="@+id/txtchecklist"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:textSize="14.0dip"
-                                android:text="CheckList"/>
-
-                            <EditText
-                                android:id="@+id/txtchecklist1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/txtchecklist"
-                                android:background="@drawable/edittextanimation"
-                                android:inputType="textMultiLine"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/layoutsalesperson"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_below="@id/layoutchecklist"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/txtsalespersonname"-->
-                            <!--android:layout_width="150.0dip"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="5.0dip"-->
-                            <!--android:layout_marginBottom="5.0dip"-->
-                            <!--android:padding="10.0dip"-->
-                            <!--android:text="Sales Person:"-->
-                            <!--android:textColor="@color/darkgraycolor"-->
-                            <!--android:textSize="14.0dip" />-->
-                            <Button
-                                android:id="@+id/txtsalespersonname"
-                                android:layout_width="150.0dip"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:text="Sales Person"
-                                android:textSize="14.0dip"/>
-
-                            <EditText
-                                android:id="@+id/txtsalespersonname1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5.0dip"
-                                android:layout_marginBottom="5.0dip"
-                                android:layout_toRightOf="@id/txtsalespersonname"
-                                android:background="@drawable/edittextanimation"
-                                android:inputType="textMultiLine"
-                                android:padding="10.0dip"
-                                android:text=""
-                                android:textColor="@color/mainTextColor"
-                                android:textSize="14.0dip" />
-                            <!--<Spinner-->
-                            <!--android:id="@+id/txtsalespersonname1"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="5.0dip"-->
-                            <!--android:layout_marginBottom="5.0dip"-->
-                            <!--android:layout_toRightOf="@id/txtsalespersonname"-->
-                            <!--android:background="@drawable/edittextanimation"-->
-                            <!--android:padding="10.0dip"-->
-                            <!--android:text=""-->
-                            <!--android:textColor="@color/mainTextColor"-->
-                            <!--android:textSize="14.0dip" />-->
-
-                        </RelativeLayout>
 
                         <LinearLayout
                             android:id="@id/layoutbuttons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/layoutsalesperson"
+                            android:layout_below="@id/layotDescription"
                             android:layout_marginTop="20.0dip"
                             android:layout_weight="15.0"
                             android:gravity="bottom"

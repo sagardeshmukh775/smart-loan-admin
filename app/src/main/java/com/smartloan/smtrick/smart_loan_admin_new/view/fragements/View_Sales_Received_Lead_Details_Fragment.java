@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.smartloan.smtrick.smart_loan_admin_new.Listners.OnCheckedClickListener;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
@@ -44,6 +45,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.Sales_CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.text.SimpleDateFormat;
@@ -56,7 +58,7 @@ import java.util.Map;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_BANK_SUBMITED;
 
-public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
+public class View_Sales_Received_Lead_Details_Fragment extends Fragment implements OnCheckedClickListener {
 
     TextView CoapplicantRalationship;
 
@@ -138,7 +140,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     private List<String> listmaritalstatus;
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
-    CheckListAdapter checkdapter;
+    Sales_CheckListAdapter checkdapter;
 
     Button UpdateBankAndSales, btnBankSubmit;
     Button btnUpdatAppointment;
@@ -148,6 +150,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     int mHour;
     int mMinute;
     String fdate;
+    static private ArrayList<String> serList;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -183,6 +186,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         leedsArraylist = new ArrayList<>();
         userArraylist = new ArrayList<>();
         listmaritalstatus = new ArrayList<>();
+        serList = new ArrayList<>();
         getSalesperson();
 
         txtLeedId = (TextView) view.findViewById(R.id.txt_id_value);
@@ -500,7 +504,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
                 ArrayList<String> checked = new ArrayList<>();
 
                 checked = leedsModel.getChecklist();
-                checkdapter = new CheckListAdapter(getContext(), checked);
+                checkdapter = new Sales_CheckListAdapter(getContext(), checked, (OnCheckedClickListener) View_Sales_Received_Lead_Details_Fragment.this);
                 //adding adapter to recyclerview
                 checklist.setAdapter(checkdapter);
                 // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
@@ -522,7 +526,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
         btnUpdatAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateLeadDetails(leedsModel,"appointment");
+                updateLeadDetails(leedsModel, "appointment");
             }
         });
 
@@ -544,10 +548,11 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
 
     private void updateLeadDetails(LeedsModel leedsModel, String data) {
         if (data.equalsIgnoreCase("loginid")) {
+            leedsModel.setChecklistCollected(serList);
             leedsModel.setLoginid(edtloginId.getText().toString());
         } else if (data.equalsIgnoreCase("banksubmit")) {
             leedsModel.setStatus(STATUS_BANK_SUBMITED);
-        }else if (data.equalsIgnoreCase("appointment")) {
+        } else if (data.equalsIgnoreCase("appointment")) {
             String app = edtupdateAppointment.getText().toString();
             leedsModel.setAppointment(app);
         }
@@ -1377,6 +1382,18 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment {
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    @Override
+    public void onImageClick(String imageData, boolean isChecked) {
+        if (isChecked) {
+            serList.add(imageData);
+
+        } else if (!isChecked) {
+            int i = serList.indexOf(imageData);
+            serList.remove(i);
+            
+        }
     }
 
 }
