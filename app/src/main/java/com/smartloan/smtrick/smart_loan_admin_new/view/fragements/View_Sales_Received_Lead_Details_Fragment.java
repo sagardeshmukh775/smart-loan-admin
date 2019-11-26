@@ -142,7 +142,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
     SalesPersonAdapter useradapter;
     Sales_CheckListAdapter checkdapter;
 
-    Button UpdateBankAndSales, btnBankSubmit;
+    Button UpdateBankAndSales;
     Button btnUpdatAppointment;
     EditText edtupdateAppointment, edtViewChecklist;
 
@@ -197,7 +197,6 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
         edtloginId = (EditText) view.findViewById(R.id.edtloginid);
 
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
-        btnBankSubmit = (Button) view.findViewById(R.id.buttonsubmitbank);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -500,6 +499,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
                 dialog1.setContentView(R.layout.customdialogboxviewchecklist);
 
                 final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
+                Button AddChecklist = (Button) dialog1.findViewById(R.id.buttonaddchecklist);
 
                 ArrayList<String> checked = new ArrayList<>();
 
@@ -510,6 +510,14 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
                 // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
                 checklist.setHasFixedSize(true);
                 checklist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                AddChecklist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "CheckList Added", Toast.LENGTH_SHORT).show();
+                        dialog1.dismiss();
+                    }
+                });
 
                 dialog1.show();
 
@@ -533,13 +541,12 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
         UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (edtloginId.getText().toString().matches("")) {
+                    Toast.makeText(getContext(), "You did not enter a LoginId", Toast.LENGTH_SHORT).show();
+                    edtloginId.setError("required");
+                    return;
+                }
                 updateLeadDetails(leedsModel, "loginid");
-            }
-        });
-        btnBankSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateLeadDetails(leedsModel, "banksubmit");
             }
         });
 
@@ -550,7 +557,6 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
         if (data.equalsIgnoreCase("loginid")) {
             leedsModel.setChecklistCollected(serList);
             leedsModel.setLoginid(edtloginId.getText().toString());
-        } else if (data.equalsIgnoreCase("banksubmit")) {
             leedsModel.setStatus(STATUS_BANK_SUBMITED);
         } else if (data.equalsIgnoreCase("appointment")) {
             String app = edtupdateAppointment.getText().toString();
@@ -1392,7 +1398,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
         } else if (!isChecked) {
             int i = serList.indexOf(imageData);
             serList.remove(i);
-            
+
         }
     }
 
