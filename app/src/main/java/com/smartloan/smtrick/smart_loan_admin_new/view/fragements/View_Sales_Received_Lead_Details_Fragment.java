@@ -482,8 +482,6 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
 
         getdata();
 
-
-        setDateTimeField();
         edtViewChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -523,6 +521,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
 
             }
         });
+        setDateTimeField();
         edtupdateAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
