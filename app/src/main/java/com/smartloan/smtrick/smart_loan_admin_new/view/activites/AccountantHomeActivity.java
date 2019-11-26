@@ -91,22 +91,22 @@ public class AccountantHomeActivity extends AppCompatActivity implements
                 startActivity(intent);
             }
         });
-//        cardBills.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        cardBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
+            }
+        });
+        cardInvoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 //                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
 //                intent.putExtra("value", "leeds");
 //                startActivity(intent);
-//            }
-//        });
-//        cardInvoices.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
-////                intent.putExtra("value", "leeds");
-////                startActivity(intent);
-//            }
-//        });
+            }
+        });
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
