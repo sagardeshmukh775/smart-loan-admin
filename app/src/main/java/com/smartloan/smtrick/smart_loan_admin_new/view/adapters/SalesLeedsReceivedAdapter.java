@@ -24,6 +24,8 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.holders.SalesReceivedLeed
 
 import java.util.ArrayList;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.GLOBAL_DATE_FORMATE;
+
 public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceivedLeedsViewHolder> {
 
     private ArrayList<LeedsModel> leedModelArrayList;
@@ -145,7 +147,14 @@ public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceive
                 holder.telecallerLeedsAdapterLayoutBinding.txtAgentValue.setText(leedModel.getAgentName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtAgentValue.setText(getString(R.string.na));
-
+            if (leedModel.getUpdatedDateTimeLong() > 0)
+                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(Utility.convertMilliSecondsToFormatedDate(leedModel.getUpdatedDateTimeLong(), GLOBAL_DATE_FORMATE));
+            else
+                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(getString(R.string.na));
+            if (!Utility.isEmptyOrNull(leedModel.getAppointment()))
+                holder.telecallerLeedsAdapterLayoutBinding.txtAppointmentDateValue.setText(leedModel.getAppointment());
+            else
+                holder.telecallerLeedsAdapterLayoutBinding.txtAppointmentDateValue.setText(getString(R.string.na));
 
         } catch (Exception e) {
             e.printStackTrace();
