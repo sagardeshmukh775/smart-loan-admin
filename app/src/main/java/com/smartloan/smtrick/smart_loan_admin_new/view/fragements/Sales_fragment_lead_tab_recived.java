@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
@@ -111,7 +114,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                 fragment2.setArguments(bundle);
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.detailContainer,  fragment2);
+                ft.replace(R.id.container,  fragment2);
                 ft.commit();
             }
 
@@ -136,4 +139,19 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             }
         }
     }
+
+//    @Override
+//    public void onBackPressed(){
+//        FragmentManager fm = getFragmentManager();
+//        if (fm.getBackStackEntryCount() > 0) {
+//            Log.i("MainActivity", "popping backstack");
+//            fm.popBackStack();
+//        } else {
+//            Log.i("MainActivity", "nothing on backstack, calling super");
+//            super.onBackPressed();
+//        }
+//    }
+
+
+
 }

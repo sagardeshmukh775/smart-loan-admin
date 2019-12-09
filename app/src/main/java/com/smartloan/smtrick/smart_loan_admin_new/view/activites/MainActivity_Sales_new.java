@@ -27,7 +27,7 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main__coordinator_new);
+        setContentView(R.layout.activity_main__sales_new);
 
         fragmentManager = getSupportFragmentManager();
 
