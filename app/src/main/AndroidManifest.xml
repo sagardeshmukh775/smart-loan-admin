@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activites.Sales_View_Lead_Details_Activity"></activity>
+        <activity android:name=".view.activites.Sales_Tasks_Activity"></activity>
+        <activity android:name=".view.activites.Sales_View_Lead_Details_Activity" />
         <activity
             android:name=".view.activites.Accountant_Bills_Activity"
             android:windowSoftInputMode="stateHidden" />
