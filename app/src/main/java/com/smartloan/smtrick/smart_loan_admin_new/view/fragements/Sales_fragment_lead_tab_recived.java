@@ -29,6 +29,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_Update_Activity;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_View_Lead_Details_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsReceivedAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
@@ -104,18 +105,18 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
-//                Intent intent = new Intent(getActivity(), Sales_Update_Activity.class);
-//                intent.putExtra(LEED_MODEL, leedsModel);
-//                startActivity(intent);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+                Intent intent = new Intent(getActivity(), Sales_View_Lead_Details_Activity.class);
+                intent.putExtra(LEED_MODEL, leedsModel);
+                startActivity(intent);
 
-                View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
-                fragment2.setArguments(bundle);
 
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.container,  fragment2);
-                ft.commit();
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+//                View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
+//                fragment2.setArguments(bundle);
+//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.container,  fragment2);
+//                ft.commit();
             }
 
             @Override

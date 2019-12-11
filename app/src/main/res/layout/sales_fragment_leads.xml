@@ -16,7 +16,7 @@
         app:tabGravity="fill"
         app:tabSelectedTextColor="@color/whiteheadercolor"
         app:tabTextColor="@color/whiteheadercolor"
-        app:tabIndicatorColor="@color/whiteheadercolor"
+        app:tabIndicatorColor="@color/hederbackground"
         app:tabIndicatorHeight="4dp"
         app:tabBackground="@color/hederbackground"
         app:tabMode="fixed">
