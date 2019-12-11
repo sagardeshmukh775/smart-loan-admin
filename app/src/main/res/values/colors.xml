@@ -47,6 +47,6 @@
 
     <color name="app">#EC6F70</color>
     <color name="green_">#48C9B0</color>
-
+    <color name="bgBottomNavigation">#fe485a</color>
 
 </resources>

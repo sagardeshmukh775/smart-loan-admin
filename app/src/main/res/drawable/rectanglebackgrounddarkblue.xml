@@ -9,7 +9,7 @@
         android:angle="45"
         android:centerX="1.2"
         android:centerY="1.2"
-        android:endColor="#34495E"
+        android:endColor="#1ABC9C"
         android:gradientRadius="1"
         android:startColor="#34495E"
         android:type="linear" />
