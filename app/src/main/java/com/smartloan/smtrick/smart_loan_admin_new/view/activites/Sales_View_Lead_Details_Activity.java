@@ -127,8 +127,8 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
             emailIntent.setType("text/plain");
             emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{leedsModel.getEmail()});
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello There");
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Add Message here");
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
 
 
             emailIntent.setType("message/rfc822");

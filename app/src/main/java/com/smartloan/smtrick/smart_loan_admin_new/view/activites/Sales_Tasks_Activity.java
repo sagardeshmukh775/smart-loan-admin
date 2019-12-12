@@ -14,9 +14,10 @@ import android.view.MenuItem;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_Fragment_Checklist;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Sales_Received_Lead_Details_Fragment;
 
-public class Sales_Tasks_Activity extends AppCompatActivity {
+public class Sales_Tasks_Activity extends AppCompatActivity implements Sales_Fragment_Checklist.OnFragmentInteractionListener {
 
     LeedsModel leedsModel;
     private ActionBar toolbar;
@@ -65,7 +66,13 @@ public class Sales_Tasks_Activity extends AppCompatActivity {
         } else if (task.equalsIgnoreCase("Appointment")) {
 
         } else if (task.equalsIgnoreCase("Docs")) {
-
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+            Sales_Fragment_Checklist fragment2 = new Sales_Fragment_Checklist();
+            fragment2.setArguments(bundle);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_container, fragment2);
+            ft.commit();
         }
 
     }
@@ -96,4 +103,9 @@ public class Sales_Tasks_Activity extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void onFragmentInteraction(String title) {
+
+    }
 }
