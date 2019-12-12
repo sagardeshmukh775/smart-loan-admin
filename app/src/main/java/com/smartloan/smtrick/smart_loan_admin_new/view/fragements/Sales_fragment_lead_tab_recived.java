@@ -2,7 +2,11 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,7 @@ import android.view.animation.Animation;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.callback.SwipeToDeleteCallback;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesFragmentLeadTabReceivedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentLeadTabGeneratedleadBinding;
@@ -52,6 +58,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
     String name;
     ArrayList<LeedsModel> leedsModelArrayList;
     ArrayList<LeedsModel> leedsModelArrayList1;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,6 +139,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             if (telecallerLeedsAdapter == null) {
                 telecallerLeedsAdapter = new SalesLeedsReceivedAdapter(getActivity(), leedsModels);
                 salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                enableSwipeToDeleteAndUndo();
                 onClickListner();
             } else {
                 ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
@@ -140,6 +148,42 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             }
         }
     }
+
+
+    private void enableSwipeToDeleteAndUndo() {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                final LeedsModel item = telecallerLeedsAdapter.getData().get(position);
+
+//                telecallerLeedsAdapter.removeItem(position);
+                telecallerLeedsAdapter.MakeCall(item);
+
+
+//                Snackbar snackbar = Snackbar
+//                        .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+//                snackbar.setAction("UNDO", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//
+//                        telecallerLeedsAdapter.restoreItem(item, position);
+//                        salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.scrollToPosition(position);
+//                    }
+//                });
+//
+//                snackbar.setActionTextColor(Color.YELLOW);
+//                snackbar.show();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
+    }
+
 
 //    @Override
 //    public void onBackPressed(){

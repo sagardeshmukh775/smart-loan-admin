@@ -1,13 +1,20 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
@@ -22,6 +29,7 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
     TextView TXTusername;
 
     LeedsModel leedsModel;
+    private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -69,33 +77,87 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
 
     @Override
     public void onClick(View v) {
-        if (v == cardLabel){
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this,Sales_Tasks_Activity.class);
-            intent.putExtra("Task","Label");
+        if (v == cardLabel) {
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            intent.putExtra("Task", "Label");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
-        }else   if (v == cardFollow_up){
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this,Sales_Tasks_Activity.class);
-            intent.putExtra("Task","FallowUp");
+        } else if (v == cardFollow_up) {
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            intent.putExtra("Task", "FallowUp");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
-        }else   if (v == cardNotes){
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this,Sales_Tasks_Activity.class);
-            intent.putExtra("Task","Notes");
+        } else if (v == cardNotes) {
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            intent.putExtra("Task", "Notes");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
-        }else   if (v == cardAppointment){
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this,Sales_Tasks_Activity.class);
-            intent.putExtra("Task","Appointment");
+        } else if (v == cardAppointment) {
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            intent.putExtra("Task", "Appointment");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
-        }else   if (v == cardDocuments){
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this,Sales_Tasks_Activity.class);
-            intent.putExtra("Task","Docs");
+        } else if (v == cardDocuments) {
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            intent.putExtra("Task", "Docs");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
-        }else   if (v == imgCall){
+        } else if (v == imgCall) {
+            String customer_number = leedsModel.getMobileNumber();
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + customer_number));
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                startActivity(intent);
+
+                return;
+            }
+            startActivity(intent);
+        } else if (v == imgMessage) {
+
+//            sendSMS(leedsModel.getMobileNumber(), "Hello");
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_APP_MESSAGING);
+            startActivity(intent);
+
+        } else if (v == imgEmail) {
+
+            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setType("text/plain");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{leedsModel.getEmail()});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hello There");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Add Message here");
+
+
+            emailIntent.setType("message/rfc822");
+
+            try {
+                startActivity(Intent.createChooser(emailIntent,
+                        "Send email using..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(getApplicationContext(),
+                        "No email clients installed.",
+                        Toast.LENGTH_SHORT).show();
+            }
+
 
         }
     }
+
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
+
+
 }

@@ -36,7 +36,7 @@ public class Sales_Tasks_Activity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
         assert getSupportActionBar() != null;   //null check
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        toolbar = getSupportActionBar();
+        toolbar = getSupportActionBar();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

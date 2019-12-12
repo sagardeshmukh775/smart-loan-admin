@@ -1,9 +1,15 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.adapters;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +39,8 @@ public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceive
     int index = -1;
     private int selectedPosition = 0;
     static int m = 0;
+    private static final int REQUEST_PHONE_CALL = 1;
+
 
 
     public SalesLeedsReceivedAdapter(Context context, ArrayList<LeedsModel> data) {
@@ -174,5 +182,39 @@ public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceive
         leedModelArrayList.clear();
         leedModelArrayList.addAll(leedsModelArrayList);
         notifyDataSetChanged();
+    }
+//
+//    public void removeItem(int position) {
+//        leedModelArrayList.remove(position);
+//        notifyItemRemoved(position);
+//    }
+
+    public void MakeCall(LeedsModel item) {
+//        leedModelArrayList.add(position, item);
+//        notifyItemInserted(position);
+        String number = item.getMobileNumber();
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+            context.startActivity(intent);
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }else {
+            context.startActivity(intent);
+        }
+    }
+
+    public void restoreItem(LeedsModel item, int position) {
+        leedModelArrayList.add(position, item);
+        notifyItemInserted(position);
+    }
+    public ArrayList<LeedsModel> getData() {
+        return leedModelArrayList;
     }
 }
