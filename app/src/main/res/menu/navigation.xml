@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_shop"
+        android:id="@+id/navigation_leeds"
         android:icon="@drawable/usersimage2"
-        android:title="@string/title_shop" />
+        android:title="Leeds" />
 
     <item
-        android:id="@+id/navigation_gifts"
+        android:id="@+id/navigation_customer"
         android:icon="@drawable/team"
-        android:title="@string/title_gifts" />
+        android:title="Customers" />
 
     <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/tag"
-        android:title="@string/title_cart" />
+        android:id="@+id/navigation_label"
+        android:icon="@drawable/tag1"
+        android:title="Labels" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_tasks"
         android:icon="@drawable/list"
-        android:title="@string/title_profile" />
+        android:title="Tasks" />
 
     <item
         android:id="@+id/navigation_business"
-        android:icon="@drawable/calculator"
-        android:title="@string/title_profile" />
+        android:icon="@drawable/diagram"
+        android:title="My Business" />
 
 </menu>

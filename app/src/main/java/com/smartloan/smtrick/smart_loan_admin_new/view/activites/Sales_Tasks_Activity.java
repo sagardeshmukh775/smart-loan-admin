@@ -84,20 +84,27 @@ public class Sales_Tasks_Activity extends AppCompatActivity implements Sales_Fra
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_shop:
+                case R.id.navigation_leeds:
                     toolbar.setTitle("Leeds");
                     return true;
-                case R.id.navigation_gifts:
+                case R.id.navigation_customer:
                     toolbar.setTitle("Customers");
                     return true;
-                case R.id.navigation_cart:
+                case R.id.navigation_label:
                     toolbar.setTitle("Labels");
                     return true;
-                case R.id.navigation_profile:
+                case R.id.navigation_tasks:
                     toolbar.setTitle("Tasks");
                     return true;
                 case R.id.navigation_business:
                     toolbar.setTitle("My Business");
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+                    Sales_Fragment_Checklist fragment2 = new Sales_Fragment_Checklist();
+                    fragment2.setArguments(bundle);
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_container, fragment2);
+                    ft.commit();
                     return true;
             }
             return false;

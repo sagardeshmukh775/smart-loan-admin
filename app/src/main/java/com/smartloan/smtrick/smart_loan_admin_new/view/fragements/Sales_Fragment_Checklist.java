@@ -19,6 +19,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesChecklistAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.Tab_Adapter;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class Sales_Fragment_Checklist extends Fragment implements AdapterView.On
 
 
     RecyclerView recycleChecklist;
-    CheckListAdapter checkListAdapter;
+    SalesChecklistAdapter checkListAdapter;
     ArrayList<String> checklist;
     LeedsModel leedsModel;
 
@@ -64,7 +65,7 @@ public class Sales_Fragment_Checklist extends Fragment implements AdapterView.On
         recycleChecklist = (RecyclerView) view.findViewById(R.id.recycler_view_users);
         recycleChecklist.setHasFixedSize(true);
         recycleChecklist.setLayoutManager(new LinearLayoutManager(getContext()));
-        checkListAdapter = new CheckListAdapter(getContext(),checklist);
+        checkListAdapter = new SalesChecklistAdapter(getContext(),checklist);
         recycleChecklist.setAdapter(checkListAdapter);
 
 
