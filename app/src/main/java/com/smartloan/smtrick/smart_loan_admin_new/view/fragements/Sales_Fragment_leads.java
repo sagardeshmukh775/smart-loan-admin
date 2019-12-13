@@ -54,7 +54,7 @@ public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItem
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Sales_fragment_lead_tab_recived(), "Received");
-//        adapter.addFragment(new Sales_fragment_lead_tab_submited(), "Bank Submited");
+        adapter.addFragment(new Sales_fragment_lead_tab_submited(), "Bank Submited");
 //        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Approved");
 //        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 

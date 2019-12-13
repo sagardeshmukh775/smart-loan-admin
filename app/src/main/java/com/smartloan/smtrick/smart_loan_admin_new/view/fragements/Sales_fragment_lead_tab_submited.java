@@ -29,6 +29,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Bank_Submit_Update_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsBankSubmittedAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STAT
 
 public class Sales_fragment_lead_tab_submited extends Fragment {
 
-    SalesLeedsAdapter telecallerLeedsAdapter;
+    SalesLeedsBankSubmittedAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
@@ -112,7 +113,7 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new SalesLeedsAdapter(getActivity(), leedsModels);
+                telecallerLeedsAdapter = new SalesLeedsBankSubmittedAdapter(getActivity(), leedsModels);
                 salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {

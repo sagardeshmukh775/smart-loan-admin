@@ -83,7 +83,7 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
         } else if (v == cardFollow_up) {
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_FollowUP_Activity.class);
             intent.putExtra("Task", "FallowUp");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);

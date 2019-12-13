@@ -71,4 +71,9 @@
         <item name="android:minWidth">200dp</item>
     </style>
 
+    <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="actionMenuTextColor">#ffffff</item>
+    </style>
+
+
 </resources>

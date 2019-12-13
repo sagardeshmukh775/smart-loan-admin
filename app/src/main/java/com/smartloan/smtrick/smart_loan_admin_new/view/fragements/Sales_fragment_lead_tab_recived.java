@@ -173,7 +173,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 //                        salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.scrollToPosition(position);
 //                    }
 //                });
-//
+
 //                snackbar.setActionTextColor(Color.YELLOW);
 //                snackbar.show();
 
@@ -183,20 +183,6 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
     }
-
-
-//    @Override
-//    public void onBackPressed(){
-//        FragmentManager fm = getFragmentManager();
-//        if (fm.getBackStackEntryCount() > 0) {
-//            Log.i("MainActivity", "popping backstack");
-//            fm.popBackStack();
-//        } else {
-//            Log.i("MainActivity", "nothing on backstack, calling super");
-//            super.onBackPressed();
-//        }
-//    }
-
 
 
 }
