@@ -47,6 +47,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LEED_MODEL;
+
 public class Sales_Checklist_Activity extends AppCompatActivity implements OnCheckedClickListener {
 
     RecyclerView recycleChecklist, recycleCollectedDocuments;
@@ -251,6 +253,10 @@ public class Sales_Checklist_Activity extends AppCompatActivity implements OnChe
             public void onSuccess(Object object) {
 
                 Toast.makeText(Sales_Checklist_Activity.this, "Documents Added", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Sales_Checklist_Activity.this,Sales_View_Lead_Details_Activity.class);
+                intent.putExtra(LEED_MODEL, leedsModel);
+                startActivity(intent);
+
             }
 
             @Override

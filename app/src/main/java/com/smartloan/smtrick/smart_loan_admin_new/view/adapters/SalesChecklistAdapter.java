@@ -53,24 +53,15 @@ public class SalesChecklistAdapter extends RecyclerView.Adapter<SalesChecklistAd
         holder.Item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    holder.Item.setEnabled(false);
-                }else {
-                    holder.Item.setEnabled(true);
-                }
-            }
-        });
-
-        holder.Item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     String item = holder.Item.getText().toString();
                     onImageClickListener.onImageClick(item, true);
+                    holder.Item.setEnabled(false);
 
                 } else if (!isChecked) {
                     String item1 = holder.Item.getText().toString();
                     onImageClickListener.onImageClick(item1, false);
+                    holder.Item.setEnabled(true);
 //                    Toast.makeText(holder.count.getContext(), String.valueOf(servicesList.size()), Toast.LENGTH_SHORT).show();
                 }
             }
