@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import com.smartloan.smtrick.smart_loan_admin_new.Listners.OnCheckedClickListener;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
@@ -65,7 +66,7 @@ public class Sales_Fragment_Checklist extends Fragment implements AdapterView.On
         recycleChecklist = (RecyclerView) view.findViewById(R.id.recycler_view_users);
         recycleChecklist.setHasFixedSize(true);
         recycleChecklist.setLayoutManager(new LinearLayoutManager(getContext()));
-        checkListAdapter = new SalesChecklistAdapter(getContext(),checklist);
+        checkListAdapter = new SalesChecklistAdapter(getContext(),checklist,(OnCheckedClickListener) Sales_Fragment_Checklist.this);
         recycleChecklist.setAdapter(checkListAdapter);
 
 

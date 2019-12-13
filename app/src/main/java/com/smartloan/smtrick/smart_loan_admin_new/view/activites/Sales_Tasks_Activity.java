@@ -66,13 +66,13 @@ public class Sales_Tasks_Activity extends AppCompatActivity implements Sales_Fra
         } else if (task.equalsIgnoreCase("Appointment")) {
 
         } else if (task.equalsIgnoreCase("Docs")) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-            Sales_Fragment_Checklist fragment2 = new Sales_Fragment_Checklist();
-            fragment2.setArguments(bundle);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_container, fragment2);
-            ft.commit();
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+//            Sales_Fragment_Checklist fragment2 = new Sales_Fragment_Checklist();
+//            fragment2.setArguments(bundle);
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.frame_container, fragment2);
+//            ft.commit();
         }
 
     }

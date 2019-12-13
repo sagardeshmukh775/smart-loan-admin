@@ -98,7 +98,7 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
         } else if (v == cardDocuments) {
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Checklist_Activity.class);
             intent.putExtra("Task", "Docs");
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);

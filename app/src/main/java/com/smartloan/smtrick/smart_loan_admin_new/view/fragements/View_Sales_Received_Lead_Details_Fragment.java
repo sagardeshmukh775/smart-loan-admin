@@ -482,12 +482,7 @@ public class View_Sales_Received_Lead_Details_Fragment extends Fragment implemen
 
         getdata();
 
-        edtViewChecklist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
         edtViewChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
