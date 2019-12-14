@@ -10,8 +10,9 @@ import java.util.Map;
 
 public class FollowUp implements Serializable {
 
+    private String followupId;
     private String salesId;
-    private String leedId;
+    private String leedNumber;
     private String date;
     private String time;
     private String description;
@@ -34,6 +35,7 @@ public class FollowUp implements Serializable {
     public void setCreatedDateTime(Long createdDateTime) {
         this.createdDateTime = (Long) createdDateTime;
     }
+
     @Exclude
     public Long getUpdatedDateTimeLong() {
         return updatedDateTime;
@@ -47,6 +49,15 @@ public class FollowUp implements Serializable {
         return ServerValue.TIMESTAMP;
     }
 
+
+    public String getFollowupId() {
+        return followupId;
+    }
+
+    public void setFollowupId(String followupId) {
+        this.followupId = followupId;
+    }
+
     public String getSalesId() {
         return salesId;
     }
@@ -55,12 +66,12 @@ public class FollowUp implements Serializable {
         this.salesId = salesId;
     }
 
-    public String getLeedId() {
-        return leedId;
+    public String getLeedNumber() {
+        return leedNumber;
     }
 
-    public void setLeedId(String leedId) {
-        this.leedId = leedId;
+    public void setLeedNumber(String leedNumber) {
+        this.leedNumber = leedNumber;
     }
 
     public String getDate() {
@@ -90,8 +101,9 @@ public class FollowUp implements Serializable {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("followupId", followupId);
         result.put("salesId", salesId);
-        result.put("leedId", leedId);
+        result.put("leedNumber", leedNumber);
         result.put("date", date);
         result.put("time", time);
         result.put("description", description);

@@ -2,6 +2,7 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
+import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.FollowUp;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
@@ -41,6 +46,7 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
     int mHour;
     int mMinute;
     LeedRepository leedRepository;
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -56,6 +62,8 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
 
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
         leedRepository = new LeedRepositoryImpl();
+        appSharedPreference = new AppSharedPreference(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
 
         Toolbar toolbar = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
@@ -87,14 +95,16 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
         btnAddFollowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String key = mDatabase.push().getKey();
                 String Description = edtDescription.getText().toString();
                 String SalesId = appSharedPreference.getAgeniId();
-                String leedId = leedsModel.getLeedId();
+                String leedNumber = leedsModel.getLeedNumber();
                 String date = inputDate.getText().toString();
                 String Time = inputTime.getText().toString();
                 FollowUp followUp = new FollowUp();
+                followUp.setFollowupId(key);
                 followUp.setSalesId(SalesId);
-                followUp.setLeedId(leedId);
+                followUp.setLeedNumber(leedNumber);
                 followUp.setDate(date);
                 followUp.setTime(Time);
                 followUp.setDescription(Description);
@@ -102,9 +112,6 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
 
             }
 
-            private void AddFollowUp(FollowUp followUp) {
-//                leedRepository.createBank();
-            }
         });
         setDateTimeField();
         imgReminder.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +119,23 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 mDatePickerDialog.show();
                 layoutDateTime.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+
+    private void AddFollowUp(FollowUp followUp) {
+        leedRepository.createFollowUp(followUp, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Toast.makeText(Sales_Add_Task_Activity.this, "Follow_Up Added", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Sales_Add_Task_Activity.this,Sales_FollowUP_Activity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(Object object) {
+
             }
         });
     }

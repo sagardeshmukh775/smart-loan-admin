@@ -8,6 +8,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
 import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Commission;
+import com.smartloan.smtrick.smart_loan_admin_new.models.FollowUp;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
@@ -657,6 +658,50 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             CheckList leedsModel = suggestionSnapshot.getValue(CheckList.class);
                              leedsModelArrayList.add(leedsModel);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+    @Override
+    public void createFollowUp(FollowUp followUp, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.FOLLOW_UP_TABLE_REF.child(followUp.getFollowupId());
+        fireBaseCreate(databaseReference, followUp, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+    @Override
+    public void readFolloUpByLeedId(String id, final CallBack callBack) {
+        final Query query = Constant.FOLLOW_UP_TABLE_REF.orderByChild("salesId").equalTo(id);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<FollowUp> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            FollowUp followUp = suggestionSnapshot.getValue(FollowUp.class);
+                            leedsModelArrayList.add(followUp);
                         }
                         callBack.onSuccess(leedsModelArrayList);
                     } else {
