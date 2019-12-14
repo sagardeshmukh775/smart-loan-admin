@@ -1,26 +1,46 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin_new.models.FollowUp;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Sales_Add_Task_Activity extends AppCompatActivity {
 
     LeedsModel leedsModel;
-    ImageView imgReminder,imgTeskDesc;
-    TextView inputUserName;
+    ImageView imgReminder, imgTeskDesc;
+    TextView inputUserName, inputDate, inputTime;
     EditText edtDescription;
-    LinearLayout layoutDescription;
+    LinearLayout layoutDescription, layoutDateTime;
+    Button btnAddFollowUp;
+    AppSharedPreference appSharedPreference;
+    private DatePickerDialog mDatePickerDialog;
+    String fdate;
+    int mHour;
+    int mMinute;
+    LeedRepository leedRepository;
 
 
     @Override
@@ -35,6 +55,7 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_sales__add__task_);
 
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
+        leedRepository = new LeedRepositoryImpl();
 
         Toolbar toolbar = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
@@ -48,13 +69,90 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
         inputUserName.setText(leedsModel.getAgentName());
         edtDescription = (EditText) findViewById(R.id.edtDesc);
         layoutDescription = (LinearLayout) findViewById(R.id.layout_Desc);
+        btnAddFollowUp = (Button) findViewById(R.id.btn_Add_FollowUp);
+        inputDate = (TextView) findViewById(R.id.txt_date);
+        inputTime = (TextView) findViewById(R.id.txt_time);
+        layoutDateTime = (LinearLayout) findViewById(R.id.layout_date);
 
         layoutDescription.setVisibility(View.GONE);
+        layoutDateTime.setVisibility(View.GONE);
         imgTeskDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layoutDescription.setVisibility(View.VISIBLE);
             }
         });
+
+
+        btnAddFollowUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Description = edtDescription.getText().toString();
+                String SalesId = appSharedPreference.getAgeniId();
+                String leedId = leedsModel.getLeedId();
+                String date = inputDate.getText().toString();
+                String Time = inputTime.getText().toString();
+                FollowUp followUp = new FollowUp();
+                followUp.setSalesId(SalesId);
+                followUp.setLeedId(leedId);
+                followUp.setDate(date);
+                followUp.setTime(Time);
+                followUp.setDescription(Description);
+                AddFollowUp(followUp);
+
+            }
+
+            private void AddFollowUp(FollowUp followUp) {
+//                leedRepository.createBank();
+            }
+        });
+        setDateTimeField();
+        imgReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatePickerDialog.show();
+                layoutDateTime.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void setDateTimeField() {
+        Calendar newCalendar = Calendar.getInstance();
+        mDatePickerDialog = new DatePickerDialog(Sales_Add_Task_Activity.this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+                final Date startDate = newDate.getTime();
+                fdate = sd.format(startDate);
+
+                timePicker();
+            }
+
+            private void timePicker() {
+                // Get Current Time
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Sales_Add_Task_Activity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                                mHour = hourOfDay;
+                                mMinute = minute;
+
+                                inputDate.setText(fdate);
+                                inputTime.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
     }
 }
