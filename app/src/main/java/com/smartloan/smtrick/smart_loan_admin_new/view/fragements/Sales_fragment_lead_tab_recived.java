@@ -75,7 +75,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
 
-             name = appSharedPreference.getUserName();
+            name = appSharedPreference.getUserName();
             getteLeed();
         }
         return salesFragmentLeadTabGeneratedleadBinding.getRoot();
@@ -161,7 +161,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 
 //                telecallerLeedsAdapter.removeItem(position);
                 telecallerLeedsAdapter.MakeCall(item);
-
+                getteLeed();
 
 //                Snackbar snackbar = Snackbar
 //                        .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);

@@ -45,6 +45,7 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
 
