@@ -32,6 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LEED_MODEL;
+
 public class Sales_Add_Task_Activity extends AppCompatActivity {
 
     LeedsModel leedsModel;
@@ -130,6 +132,7 @@ public class Sales_Add_Task_Activity extends AppCompatActivity {
             public void onSuccess(Object object) {
                 Toast.makeText(Sales_Add_Task_Activity.this, "Follow_Up Added", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Sales_Add_Task_Activity.this,Sales_FollowUP_Activity.class);
+                intent.putExtra(LEED_MODEL, leedsModel);
                 startActivity(intent);
             }
 
