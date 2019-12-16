@@ -81,7 +81,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             etoffaddress, etother, etpermanantaddress;
 
     TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
-    
+
     TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;
@@ -720,9 +720,9 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                     private void updatechecklist(LeedsModel leedsModel) {
                         checkedListitems.clear();
                         checkedListitems.addAll(checked);
-
+                        leedsModel.setChecklist(checkedListitems);
+                        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
                         dialog1.dismiss();
-//                        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
                     }
 
                 });
