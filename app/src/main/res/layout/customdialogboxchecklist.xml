@@ -44,7 +44,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/hederbackground"
                 android:text="Add Item"
-                android:textColor="@color/mainTextColor" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/buttonaddchecklist"
@@ -53,7 +53,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/hederbackground"
                 android:text="Submit List"
-                android:textColor="@color/mainTextColor" />
+                android:textColor="@color/white" />
             <!--    <ListView-->
             <!--        android:id="@+id/checklist"-->
             <!--        android:layout_width="match_parent"-->

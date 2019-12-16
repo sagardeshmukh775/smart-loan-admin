@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,6 +46,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_Telecaller_new;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
@@ -58,6 +60,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_BANK_SUBMITED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class View_Lead_Details_Fragment1 extends Fragment {
 
@@ -77,9 +81,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             etoffaddress, etother, etpermanantaddress;
 
     TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
-
-
-    String lGenby;
+    
     TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;
@@ -142,7 +144,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales;
+    Button UpdateBankAndSales,SubmitToBank;
     private DatePickerDialog mDatePickerDialog;
     int mHour;
     int mMinute;
@@ -198,6 +200,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         edtAppointment = (EditText) view.findViewById(R.id.edtappointment);
         edtChecklist = (EditText) view.findViewById(R.id.edtchecklist);
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
+        SubmitToBank = (Button) view.findViewById(R.id.buttonsubmittobank);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -507,6 +510,14 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             }
         });
 
+        SubmitToBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                updateLeadDetails(leedsModel);
+                setLeedStatus(leedsModel);
+            }
+        });
+
 
         edtBank.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -633,9 +644,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                 dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 dialog1.setContentView(R.layout.customdialogboxchecklist);
 
-
-
-
                 final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
                 final EditText edtchecklist = (EditText) dialog1.findViewById(R.id.txtaddchecklistitem);
                 final Button btnaddchecklistitem = (Button) dialog1.findViewById(R.id.buttonadditem);
@@ -727,7 +735,16 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         return view;
     }
 
+    private void setLeedStatus(LeedsModel leedsModel) {
+        leedsModel.setStatus(STATUS_BANK_SUBMITED);
+        Toast.makeText(getContext(), "Lead Submitted To Bank", Toast.LENGTH_SHORT).show();
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
 
+//        Intent i = new Intent(getActivity(), MainActivity_Telecaller_new.class);
+//        startActivity(i);
+//        getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+    }
 
     private void setDateTimeField() {
 
@@ -740,7 +757,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                 SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
                 final Date startDate = newDate.getTime();
                 fdate = sd.format(startDate);
-
 
                 timePicker();
             }
