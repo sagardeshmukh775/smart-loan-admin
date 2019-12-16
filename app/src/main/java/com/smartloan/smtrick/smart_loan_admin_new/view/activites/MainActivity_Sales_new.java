@@ -3,6 +3,10 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
@@ -10,6 +14,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Coordinator_Fr
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.DisplaySettingsFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Fragment_Calculator;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_Fragment_leads;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_fragment_lead_tab_recived;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Telecaller_Fragment_leads;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Telecaller_fragment_Reports;
 
@@ -29,6 +34,11 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__sales_new);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
         fragmentManager = getSupportFragmentManager();
 
         if (findViewById(R.id.detailContainer) != null) {
@@ -39,7 +49,7 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
 
         if (savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                    .add(R.id.container, new Sales_Fragment_leads())
+                    .add(R.id.container, new Sales_fragment_lead_tab_recived())
                     .commit();
         }
 
@@ -57,6 +67,26 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+            case R.id.action_banksubmit:
+                // search action
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 //    @Override
 //    public void onOptionSelected(String option) {

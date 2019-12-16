@@ -104,7 +104,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             choverbankdetails, chpartnersheepdeed, chpassport, chpersonalloan, chqualification, chsalarysleep, chsavingacctstatement,
             chsocietyloan, chvisa;
 
-    //PROPERTY
+    //////////////////////////////PROPERTY////////////////////////////////////////
     TextView SPpropertytype;
     TextView edtloanrequirement, edtdownpayment, edtdescription, edtpropertypin, edtpropertylandmark, edtpropertyarea,
             edtprojectname, edtbankname, edtbranchname, edtifsccode, edtappointment, edtappointmentreschedule;
@@ -144,7 +144,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales,SubmitToBank;
+    Button UpdateBankAndSales, SubmitToBank;
     private DatePickerDialog mDatePickerDialog;
     int mHour;
     int mMinute;
@@ -670,7 +670,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                         ArrayList<String> check = new ArrayList<>();
                         if (object != null) {
                             checklistArraylist = (ArrayList<CheckList>) object;
-                            for (CheckList checked1: checklistArraylist) {
+                            for (CheckList checked1 : checklistArraylist) {
                                 checked.add(checked1.getRule());
                             }
 
@@ -717,6 +717,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                     public void onClick(View v) {
                         updatechecklist(leedsModel);
                     }
+
                     private void updatechecklist(LeedsModel leedsModel) {
                         checkedListitems.clear();
                         checkedListitems.addAll(checked);
@@ -763,6 +764,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
     }
+
     private void timePicker() {
         // Get Current Time
         final Calendar c = Calendar.getInstance();
@@ -790,10 +792,10 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         if (edtSalesPerson.getText().toString() != null) {
             leedsModel.setSalesPerson(edtSalesPerson.getText().toString());
         }
-        if (edtAppointment.getText().toString() != null){
+        if (edtAppointment.getText().toString() != null) {
             leedsModel.setAppointment(edtAppointment.getText().toString());
         }
-        if (checkedListitems != null){
+        if (checkedListitems != null) {
             leedsModel.setChecklist(checkedListitems);
         }
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
@@ -827,7 +829,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         Long ldatetime = leedsModel.getCreatedDateTimeLong();
         Long time = leedsModel.getCreatedDateTimeLong();
         spinloantype.setText(leedsModel.getLoanType());
-
 
         if (ldatetime != null) {
             txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
@@ -1228,6 +1229,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
         }
         if (appointment != null && !appointment.equalsIgnoreCase("")) {
             edtappointment.setText(appointment);
+            edtAppointment.setText(appointment);
         } else {
             HideFields(layoutappointment);
         }
@@ -1537,17 +1539,19 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             HideFields(layotDescription);
         }
 
-//        ArrayList<String> checkelist = new ArrayList<>();
-//        checkelist = leedsModel.getChecklist();
-//        if (checkelist != null) {
-//            edtChecklist.setText("Checklist Submitted");
-//        }else{
-//            edtChecklist.setText("Submit Checklist");
-//        }
+        try {
+            ArrayList<String> checkelist = new ArrayList<>();
+            checkelist = leedsModel.getChecklist();
+            if (checkelist != null) {
+                edtChecklist.setText("Checklist Submitted");
+            } else {
+                edtChecklist.setText("Tap Here To Submit Checklist");
+            }
 
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
+        } catch (
+                Exception e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
     }
 

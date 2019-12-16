@@ -1,11 +1,15 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sals_Bank_Submitted_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.Tab_Adapter;
 
 public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -47,6 +52,7 @@ public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItem
             mListener.onFragmentInteraction("Leads");
         }
 
+
         viewPager = (ViewPager)view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager.setOffscreenPageLimit(0);
@@ -54,7 +60,7 @@ public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItem
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Sales_fragment_lead_tab_recived(), "Received");
-        adapter.addFragment(new Sales_fragment_lead_tab_submited(), "Bank Submited");
+//        adapter.addFragment(new Sales_fragment_lead_tab_submited(), "Bank Submited");
 //        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Approved");
 //        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
@@ -63,6 +69,11 @@ public class Sales_Fragment_leads extends Fragment implements AdapterView.OnItem
 
         return view;
     }
+
+
+
+
+
 
     @Override
     public void onAttach(Context context) {

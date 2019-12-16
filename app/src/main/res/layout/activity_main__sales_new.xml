@@ -7,4 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".view.activites.MainActivity_Coorinator_new">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Received"
+            android:textColor="@color/white"/>
+
+    </android.support.v7.widget.Toolbar>
+
 </FrameLayout>

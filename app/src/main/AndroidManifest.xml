@@ -14,7 +14,8 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activites.Sales_Add_Task_Activity"></activity>
+        <activity android:name=".view.activites.Sals_Bank_Submitted_Activity"></activity>
+        <activity android:name=".view.activites.Sales_Add_Task_Activity" />
         <activity android:name=".view.activites.Sales_FollowUP_Activity" />
         <activity android:name=".view.activites.Sales_Checklist_Activity" />
         <activity android:name=".view.activites.Sales_Tasks_Activity" />

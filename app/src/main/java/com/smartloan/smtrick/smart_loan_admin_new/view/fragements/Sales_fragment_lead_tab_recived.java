@@ -17,6 +17,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -36,6 +39,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_Update_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sales_View_Lead_Details_Activity;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Sals_Bank_Submitted_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsReceivedAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
@@ -62,6 +66,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         if (salesFragmentLeadTabGeneratedleadBinding == null) {
             salesFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.sales_fragment_lead_tab_receivedlead, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
@@ -116,7 +121,6 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                 intent.putExtra(LEED_MODEL, leedsModel);
                 startActivity(intent);
 
-
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
 //                View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
@@ -159,23 +163,8 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                 final int position = viewHolder.getAdapterPosition();
                 final LeedsModel item = telecallerLeedsAdapter.getData().get(position);
 
-//                telecallerLeedsAdapter.removeItem(position);
                 telecallerLeedsAdapter.MakeCall(item);
                 getteLeed();
-
-//                Snackbar snackbar = Snackbar
-//                        .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
-//                snackbar.setAction("UNDO", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//
-//                        telecallerLeedsAdapter.restoreItem(item, position);
-//                        salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.scrollToPosition(position);
-//                    }
-//                });
-
-//                snackbar.setActionTextColor(Color.YELLOW);
-//                snackbar.show();
 
             }
         };
@@ -184,5 +173,30 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
         itemTouchhelper.attachToRecyclerView(salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        menu.clear();
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_banksubmit:
+                Intent intent = new Intent(getContext(), Sals_Bank_Submitted_Activity.class);
+                startActivity(intent);
+                // Not implemented here
+                return false;
+
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 
 }
