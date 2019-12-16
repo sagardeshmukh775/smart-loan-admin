@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -627,8 +628,13 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             public void onClick(final View view) {
 
                 final Dialog dialog1 = new Dialog(getContext());
-                dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
+//                dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
+                dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 dialog1.setContentView(R.layout.customdialogboxchecklist);
+
+
+
 
                 final RecyclerView checklist = (RecyclerView) dialog1.findViewById(R.id.checklist_recycle);
                 final EditText edtchecklist = (EditText) dialog1.findViewById(R.id.txtaddchecklistitem);
@@ -707,7 +713,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                         checkedListitems.clear();
                         checkedListitems.addAll(checked);
 
-
+                        dialog1.dismiss();
 //                        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
                     }
 

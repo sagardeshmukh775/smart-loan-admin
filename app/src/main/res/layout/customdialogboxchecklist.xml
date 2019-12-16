@@ -5,17 +5,14 @@
     android:padding="7dp">
 
 
-
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/checklist_recycle"
@@ -26,46 +23,44 @@
             </android.support.v7.widget.RecyclerView>
 
 
-    <EditText
-        android:id="@+id/txtaddchecklistitem"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7.0dip"
-        android:layout_marginBottom="5.0dip"
-        android:background="@drawable/edittextanimation"
-        android:layout_below="@+id/checklist_recycle"
-        android:inputType="textMultiLine"
-        android:padding="10.0dip"
-        android:text=""
-        android:textColor="@color/mainTextColor"
-        android:textSize="14.0dip" />
+            <EditText
+                android:id="@+id/txtaddchecklistitem"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checklist_recycle"
+                android:layout_marginTop="7.0dip"
+                android:layout_marginBottom="5.0dip"
+                android:background="@drawable/edittextanimation"
+                android:inputType="textMultiLine"
+                android:padding="10.0dip"
+                android:text=""
+                android:textColor="@color/mainTextColor"
+                android:textSize="14.0dip" />
 
-    <Button
-        android:id="@+id/buttonadditem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/hederbackground"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/mainTextColor"
-        android:text="Add Item"
-        />
+            <Button
+                android:id="@+id/buttonadditem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/hederbackground"
+                android:text="Add Item"
+                android:textColor="@color/mainTextColor" />
 
             <Button
                 android:id="@+id/buttonaddchecklist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/hederbackground"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/mainTextColor"
+                android:background="@color/hederbackground"
                 android:text="Submit List"
-                />
-<!--    <ListView-->
-<!--        android:id="@+id/checklist"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="5dp">-->
+                android:textColor="@color/mainTextColor" />
+            <!--    <ListView-->
+            <!--        android:id="@+id/checklist"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_margin="5dp">-->
 
-<!--    </ListView>-->
+            <!--    </ListView>-->
         </LinearLayout>
 
     </ScrollView>

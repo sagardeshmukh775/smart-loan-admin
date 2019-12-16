@@ -210,10 +210,6 @@ public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceive
         }
     }
 
-    public void restoreItem(LeedsModel item, int position) {
-        leedModelArrayList.add(position, item);
-        notifyItemInserted(position);
-    }
     public ArrayList<LeedsModel> getData() {
         return leedModelArrayList;
     }
