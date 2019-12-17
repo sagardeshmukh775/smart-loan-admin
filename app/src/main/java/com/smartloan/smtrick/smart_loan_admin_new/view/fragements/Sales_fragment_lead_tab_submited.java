@@ -49,8 +49,10 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
     int toYear, toMonth, toDay;
     long fromDate, toDate;
     ArrayList<LeedsModel> leedsModelArrayList;
-    private boolean _hasLoadedOnce= false;
+    ArrayList<LeedsModel> leedsModelArrayList1;
+    private boolean _hasLoadedOnce = false;
     private ProgressDialog progress;
+    String salesName;
 
     @Override
     public void setUserVisibleHint(boolean isFragmentVisible_) {
@@ -78,7 +80,9 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
             salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
-//            getteLeed();
+            leedsModelArrayList1 = new ArrayList<>();
+            salesName = appSharedPreference.getUserName();
+            getteLeed();
         }
         return salesFragmentLeadTabGeneratedleadBinding.getRoot();
     }
@@ -94,7 +98,12 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
             public void onSuccess(Object object) {
                 if (object != null) {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
-                    serAdapter(leedsModelArrayList);
+                    for (LeedsModel leed : leedsModelArrayList) {
+                        if (leed.getSalesPerson().equalsIgnoreCase(appSharedPreference.getUserName())) {
+                            leedsModelArrayList1.add(leed);
+                        }
+                    }
+                    serAdapter(leedsModelArrayList1);
                 }
 //                progressDialogClass.dismissDialog();
             }
@@ -106,8 +115,6 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
             }
         });
     }
-
-
 
 
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
@@ -155,7 +162,7 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress=new ProgressDialog(getContext());
+            progress = new ProgressDialog(getContext());
             progress.setMessage("Downloading Data");
             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
@@ -172,11 +179,9 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            if(progress.isShowing())
-            {
+            if (progress.isShowing()) {
                 progress.dismiss();
             }
-
 
 
         }

@@ -71,31 +71,22 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
                 holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(leedModel.getCustomerName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getMobileNumber()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtContactValue.setText(leedModel.getMobileNumber());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtContactValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getAddress()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtAddressValue.setText(leedModel.getAddress());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtAddressValue.setText(getString(R.string.na));
 
             if (!Utility.isEmptyOrNull(leedModel.getBanknName()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getBanknName());
+                holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(leedModel.getBanknName());
             else
-                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getAgentName()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtAgentValue.setText(leedModel.getAgentName());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtAgentValue.setText(getString(R.string.na));
-            if (leedModel.getUpdatedDateTimeLong() > 0)
-                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(Utility.convertMilliSecondsToFormatedDate(leedModel.getUpdatedDateTimeLong(), GLOBAL_DATE_FORMATE));
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getAppointment()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtAppointmentDateValue.setText(leedModel.getAppointment());
-            else
-                holder.telecallerLeedsAdapterLayoutBinding.txtAppointmentDateValue.setText(getString(R.string.na));
+                holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(getString(R.string.na));
+
+
+
+
+
+
+//            if (leedModel.getUpdatedDateTimeLong() > 0)
+//                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(Utility.convertMilliSecondsToFormatedDate(leedModel.getUpdatedDateTimeLong(), GLOBAL_DATE_FORMATE));
+//            else
+//                holder.telecallerLeedsAdapterLayoutBinding.txtAssignDateTimeValue.setText(getString(R.string.na));
+
 
         } catch (Exception e) {
             e.printStackTrace();

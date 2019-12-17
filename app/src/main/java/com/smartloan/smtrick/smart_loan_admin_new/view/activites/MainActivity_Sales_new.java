@@ -1,5 +1,6 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +82,8 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.action_banksubmit:
                 // search action
+                Intent intent = new Intent(MainActivity_Sales_new.this,Sals_Bank_Submitted_Activity.class);
+                startActivity(intent);
                 return true;
 
             default:
