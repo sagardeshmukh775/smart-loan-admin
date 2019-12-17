@@ -34,7 +34,6 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
     private static final int REQUEST_PHONE_CALL = 1;
 
 
-
     public SalesLeedsBankSubmittedAdapter(Context context, ArrayList<LeedsModel> data) {
         this.leedModelArrayList = data;
         this.context = context;
@@ -42,7 +41,7 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
 
     @Override
     public SalesBankSubmittedLeedsViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                                                int viewType) {
         SalesBanksubmittedLeedsAdapterLayoutBinding telecallerLeedsAdapterLayoutBinding;
         telecallerLeedsAdapterLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.sales_banksubmitted_leeds_adapter_layout, parent, false);
         return new SalesBankSubmittedLeedsViewHolder(telecallerLeedsAdapterLayoutBinding);
@@ -73,13 +72,23 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
                 holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(getString(R.string.na));
 
             if (!Utility.isEmptyOrNull(leedModel.getBanknName()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(leedModel.getBanknName());
+                holder.telecallerLeedsAdapterLayoutBinding.txtContact.setText(leedModel.getBanknName());
             else
-                holder.telecallerLeedsAdapterLayoutBinding.txtNameValue.setText(getString(R.string.na));
+                holder.telecallerLeedsAdapterLayoutBinding.txtContact.setText(getString(R.string.na));
 
 
+            holder.telecallerLeedsAdapterLayoutBinding.dots.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
+            holder.telecallerLeedsAdapterLayoutBinding.pin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
 
 
 //            if (leedModel.getUpdatedDateTimeLong() > 0)
@@ -122,14 +131,14 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
             context.startActivity(intent);
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
-        }else {
+        } else {
             context.startActivity(intent);
         }
     }
@@ -138,6 +147,7 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
         leedModelArrayList.add(position, item);
         notifyItemInserted(position);
     }
+
     public ArrayList<LeedsModel> getData() {
         return leedModelArrayList;
     }

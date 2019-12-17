@@ -98,12 +98,12 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
             public void onSuccess(Object object) {
                 if (object != null) {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
-                    for (LeedsModel leed : leedsModelArrayList) {
-                        if (leed.getSalesPerson().equalsIgnoreCase(appSharedPreference.getUserName())) {
-                            leedsModelArrayList1.add(leed);
-                        }
-                    }
-                    serAdapter(leedsModelArrayList1);
+//                    for (LeedsModel leed : leedsModelArrayList) {
+//                        if (leed.getSalesPerson().equalsIgnoreCase(appSharedPreference.getUserName())) {
+//                            leedsModelArrayList1.add(leed);
+//                        }
+//                    }
+                    serAdapter(leedsModelArrayList);
                 }
 //                progressDialogClass.dismissDialog();
             }

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_leeds"
-        android:icon="@drawable/usersimage2"
+        android:icon="@drawable/arrow_on_target"
         android:title="Leeds" />
 
     <item

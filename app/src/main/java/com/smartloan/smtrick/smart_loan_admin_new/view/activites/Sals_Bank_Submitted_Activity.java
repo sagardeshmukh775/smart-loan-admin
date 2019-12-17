@@ -36,9 +36,10 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_sals__bank__submitted);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar1 = getSupportActionBar();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -48,6 +49,7 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(R.id.frame_container, new Sales_fragment_lead_tab_submited())
                 .commit();
+        getSupportActionBar().setTitle("Leeds");
 
 //        leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
     }
@@ -61,18 +63,28 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_leeds:
                     toolbar1.setTitle("Leeds");
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .add(R.id.frame_container, new Sales_fragment_lead_tab_submited())
+                            .commit();
+                    getSupportActionBar().setTitle("Leeds");
+
                     return true;
                 case R.id.navigation_customer:
                     toolbar1.setTitle("Customers");
+                    getSupportActionBar().setTitle("Customers");
                     return true;
                 case R.id.navigation_label:
                     toolbar1.setTitle("Labels");
+                    getSupportActionBar().setTitle("Labels");
                     return true;
                 case R.id.navigation_tasks:
                     toolbar1.setTitle("Tasks");
+                    getSupportActionBar().setTitle("Tasks");
                     return true;
                 case R.id.navigation_business:
                     toolbar1.setTitle("My Business");
+                    getSupportActionBar().setTitle("My Business");
 
                     return true;
             }
