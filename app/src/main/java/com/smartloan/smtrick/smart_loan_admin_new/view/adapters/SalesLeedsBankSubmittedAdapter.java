@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -54,6 +55,8 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
     static int m = 0;
     private static final int REQUEST_PHONE_CALL = 1;
     LeedRepository leedRepository;
+    ArrayList<String> checklist;
+    CheckListAdapter checkListAdapter;
 
 
     public SalesLeedsBankSubmittedAdapter(Context context, ArrayList<LeedsModel> data) {
@@ -78,6 +81,7 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
         try {
 
             LeedsModel leedModel2 = getModel(listPosition);
+            checklist = new ArrayList<>();
 
             holder.telecallerLeedsAdapterLayoutBinding.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -204,7 +208,19 @@ public class SalesLeedsBankSubmittedAdapter extends RecyclerView.Adapter<SalesBa
         ViewChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Dialog dialog1 = new Dialog(context);
+                dialog1.setContentView(R.layout.customdialogbox);
 
+                checklist = leedsModel.getChecklistCollected();
+                RecyclerView recycleChecklist = (RecyclerView) dialog1.findViewById(R.id.dialog_recycle);
+                recycleChecklist.setHasFixedSize(true);
+                recycleChecklist.setLayoutManager(new LinearLayoutManager(context));
+                if (checklist != null) {
+                    checkListAdapter = new CheckListAdapter(context, checklist);
+                    recycleChecklist.setAdapter(checkListAdapter);
+                }
+
+                dialog1.show();
             }
         });
         RemoveLeed.setOnClickListener(new View.OnClickListener() {
