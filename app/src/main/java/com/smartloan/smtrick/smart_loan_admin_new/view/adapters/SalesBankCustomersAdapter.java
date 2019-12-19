@@ -46,6 +46,11 @@ public class SalesBankCustomersAdapter extends RecyclerView.Adapter<SalesBankCus
         final LeedsModel leedsModel = searchArrayList.get(position);
 
         holder.Item.setText(leedsModel.getCustomerName());
+        if (position%2 == 0){
+
+        }else {
+            
+        }
 
 
     }

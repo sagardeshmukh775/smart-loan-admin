@@ -27,7 +27,6 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
 
     private static ArrayList<Bank> searchArrayList;
     private Context context;
-    private boolean isFromRequest;
     LeedRepository leedRepository;
     ArrayList<LeedsModel> leedsModelArrayList;
     String count;
@@ -36,7 +35,6 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
     public SalesLabelsAdapter(Context context, ArrayList<Bank> userArrayList) {
         this.context = context;
         this.searchArrayList = userArrayList;
-
 
     }
 
@@ -88,10 +86,10 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
                 holder.card_view.getContext().startActivity(intent);
 
             }
+
         });
 
     }
-
 
     @Override
     public int getItemCount() {
