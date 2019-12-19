@@ -19,6 +19,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesBankCustomersAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_Fragment_Checklist;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Sales_Received_Lead_Details_Fragment;
 
@@ -31,6 +32,7 @@ public class Sales_Bank_Customers_Activity extends AppCompatActivity implements 
     LeedRepository leedRepository;
     ArrayList<LeedsModel> leedsModelArrayList;
     RecyclerView recycleCustomers;
+    SalesBankCustomersAdapter salesBankCustomersAdapter;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -41,7 +43,7 @@ public class Sales_Bank_Customers_Activity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sales__tasks_);
+        setContentView(R.layout.activity_sales__bank_customers);
 
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
@@ -50,7 +52,7 @@ public class Sales_Bank_Customers_Activity extends AppCompatActivity implements 
 
 //        leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
         Intent intent = getIntent();
-        BankName = intent.getStringExtra("Leed");
+        BankName = intent.getStringExtra("bank");
 
         leedRepository = new LeedRepositoryImpl();
 
@@ -71,6 +73,8 @@ public class Sales_Bank_Customers_Activity extends AppCompatActivity implements 
                 if (object != null) {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
                 }
+                salesBankCustomersAdapter = new SalesBankCustomersAdapter(getApplicationContext(),leedsModelArrayList);
+                recycleCustomers.setAdapter(salesBankCustomersAdapter);
 
             }
 

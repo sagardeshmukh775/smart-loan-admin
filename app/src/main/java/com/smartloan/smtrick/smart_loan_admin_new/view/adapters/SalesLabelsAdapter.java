@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.ViewHolder> {
 
-    private static List<Bank> searchArrayList;
+    private static ArrayList<Bank> searchArrayList;
     private Context context;
     private boolean isFromRequest;
     LeedRepository leedRepository;
@@ -33,7 +33,7 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
     String count;
 
 
-    public SalesLabelsAdapter(Context context, List<Bank> userArrayList) {
+    public SalesLabelsAdapter(Context context, ArrayList<Bank> userArrayList) {
         this.context = context;
         this.searchArrayList = userArrayList;
 
@@ -58,16 +58,20 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
         leedsModelArrayList = new ArrayList<>();
         holder.bankName.setText(item.getBankname());
 
+        leedsModelArrayList.clear();
         leedRepository.readLeedsByBankName(item.getBankname(), new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
+                    count = String.valueOf(leedsModelArrayList.size());
+                    if (count != null) {
+                        holder.CustomerCount.setText(count + " Customers");
+                    }
+                } else {
+                    holder.CustomerCount.setText("0 Customers");
                 }
-                count = String.valueOf(leedsModelArrayList.size());
-                if (count != null) {
-                    holder.CustomerCount.setText(count + " Customers");
-                }
+
             }
 
             @Override

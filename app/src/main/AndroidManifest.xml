@@ -20,6 +20,7 @@
         <activity android:name=".view.activites.Sales_Checklist_Activity" />
         <activity android:name=".view.activites.Sales_Tasks_Activity" />
         <activity android:name=".view.activites.Sales_View_Lead_Details_Activity" />
+        <activity android:name=".view.activites.Sales_Bank_Customers_Activity"></activity>
         <activity
             android:name=".view.activites.Accountant_Bills_Activity"
             android:windowSoftInputMode="stateHidden" />
