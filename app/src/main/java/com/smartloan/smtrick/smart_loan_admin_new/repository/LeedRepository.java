@@ -34,6 +34,8 @@ public interface LeedRepository {
 
     void readLeedsByName(final String id, final CallBack callBack);
 
+    void readLeedsByBankName(final String id, final CallBack callBack);
+
     void createInvoice(final LeedsModel leedsModel, final CallBack callback);
 
     void readAllInvoices(final CallBack callback);
@@ -77,5 +79,7 @@ public interface LeedRepository {
     void createFollowUp(final FollowUp followUp, final CallBack callback);
 
     void readFolloUpByLeedId(final String salesId, final CallBack callBack);
+
+
 
 }

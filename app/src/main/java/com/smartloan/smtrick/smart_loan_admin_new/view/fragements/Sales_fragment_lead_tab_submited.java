@@ -20,6 +20,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouch
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesFragmentLeadTabReceivedleadBinding;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.SalesFragmentLeadTabSubmitedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentLeadTabGeneratedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -44,7 +45,7 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
     AppSharedPreference appSharedPreference;
-    SalesFragmentLeadTabReceivedleadBinding salesFragmentLeadTabGeneratedleadBinding;
+    SalesFragmentLeadTabSubmitedleadBinding salesFragmentLeadTabGeneratedleadBinding;
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
@@ -69,7 +70,7 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (salesFragmentLeadTabGeneratedleadBinding == null) {
-            salesFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.sales_fragment_lead_tab_receivedlead, container, false);
+            salesFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.sales_fragment_lead_tab_submitedlead, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
             appSingleton = AppSingleton.getInstance(getActivity());
             leedRepository = new LeedRepositoryImpl();
@@ -92,7 +93,7 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
     }
 
     private void getteLeed() {
-//        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
         leedRepository.readLeedsByStatus(STATUS_BANK_SUBMITED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -105,12 +106,12 @@ public class Sales_fragment_lead_tab_submited extends Fragment {
 //                    }
                     serAdapter(leedsModelArrayList);
                 }
-//                progressDialogClass.dismissDialog();
+                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-//                progressDialogClass.dismissDialog();
+                progressDialogClass.dismissDialog();
                 Utility.showLongMessage(getActivity(), getString(R.string.server_error));
             }
         });

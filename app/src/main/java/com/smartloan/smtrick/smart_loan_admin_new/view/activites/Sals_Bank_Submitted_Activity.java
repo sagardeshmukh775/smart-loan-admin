@@ -15,10 +15,11 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_Fragment_Checklist;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_Fragment_Labels;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_fragment_lead_tab_recived;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Sales_fragment_lead_tab_submited;
 
-public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
+public class Sals_Bank_Submitted_Activity extends AppCompatActivity implements Sales_Fragment_Labels.OnFragmentInteractionListener {
 
     LeedsModel leedsModel;
     private ActionBar toolbar1;
@@ -45,10 +46,13 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.frame_container, new Sales_fragment_lead_tab_submited())
-                .commit();
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .add(R.id.frame_container, new Sales_fragment_lead_tab_submited())
+//                .commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame_container, new Sales_fragment_lead_tab_submited());
+        ft.commit();
         getSupportActionBar().setTitle("Leeds");
 
 //        leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
@@ -65,7 +69,7 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
                     toolbar1.setTitle("Leeds");
                     fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction()
-                            .add(R.id.frame_container, new Sales_fragment_lead_tab_submited())
+                            .replace(R.id.frame_container, new Sales_fragment_lead_tab_submited())
                             .commit();
                     getSupportActionBar().setTitle("Leeds");
 
@@ -76,6 +80,10 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_label:
                     toolbar1.setTitle("Labels");
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, new Sales_Fragment_Labels())
+                            .commit();
                     getSupportActionBar().setTitle("Labels");
                     return true;
                 case R.id.navigation_tasks:
@@ -93,4 +101,8 @@ public class Sals_Bank_Submitted_Activity extends AppCompatActivity {
     };
 
 
+    @Override
+    public void onFragmentInteraction(String title) {
+
+    }
 }
