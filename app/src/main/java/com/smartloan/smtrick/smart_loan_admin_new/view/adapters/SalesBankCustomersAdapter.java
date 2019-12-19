@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smartloan.smtrick.smart_loan_admin_new.Listners.OnCheckedClickListener;
@@ -46,11 +47,7 @@ public class SalesBankCustomersAdapter extends RecyclerView.Adapter<SalesBankCus
         final LeedsModel leedsModel = searchArrayList.get(position);
 
         holder.Item.setText(leedsModel.getCustomerName());
-        if (position%2 == 0){
 
-        }else {
-            
-        }
 
 
     }
@@ -66,11 +63,13 @@ public class SalesBankCustomersAdapter extends RecyclerView.Adapter<SalesBankCus
         TextView Item;
         EditText edtCustomer;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             Item = (TextView) itemView.findViewById(R.id.Customername);
             edtCustomer = (EditText) itemView.findViewById(R.id.customer);
+
             card_view = (CardView) itemView.findViewById(R.id.card_view_customer);
 
         }

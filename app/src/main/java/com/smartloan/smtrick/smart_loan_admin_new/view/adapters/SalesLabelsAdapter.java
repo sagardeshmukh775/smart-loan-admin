@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smartloan.smtrick.smart_loan_admin_new.Listners.OnCheckedClickListener;
@@ -56,6 +57,12 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
         leedsModelArrayList = new ArrayList<>();
         holder.bankName.setText(item.getBankname());
 
+        if (position % 2 == 0) {
+            holder.bankName.setBackgroundResource(R.color.black_color);
+        } else {
+            holder.bankName.setBackgroundResource(R.color.red);
+        }
+
         leedsModelArrayList.clear();
         leedRepository.readLeedsByBankName(item.getBankname(), new CallBack() {
             @Override
@@ -100,12 +107,14 @@ public class SalesLabelsAdapter extends RecyclerView.Adapter<SalesLabelsAdapter.
 
         CardView card_view;
         TextView bankName, CustomerCount;
+        LinearLayout layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             bankName = (TextView) itemView.findViewById(R.id.bankname);
             CustomerCount = (TextView) itemView.findViewById(R.id.customercount);
+            layout = (LinearLayout) itemView.findViewById(R.id.layout);
             card_view = (CardView) itemView.findViewById(R.id.card_view_checklist);
 
         }
