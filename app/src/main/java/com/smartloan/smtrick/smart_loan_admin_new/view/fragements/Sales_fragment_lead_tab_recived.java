@@ -23,7 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.Toast;
 
+import com.smartloan.smtrick.smart_loan_admin_new.Listners.SwipeableRecyclerViewTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
@@ -143,7 +145,47 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
             if (telecallerLeedsAdapter == null) {
                 telecallerLeedsAdapter = new SalesLeedsReceivedAdapter(getActivity(), leedsModels);
                 salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
-                enableSwipeToDeleteAndUndo();
+
+                SwipeableRecyclerViewTouchListener swipeTouchListener =
+                        new SwipeableRecyclerViewTouchListener( salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds,
+                                new SwipeableRecyclerViewTouchListener.SwipeListener() {
+
+                                    @Override
+                                    public boolean canSwipeLeft(int position) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean canSwipeRight(int position) {
+                                        return true;
+                                    }
+
+                                    @Override
+                                    public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                        for (int position : reverseSortedPositions) {
+//                                            mItems.remove(position);
+//                                            mAdapter.notifyItemRemoved(position);
+                                        }
+                                        telecallerLeedsAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                        for (int position : reverseSortedPositions) {
+//                                            mItems.remove(position);
+//                                            mAdapter.notifyItemRemoved(position);
+                                            final LeedsModel item = telecallerLeedsAdapter.getData().get(getItemCount()-1-position);
+
+                                            telecallerLeedsAdapter.MakeCall(item);
+                                            Toast.makeText(getContext(), "calling"+ item.getMobileNumber(), Toast.LENGTH_SHORT).show();
+                                        }
+                                        telecallerLeedsAdapter.notifyDataSetChanged();
+                                    }
+                                });
+
+                salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(swipeTouchListener);
+
+//                enableSwipeToDeleteAndUndo();
                 onClickListner();
             } else {
                 ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
@@ -153,6 +195,9 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
         }
     }
 
+    public int getItemCount() {
+        return leedsModelArrayList.size();
+    }
 
     private void enableSwipeToDeleteAndUndo() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {

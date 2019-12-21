@@ -51,13 +51,13 @@ public class Sales_Tasks_Activity extends AppCompatActivity implements Sales_Fra
 
         if (task.equalsIgnoreCase("Label")) {
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-            View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
-            fragment2.setArguments(bundle);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_container, fragment2);
-            ft.commit();
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+//            View_Sales_Received_Lead_Details_Fragment fragment2 = new View_Sales_Received_Lead_Details_Fragment();
+//            fragment2.setArguments(bundle);
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.frame_container, fragment2);
+//            ft.commit();
 
         } else if (task.equalsIgnoreCase("FallowUp")) {
 
