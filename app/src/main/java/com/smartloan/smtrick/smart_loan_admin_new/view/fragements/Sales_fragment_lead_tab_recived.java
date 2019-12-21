@@ -173,9 +173,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                                         for (int position : reverseSortedPositions) {
 
                                             final LeedsModel item = telecallerLeedsAdapter.getData().get(getItemCount()-1-position);
-
                                             telecallerLeedsAdapter.MakeCall(item);
-                                            Toast.makeText(getContext(), "calling"+ item.getMobileNumber(), Toast.LENGTH_SHORT).show();
                                         }
                                         telecallerLeedsAdapter.notifyDataSetChanged();
                                     }
@@ -233,7 +231,6 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                 startActivity(intent);
                 // Not implemented here
                 return false;
-
 
             default:
                 break;
