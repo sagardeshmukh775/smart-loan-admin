@@ -14,13 +14,14 @@
         android:roundIcon="@drawable/applogo4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activites.Sals_Bank_Submitted_Activity"></activity>
+        <activity android:name=".view.activites.Sales_Reschedule_Appointment_Activity"></activity>
+        <activity android:name=".view.activites.Sals_Bank_Submitted_Activity" />
         <activity android:name=".view.activites.Sales_Add_Task_Activity" />
         <activity android:name=".view.activites.Sales_FollowUP_Activity" />
         <activity android:name=".view.activites.Sales_Checklist_Activity" />
         <activity android:name=".view.activites.Sales_Tasks_Activity" />
         <activity android:name=".view.activites.Sales_View_Lead_Details_Activity" />
-        <activity android:name=".view.activites.Sales_Bank_Customers_Activity"></activity>
+        <activity android:name=".view.activites.Sales_Bank_Customers_Activity" />
         <activity
             android:name=".view.activites.Accountant_Bills_Activity"
             android:windowSoftInputMode="stateHidden" />

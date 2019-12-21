@@ -94,8 +94,8 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
         } else if (v == cardAppointment) {
-            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Tasks_Activity.class);
-            intent.putExtra("Task", "Appointment");
+            Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Reschedule_Appointment_Activity.class);
+            intent.putExtra(LEED_MODEL, leedsModel);
             intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
         } else if (v == cardDocuments) {

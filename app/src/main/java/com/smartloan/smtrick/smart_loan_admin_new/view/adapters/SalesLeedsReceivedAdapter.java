@@ -183,11 +183,6 @@ public class SalesLeedsReceivedAdapter extends RecyclerView.Adapter<SalesReceive
         leedModelArrayList.addAll(leedsModelArrayList);
         notifyDataSetChanged();
     }
-//
-//    public void removeItem(int position) {
-//        leedModelArrayList.remove(position);
-//        notifyItemRemoved(position);
-//    }
 
     public void MakeCall(LeedsModel item) {
 //        leedModelArrayList.add(position, item);

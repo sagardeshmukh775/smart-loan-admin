@@ -185,6 +185,7 @@ public class LeedsModel implements Serializable {
     private String branchName;
     private String ifscCode;
     private String appointment;
+    private String rescheduledappointment;
     private String appointreschedualreason;
     private String loginid;
     private String salesPerson;
@@ -200,6 +201,7 @@ public class LeedsModel implements Serializable {
         this.branchName = "branch";
         this.ifscCode = "ifsc";
         this.appointment = "appointment";
+        this.rescheduledappointment = "rescheduledappointment";
         this.appointreschedualreason = "appointreschedualreason";
         this.loginid = "loginid";
         this.salesPerson = "sales";
@@ -415,6 +417,14 @@ public class LeedsModel implements Serializable {
 
     public void setAppointment(String appointment) {
         this.appointment = appointment;
+    }
+
+    public String getRescheduledappointment() {
+        return rescheduledappointment;
+    }
+
+    public void setRescheduledappointment(String rescheduledappointment) {
+        this.rescheduledappointment = rescheduledappointment;
     }
 
     public String getAppointreschedualreason() {
@@ -1963,6 +1973,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("branchName", getBranchName());
         leedMap.put("ifscCode", getIfscCode());
         leedMap.put("appointment", getAppointment());
+        leedMap.put("rescheduledappointment", getRescheduledappointment());
         leedMap.put("appointreschedualreason", getAppointreschedualreason());
 
         leedMap.put("loginid", getLoginid());

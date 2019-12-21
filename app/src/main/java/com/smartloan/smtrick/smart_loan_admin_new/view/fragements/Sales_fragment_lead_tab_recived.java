@@ -163,8 +163,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                                     @Override
                                     public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                         for (int position : reverseSortedPositions) {
-//                                            mItems.remove(position);
-//                                            mAdapter.notifyItemRemoved(position);
+
                                         }
                                         telecallerLeedsAdapter.notifyDataSetChanged();
                                     }
@@ -172,8 +171,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
                                     @Override
                                     public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                         for (int position : reverseSortedPositions) {
-//                                            mItems.remove(position);
-//                                            mAdapter.notifyItemRemoved(position);
+
                                             final LeedsModel item = telecallerLeedsAdapter.getData().get(getItemCount()-1-position);
 
                                             telecallerLeedsAdapter.MakeCall(item);
@@ -199,24 +197,24 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
         return leedsModelArrayList.size();
     }
 
-    private void enableSwipeToDeleteAndUndo() {
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-
-                final int position = viewHolder.getAdapterPosition();
-                final LeedsModel item = telecallerLeedsAdapter.getData().get(position);
-
-                telecallerLeedsAdapter.MakeCall(item);
-                getteLeed();
-
-            }
-        };
-
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
-        itemTouchhelper.attachToRecyclerView(salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
-    }
+//    private void enableSwipeToDeleteAndUndo() {
+//        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+//
+//
+//                final int position = viewHolder.getAdapterPosition();
+//                final LeedsModel item = telecallerLeedsAdapter.getData().get(position);
+//
+//                telecallerLeedsAdapter.MakeCall(item);
+//                getteLeed();
+//
+//            }
+//        };
+//
+//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+//        itemTouchhelper.attachToRecyclerView(salesFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
