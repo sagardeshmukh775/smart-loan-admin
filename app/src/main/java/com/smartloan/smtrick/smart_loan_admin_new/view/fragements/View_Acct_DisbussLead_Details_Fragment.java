@@ -1217,6 +1217,21 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         String comission = leedsModel.getComissionamount();
         if (comission != null){
             edtComissionAmount.setText(comission);
+        }else {
+            int commission = Integer.parseInt(edtComissionAmount.getText().toString());
+            if (commission>1000000 && commission<9000000){
+                double com = (commission * 0.30)/100;
+                edtComissionAmount.setText(String.valueOf(com));
+            }else if (commission>9000000 && commission<15000000){
+                double com = (commission * 0.40)/100;
+                edtComissionAmount.setText(String.valueOf(com));
+            }else if (commission>15000000 && commission<35000000){
+                double com = (commission * 0.55)/100;
+                edtComissionAmount.setText(String.valueOf(com));
+            }else if (commission>35000000){
+                double com = (commission * 0.65)/100;
+                edtComissionAmount.setText(String.valueOf(com));
+            }
         }
 
 //        } catch (Exception e) {
