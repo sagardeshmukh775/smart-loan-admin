@@ -1217,8 +1217,9 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         String comission = leedsModel.getComissionamount();
         if (comission != null){
             edtComissionAmount.setText(comission);
+           
         }else {
-            int commission = Integer.parseInt(edtComissionAmount.getText().toString());
+            int commission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
             if (commission>1000000 && commission<9000000){
                 double com = (commission * 0.30)/100;
                 edtComissionAmount.setText(String.valueOf(com));
