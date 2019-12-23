@@ -66,7 +66,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
 //    TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
 
 
-//    TextView landmark, pin, street, txtpannumber;
+    //    TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;
     LeedsModel leedsModel;
@@ -128,6 +128,8 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
 
     Button UpdateComission;
 
+    TextView txtApproved, txtDisbuss, txtPending,txtTDS;
+
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
     }
@@ -171,6 +173,11 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtComissionAmount = (EditText) view.findViewById(R.id.edtcommisionamount);
         UpdateComission = (Button) view.findViewById(R.id.buttonupdate2);
+
+        txtApproved = (TextView) view.findViewById(R.id.txtapprovedamtvalue);
+        txtDisbuss = (TextView) view.findViewById(R.id.txtdisbussedamtvalue);
+        txtPending = (TextView) view.findViewById(R.id.txtpandingamtvalue);
+        txtTDS = (TextView) view.findViewById(R.id.txttdsamt);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -1214,23 +1221,43 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
 //            HideFields(layotDescription);
 //        }
 
-        String comission = leedsModel.getComissionamount();
-        if (comission != null){
-            edtComissionAmount.setText(comission);
-           
+        String approved = leedsModel.getApprovedLoan();
+        String disbuss = leedsModel.getDisbusedLoanAmount();
+        String pending = leedsModel.getPendingLoanAmount();
+
+        if (approved != null){
+            txtApproved.setText(approved);
         }else {
+            txtApproved.setText("Null");
+        }
+        if (disbuss != null){
+            txtDisbuss.setText(disbuss);
+        }else {
+            txtDisbuss.setText("Null");
+        }
+        if (pending != null){
+            txtPending.setText(pending);
+        }else {
+            txtPending.setText("Null");
+        }
+
+        String comission = leedsModel.getComissionamount();
+        if (comission != null) {
+            edtComissionAmount.setText(comission);
+
+        } else {
             int commission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
-            if (commission>1000000 && commission<9000000){
-                double com = (commission * 0.30)/100;
+            if (commission > 1000000 && commission < 9000000) {
+                double com = (commission * 0.30) / 100;
                 edtComissionAmount.setText(String.valueOf(com));
-            }else if (commission>9000000 && commission<15000000){
-                double com = (commission * 0.40)/100;
+            } else if (commission > 9000000 && commission < 15000000) {
+                double com = (commission * 0.40) / 100;
                 edtComissionAmount.setText(String.valueOf(com));
-            }else if (commission>15000000 && commission<35000000){
-                double com = (commission * 0.55)/100;
+            } else if (commission > 15000000 && commission < 35000000) {
+                double com = (commission * 0.55) / 100;
                 edtComissionAmount.setText(String.valueOf(com));
-            }else if (commission>35000000){
-                double com = (commission * 0.65)/100;
+            } else if (commission > 35000000) {
+                double com = (commission * 0.65) / 100;
                 edtComissionAmount.setText(String.valueOf(com));
             }
         }
