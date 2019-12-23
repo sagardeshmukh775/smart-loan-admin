@@ -40,7 +40,7 @@ public class Accountant_fragment_lead_tab_Disbussed extends Fragment {
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
     AppSharedPreference appSharedPreference;
-    AccountantFragmentAdminLeadTabDisbussleadBinding tcFragmentLeadTabGeneratedleadBinding;
+    AccountantFragmentAdminLeadTabDisbussleadBinding accountantFragmentAdminLeadTabDisbussleadBinding;
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
@@ -49,21 +49,21 @@ public class Accountant_fragment_lead_tab_Disbussed extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (tcFragmentLeadTabGeneratedleadBinding == null) {
-            tcFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.accountant_fragment_admin_lead_tab_disbusslead, container, false);
+        if (accountantFragmentAdminLeadTabDisbussleadBinding == null) {
+            accountantFragmentAdminLeadTabDisbussleadBinding = DataBindingUtil.inflate(inflater, R.layout.accountant_fragment_admin_lead_tab_disbusslead, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
             appSingleton = AppSingleton.getInstance(getActivity());
             leedRepository = new LeedRepositoryImpl();
             appSharedPreference = new AppSharedPreference(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
+            accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.setHasFixedSize(true);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
+            accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
+            accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
+            accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
             getteLeed();
         }
-        return tcFragmentLeadTabGeneratedleadBinding.getRoot();
+        return accountantFragmentAdminLeadTabDisbussleadBinding.getRoot();
     }
 
     private LeedsModel getModel(int position) {
@@ -91,7 +91,7 @@ public class Accountant_fragment_lead_tab_Disbussed extends Fragment {
     }
 
     private void onClickListner() {
-        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
+        accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
@@ -116,7 +116,7 @@ public class Accountant_fragment_lead_tab_Disbussed extends Fragment {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
                 telecallerLeedsAdapter = new AccountantDisbussLeedsAdapter(getActivity(), leedsModels);
-                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                accountantFragmentAdminLeadTabDisbussleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
 //                postAndNotifyAdapter(new Handler(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
 
                 onClickListner();

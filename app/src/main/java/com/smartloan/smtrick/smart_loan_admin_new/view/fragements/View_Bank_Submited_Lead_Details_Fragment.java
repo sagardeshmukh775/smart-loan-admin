@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -535,6 +536,23 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         btnDISBUSS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String approved = edtapprovedamount.getText().toString();
+                if(TextUtils.isEmpty(approved)) {
+                    edtapprovedamount.setError("Required");
+                    return;
+                }
+
+                String disbuss = edtdisbussamount.getText().toString();
+                if(TextUtils.isEmpty(disbuss)) {
+                    edtdisbussamount.setError("Required");
+                    return;
+                }
+
+                String pending = edtpendingamount.getText().toString();
+                if(TextUtils.isEmpty(pending)) {
+                    edtpendingamount.setError("Required");
+                    return;
+                }
                 updateLeadDetails(leedsModel, "disbuss");
             }
         });
