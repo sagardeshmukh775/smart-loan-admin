@@ -63,8 +63,7 @@ public class Sales_fragment_lead_tab_recived extends Fragment {
     long fromDate, toDate;
     String name;
     ArrayList<LeedsModel> leedsModelArrayList;
-    ArrayList<LeedsModel> leedsModelArrayList1;
-    CoordinatorLayout coordinatorLayout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

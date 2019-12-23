@@ -43,17 +43,12 @@ public class AddBankFragement extends Fragment implements AdapterView.OnItemSele
     private OnFragmentInteractionListener mListener;
 
     EditText Bankname;
-//    EditText Branchname;
     ImageView Banklogo;
     Button Addbank;
 
-    String image;
     private Uri filePath;
-    private static final int REQUEST_PICK_IMAGE = 1002;
     private final int PICK_IMAGE_REQUEST = 71;
 
-    private Uri profileUri;
-    Bitmap bitmap;
     FirebaseStorage storage;
     StorageReference storageReference;
     LeedRepository leedRepository;
@@ -80,7 +75,6 @@ public class AddBankFragement extends Fragment implements AdapterView.OnItemSele
 
 
         Bankname = (EditText) view.findViewById(R.id.txtbankname);
-//        Branchname = (EditText) view.findViewById(R.id.txtbankbranch);
         Banklogo = (ImageView) view.findViewById(R.id.banklogo);
         Banklogo.setImageDrawable(getResources().getDrawable(R.drawable.add_person));
 
@@ -151,11 +145,9 @@ public class AddBankFragement extends Fragment implements AdapterView.OnItemSele
                                 public void onSuccess(Uri uri) {
                                     progressDialog.dismiss();
                                     String downloadurl = uri.toString();
-                                    String key =  mDatabase.push().getKey();
 
                                     Bank bank = new Bank();
                                     bank.setBankname(Bankname.getText().toString());
-//                                    bank.setBranch(Branchname.getText().toString());
                                     bank.setBanklogo(downloadurl);
                                     bank.setLeedid(mDatabase.push().getKey());
                                     Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();

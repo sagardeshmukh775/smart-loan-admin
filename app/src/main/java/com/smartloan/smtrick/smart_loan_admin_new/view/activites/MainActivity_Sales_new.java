@@ -91,33 +91,4 @@ public class MainActivity_Sales_new extends AppCompatActivity implements
         }
     }
 
-//    @Override
-//    public void onOptionSelected(String option) {
-//        if (isTwoPane) {
-//            switch (option) {
-//                case "network": {
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.detailContainer, new NetworkSettingsFragment())
-//                            .commit();
-//                    break;
-//                }
-//                case "display": {
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.detailContainer, new DisplaySettingsFragment())
-//                            .commit();
-//                    break;
-//                }
-//                case "storage": {
-//                    fragmentManager.beginTransaction()
-//                            .replace(R.id.detailContainer, new StorageSettingsFragment())
-//                            .commit();
-//                    break;
-//                }
-//            }
-//        } else {
-//            Intent intent = new Intent(this, SettingsDetailActivity.class);
-//            intent.putExtra(SettingsDetailActivity.EXTRA_SETTING_OPTION, option);
-//            startActivity(intent);
-//        }
-//    }
 }

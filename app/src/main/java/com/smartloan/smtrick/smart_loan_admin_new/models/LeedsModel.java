@@ -69,6 +69,7 @@ public class LeedsModel implements Serializable {
     private String employed;
     private String expectedLoanAmount;
     private String disbusedLoanAmount;
+    private String pendingLoanAmount;
     private String experience;
     private String experiencemonths;
     private String experinceltr;
@@ -252,6 +253,7 @@ public class LeedsModel implements Serializable {
         this.email = "kjsdj@jhjdf.sdf";
         this.expectedLoanAmount = "2565656";
         this.disbusedLoanAmount = "1234567";
+        this.pendingLoanAmount = "1234567";
         this.occupation = "vdvf";
         this.agentName = "Aikk";
         this.leedId = "dfgdfg";
@@ -930,6 +932,14 @@ public class LeedsModel implements Serializable {
 
     public void setDisbusedLoanAmount(String disbusedLoanAmount) {
         this.disbusedLoanAmount = disbusedLoanAmount;
+    }
+
+    public String getPendingLoanAmount() {
+        return pendingLoanAmount;
+    }
+
+    public void setPendingLoanAmount(String pendingLoanAmount) {
+        this.pendingLoanAmount = pendingLoanAmount;
     }
 
     public String getBankName() {
@@ -1955,6 +1965,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("propetyYN", getPropetyYN());
         leedMap.put("loanrequirement", getLoanrequirement());
         leedMap.put("disbusedLoanAmount", getDisbusedLoanAmount());
+        leedMap.put("pendingLoanAmount", getPendingLoanAmount());
 
         leedMap.put("downpayment", getDownpayment());
         leedMap.put("apvoterid", getApvoterid());

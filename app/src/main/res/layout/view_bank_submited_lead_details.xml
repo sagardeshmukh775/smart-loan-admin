@@ -313,6 +313,12 @@
                     android:padding="5dp"
                     android:weightSum="100">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="40">
+
                     <EditText
                         android:id="@+id/edtapprovedamount"
                         android:layout_width="fill_parent"
@@ -320,7 +326,6 @@
                         android:layout_marginTop="5.0dip"
                         android:layout_marginBottom="5.0dip"
                         android:layout_toRightOf="@id/txtbankname"
-                        android:layout_weight="40"
                         android:background="@drawable/edittextanimation"
                         android:hint="Enter Approved Amount"
                         android:inputType="textMultiLine"
@@ -329,6 +334,37 @@
                         android:textColor="@color/mainTextColor"
                         android:textSize="14.0dip" />
 
+                        <EditText
+                            android:id="@+id/edtdisbussamount"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/txtbankname"
+                            android:background="@drawable/edittextanimation"
+                            android:hint="Enter Disbussed Amount"
+                            android:inputType="textMultiLine"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
+
+                        <EditText
+                            android:id="@+id/edtpendingamount"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_toRightOf="@id/txtbankname"
+                            android:background="@drawable/edittextanimation"
+                            android:hint="Enter Pending Amount"
+                            android:inputType="textMultiLine"
+                            android:padding="10.0dip"
+                            android:text=""
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="14.0dip" />
+
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/buttonsubmit"
@@ -341,7 +377,7 @@
                         android:layout_marginLeft="2dp"
                         android:textSize="16.0sp"
                         android:textStyle="bold" />
-                    <!--<Spinner-->
+
 
                 </LinearLayout>
 

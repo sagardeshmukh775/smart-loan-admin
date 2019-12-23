@@ -124,7 +124,7 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             layoutselfITR, layoutselfcurrentacctstmt, layoutselfsavingacct, layoutselfpartnersheepdeed, layoutselfbusinessagreement, layoutselfqualificationcertificate;
 
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent, txtLoanType;
-    EditText edtloginId, edtdisbussamount, edtrejectionreason;
+    EditText edtloginId, edtapprovedamount, edtdisbussamount, edtpendingamount, edtrejectionreason;
     TextView txtLoginId;
 
     LinearLayout layoutDisbussAmount, layoutRejectionReason;
@@ -179,7 +179,9 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         txtAgent = (TextView) view.findViewById(R.id.txt_bp_value);
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtloginId = (EditText) view.findViewById(R.id.edtloginid);
-        edtdisbussamount = (EditText) view.findViewById(R.id.edtapprovedamount);
+        edtapprovedamount = (EditText) view.findViewById(R.id.edtapprovedamount);
+        edtdisbussamount = (EditText) view.findViewById(R.id.edtdisbussamount);
+        edtpendingamount = (EditText) view.findViewById(R.id.edtpendingamount);
         edtrejectionreason = (EditText) view.findViewById(R.id.edtreejctreason);
 
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
@@ -551,7 +553,9 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             leedsModel.setLoginid(edtloginId.getText().toString());
         } else if (data.equalsIgnoreCase("disbuss")) {
             leedsModel.setStatus(STATUS_DISBUSED);
+            leedsModel.setApprovedLoan(edtapprovedamount.getText().toString());
             leedsModel.setDisbusedLoanAmount(edtdisbussamount.getText().toString());
+            leedsModel.setPendingLoanAmount(edtpendingamount.getText().toString());
         } else if (data.equalsIgnoreCase("reject")) {
             leedsModel.setRejectionReason(edtrejectionreason.getText().toString());
             leedsModel.setStatus(STATUS_REJECTED);

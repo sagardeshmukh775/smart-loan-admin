@@ -32,13 +32,12 @@ public class Admin_Approved_Bills_Fragment extends Fragment implements AdapterVi
     private OnFragmentInteractionListener mListener;
     private LeedRepository leedRepository;
     private List<Expences> expenceList;
+    RecyclerView listView;
+    AdminApprovedExpenceAdapter adapter;
 
     public Admin_Approved_Bills_Fragment() {
     }
 
-//    ArrayList<UserModel> searchResults = GetSearchResults();
-    RecyclerView listView;
-    AdminApprovedExpenceAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,6 @@ public class Admin_Approved_Bills_Fragment extends Fragment implements AdapterVi
             public void onSuccess(Object object) {
                 if (object != null) {
                     expenceList = (ArrayList<Expences>) object;
-
 
                 }
 

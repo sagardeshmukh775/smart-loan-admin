@@ -96,7 +96,6 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
         } else if (v == cardAppointment) {
             Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Reschedule_Appointment_Activity.class);
             intent.putExtra(LEED_MODEL, leedsModel);
-            intent.putExtra(LEED_MODEL, leedsModel);
             startActivity(intent);
         } else if (v == cardDocuments) {
             Intent intent = new Intent(Sales_View_Lead_Details_Activity.this, Sales_Checklist_Activity.class);
@@ -118,7 +117,6 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             startActivity(intent);
         } else if (v == imgMessage) {
 
-//            sendSMS(leedsModel.getMobileNumber(), "Hello");
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_APP_MESSAGING);
             startActivity(intent);
@@ -130,8 +128,6 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
             emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{leedsModel.getEmail()});
             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
-
-
             emailIntent.setType("message/rfc822");
 
             try {
@@ -146,19 +142,5 @@ public class Sales_View_Lead_Details_Activity extends AppCompatActivity implemen
 
         }
     }
-
-    public void sendSMS(String phoneNo, String msg) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
-        }
-    }
-
 
 }
