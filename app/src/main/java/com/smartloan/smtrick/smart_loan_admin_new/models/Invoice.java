@@ -7,12 +7,19 @@ public class Invoice {
     private String phone;
     private String status;
     private String customerName;
+    private String loanapprovedaamount;
+    private String loandisbussedamount;
+    private String loanpendingamount;
+
 
     public Invoice() {
         this.invoiceId = "";
         this.phone = "";
         this.status = "";
         this.customerName = "";
+        this.loanapprovedaamount = "";
+        this.loandisbussedamount = "";
+        this.loanpendingamount = "";
     }
 
     public String getInvoiceId() {
@@ -47,11 +54,35 @@ public class Invoice {
         this.status = status;
     }
 
+    public String getLoanapprovedaamount() {
+        return loanapprovedaamount;
+    }
+
+    public void setLoanapprovedaamount(String loanapprovedaamount) {
+        this.loanapprovedaamount = loanapprovedaamount;
+    }
+
+    public String getLoandisbussedamount() {
+        return loandisbussedamount;
+    }
+
+    public void setLoandisbussedamount(String loandisbussedamount) {
+        this.loandisbussedamount = loandisbussedamount;
+    }
+
+    public String getLoanpendingamount() {
+        return loanpendingamount;
+    }
+
+    public void setLoanpendingamount(String loanpendingamount) {
+        this.loanpendingamount = loanpendingamount;
+    }
+
     public static ArrayList<Invoice> getSentInvoices() {
         ArrayList<Invoice> results = new ArrayList<Invoice>();
         for (int i = 0; i < 20; i++) {
             Invoice sr = new Invoice();
-            sr.setInvoiceId("INV 000"+i);
+            sr.setInvoiceId("INV 000" + i);
             sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
             sr.setStatus("Sent");
@@ -59,11 +90,12 @@ public class Invoice {
         }
         return results;
     }
+
     public static ArrayList<Invoice> getAcceptedInvoices() {
         ArrayList<Invoice> results = new ArrayList<Invoice>();
         for (int i = 0; i < 20; i++) {
             Invoice sr = new Invoice();
-            sr.setInvoiceId("INV 000"+i);
+            sr.setInvoiceId("INV 000" + i);
             sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
             sr.setStatus("Unpaid");
@@ -71,11 +103,12 @@ public class Invoice {
         }
         return results;
     }
+
     public static ArrayList<Invoice> getPaidInvoices() {
         ArrayList<Invoice> results = new ArrayList<Invoice>();
         for (int i = 0; i < 20; i++) {
             Invoice sr = new Invoice();
-            sr.setInvoiceId("INV 000"+i);
+            sr.setInvoiceId("INV 000" + i);
             sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
             sr.setStatus("Paid");
@@ -83,11 +116,12 @@ public class Invoice {
         }
         return results;
     }
+
     public static ArrayList<Invoice> getRejectedInvoices() {
         ArrayList<Invoice> results = new ArrayList<Invoice>();
         for (int i = 0; i < 20; i++) {
             Invoice sr = new Invoice();
-            sr.setInvoiceId("INV 000"+i);
+            sr.setInvoiceId("INV 000" + i);
             sr.setCustomerName("Mr Pratik Patel");
             sr.setPhone("Axis Bank");
             sr.setStatus("Rejected");

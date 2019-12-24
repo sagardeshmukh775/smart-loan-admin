@@ -32,6 +32,7 @@ public class Accountant_Invoice_Activity extends AppCompatActivity
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Invoices");
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame1, new Accountant_Invoice_fragment_lead_tab_Disbussed());
