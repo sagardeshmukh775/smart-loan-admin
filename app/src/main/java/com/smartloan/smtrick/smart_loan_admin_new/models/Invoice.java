@@ -7,6 +7,7 @@ public class Invoice {
     private String phone;
     private String status;
     private String customerName;
+    private String leedId;
     private String loanapprovedaamount;
     private String loandisbussedamount;
     private String loanpendingamount;
@@ -17,6 +18,7 @@ public class Invoice {
         this.phone = "";
         this.status = "";
         this.customerName = "";
+        this.leedId = "";
         this.loanapprovedaamount = "";
         this.loandisbussedamount = "";
         this.loanpendingamount = "";
@@ -48,6 +50,14 @@ public class Invoice {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getLeedId() {
+        return leedId;
+    }
+
+    public void setLeedId(String leedId) {
+        this.leedId = leedId;
     }
 
     public void setStatus(String status) {
