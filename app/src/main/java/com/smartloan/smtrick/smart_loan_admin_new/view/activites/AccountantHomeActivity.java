@@ -102,9 +102,9 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         cardInvoices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
-//                intent.putExtra("value", "leeds");
-//                startActivity(intent);
+                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
             }
         });
         // get our list view
