@@ -29,9 +29,15 @@ public class Accountant_Bills_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__bills);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
+//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
+//        assert getSupportActionBar() != null;   //null check
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Bills");
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
 //        Intent intent = getIntent();
 //        String value = intent.getStringExtra("value");

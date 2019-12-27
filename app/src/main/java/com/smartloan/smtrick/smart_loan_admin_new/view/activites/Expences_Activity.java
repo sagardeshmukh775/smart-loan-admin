@@ -59,6 +59,7 @@ public class Expences_Activity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
         leedRepository = new LeedRepositoryImpl();

@@ -99,7 +99,7 @@
                     android:text="PAY"
                     style="@style/DefaultButton"
                     android:layout_margin="3dp"
-                    android:textColor="@color/background" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -145,7 +145,7 @@
                     android:text="PAY"
                     style="@style/DefaultButton"
                     android:layout_margin="3dp"
-                    android:textColor="@color/background" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -191,7 +191,7 @@
                     android:text="PAY"
                     style="@style/DefaultButton"
                     android:layout_margin="3dp"
-                    android:textColor="@color/background" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -237,7 +237,7 @@
                     android:text="PAY"
                     style="@style/DefaultButton"
                     android:layout_margin="3dp"
-                    android:textColor="@color/background" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -283,7 +283,7 @@
                     android:text="PAY"
                     style="@style/DefaultButton"
                     android:layout_margin="3dp"
-                    android:textColor="@color/background" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

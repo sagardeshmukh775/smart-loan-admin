@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +24,17 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
+import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AccountantApprovedExpenceAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.PaidExpenceAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantApprovedLeedsFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantInvoicesTabFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantUsersFragment;
@@ -36,6 +44,9 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.UnderConstrati
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.REQUEST_CODE;
 
 public class AccountantHomeActivity extends AppCompatActivity implements
@@ -43,9 +54,12 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
     private AppSharedPreference appSharedPreference;
     private NavigationView navigationView;
+    private LeedRepository leedRepository;
 
-//    private CardView cardComission, cardExpences, cardBills, cardInvoices, cardReports;
-//    TextView leedscount, bankscount, userscount, reportscount;
+    private CardView cardComission, cardExpences, cardBills, cardInvoices;
+    TextView leedscount, expencescount, invoicescount, billscount, paidinvoicescount, unpaidinvoicescount, paidbills, unpaidbills;
+
+    private List<Expences> expenceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +67,10 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_accountant_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-       // setSupportActionBar(toolbar);
+        // setSupportActionBar(toolbar);
         appSharedPreference = new AppSharedPreference(this);
+        leedRepository = new LeedRepositoryImpl();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -64,53 +80,122 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         updateNavigationHeader();
 
-//        cardComission = (CardView) findViewById(R.id.leedcardId);
-//        cardExpences = (CardView) findViewById(R.id.bankscardId);
-//        cardBills = (CardView) findViewById(R.id.calculatorcardId);
-//        cardInvoices = (CardView) findViewById(R.id.userscardId);
-////        cardReports = (CardView) findViewById(R.id.reportscardId);
-//
-//        leedscount = (TextView) findViewById(R.id.txttotalLeedvalue);
-//        bankscount = (TextView) findViewById(R.id.txtbanksvalue);
-////        userscount = (TextView) findViewById(R.id.txtactiveusersvalue);
-//        reportscount = (TextView) findViewById(R.id.txtreportsvalue);
+        expenceList = new ArrayList<>();
 
-//        cardExpences.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(AccountantHomeActivity.this, Expences_Activity.class);
-//                intent.putExtra("value", "leeds");
-//                startActivity(intent);
-//            }
-//        });
-//        cardComission.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
-//                intent.putExtra("value", "leeds");
-//                startActivity(intent);
-//            }
-//        });
-//        cardBills.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
-//                intent.putExtra("value", "leeds");
-//                startActivity(intent);
-//            }
-//        });
-//        cardInvoices.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
-//                intent.putExtra("value", "leeds");
-//                startActivity(intent);
-//            }
-//        });
+        cardComission = (CardView) findViewById(R.id.card_view_approved_leeds);
+        cardExpences = (CardView) findViewById(R.id.card_view_expences);
+        cardBills = (CardView) findViewById(R.id.card_view_bills);
+        cardInvoices = (CardView) findViewById(R.id.card_view_invoices);
+
+        leedscount = (TextView) findViewById(R.id.aproved_leedcount);
+//        expencescount = (TextView) findViewById(R.id.card_view_approved_leeds);
+        invoicescount = (TextView) findViewById(R.id.invoices_count);
+        billscount = (TextView) findViewById(R.id.bills_count);
+        paidinvoicescount = (TextView) findViewById(R.id.paidinvoices_count);
+        unpaidinvoicescount = (TextView) findViewById(R.id.unpidinvoices_leedcount);
+        paidbills = (TextView) findViewById(R.id.paid_bills_count);
+        unpaidbills = (TextView) findViewById(R.id.unpaid_bills_count);
+
+        readBills();
+        readPaidBills();
+        readUnpaidBills();
+
+        cardExpences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountantHomeActivity.this, Expences_Activity.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
+            }
+        });
+        cardComission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
+            }
+        });
+        cardBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
+            }
+        });
+        cardInvoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
+                intent.putExtra("value", "leeds");
+                startActivity(intent);
+            }
+        });
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
 //        ft.commit();
+    }
+
+    private void readBills() {
+        leedRepository.readExpence(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    expenceList = (ArrayList<Expences>) object;
+                    String count = String.valueOf(expenceList.size());
+                    billscount.setText(count);
+
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
+    }
+
+    private void readPaidBills() {
+        expenceList.clear();
+        leedRepository.readExpenceByStatus(Constant.STATUS_PAID_BILL, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    expenceList = (ArrayList<Expences>) object;
+                    String count = String.valueOf(expenceList.size());
+                    paidbills.setText(count);
+
+                }
+
+
+            }
+
+            @Override
+            public void onError(Object object) {
+                Utility.showLongMessage(getApplicationContext(), getString(R.string.server_error));
+            }
+        });
+    }
+
+    private void readUnpaidBills() {
+        expenceList.clear();
+        leedRepository.readExpenceByStatus(Constant.STATUS_APPROVED_BILL,new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    expenceList = (ArrayList<Expences>) object;
+                    String count = String.valueOf(expenceList.size());
+                    unpaidbills.setText(count);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                Utility.showLongMessage(getApplicationContext(), getString(R.string.server_error));
+            }
+        });
     }
 
     @Override
@@ -155,7 +240,6 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         }
 
 
-
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame, fragment);
@@ -167,15 +251,13 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         return true;
     }
 
-    private void clearDataWithSignOut()
-    {
+    private void clearDataWithSignOut() {
         FirebaseAuth.getInstance().signOut();
         appSharedPreference.clear();
         logOut();
     }
 
-    private void logOut()
-    {
+    private void logOut() {
         Intent intent = new Intent(this, LoginScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

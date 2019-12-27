@@ -29,10 +29,18 @@ public class Accountant_Invoice_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__invoice);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
+//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar1));
+//        assert getSupportActionBar() != null;   //null check
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Invoices");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Invoices");
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame1, new Accountant_Invoice_fragment_lead_tab_Disbussed());
