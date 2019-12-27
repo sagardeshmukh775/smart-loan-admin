@@ -19,7 +19,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_home_accountant" />
+    <include layout="@layout/content_home_accountant2" />
 
 
 </android.support.design.widget.CoordinatorLayout>

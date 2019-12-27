@@ -44,8 +44,8 @@ public class AccountantHomeActivity extends AppCompatActivity implements
     private AppSharedPreference appSharedPreference;
     private NavigationView navigationView;
 
-    private CardView cardComission, cardExpences, cardBills, cardInvoices, cardReports;
-    TextView leedscount, bankscount, userscount, reportscount;
+//    private CardView cardComission, cardExpences, cardBills, cardInvoices, cardReports;
+//    TextView leedscount, bankscount, userscount, reportscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,49 +64,49 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         updateNavigationHeader();
 
-        cardComission = (CardView) findViewById(R.id.leedcardId);
-        cardExpences = (CardView) findViewById(R.id.bankscardId);
-        cardBills = (CardView) findViewById(R.id.calculatorcardId);
-        cardInvoices = (CardView) findViewById(R.id.userscardId);
-//        cardReports = (CardView) findViewById(R.id.reportscardId);
+//        cardComission = (CardView) findViewById(R.id.leedcardId);
+//        cardExpences = (CardView) findViewById(R.id.bankscardId);
+//        cardBills = (CardView) findViewById(R.id.calculatorcardId);
+//        cardInvoices = (CardView) findViewById(R.id.userscardId);
+////        cardReports = (CardView) findViewById(R.id.reportscardId);
+//
+//        leedscount = (TextView) findViewById(R.id.txttotalLeedvalue);
+//        bankscount = (TextView) findViewById(R.id.txtbanksvalue);
+////        userscount = (TextView) findViewById(R.id.txtactiveusersvalue);
+//        reportscount = (TextView) findViewById(R.id.txtreportsvalue);
 
-        leedscount = (TextView) findViewById(R.id.txttotalLeedvalue);
-        bankscount = (TextView) findViewById(R.id.txtbanksvalue);
-//        userscount = (TextView) findViewById(R.id.txtactiveusersvalue);
-        reportscount = (TextView) findViewById(R.id.txtreportsvalue);
-
-        cardExpences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Expences_Activity.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
-        cardComission.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
-        cardBills.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
-        cardInvoices.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
-                intent.putExtra("value", "leeds");
-                startActivity(intent);
-            }
-        });
+//        cardExpences.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AccountantHomeActivity.this, Expences_Activity.class);
+//                intent.putExtra("value", "leeds");
+//                startActivity(intent);
+//            }
+//        });
+//        cardComission.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AccountantHomeActivity.this, MainActivity_Accountant_new.class);
+//                intent.putExtra("value", "leeds");
+//                startActivity(intent);
+//            }
+//        });
+//        cardBills.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Bills_Activity.class);
+//                intent.putExtra("value", "leeds");
+//                startActivity(intent);
+//            }
+//        });
+//        cardInvoices.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
+//                intent.putExtra("value", "leeds");
+//                startActivity(intent);
+//            }
+//        });
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
