@@ -29,12 +29,14 @@ import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
+import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AccountantApprovedExpenceAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.PaidExpenceAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantApprovedLeedsFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantInvoicesTabFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AccountantUsersFragment;
@@ -48,6 +50,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.REQUEST_CODE;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_DISBUSED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_REJECTED;
 
 public class AccountantHomeActivity extends AppCompatActivity implements
         OnFragmentInteractionListener,
@@ -55,11 +59,14 @@ public class AccountantHomeActivity extends AppCompatActivity implements
     private AppSharedPreference appSharedPreference;
     private NavigationView navigationView;
     private LeedRepository leedRepository;
+    ProgressDialogClass progressDialogClass;
 
     private CardView cardComission, cardExpences, cardBills, cardInvoices;
-    TextView leedscount, expencescount, invoicescount, billscount, paidinvoicescount, unpaidinvoicescount, paidbills, unpaidbills;
+    TextView leedscount, expencescount, invoicescount, billscount, paidinvoicescount, unpaidinvoicescount, paidbills,
+            unpaidbills, approvedleedscount, rejectedleedscount;
 
     private List<Expences> expenceList;
+    ArrayList<LeedsModel> leedsModelArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         // setSupportActionBar(toolbar);
         appSharedPreference = new AppSharedPreference(this);
         leedRepository = new LeedRepositoryImpl();
+        progressDialogClass = new ProgressDialogClass(AccountantHomeActivity.this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,6 +89,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         updateNavigationHeader();
 
         expenceList = new ArrayList<>();
+        leedsModelArrayList = new ArrayList<>();
 
         cardComission = (CardView) findViewById(R.id.card_view_approved_leeds);
         cardExpences = (CardView) findViewById(R.id.card_view_expences);
@@ -95,7 +104,11 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         unpaidinvoicescount = (TextView) findViewById(R.id.unpidinvoices_leedcount);
         paidbills = (TextView) findViewById(R.id.paid_bills_count);
         unpaidbills = (TextView) findViewById(R.id.unpaid_bills_count);
+        approvedleedscount = (TextView) findViewById(R.id.approved_leeds_count);
+        rejectedleedscount = (TextView) findViewById(R.id.rejected_leeds_count);
 
+        getteLeed();
+        getRejectedLeeds();
         readBills();
         readPaidBills();
         readUnpaidBills();
@@ -136,6 +149,49 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
 //        ft.commit();
+    }
+
+    private void getteLeed() {
+        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+        leedRepository.readLeedsByStatus(STATUS_DISBUSED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    leedsModelArrayList = (ArrayList<LeedsModel>) object;
+                    String count = String.valueOf(leedsModelArrayList.size());
+                    leedscount.setText(count);
+                    approvedleedscount.setText(count);
+                }
+                progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+                Utility.showLongMessage(getApplicationContext(), getString(R.string.server_error));
+            }
+        });
+    }
+
+    private void getRejectedLeeds() {
+        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+        leedRepository.readLeedsByStatus(STATUS_REJECTED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    leedsModelArrayList = (ArrayList<LeedsModel>) object;
+                    String count = String.valueOf(leedsModelArrayList.size());
+                    rejectedleedscount.setText(count);
+                }
+                progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+                Utility.showLongMessage(getApplicationContext(), getString(R.string.server_error));
+            }
+        });
     }
 
     private void readBills() {
@@ -181,7 +237,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 
     private void readUnpaidBills() {
         expenceList.clear();
-        leedRepository.readExpenceByStatus(Constant.STATUS_APPROVED_BILL,new CallBack() {
+        leedRepository.readExpenceByStatus(Constant.STATUS_APPROVED_BILL, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
