@@ -35,27 +35,30 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:layout_weight="95"
+                        android:layout_weight="100"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="100">
 
                         <TextView
                             android:id="@+id/txt_billname"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Bill Type: "
+                            android:text="Bill Type "
                             android:textColor="@color/whitetextcolor"
+                            android:layout_weight="90"
                             android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/txt_name_value"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Id:"
+                                android:layout_weight="10"
                                 android:textColor="@color/whitetextcolor"
                                 android:textSize="14dp" />
 
@@ -64,20 +67,24 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="100">
+
                         <TextView
                             android:id="@+id/txt_amount"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Amount:"
+                            android:text="Amount"
+                            android:layout_weight="90"
                             android:textColor="@color/whitetextcolor"
                             android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/txt_amount_value"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="C Name:"
+                                android:layout_weight="10"
                                 android:textColor="@color/whitetextcolor"
                                 android:textSize="14dp" />
 
@@ -87,21 +94,24 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:weightSum="100"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/txt_date"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Date: "
+                                android:text="Date"
                                 android:textColor="@color/whitetextcolor"
+                                android:layout_weight="90"
                                 android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/txt_date_value"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Bank:"
+                                android:layout_weight="10"
                                 android:textColor="@color/whitetextcolor"
                                 android:textSize="14dp" />
 
@@ -110,21 +120,24 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:weightSum="100"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/txt_status"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="B.P: "
+                                android:text="Status"
                                 android:textColor="@color/whitetextcolor"
+                                android:layout_weight="90"
                                 android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/txt_status_value"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="LAP"
+                                android:layout_weight="10"
                                 android:textColor="@color/whitetextcolor"
                                 android:textSize="14dp" />
 

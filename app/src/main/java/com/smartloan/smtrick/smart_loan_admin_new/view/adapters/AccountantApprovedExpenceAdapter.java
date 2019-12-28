@@ -53,12 +53,12 @@ public class AccountantApprovedExpenceAdapter extends RecyclerView.Adapter<Accou
     public void onBindViewHolder(final AccountantApprovedExpenceAdapter.ViewHolder holder, int position) {
         final Expences user = searchArrayList.get(position);
 
-        holder.txtbillName.setText(searchArrayList.get(position).getBillname());
-        holder.txtbillamount.setText(searchArrayList.get(position).getBillAmount());
-        holder.txtbilldate.setText(Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
+        holder.txtbillName.setText(": "+searchArrayList.get(position).getBillname());
+        holder.txtbillamount.setText(": "+searchArrayList.get(position).getBillAmount());
+        holder.txtbilldate.setText(": "+Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
 
         try {
-            holder.txtstatus.setText(searchArrayList.get(position).getStatus());
+            holder.txtstatus.setText(": "+searchArrayList.get(position).getStatus());
         } catch (Exception e) {
         }
         holder.card_view.setOnClickListener(new View.OnClickListener() {
