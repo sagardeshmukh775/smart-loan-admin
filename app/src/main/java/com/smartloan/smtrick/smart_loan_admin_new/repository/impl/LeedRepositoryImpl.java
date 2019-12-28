@@ -1,10 +1,13 @@
 package com.smartloan.smtrick.smart_loan_admin_new.repository.impl;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
+import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
 import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Commission;
@@ -187,27 +190,56 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     @Override
     public void readLeedByLeedId(String leedId, final CallBack callBack) {
         final Query query = Constant.LEEDS_TABLE_REF.child(leedId);
-        fireBaseReadData(query, new CallBack() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(Object object) {
-                if (object != null) {
-                    DataSnapshot dataSnapshot = (DataSnapshot) object;
-                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
-                        DataSnapshot child = dataSnapshot.getChildren().iterator().next();
-                        LeedsModel leedsModel = child.getValue(LeedsModel.class);
-                        callBack.onSuccess(leedsModel);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            if (dataSnapshot.hasChildren()) {
+                                callBack.onSuccess(dataSnapshot.getValue(LeedsModel.class));
+                            } else {
+                                callBack.onError(null);
+                            }
+                        } catch (Exception e) {
+                            ExceptionUtil.logException(e);
+                        }
                     } else
-                        callBack.onSuccess(null);
+                        callBack.onError(null);
                 } else
-                    callBack.onSuccess(null);
+                    callBack.onError(null);
             }
 
             @Override
-            public void onError(Object object) {
-                callBack.onError(object);
+            public void onCancelled(DatabaseError databaseError) {
+                callBack.onError(databaseError);
             }
         });
     }
+//    @Override
+//    public void readLeedByLeedId(String leedId, final CallBack callBack) {
+//        final Query query = Constant.LEEDS_TABLE_REF.child(leedId);
+//        fireBaseReadData(query, new CallBack() {
+//            @Override
+//            public void onSuccess(Object object) {
+//                if (object != null) {
+//                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+//                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+//                        DataSnapshot child = dataSnapshot.getChildren().iterator().next();
+//                        LeedsModel leedsModel = child.getValue(LeedsModel.class);
+//                        callBack.onSuccess(leedsModel);
+//                    } else
+//                        callBack.onSuccess(null);
+//                } else
+//                    callBack.onSuccess(null);
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//                callBack.onError(object);
+//            }
+//        });
+//    }
 
     @Override
     public void readLeedsByStatus(String status, final CallBack callBack) {

@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,6 +54,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CheckListAdapter
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -152,6 +155,10 @@ public class View_Lead_Details_Fragment1 extends Fragment {
     CheckListAdapter checkdapter;
     ArrayList<CheckList> checklistArraylist;
     ArrayList<String> checkedListitems = new ArrayList<>();
+
+    String number;
+    static String item = "";
+    LeedsModel leed = new LeedsModel();
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -503,17 +510,11 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             }
         });
 
-        UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateLeadDetails(leedsModel);
-            }
-        });
-
         SubmitToBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                updateLeadDetails(leedsModel);
+
                 setLeedStatus(leedsModel);
             }
         });
@@ -730,6 +731,79 @@ public class View_Lead_Details_Fragment1 extends Fragment {
 
                 dialog1.show();
 
+            }
+        });
+
+        UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog1 = new Dialog(getContext());
+                dialog1.setContentView(R.layout.dialogsendchecklist);
+
+                Button btnYes = (Button) dialog1.findViewById(R.id.dialogButtonYes);
+                Button btnNo = (Button) dialog1.findViewById(R.id.dialogButtonNo);
+
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String id = leedsModel.getLeedId();
+                        leedRepository.readLeedByLeedId(id, new CallBack() {
+                            @Override
+                            public void onSuccess(Object object) {
+                                if (object != null) {
+                                    LeedsModel leed1 = (LeedsModel) object;
+                                    leed = leed1;
+                                    ArrayList<String> checklist = new ArrayList<>();
+                                    checklist = leed.getChecklist();
+
+
+                                    for (int j = 0; j < checklist.size(); j++) {
+                                        item = item + checklist.get(j) + "\n";
+                                    }
+                                    number = "+91" + leedsModel.getMobileNumber();
+                                    if (number != null) {
+                                        PackageManager packageManager = getActivity().getPackageManager();
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+
+                                        try {
+
+
+                                            String message1 = "Documents" + "\n" + item;
+
+                                            String url = "https://api.whatsapp.com/send?phone=" + number + "&text=" + URLEncoder.encode(message1, "UTF-8");
+                                            i.setPackage("com.whatsapp");
+                                            i.setData(Uri.parse(url));
+                                            if (i.resolveActivity(packageManager) != null) {
+                                                startActivity(i);
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(Object object) {
+
+                            }
+                        });
+
+
+                    }
+                });
+
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog1.dismiss();
+                    }
+                });
+
+                dialog1.show();
+//                updateLeadDetails(leedsModel);
             }
         });
 
