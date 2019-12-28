@@ -757,7 +757,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                                     ArrayList<String> checklist = new ArrayList<>();
                                     checklist = leed.getChecklist();
 
-
                                     for (int j = 0; j < checklist.size(); j++) {
                                         item = item + checklist.get(j) + "\n";
                                     }
@@ -767,7 +766,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                                         Intent i = new Intent(Intent.ACTION_VIEW);
 
                                         try {
-
 
                                             String message1 = "Documents" + "\n" + item;
 
@@ -803,7 +801,7 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                 });
 
                 dialog1.show();
-//                updateLeadDetails(leedsModel);
+                updateLeadDetails(leedsModel);
             }
         });
 

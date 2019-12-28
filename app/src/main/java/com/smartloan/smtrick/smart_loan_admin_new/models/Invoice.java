@@ -3,13 +3,18 @@ package com.smartloan.smtrick.smart_loan_admin_new.models;
 import java.util.ArrayList;
 
 public class Invoice {
-    private String invoiceId;
-    private String phone;
-    private String status;
+
     private String customerName;
-    private String leedId;
+    private String invoiceId;
+    private String agentId;
     private String loanapprovedaamount;
     private String loandisbussedamount;
+    private String tdsAmount;
+    private String phone;
+    private String status;
+
+    private String leedId;
+
     private String loanpendingamount;
 
 
@@ -22,6 +27,8 @@ public class Invoice {
         this.loanapprovedaamount = "";
         this.loandisbussedamount = "";
         this.loanpendingamount = "";
+        this.tdsAmount = "";
+        this.agentId = "";
     }
 
     public String getInvoiceId() {
@@ -86,6 +93,22 @@ public class Invoice {
 
     public void setLoanpendingamount(String loanpendingamount) {
         this.loanpendingamount = loanpendingamount;
+    }
+
+    public String getTdsAmount() {
+        return tdsAmount;
+    }
+
+    public void setTdsAmount(String tdsAmount) {
+        this.tdsAmount = tdsAmount;
+    }
+
+    public String getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(String agentId) {
+        this.agentId = agentId;
     }
 
     public static ArrayList<Invoice> getSentInvoices() {
