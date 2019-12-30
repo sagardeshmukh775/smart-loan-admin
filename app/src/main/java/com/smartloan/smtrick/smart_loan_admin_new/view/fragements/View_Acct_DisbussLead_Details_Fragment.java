@@ -155,9 +155,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 double Totalcom = (TotalCommission * 0.30) / 100;
                 double Disbussmentcom = (DisbussCommission * 0.30) / 100;
                 double TDSAmount = (Disbussmentcom * 10) / 100;
-                double CommisionwithTDS = DisbussCommission - TDSAmount;
-
-                String date = Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE);
+                double CommisionwithTDS = Disbussmentcom - TDSAmount;
 
                 Invoice invoice = new Invoice();
                 invoice.setCustomerName(leedsModel.getCustomerName());
@@ -165,18 +163,19 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 invoice.setInvoiceId(mDatabase.push().getKey());
                 invoice.setLoanapprovedaamount(leedsModel.getApprovedLoan());
                 invoice.setLoandisbussedamount(leedsModel.getDisbusedLoanAmount());
-                invoice.setLoanpendingamount(leedsModel.getPendingLoanAmount());
+                invoice.setPendingdisbussedamount(leedsModel.getPendingLoanAmount());
                 invoice.setPayoutbussedamount(String.valueOf(Disbussmentcom));
                 invoice.setTotalpayoutamount(String.valueOf(Totalcom));
                 invoice.setTdsAmount(String.valueOf(TDSAmount));
                 invoice.setCommisionwithtdsAmount(String.valueOf(CommisionwithTDS));
+                invoice.setAgentId(leedsModel.getAgentId());
                 invoice.setStatus(STATUS_INVOICE_SENT);
-                invoice.setDisbussmentDate(Long.valueOf(date));
+                invoice.setDisbussmentDate(leedsModel.getDisbussmentDate());
 
                 leedRepository.createInvoice1(invoice, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
-                        Toast.makeText(getContext(), "Invois Sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Invoice Sent", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

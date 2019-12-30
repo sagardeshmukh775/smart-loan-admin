@@ -193,6 +193,7 @@ public class LeedsModel implements Serializable {
     private String salesPerson;
     private String rejectionReason;
     private String comissionamount;
+    private String disbussmentDate;
 
     private ArrayList<String> checklist;
     private ArrayList<String> checklistCollected;
@@ -366,10 +367,11 @@ public class LeedsModel implements Serializable {
         this.prdescripiton = "na";
         this.rejectionReason = "na";
         this.comissionamount = "na";
+        this.disbussmentDate = "na";
 
         this.checklist = new ArrayList<String>();
         this.checklistCollected = new ArrayList<String>();
-        this.checklistCollectedimages =new ArrayList<String>();
+        this.checklistCollectedimages = new ArrayList<String>();
     }
 
     public LeedsModel() {
@@ -388,20 +390,6 @@ public class LeedsModel implements Serializable {
     public void setCreatedDateTime(Long createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
-
-    @Exclude
-    public Long getDisbussmentDateTimeLong() {
-        return this.disbussmentDateTime;
-    }
-
-    public Map<String, String> getDisbussmentDateTime() {
-        return ServerValue.TIMESTAMP;
-    }
-
-    public void setDisbussmentDateTime(Long disbussmentDateTime) {
-        this.disbussmentDateTime = disbussmentDateTime;
-    }
-
 
     public String getBanknName() {
         return banknName;
@@ -1820,6 +1808,14 @@ public class LeedsModel implements Serializable {
         this.checklistCollectedimages = checklistCollectedimages;
     }
 
+    public String getDisbussmentDate() {
+        return disbussmentDate;
+    }
+
+    public void setDisbussmentDate(String disbussmentDate) {
+        this.disbussmentDate = disbussmentDate;
+    }
+
     public static ArrayList<LeedsModel> getLeeds() {
         ArrayList<LeedsModel> leedsModelArrayList = new ArrayList();
         for (int i = 0; i < 10; i++) {
@@ -1978,6 +1974,7 @@ public class LeedsModel implements Serializable {
         leedMap.put("propety", getPropety());
         leedMap.put("propetyYN", getPropetyYN());
         leedMap.put("loanrequirement", getLoanrequirement());
+        leedMap.put("approvedLoan", getApprovedLoan());
         leedMap.put("disbusedLoanAmount", getDisbusedLoanAmount());
         leedMap.put("pendingLoanAmount", getPendingLoanAmount());
 
@@ -2004,15 +2001,15 @@ public class LeedsModel implements Serializable {
         leedMap.put("loginid", getLoginid());
         leedMap.put("salesPerson", getSalesPerson());
 
-        leedMap.put("checklist",getChecklist() );
-        leedMap.put("checklistCollected",getChecklistCollected() );
-        leedMap.put("checklistCollectedimages",getChecklistCollectedimages() );
-        leedMap.put("rejectionReason",getRejectionReason());
-        leedMap.put("comissionamount",getComissionamount());
-        leedMap.put("status",getStatus());
-        leedMap.put("approvedLoan",getApprovedLoan());
-        leedMap.put("disbusedLoanAmount",getDisbusedLoanAmount());
-        leedMap.put("pendingLoanAmount",getPendingLoanAmount());
+        leedMap.put("checklist", getChecklist());
+        leedMap.put("checklistCollected", getChecklistCollected());
+        leedMap.put("checklistCollectedimages", getChecklistCollectedimages());
+        leedMap.put("rejectionReason", getRejectionReason());
+        leedMap.put("comissionamount", getComissionamount());
+        leedMap.put("status", getStatus());
+        leedMap.put("disbussmentDate", getDisbussmentDate());
+
+
 
         return leedMap;
     }

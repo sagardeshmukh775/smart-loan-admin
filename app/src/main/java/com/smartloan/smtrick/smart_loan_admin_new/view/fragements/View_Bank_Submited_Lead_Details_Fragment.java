@@ -42,8 +42,13 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
@@ -555,7 +560,13 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
             String disbuss = edtdisbussamount.getText().toString();
             String pending = edtpendingamount.getText().toString();
 
+            Date c = Calendar.getInstance().getTime();
+            System.out.println("Current time => " + c);
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            String formattedDate = df.format(c);
+
             leedsModel.setStatus(STATUS_DISBUSED);
+            leedsModel.setDisbussmentDate(formattedDate);
             leedsModel.setApprovedLoan(approved);
             leedsModel.setDisbusedLoanAmount(disbuss);
             leedsModel.setPendingLoanAmount(pending);

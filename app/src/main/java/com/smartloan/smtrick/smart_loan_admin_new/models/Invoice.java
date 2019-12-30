@@ -11,7 +11,7 @@ public class Invoice {
     private String customerName;
     private String invoiceId;
     private String invoiceNumber;
-    private Long disbussmentDate;
+    private String disbussmentDate;
 
     private String loanapprovedaamount;
     private String totalpayoutamount;
@@ -25,9 +25,6 @@ public class Invoice {
     private String agentId;
     private String leedId;
 
-    private String loanpendingamount;
-
-
     public Invoice() {
         this.invoiceId = "";
         this.invoiceNumber = "";
@@ -37,29 +34,18 @@ public class Invoice {
         this.leedId = "";
         this.loanapprovedaamount = "";
         this.loandisbussedamount = "";
-        this.loanpendingamount = "";
 
         this.totalpayoutamount = "";
         this.pendingdisbussedamount = "";
         this.payoutbussedamount = "";
         this.commisionwithtdsAmount = "";
+        this.disbussmentDate = "";
 
         this.tdsAmount = "";
         this.agentId = "";
     }
 
-    @Exclude
-    public Long getCreatedDateTimeLong() {
-        return this.disbussmentDate;
-    }
 
-    public Map<String, String> getCreatedDateTime() {
-        return ServerValue.TIMESTAMP;
-    }
-
-    public void setCreatedDateTime(Long createdDateTime) {
-        this.disbussmentDate = createdDateTime;
-    }
 
     public String getInvoiceId() {
         return invoiceId;
@@ -125,14 +111,6 @@ public class Invoice {
         this.loandisbussedamount = loandisbussedamount;
     }
 
-    public String getLoanpendingamount() {
-        return loanpendingamount;
-    }
-
-    public void setLoanpendingamount(String loanpendingamount) {
-        this.loanpendingamount = loanpendingamount;
-    }
-
     public String getTdsAmount() {
         return tdsAmount;
     }
@@ -149,13 +127,6 @@ public class Invoice {
         this.agentId = agentId;
     }
 
-    public Long getDisbussmentDate() {
-        return disbussmentDate;
-    }
-
-    public void setDisbussmentDate(Long disbussmentDate) {
-        this.disbussmentDate = disbussmentDate;
-    }
 
     public String getTotalpayoutamount() {
         return totalpayoutamount;
@@ -187,6 +158,14 @@ public class Invoice {
 
     public void setCommisionwithtdsAmount(String commisionwithtdsAmount) {
         this.commisionwithtdsAmount = commisionwithtdsAmount;
+    }
+
+    public String getDisbussmentDate() {
+        return disbussmentDate;
+    }
+
+    public void setDisbussmentDate(String disbussmentDate) {
+        this.disbussmentDate = disbussmentDate;
     }
 
     public static ArrayList<Invoice> getSentInvoices() {

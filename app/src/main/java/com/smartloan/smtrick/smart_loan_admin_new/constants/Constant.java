@@ -40,7 +40,7 @@ public class Constant {
     public static final String SALES = "SALES";
     public static final String ACCOUNTANT = "ACCOUNTANT";
     public static final String AGENT_PREFIX = "AG-";
-    public static final String INV_PREFIX = "AG-";
+    public static final String INV_PREFIX = "INV-";
     public static final String LEED_PREFIX = "L-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
     //********************************************STATUS FLEADS*****************************
