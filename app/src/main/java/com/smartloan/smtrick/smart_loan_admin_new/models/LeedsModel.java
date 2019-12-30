@@ -179,6 +179,7 @@ public class LeedsModel implements Serializable {
     private String tenure;
     private String tenuremonth;
     private Long updatedDateTime;
+    private Long disbussmentDateTime;
     private String visa;
     private String yincome;
 
@@ -386,6 +387,19 @@ public class LeedsModel implements Serializable {
 
     public void setCreatedDateTime(Long createdDateTime) {
         this.createdDateTime = createdDateTime;
+    }
+
+    @Exclude
+    public Long getDisbussmentDateTimeLong() {
+        return this.disbussmentDateTime;
+    }
+
+    public Map<String, String> getDisbussmentDateTime() {
+        return ServerValue.TIMESTAMP;
+    }
+
+    public void setDisbussmentDateTime(Long disbussmentDateTime) {
+        this.disbussmentDateTime = disbussmentDateTime;
     }
 
 
@@ -1995,6 +2009,11 @@ public class LeedsModel implements Serializable {
         leedMap.put("checklistCollectedimages",getChecklistCollectedimages() );
         leedMap.put("rejectionReason",getRejectionReason());
         leedMap.put("comissionamount",getComissionamount());
+        leedMap.put("status",getStatus());
+        leedMap.put("approvedLoan",getApprovedLoan());
+        leedMap.put("disbusedLoanAmount",getDisbusedLoanAmount());
+        leedMap.put("pendingLoanAmount",getPendingLoanAmount());
+
         return leedMap;
     }
 

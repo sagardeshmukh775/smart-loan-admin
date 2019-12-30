@@ -40,6 +40,7 @@ public class Constant {
     public static final String SALES = "SALES";
     public static final String ACCOUNTANT = "ACCOUNTANT";
     public static final String AGENT_PREFIX = "AG-";
+    public static final String INV_PREFIX = "AG-";
     public static final String LEED_PREFIX = "L-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
     //********************************************STATUS FLEADS*****************************
@@ -61,6 +62,8 @@ public class Constant {
     public static final String STATUS_GENERATED_BILL = "GENERATEDBILL";
     public static final String STATUS_APPROVED_BILL = "APPROVEDBILL";
     public static final String STATUS_PAID_BILL = "PAIDBILL";
+
+
 
     public static final String STATUS_IN_PROGRESS = "IN-PROGRESS";
     public static final String GLOBAL_DATE_FORMATE = "dd MMM yyyy";

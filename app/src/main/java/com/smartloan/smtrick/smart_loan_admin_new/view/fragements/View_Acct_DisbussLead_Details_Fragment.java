@@ -23,11 +23,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -44,7 +47,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.AGENT_PREFIX;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.GLOBAL_DATE_FORMATE;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.INV_PREFIX;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_INVOICE_SENT;
 
 public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
 
@@ -66,9 +73,9 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
     BanksAdapter adapter;
     SalesPersonAdapter useradapter;
 
-    Button UpdateComission;
-
-    TextView txtApproved, txtDisbuss, txtPending,txtTDS;
+    Button UpdateComission, btnSendInvoice;
+    TextView txtApproved, txtDisbuss, txtPending, txtTDS;
+    private DatabaseReference mDatabase;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -96,6 +103,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         leedRepository = new LeedRepositoryImpl();
         UserRepository = new UserRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
+        mDatabase = FirebaseDatabase.getInstance().getReference("invoice");
 
         SalesPerson = new ArrayList<>();
         leedsArraylist = new ArrayList<>();
@@ -110,6 +118,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         txtLoanType = (TextView) view.findViewById(R.id.txt_loan_type_value);
         edtComissionAmount = (EditText) view.findViewById(R.id.edtcommisionamount);
         UpdateComission = (Button) view.findViewById(R.id.buttonupdate2);
+        btnSendInvoice = (Button) view.findViewById(R.id.buttonsendinvoice);
 
         txtApproved = (TextView) view.findViewById(R.id.txtapprovedamtvalue);
         txtDisbuss = (TextView) view.findViewById(R.id.txtdisbussedamtvalue);
@@ -133,6 +142,48 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 updateLeadDetails(leedsModel);
+            }
+        });
+
+        btnSendInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int TotalCommission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
+                int DisbussCommission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
+
+                double Totalcom = (TotalCommission * 0.30) / 100;
+                double Disbussmentcom = (DisbussCommission * 0.30) / 100;
+                double TDSAmount = (Disbussmentcom * 10) / 100;
+                double CommisionwithTDS = DisbussCommission - TDSAmount;
+
+                String date = Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE);
+
+                Invoice invoice = new Invoice();
+                invoice.setCustomerName(leedsModel.getCustomerName());
+                invoice.setInvoiceNumber(Utility.generateAgentId(INV_PREFIX));
+                invoice.setInvoiceId(mDatabase.push().getKey());
+                invoice.setLoanapprovedaamount(leedsModel.getApprovedLoan());
+                invoice.setLoandisbussedamount(leedsModel.getDisbusedLoanAmount());
+                invoice.setLoanpendingamount(leedsModel.getPendingLoanAmount());
+                invoice.setPayoutbussedamount(String.valueOf(Disbussmentcom));
+                invoice.setTotalpayoutamount(String.valueOf(Totalcom));
+                invoice.setTdsAmount(String.valueOf(TDSAmount));
+                invoice.setCommisionwithtdsAmount(String.valueOf(CommisionwithTDS));
+                invoice.setStatus(STATUS_INVOICE_SENT);
+                invoice.setDisbussmentDate(Long.valueOf(date));
+
+                leedRepository.createInvoice1(invoice, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        Toast.makeText(getContext(), "Invois Sent", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
             }
         });
 
@@ -170,40 +221,48 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         String disbuss = leedsModel.getDisbusedLoanAmount();
         String pending = leedsModel.getPendingLoanAmount();
 
-        if (approved != null){
+        if (approved != null) {
             txtApproved.setText(approved);
-        }else {
+        } else {
             txtApproved.setText("Null");
         }
-        if (disbuss != null){
+        if (disbuss != null) {
             txtDisbuss.setText(disbuss);
-        }else {
+        } else {
             txtDisbuss.setText("Null");
         }
-        if (pending != null){
+        if (pending != null) {
             txtPending.setText(pending);
-        }else {
+        } else {
             txtPending.setText("Null");
         }
 
         String comission = leedsModel.getComissionamount();
-        if (comission != null) {
+        if (comission == null) {
             edtComissionAmount.setText(comission);
 
         } else {
             int commission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
             if (commission > 1000000 && commission < 9000000) {
                 double com = (commission * 0.30) / 100;
-                edtComissionAmount.setText(String.valueOf(com));
+                double com1 = (com * 10) / 100;
+                double com2 = com - com1;
+                edtComissionAmount.setText(String.valueOf(com2));
             } else if (commission > 9000000 && commission < 15000000) {
                 double com = (commission * 0.40) / 100;
-                edtComissionAmount.setText(String.valueOf(com));
+                double com1 = (com * 10) / 100;
+                double com2 = com - com1;
+                edtComissionAmount.setText(String.valueOf(com2));
             } else if (commission > 15000000 && commission < 35000000) {
                 double com = (commission * 0.55) / 100;
-                edtComissionAmount.setText(String.valueOf(com));
+                double com1 = (com * 10) / 100;
+                double com2 = com - com1;
+                edtComissionAmount.setText(String.valueOf(com2));
             } else if (commission > 35000000) {
                 double com = (commission * 0.65) / 100;
-                edtComissionAmount.setText(String.valueOf(com));
+                double com1 = (com * 10) / 100;
+                double com2 = com - com1;
+                edtComissionAmount.setText(String.valueOf(com2));
             }
         }
     }

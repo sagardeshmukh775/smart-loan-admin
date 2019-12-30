@@ -10,6 +10,7 @@ public class Invoice {
 
     private String customerName;
     private String invoiceId;
+    private String invoiceNumber;
     private Long disbussmentDate;
 
     private String loanapprovedaamount;
@@ -18,6 +19,7 @@ public class Invoice {
     private String pendingdisbussedamount;
     private String payoutbussedamount;
     private String tdsAmount;
+    private String commisionwithtdsAmount;
     private String phone;
     private String status;
     private String agentId;
@@ -28,6 +30,7 @@ public class Invoice {
 
     public Invoice() {
         this.invoiceId = "";
+        this.invoiceNumber = "";
         this.phone = "";
         this.status = "";
         this.customerName = "";
@@ -39,6 +42,7 @@ public class Invoice {
         this.totalpayoutamount = "";
         this.pendingdisbussedamount = "";
         this.payoutbussedamount = "";
+        this.commisionwithtdsAmount = "";
 
         this.tdsAmount = "";
         this.agentId = "";
@@ -63,6 +67,14 @@ public class Invoice {
 
     public void setInvoiceId(String invoiceId) {
         this.invoiceId = invoiceId;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
     public void setPhone(String phone) {
@@ -167,6 +179,14 @@ public class Invoice {
 
     public void setPayoutbussedamount(String payoutbussedamount) {
         this.payoutbussedamount = payoutbussedamount;
+    }
+
+    public String getCommisionwithtdsAmount() {
+        return commisionwithtdsAmount;
+    }
+
+    public void setCommisionwithtdsAmount(String commisionwithtdsAmount) {
+        this.commisionwithtdsAmount = commisionwithtdsAmount;
     }
 
     public static ArrayList<Invoice> getSentInvoices() {

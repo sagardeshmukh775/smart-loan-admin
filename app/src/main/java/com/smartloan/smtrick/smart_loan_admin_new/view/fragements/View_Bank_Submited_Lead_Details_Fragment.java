@@ -491,25 +491,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
         getdata();
 
-//        btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent Bintent = new Intent(getContext(), Coordinator_Update_Activity.class);
-////                Bintent.putExtra(Constant.LEED_MODEL, leedsModel);
-////                startActivity(Bintent);
-//                Bundle bundle = new Bundle();
-////            bundle.putString("key","abc");
-//                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-//
-//                Coordinator_Update_Fragment fragment2 = new Coordinator_Update_Fragment();
-//                fragment2.setArguments(bundle);
-//
-//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.detailContainer, fragment2);
-//                ft.commit();
-//            }
-//        });
-
         UpdateBankAndSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -570,16 +551,20 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
         if (data.equalsIgnoreCase("updateBank")) {
             leedsModel.setLoginid(edtloginId.getText().toString());
         } else if (data.equalsIgnoreCase("disbuss")) {
+            String approved = edtapprovedamount.getText().toString();
+            String disbuss = edtdisbussamount.getText().toString();
+            String pending = edtpendingamount.getText().toString();
+
             leedsModel.setStatus(STATUS_DISBUSED);
-            leedsModel.setApprovedLoan(edtapprovedamount.getText().toString());
-            leedsModel.setDisbusedLoanAmount(edtdisbussamount.getText().toString());
-            leedsModel.setPendingLoanAmount(edtpendingamount.getText().toString());
+            leedsModel.setApprovedLoan(approved);
+            leedsModel.setDisbusedLoanAmount(disbuss);
+            leedsModel.setPendingLoanAmount(pending);
         } else if (data.equalsIgnoreCase("reject")) {
             leedsModel.setRejectionReason(edtrejectionreason.getText().toString());
             leedsModel.setStatus(STATUS_REJECTED);
         }
 
-        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
     private void updateLeed(String leedId, Map leedsMap) {
@@ -601,7 +586,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
     }
 
     private void getdata() {
-//        try {
 
         ////////////////////////////////////LEED DETAILS////////////////////////////////////////////////
 

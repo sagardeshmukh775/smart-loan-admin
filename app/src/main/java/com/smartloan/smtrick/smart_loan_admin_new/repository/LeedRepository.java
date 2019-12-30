@@ -6,6 +6,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
 import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Commission;
 import com.smartloan.smtrick.smart_loan_admin_new.models.FollowUp;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
@@ -80,6 +81,6 @@ public interface LeedRepository {
 
     void readFolloUpByLeedId(final String salesId, final CallBack callBack);
 
-
+    void createInvoice1(final Invoice leedsModel, final CallBack callback);
 
 }
