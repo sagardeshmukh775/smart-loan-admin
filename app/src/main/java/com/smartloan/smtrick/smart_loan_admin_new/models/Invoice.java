@@ -1,18 +1,26 @@
 package com.smartloan.smtrick.smart_loan_admin_new.models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Invoice {
 
     private String customerName;
     private String invoiceId;
-    private String agentId;
+    private Long disbussmentDate;
+
     private String loanapprovedaamount;
+    private String totalpayoutamount;
     private String loandisbussedamount;
+    private String pendingdisbussedamount;
+    private String payoutbussedamount;
     private String tdsAmount;
     private String phone;
     private String status;
-
+    private String agentId;
     private String leedId;
 
     private String loanpendingamount;
@@ -27,8 +35,26 @@ public class Invoice {
         this.loanapprovedaamount = "";
         this.loandisbussedamount = "";
         this.loanpendingamount = "";
+
+        this.totalpayoutamount = "";
+        this.pendingdisbussedamount = "";
+        this.payoutbussedamount = "";
+
         this.tdsAmount = "";
         this.agentId = "";
+    }
+
+    @Exclude
+    public Long getCreatedDateTimeLong() {
+        return this.disbussmentDate;
+    }
+
+    public Map<String, String> getCreatedDateTime() {
+        return ServerValue.TIMESTAMP;
+    }
+
+    public void setCreatedDateTime(Long createdDateTime) {
+        this.disbussmentDate = createdDateTime;
     }
 
     public String getInvoiceId() {
@@ -109,6 +135,38 @@ public class Invoice {
 
     public void setAgentId(String agentId) {
         this.agentId = agentId;
+    }
+
+    public Long getDisbussmentDate() {
+        return disbussmentDate;
+    }
+
+    public void setDisbussmentDate(Long disbussmentDate) {
+        this.disbussmentDate = disbussmentDate;
+    }
+
+    public String getTotalpayoutamount() {
+        return totalpayoutamount;
+    }
+
+    public void setTotalpayoutamount(String totalpayoutamount) {
+        this.totalpayoutamount = totalpayoutamount;
+    }
+
+    public String getPendingdisbussedamount() {
+        return pendingdisbussedamount;
+    }
+
+    public void setPendingdisbussedamount(String pendingdisbussedamount) {
+        this.pendingdisbussedamount = pendingdisbussedamount;
+    }
+
+    public String getPayoutbussedamount() {
+        return payoutbussedamount;
+    }
+
+    public void setPayoutbussedamount(String payoutbussedamount) {
+        this.payoutbussedamount = payoutbussedamount;
     }
 
     public static ArrayList<Invoice> getSentInvoices() {

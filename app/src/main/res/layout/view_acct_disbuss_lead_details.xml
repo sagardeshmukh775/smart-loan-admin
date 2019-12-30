@@ -304,7 +304,7 @@
                         android:id="@+id/txttdsamt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        android:text="10%"
                         android:layout_weight="30"
                         android:textColor="@color/whitetextcolor"
                         android:textSize="14dp" />
