@@ -129,7 +129,7 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
     private List<String> listmaritalstatus;
     BanksAdapter adapter;
 
-    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount, btnDISBUSS;
+    Button UpdateBankAndSales,  btnDisbussAmount, btnDISBUSS;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -473,7 +473,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
         txtOccupationtype = (TextView) view.findViewById(R.id.txtoccupationvalue);
         txtAboutProperty = (TextView) view.findViewById(R.id.txtaboutpropertyvalue);
 
-        btnRejectReason = (Button) view.findViewById(R.id.buttonreject);
         btnDisbussAmount = (Button) view.findViewById(R.id.buttondisbuss);
         btnDISBUSS = (Button) view.findViewById(R.id.buttonsubmit);
 
@@ -486,13 +485,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
             }
         });
 
-        btnRejectReason.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutDisbussAmount.setVisibility(LinearLayout.GONE);
-                
-            }
-        });
         btnDisbussAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
