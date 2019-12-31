@@ -18,30 +18,30 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
-import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentLeadTabGeneratedleadBinding;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.AccountantFragmentAdminLeadTabDisbussleadBinding;
+import com.smartloan.smtrick.smart_loan_admin_new.databinding.CoFragmentLeadTabDisbussleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
-import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity;
-import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AccountantDisbussLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.CoDisbussLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
-import java.net.URI;
 import java.util.ArrayList;
 
-import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_BANK_SUBMITED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_DISBUSED;
 
-public class Coordinator_fragment_lead_tab_submited extends Fragment {
+public class Co_fragment_lead_tab_Disbussed extends Fragment {
 
-    SalesLeedsAdapter telecallerLeedsAdapter;
+    CoDisbussLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
     AppSharedPreference appSharedPreference;
-    TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
+    CoFragmentLeadTabDisbussleadBinding coFragmentLeadTabDisbussleadBinding;
     int fromYear, fromMonth, fromDay;
     int toYear, toMonth, toDay;
     long fromDate, toDate;
@@ -63,21 +63,21 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (tcFragmentLeadTabGeneratedleadBinding == null) {
-            tcFragmentLeadTabGeneratedleadBinding = DataBindingUtil.inflate(inflater, R.layout.tc_fragment_lead_tab_generatedlead, container, false);
+        if (coFragmentLeadTabDisbussleadBinding == null) {
+            coFragmentLeadTabDisbussleadBinding = DataBindingUtil.inflate(inflater, R.layout.co_fragment_lead_tab_disbusslead, container, false);
             progressDialogClass = new ProgressDialogClass(getActivity());
             appSingleton = AppSingleton.getInstance(getActivity());
             leedRepository = new LeedRepositoryImpl();
             appSharedPreference = new AppSharedPreference(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setHasFixedSize(true);
+            coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.setHasFixedSize(true);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
-            tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
+            coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.setLayoutManager(layoutManager);
+            coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
+            coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
 //            getteLeed();
         }
-        return tcFragmentLeadTabGeneratedleadBinding.getRoot();
+        return coFragmentLeadTabDisbussleadBinding.getRoot();
     }
 
     private LeedsModel getModel(int position) {
@@ -86,7 +86,7 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
 
     private void getteLeed() {
 //        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-        leedRepository.readLeedsByStatus(STATUS_BANK_SUBMITED, new CallBack() {
+        leedRepository.readLeedsByStatus(STATUS_DISBUSED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -104,15 +104,35 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
         });
     }
 
+    private void onClickListner() {
+        coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                LeedsModel leedsModel = getModel(position);
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+                Co_View_Disbussed_Lead_Details_Fragment fragment2 = new Co_View_Disbussed_Lead_Details_Fragment();
+                fragment2.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer,  fragment2);
+                ft.commit();
+            }
 
+            @Override
+            public void onLongClick(View view, int position) {
+            }
 
+        }));
+    }
 
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new SalesLeedsAdapter(getActivity(), leedsModels);
-                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+                telecallerLeedsAdapter = new CoDisbussLeedsAdapter(getActivity(), leedsModels);
+                coFragmentLeadTabDisbussleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
+//                postAndNotifyAdapter(new Handler(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds);
+
                 onClickListner();
             } else {
                 ArrayList<LeedsModel> leedsModelArrayList = new ArrayList<>();
@@ -120,31 +140,6 @@ public class Coordinator_fragment_lead_tab_submited extends Fragment {
                 telecallerLeedsAdapter.reload(leedsModelArrayList);
             }
         }
-    }
-
-    private void onClickListner() {
-        tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                LeedsModel leedsModel = getModel(position);
-//                Intent intent = new Intent(getActivity(), Bank_Submit_Update_Activity.class);
-//                intent.putExtra(LEED_MODEL, leedsModel);
-//                startActivity(intent);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-
-                View_Bank_Submited_Lead_Details_Fragment fragment2 = new View_Bank_Submited_Lead_Details_Fragment();
-                fragment2.setArguments(bundle);
-
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.detailContainer,  fragment2);
-                ft.commit();            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-            }
-
-        }));
     }
 
     private class Loaddata extends AsyncTask<Void, Void, Void> {

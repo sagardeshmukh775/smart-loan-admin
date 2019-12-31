@@ -41,6 +41,8 @@ public interface LeedRepository {
 
     void readAllInvoices(final CallBack callback);
 
+    void readAllInvoices1(final CallBack callback);
+
     void updateLeedDocuments(final String leedId, final Map leedMap, final CallBack callback);
 
     void createBank(final Bank leedsModel, final CallBack callback);

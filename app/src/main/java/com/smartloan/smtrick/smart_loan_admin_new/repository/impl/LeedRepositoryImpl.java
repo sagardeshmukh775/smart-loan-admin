@@ -84,6 +84,36 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
         });
     }
 
+
+    @Override
+    public void readAllInvoices1(final CallBack callBack) {
+        final Query query = Constant.INVOICE_TABLE_REF;
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<Invoice> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            Invoice leedsModel = suggestionSnapshot.getValue(Invoice.class);
+                            leedsModelArrayList.add(leedsModel);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+
     @Override
     public void readLeedsByUserId(String userId, final CallBack callBack) {
         final Query query = Constant.LEEDS_TABLE_REF.orderByChild("agentId").equalTo(userId);

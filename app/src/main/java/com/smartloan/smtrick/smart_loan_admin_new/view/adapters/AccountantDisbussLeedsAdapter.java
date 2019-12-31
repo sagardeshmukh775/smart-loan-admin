@@ -18,6 +18,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.databinding.TelecallerLeedsAda
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Acct_DisbussLead_Details_Fragment;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Bank_Submited_Lead_Details_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Lead_Details_Fragment1;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.AcctDisbussLeedsViewHolder;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.AcctDisbussLeedsViewHolder;
@@ -89,7 +90,7 @@ public class AccountantDisbussLeedsAdapter extends RecyclerView.Adapter<AcctDisb
                     holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
-                    View_Acct_DisbussLead_Details_Fragment fragment2 = new View_Acct_DisbussLead_Details_Fragment();
+                    View_Bank_Submited_Lead_Details_Fragment fragment2 = new View_Bank_Submited_Lead_Details_Fragment();
                     fragment2.setArguments(bundle);
                     FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.detailContainer,  fragment2);

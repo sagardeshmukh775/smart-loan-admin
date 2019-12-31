@@ -29,6 +29,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
@@ -67,6 +68,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 
     private List<Expences> expenceList;
     ArrayList<LeedsModel> leedsModelArrayList;
+    ArrayList<Invoice> invoiceArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 
         expenceList = new ArrayList<>();
         leedsModelArrayList = new ArrayList<>();
+        invoiceArrayList = new ArrayList<>();
 
         cardComission = (CardView) findViewById(R.id.card_view_approved_leeds);
         cardExpences = (CardView) findViewById(R.id.card_view_expences);
@@ -112,6 +115,7 @@ public class AccountantHomeActivity extends AppCompatActivity implements
         readBills();
         readPaidBills();
         readUnpaidBills();
+        getInvoices();
 
         cardExpences.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +153,24 @@ public class AccountantHomeActivity extends AppCompatActivity implements
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new AccountantApprovedLeedsFragment());
 //        ft.commit();
+    }
+
+    private void getInvoices() {
+        leedRepository.readAllInvoices(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null){
+                    invoiceArrayList = (ArrayList<Invoice>) object;
+                    String count = String.valueOf(invoiceArrayList.size());
+                    invoicescount.setText(count);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
     }
 
     private void getteLeed() {

@@ -57,6 +57,7 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
 
         adapter.addFragment(new Co_fragment_lead_tab_verified(), "Verified");
         adapter.addFragment(new Coordinator_fragment_lead_tab_submited(), "Bank Submitted");
+        adapter.addFragment(new Co_fragment_lead_tab_Disbussed(), "Disbussed");
         adapter.addFragment(new Sales_fragment_lead_tab_rejected(), "Rejected");
 
         viewPager.setAdapter(adapter);
