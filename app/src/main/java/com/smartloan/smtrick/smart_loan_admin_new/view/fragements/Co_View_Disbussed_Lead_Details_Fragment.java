@@ -65,8 +65,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
 
     TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
 
-
-    String lGenby;
     TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;
@@ -124,15 +122,14 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
     EditText edtloginId, edtapprovedamount, edtdisbussamount, edtpendingamount, edtrejectionreason;
     TextView txtLoginId;
 
-    LinearLayout layoutDisbussAmount, layoutRejectionReason;
+    LinearLayout layoutDisbussAmount;
 
     ArrayList<Bank> leedsArraylist;
     ArrayList<User> userArraylist;
     private List<String> listmaritalstatus;
     BanksAdapter adapter;
-    SalesPersonAdapter useradapter;
 
-    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount, btnDISBUSS, btnREJECT;
+    Button UpdateBankAndSales, btnRejectReason, btnDisbussAmount, btnDISBUSS;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -146,7 +143,7 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.view_bank_submited_lead_details, container, false);
+        View view = inflater.inflate(R.layout.co_view_disbussed_lead_details, container, false);
 
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
 
@@ -226,9 +223,7 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
 
         Recidential = (TextView) view.findViewById(R.id.spinnerrecidencialvalue);
 
-
         CoapplicantRalationship = (TextView) view.findViewById(R.id.txtcoapplicantrelation1);
-
 
         edtotherrelationship = (TextView) view.findViewById(R.id.txtotherrelationship1);
         edtreferencename = (TextView) view.findViewById(R.id.txtreferencefullname1);
@@ -320,7 +315,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
         chsocietyloan = (TextView) view.findViewById(R.id.checkboxSocietyloan);
         chpersonalloan = (TextView) view.findViewById(R.id.checkboxPersonalloan);
         chotherloan = (TextView) view.findViewById(R.id.txtotheremi1);
-
 
 ///////////////////////////////////////////PROPERTY/////////////////////////////////////////////////////////////////
 
@@ -470,9 +464,8 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
         layoutselfqualificationcertificate = (RelativeLayout) view.findViewById(R.id.layoutcheckboxqualification);
 
         layoutDisbussAmount = (LinearLayout) view.findViewById(R.id.layoutapprovedamount);
-        layoutRejectionReason = (LinearLayout) view.findViewById(R.id.layoutrejectreason);
         layoutDisbussAmount.setVisibility(LinearLayout.GONE);
-        layoutRejectionReason.setVisibility(LinearLayout.GONE);
+
 
         txtGender = (TextView) view.findViewById(R.id.txtgender);
         txtEducation = (TextView) view.findViewById(R.id.educationvalue);
@@ -483,7 +476,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
         btnRejectReason = (Button) view.findViewById(R.id.buttonreject);
         btnDisbussAmount = (Button) view.findViewById(R.id.buttondisbuss);
         btnDISBUSS = (Button) view.findViewById(R.id.buttonsubmit);
-        btnREJECT = (Button) view.findViewById(R.id.buttonsubmitrejectreason);
 
         getdata();
 
@@ -498,14 +490,13 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 layoutDisbussAmount.setVisibility(LinearLayout.GONE);
-                layoutRejectionReason.setVisibility(LinearLayout.VISIBLE);
-
+                
             }
         });
         btnDisbussAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutRejectionReason.setVisibility(LinearLayout.GONE);
+
                 layoutDisbussAmount.setVisibility(LinearLayout.VISIBLE);
             }
         });
@@ -533,12 +524,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
                 updateLeadDetails(leedsModel, "disbuss");
             }
         });
-        btnREJECT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateLeadDetails(leedsModel, "reject");
-            }
-        });
 
         return view;
     }
@@ -561,9 +546,6 @@ public class Co_View_Disbussed_Lead_Details_Fragment extends Fragment {
             leedsModel.setApprovedLoan(approved);
             leedsModel.setDisbusedLoanAmount(disbuss);
             leedsModel.setPendingLoanAmount(pending);
-        } else if (data.equalsIgnoreCase("reject")) {
-            leedsModel.setRejectionReason(edtrejectionreason.getText().toString());
-            leedsModel.setStatus(STATUS_REJECTED);
         }
 
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());

@@ -2,6 +2,7 @@ package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_Telecaller_new;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
@@ -45,6 +47,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.SALES;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_GENERATED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
@@ -125,7 +129,7 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
     ArrayList<User> userArraylist;
     BanksAdapter adapter;
 
-    Button UpdateBankAndSales;
+    Button UpdateBankAndSales,btnRescheduleLeed;
 
     private User getUserModel(int position) {
         return userArraylist.get(userArraylist.size() - 1 - position);
@@ -170,6 +174,7 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         edtBank = (EditText) view.findViewById(R.id.edtbank);
         edtSalesPerson = (EditText) view.findViewById(R.id.edtsalespersonname);
         UpdateBankAndSales = (Button) view.findViewById(R.id.buttonupdate2);
+        btnRescheduleLeed = (Button) view.findViewById(R.id.btnRescheduleLeed);
 
         txtLeedId.setText(leedsModel.getLeedNumber());
         txtCustomerName.setText(leedsModel.getCustomerName());
@@ -457,6 +462,12 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
 
         getdata();
 
+        btnRescheduleLeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLeedStatus(leedsModel);
+            }
+        });
         return view;
     }
 
@@ -478,6 +489,14 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
         });
     }
 
+    private void setLeedStatus(LeedsModel leedsModel) {
+        leedsModel.setStatus(STATUS_GENERATED);
+        Toast.makeText(getContext(), "Lead Updated Successfully", Toast.LENGTH_SHORT).show();
+        updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap1());
+
+
+    }
+
     private void getdata() {
 //        try {
 
@@ -497,7 +516,6 @@ public class View_Rejected_Lead_Details_Fragment extends Fragment {
             txtleedtime.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), "hh:mm a"));
         }
         if (leedid != null) {
-//                txtleadid.setText(leedid);
             txtleadidvalue.setText(leedid);
         }
         if (agentname != null) {
