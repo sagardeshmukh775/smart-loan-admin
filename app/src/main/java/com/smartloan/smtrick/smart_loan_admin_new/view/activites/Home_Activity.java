@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,8 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AccountantLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.InvoicesTabFragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.UnderConstrationFragement;
 import com.squareup.picasso.Callback;
@@ -60,13 +63,14 @@ public class Home_Activity extends AppCompatActivity
     ArrayList<Invoice> invoicesArraylist;
     ArrayList<Invoice> GeneratedinvoicesArraylist;
     ArrayList<Invoice> ApprovedinvoicesArraylist;
+    ProgressDialogClass progressDialogClass;
 
     ArrayList<Bank> BanksArraylist;
     ArrayList<User> UserArraylist;
 
     private CardView cardTotalLeeds, cardBanks, cardLoanCalculator, cardActiveUsers, cardReports, cardComission, cardBills,
             cardCheckList, cardInvoices, cardTargets;
-    TextView leedscount, bankscount, userscount, reportscount, txtgeneratedInvoiceCount, txtApprovedInvoiceCount;
+    TextView leedscount, bankscount, userscount, reportscount, txtInvoiceCount, txtgeneratedInvoiceCount, txtApprovedInvoiceCount;
 
 
     @Override
@@ -90,6 +94,7 @@ public class Home_Activity extends AppCompatActivity
         leedsRepository = new LeedRepositoryImpl();
         userRepository = new UserRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getApplicationContext());
+        progressDialogClass = new ProgressDialogClass(this);
         leedsArraylist = new ArrayList<>();
         BanksArraylist = new ArrayList<>();
         invoicesArraylist = new ArrayList<>();
@@ -114,6 +119,7 @@ public class Home_Activity extends AppCompatActivity
         bankscount = (TextView) findViewById(R.id.banks_count);
         userscount = (TextView) findViewById(R.id.users_count);
         reportscount = (TextView) findViewById(R.id.reports_count);
+        txtInvoiceCount = (TextView) findViewById(R.id.invoices_count);
         txtgeneratedInvoiceCount = (TextView) findViewById(R.id.generated_invoices_count);
         txtApprovedInvoiceCount = (TextView) findViewById(R.id.approved_invoices_count);
         // get our list view
@@ -124,6 +130,7 @@ public class Home_Activity extends AppCompatActivity
         getLeedsReport();
         getBanks();
         readUsers();
+        readAllReports();
 
         cardTotalLeeds.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +217,27 @@ public class Home_Activity extends AppCompatActivity
 
     }
 
+    private void readAllReports() {
+        leedsRepository.readAllLeeds(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+
+                if (object != null) {
+                    leedsArraylist = (ArrayList<LeedsModel>) object;
+                }
+
+                String repcount = String.valueOf(leedsArraylist.size());
+                reportscount.setText(repcount);
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+            }
+        });    }
+
     private void getLeedsReport() {
+        progressDialogClass.showDialog(this.getString(R.string.SIGNING_IN), this.getString(R.string.PLEASE_WAIT));
         leedsRepository.readAllLeeds(new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -225,7 +252,7 @@ public class Home_Activity extends AppCompatActivity
 
             @Override
             public void onError(Object object) {
-
+                progressDialogClass.dismissDialog();
             }
         });
     }
@@ -238,6 +265,8 @@ public class Home_Activity extends AppCompatActivity
                 if (object != null) {
                     invoicesArraylist = (ArrayList<Invoice>) object;
                 }
+                String in = String.valueOf(invoicesArraylist.size());
+                txtInvoiceCount.setText(in);
 
                 for (int i = 0; i < invoicesArraylist.size(); i++) {
                     if (invoicesArraylist.get(i).getStatus().equalsIgnoreCase(Constant.STATUS_INVOICE_SENT)) {
@@ -253,11 +282,12 @@ public class Home_Activity extends AppCompatActivity
                 String app = String.valueOf(ApprovedinvoicesArraylist.size());
                 txtgeneratedInvoiceCount.setText(gen);
                 txtApprovedInvoiceCount.setText(app);
+                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-
+                progressDialogClass.dismissDialog();
             }
         });
     }
