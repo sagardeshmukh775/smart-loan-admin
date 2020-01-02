@@ -208,9 +208,9 @@ public class Home_Activity extends AppCompatActivity
         cardTargets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(Home_Activity.this, Activity_Home_Main.class);
-//                intent.putExtra("value", "checklist");
-//                startActivity(intent);
+                Intent intent = new Intent(Home_Activity.this, Activity_Home_Main.class);
+                intent.putExtra("value", "target");
+                startActivity(intent);
             }
         });
 

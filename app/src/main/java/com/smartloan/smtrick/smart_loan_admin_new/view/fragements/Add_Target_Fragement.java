@@ -62,21 +62,21 @@ public class Add_Target_Fragement extends Fragment implements AdapterView.OnItem
         String[] RuleTypes = new String[]{"SALARIED", "SELF EMPLOYED", "NRI SALARIED", "SALARIED(BT OR BT+TOPUP)",
                 "SELF EMPLOYED(BT OR BT+TOPUP)"};
 
-        RuleType = (Spinner) view.findViewById(R.id.spinner_ruletype);
-        edtRule = (EditText) view.findViewById(R.id.edt_rule);
-        btnAddRule = (Button) view.findViewById(R.id.btnaddrule);
+//        RuleType = (Spinner) view.findViewById(R.id.spinner_ruletype);
+//        edtRule = (EditText) view.findViewById(R.id.edt_rule);
+//        btnAddRule = (Button) view.findViewById(R.id.btnaddrule);
 
 
-        ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, RuleTypes);
-        spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        RuleType.setAdapter(spinnerArrayAdapterRecidential);
+//        ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, RuleTypes);
+//        spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//        RuleType.setAdapter(spinnerArrayAdapterRecidential);
 
-        btnAddRule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddRule();
-            }
-        });
+//        btnAddRule.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AddRule();
+//            }
+//        });
         return view;
     }
 
