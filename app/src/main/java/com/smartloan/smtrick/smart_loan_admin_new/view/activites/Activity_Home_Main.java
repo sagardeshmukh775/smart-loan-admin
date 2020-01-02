@@ -15,6 +15,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.AddBankFrageme
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Add_CheckList_Fragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Add_Comission_Rules_Fragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_Bills_Tab_Fragment;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_Invoices_Tab_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.ReportsTabFragment;
@@ -84,6 +85,11 @@ public class Activity_Home_Main extends AppCompatActivity
         } else if (value.equalsIgnoreCase("checklist")) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame, new Add_CheckList_Fragement());
+            ft.commit();
+
+        }else if (value.equalsIgnoreCase("invoice")) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame, new Admin_Invoices_Tab_Fragment());
             ft.commit();
 
         }

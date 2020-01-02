@@ -59,8 +59,8 @@ public class Home_Activity extends AppCompatActivity
     ArrayList<Bank> BanksArraylist;
     ArrayList<User> UserArraylist;
 
-    private CardView cardTotalLeeds, cardBanks, cardLoanCalculator, cardActiveUsers, cardReports,cardComission,cardBills,
-    cardCheckList;
+    private CardView cardTotalLeeds, cardBanks, cardLoanCalculator, cardActiveUsers, cardReports, cardComission, cardBills,
+            cardCheckList, cardInvoices, cardTargets;
     TextView leedscount, bankscount, userscount, reportscount;
 
 
@@ -100,6 +100,8 @@ public class Home_Activity extends AppCompatActivity
         cardComission = (CardView) findViewById(R.id.card_view_Commission);
         cardBills = (CardView) findViewById(R.id.card_view_bills);
         cardCheckList = (CardView) findViewById(R.id.card_view_Checklist);
+        cardInvoices = (CardView) findViewById(R.id.card_view_Invoice);
+        cardTargets = (CardView) findViewById(R.id.card_view_Target);
 
         leedscount = (TextView) findViewById(R.id.total_leedcount);
         bankscount = (TextView) findViewById(R.id.banks_count);
@@ -178,6 +180,23 @@ public class Home_Activity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        cardInvoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home_Activity.this, Activity_Home_Main.class);
+                intent.putExtra("value", "invoice");
+                startActivity(intent);
+            }
+        });
+
+        cardTargets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(Home_Activity.this, Activity_Home_Main.class);
+//                intent.putExtra("value", "checklist");
+//                startActivity(intent);
+            }
+        });
 
 
     }
@@ -191,7 +210,7 @@ public class Home_Activity extends AppCompatActivity
                     leedsArraylist = (ArrayList<LeedsModel>) object;
                 }
                 int a = leedsArraylist.size();
-                leedscount.setText( String.valueOf(a));
+                leedscount.setText(String.valueOf(a));
                 getInvoiceReport();
             }
 
@@ -221,7 +240,7 @@ public class Home_Activity extends AppCompatActivity
         });
     }
 
-    private void getBanks(){
+    private void getBanks() {
         leedsRepository.readAllBanks(new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -231,7 +250,7 @@ public class Home_Activity extends AppCompatActivity
                 }
 
                 int b = BanksArraylist.size();
-                bankscount.setText( String.valueOf(b));
+                bankscount.setText(String.valueOf(b));
             }
 
             @Override
@@ -241,7 +260,7 @@ public class Home_Activity extends AppCompatActivity
         });
     }
 
-    private void readUsers(){
+    private void readUsers() {
         userRepository.readAllusers(new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -251,7 +270,7 @@ public class Home_Activity extends AppCompatActivity
                 }
 
                 int u = UserArraylist.size();
-                userscount.setText( String.valueOf(u));
+                userscount.setText(String.valueOf(u));
             }
 
             @Override
@@ -260,7 +279,6 @@ public class Home_Activity extends AppCompatActivity
             }
         });
     }
-
 
 
     @Override

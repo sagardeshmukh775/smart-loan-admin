@@ -85,4 +85,6 @@ public interface LeedRepository {
 
     void createInvoice1(final Invoice leedsModel, final CallBack callback);
 
+    void readInvoices(final CallBack callback);
+
 }
