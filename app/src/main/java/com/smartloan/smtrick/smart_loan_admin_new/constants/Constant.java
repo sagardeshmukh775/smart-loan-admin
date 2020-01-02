@@ -55,6 +55,7 @@ public class Constant {
     public static final String STATUS_BANK_APPROVED = "BANKAPPROVED";
 
     public static final String STATUS_INVOICE_SENT= "SENT";
+    public static final String STATUS_INVOICE_APPROVED = "APPROVED";
     public static final String STATUS_INVOICE_UNPAID = "UNPAID";
     public static final String STATUS_INVOICE_PAID = "PAID";
     public static final String STATUS_INVOICE_REJECTED = "REJECT";

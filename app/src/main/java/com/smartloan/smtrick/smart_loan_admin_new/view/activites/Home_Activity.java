@@ -24,9 +24,11 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -55,13 +57,16 @@ public class Home_Activity extends AppCompatActivity
     private LeedRepository leedsRepository;
     private UserRepository userRepository;
     ArrayList<LeedsModel> leedsArraylist;
-    ArrayList<LeedsModel> invoicesArraylist;
+    ArrayList<Invoice> invoicesArraylist;
+    ArrayList<Invoice> GeneratedinvoicesArraylist;
+    ArrayList<Invoice> ApprovedinvoicesArraylist;
+
     ArrayList<Bank> BanksArraylist;
     ArrayList<User> UserArraylist;
 
     private CardView cardTotalLeeds, cardBanks, cardLoanCalculator, cardActiveUsers, cardReports, cardComission, cardBills,
             cardCheckList, cardInvoices, cardTargets;
-    TextView leedscount, bankscount, userscount, reportscount;
+    TextView leedscount, bankscount, userscount, reportscount, txtgeneratedInvoiceCount, txtApprovedInvoiceCount;
 
 
     @Override
@@ -88,6 +93,8 @@ public class Home_Activity extends AppCompatActivity
         leedsArraylist = new ArrayList<>();
         BanksArraylist = new ArrayList<>();
         invoicesArraylist = new ArrayList<>();
+        GeneratedinvoicesArraylist = new ArrayList<>();
+        ApprovedinvoicesArraylist = new ArrayList<>();
         UserArraylist = new ArrayList<>();
 
         updateNavigationHeader();
@@ -107,6 +114,8 @@ public class Home_Activity extends AppCompatActivity
         bankscount = (TextView) findViewById(R.id.banks_count);
         userscount = (TextView) findViewById(R.id.users_count);
         reportscount = (TextView) findViewById(R.id.reports_count);
+        txtgeneratedInvoiceCount = (TextView) findViewById(R.id.generated_invoices_count);
+        txtApprovedInvoiceCount = (TextView) findViewById(R.id.approved_invoices_count);
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new LeedsTabsFragment());
@@ -222,15 +231,28 @@ public class Home_Activity extends AppCompatActivity
     }
 
     private void getInvoiceReport() {
-        leedsRepository.readAllInvoices(new CallBack() {
+        leedsRepository.readAllInvoices1(new CallBack() {
             @Override
             public void onSuccess(Object object) {
 
                 if (object != null) {
-                    invoicesArraylist = (ArrayList<LeedsModel>) object;
+                    invoicesArraylist = (ArrayList<Invoice>) object;
                 }
-//              int in = invoicesArraylist.size() + leedsArraylist.size();
-//                reportscount.setText("Total Reports:" + String.valueOf(in));
+
+                for (int i = 0; i < invoicesArraylist.size(); i++) {
+                    if (invoicesArraylist.get(i).getStatus().equalsIgnoreCase(Constant.STATUS_INVOICE_SENT)) {
+                        GeneratedinvoicesArraylist.add(invoicesArraylist.get(i));
+                    }
+                }
+                for (int i = 0; i < invoicesArraylist.size(); i++) {
+                    if (invoicesArraylist.get(i).getStatus().equalsIgnoreCase(Constant.STATUS_BANK_APPROVED)) {
+                        ApprovedinvoicesArraylist.add(invoicesArraylist.get(i));
+                    }
+                }
+                String gen = String.valueOf(GeneratedinvoicesArraylist.size());
+                String app = String.valueOf(ApprovedinvoicesArraylist.size());
+                txtgeneratedInvoiceCount.setText(gen);
+                txtApprovedInvoiceCount.setText(app);
             }
 
             @Override

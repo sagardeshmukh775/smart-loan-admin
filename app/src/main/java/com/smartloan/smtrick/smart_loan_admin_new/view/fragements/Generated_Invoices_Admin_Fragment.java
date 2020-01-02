@@ -67,7 +67,7 @@ public class Generated_Invoices_Admin_Fragment extends Fragment implements Adapt
 
     private void readUsers() {
         invoiceList.clear();
-        leedRepository.readInvoices(new CallBack() {
+        leedRepository.readInvoicesByStatus(Constant.STATUS_INVOICE_SENT, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {

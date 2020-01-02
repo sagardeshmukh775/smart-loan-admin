@@ -41,7 +41,11 @@ public interface LeedRepository {
 
     void readAllInvoices(final CallBack callback);
 
+    void createInvoice1(final Invoice leedsModel, final CallBack callback);
+
     void readAllInvoices1(final CallBack callback);
+
+    void readInvoicesByStatus(final String status, final CallBack callBack);
 
     void updateLeedDocuments(final String leedId, final Map leedMap, final CallBack callback);
 
@@ -50,8 +54,6 @@ public interface LeedRepository {
     void readAllBanks(final CallBack callback);
 
     void readUserByRole(final String role, final CallBack callBack);
-
-    void readInvoicesByStatus(final String status, final CallBack callBack);
 
     void createSalary(final Expences expences, final CallBack callback);
 
@@ -83,8 +85,8 @@ public interface LeedRepository {
 
     void readFolloUpByLeedId(final String salesId, final CallBack callBack);
 
-    void createInvoice1(final Invoice leedsModel, final CallBack callback);
 
-    void readInvoices(final CallBack callback);
+
+
 
 }
