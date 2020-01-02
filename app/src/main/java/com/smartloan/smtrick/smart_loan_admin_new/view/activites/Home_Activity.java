@@ -92,19 +92,19 @@ public class Home_Activity extends AppCompatActivity
 
         updateNavigationHeader();
 
-        cardTotalLeeds = (CardView) findViewById(R.id.leedcardId);
-        cardBanks = (CardView) findViewById(R.id.bankscardId);
-        cardLoanCalculator = (CardView) findViewById(R.id.calculatorcardId);
-        cardActiveUsers = (CardView) findViewById(R.id.userscardId);
-        cardReports = (CardView) findViewById(R.id.reportscardId);
-        cardComission = (CardView) findViewById(R.id.commissionId);
-        cardBills = (CardView) findViewById(R.id.billsId);
-        cardCheckList = (CardView) findViewById(R.id.checklistcardId);
+        cardTotalLeeds = (CardView) findViewById(R.id.card_view_total_leeds);
+        cardBanks = (CardView) findViewById(R.id.card_view_banks);
+        cardLoanCalculator = (CardView) findViewById(R.id.card_view_loan_calculator);
+        cardActiveUsers = (CardView) findViewById(R.id.card_view_users);
+        cardReports = (CardView) findViewById(R.id.card_view_Reports);
+        cardComission = (CardView) findViewById(R.id.card_view_Commission);
+        cardBills = (CardView) findViewById(R.id.card_view_bills);
+        cardCheckList = (CardView) findViewById(R.id.card_view_Checklist);
 
-        leedscount = (TextView) findViewById(R.id.txttotalLeedvalue);
-        bankscount = (TextView) findViewById(R.id.txtbanksvalue);
-        userscount = (TextView) findViewById(R.id.txtactiveusersvalue);
-        reportscount = (TextView) findViewById(R.id.txtreportsvalue);
+        leedscount = (TextView) findViewById(R.id.total_leedcount);
+        bankscount = (TextView) findViewById(R.id.banks_count);
+        userscount = (TextView) findViewById(R.id.users_count);
+        reportscount = (TextView) findViewById(R.id.reports_count);
         // get our list view
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.replace(R.id.mainFrame, new LeedsTabsFragment());

@@ -366,7 +366,7 @@ public class View_Admin_Generated_Lead_Details_Fragment extends Fragment {
         layoutLandmark = (RelativeLayout) view.findViewById(R.id.layoutcurrentland);
         layoutArea = (RelativeLayout) view.findViewById(R.id.layoutcurrentArea);
         layoutStreet = (RelativeLayout) view.findViewById(R.id.layoutcurrentstreet);
-        layoutIfSame = (RelativeLayout) view.findViewById(R.id.layoutaddress1);
+        layoutIfSame = (RelativeLayout) view.findViewById(R.id.layoutadress);
         layoutpin1 = (RelativeLayout) view.findViewById(R.id.layoutpin);
         layoutland = (RelativeLayout) view.findViewById(R.id.layoutland);
         layoutSameArea = (RelativeLayout) view.findViewById(R.id.layoutArea);
