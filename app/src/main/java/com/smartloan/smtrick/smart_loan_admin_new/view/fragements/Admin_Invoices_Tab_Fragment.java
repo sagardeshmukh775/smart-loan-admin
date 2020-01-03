@@ -33,7 +33,7 @@ public class Admin_Invoices_Tab_Fragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         viewPagerAdapter.addFragement(new Generated_Invoices_Admin_Fragment(), "Generated");
-        viewPagerAdapter.addFragement(new Admin_Approved_Bills_Fragment(), "Approved");
+        viewPagerAdapter.addFragement(new Admin_Approved_Invoices_Fragment(), "Approved");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setTabMode(1);
