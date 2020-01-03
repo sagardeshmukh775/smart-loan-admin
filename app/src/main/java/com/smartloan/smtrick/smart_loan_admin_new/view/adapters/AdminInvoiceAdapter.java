@@ -26,6 +26,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.holders.InvoicesViewHolde
 import java.util.ArrayList;
 import java.util.Map;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_APPROVED;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewHolder> {
@@ -84,14 +85,14 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
 
                 private void setLeedStatus(Invoice invoice) {
 
-                    invoice.setStatus(STATUS_VERIFIED);
+                    invoice.setStatus(STATUS_APPROVED);
                         Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
                         updateLeed(invoice.getInvoiceId(), invoice.getLeedStatusMap1());
 
                 }
 
                 private void updateLeed(String leedId, Map leedsMap) {
-                    leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
+                    leedRepository.updateInvoice(leedId, leedsMap, new CallBack() {
                         @Override
                         public void onSuccess(Object object) {
                             Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Invoice Approved Successfully", Toast.LENGTH_SHORT).show();
