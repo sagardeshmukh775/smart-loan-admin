@@ -274,7 +274,7 @@ public class Home_Activity extends AppCompatActivity
                     }
                 }
                 for (int i = 0; i < invoicesArraylist.size(); i++) {
-                    if (invoicesArraylist.get(i).getStatus().equalsIgnoreCase(Constant.STATUS_BANK_APPROVED)) {
+                    if (invoicesArraylist.get(i).getStatus().equalsIgnoreCase(Constant.STATUS_INVOICE_APPROVED)) {
                         ApprovedinvoicesArraylist.add(invoicesArraylist.get(i));
                     }
                 }
