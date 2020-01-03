@@ -28,6 +28,7 @@ import java.util.Map;
 
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_APPROVED;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_INVOICE_APPROVED;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_INVOICE_REJECTED;
 import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewHolder> {
@@ -97,6 +98,37 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
                         @Override
                         public void onSuccess(Object object) {
                             Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Invoice Approved Successfully", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onError(Object object) {
+
+                            Utility.showLongMessage(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), getString(R.string.server_error));
+                        }
+                    });
+                }
+            });
+
+            holder.adminInvoiceAdapterLayoutBinding.cardViewReject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setLeedStatus(leedModel);
+                }
+
+                private void setLeedStatus(Invoice invoice) {
+
+                    invoice.setStatus(STATUS_INVOICE_REJECTED);
+                    Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
+                    updateLeed(invoice.getInvoiceId(), invoice.getLeedStatusMap1());
+
+                }
+
+                private void updateLeed(String leedId, Map leedsMap) {
+                    leedRepository.updateInvoice(leedId, leedsMap, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Invoice Rejected", Toast.LENGTH_SHORT).show();
 
                         }
 
