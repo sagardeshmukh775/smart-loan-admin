@@ -20,6 +20,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminInvoiceAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.ExpenceAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.InvoiceAdapter;
 
@@ -39,7 +40,7 @@ public class Generated_Invoices_Admin_Fragment extends Fragment implements Adapt
 
 //    ArrayList<UserModel> searchResults = GetSearchResults();
     RecyclerView listView;
-    InvoiceAdapter adapter;
+    AdminInvoiceAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class Generated_Invoices_Admin_Fragment extends Fragment implements Adapt
 
                 }
 
-                adapter = new InvoiceAdapter(getActivity(), invoiceList);
+                adapter = new AdminInvoiceAdapter(getActivity(), invoiceList);
                 //adding adapter to recyclerview
                 listView.setAdapter(adapter);
                 // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
