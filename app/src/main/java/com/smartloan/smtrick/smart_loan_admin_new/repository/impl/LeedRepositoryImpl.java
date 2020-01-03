@@ -16,6 +16,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Target;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.FirebaseTemplateRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
@@ -215,8 +216,6 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     }
 
 
-
-
     @Override
     public void readLeedByLeedId(String leedId, final CallBack callBack) {
         final Query query = Constant.LEEDS_TABLE_REF.child(leedId);
@@ -341,7 +340,7 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
                             LeedsModel leedsModel = suggestionSnapshot.getValue(LeedsModel.class);
 
                             if (leedsModel.getStatus().equalsIgnoreCase(STATUS_VERIFIED))
-                            leedsModelArrayList.add(leedsModel);
+                                leedsModelArrayList.add(leedsModel);
                         }
                         callBack.onSuccess(leedsModelArrayList);
                     } else {
@@ -584,7 +583,6 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     }
 
 
-
     @Override
     public void readExpenceByStatus(String status, final CallBack callBack) {
         final Query query = Constant.EXPENCE_TABLE_REF.orderByChild("status").equalTo(status);
@@ -719,7 +717,7 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
                         ArrayList<CheckList> leedsModelArrayList = new ArrayList<>();
                         for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
                             CheckList leedsModel = suggestionSnapshot.getValue(CheckList.class);
-                             leedsModelArrayList.add(leedsModel);
+                            leedsModelArrayList.add(leedsModel);
                         }
                         callBack.onSuccess(leedsModelArrayList);
                     } else {
@@ -825,6 +823,21 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     }
 
 
+    @Override
+    public void createTarget(Target target, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.TARGET_TABLE_REF.child(target.getTargetId());
+        fireBaseCreate(databaseReference, target, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 
 
 }

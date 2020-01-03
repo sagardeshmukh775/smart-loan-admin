@@ -10,6 +10,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Target;
 
 import java.util.Map;
 
@@ -85,7 +86,7 @@ public interface LeedRepository {
 
     void readFolloUpByLeedId(final String salesId, final CallBack callBack);
 
-
+    void createTarget(final Target target, final CallBack callback);
 
 
 

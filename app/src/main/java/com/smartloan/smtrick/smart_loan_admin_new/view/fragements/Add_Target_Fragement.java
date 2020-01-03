@@ -1,6 +1,7 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,27 +21,42 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Bank;
 import com.smartloan.smtrick.smart_loan_admin_new.models.CheckList;
+import com.smartloan.smtrick.smart_loan_admin_new.models.Target;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.CALANDER_DATE_FORMATE;
 
 public class Add_Target_Fragement extends Fragment implements AdapterView.OnItemSelectedListener {
     private OnFragmentInteractionListener mListener;
 
-//    Spinner Bankname;
-//    EditText Percentage;
-    Button btnAddRule;
-    EditText edtRule;
-    Spinner RuleType;
+    Button btnAddTarget;
+    EditText edtMonth, edtTarget, edtPercentage;
+    Spinner spinnerBank;
 
     private DatabaseReference mDatabase;
     ProgressDialogClass progressDialogClass;
     LeedRepository leedRepository;
+    ArrayList<Bank> bankList;
+    List<String> banknameList;
+
+    int fromYear, fromMonth, fromDay;
+    long fromDate, toDate;
 
 
     public Add_Target_Fragement() {
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,54 +71,119 @@ public class Add_Target_Fragement extends Fragment implements AdapterView.OnItem
             mListener.onFragmentInteraction("Under Construction");
         }
 
-
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
-        mDatabase = FirebaseDatabase.getInstance().getReference("banks");
+        mDatabase = FirebaseDatabase.getInstance().getReference("Target");
 
-        String[] RuleTypes = new String[]{"SALARIED", "SELF EMPLOYED", "NRI SALARIED", "SALARIED(BT OR BT+TOPUP)",
-                "SELF EMPLOYED(BT OR BT+TOPUP)"};
+        bankList = new ArrayList<>();
+        banknameList = new ArrayList<>();
 
-//        RuleType = (Spinner) view.findViewById(R.id.spinner_ruletype);
-//        edtRule = (EditText) view.findViewById(R.id.edt_rule);
-//        btnAddRule = (Button) view.findViewById(R.id.btnaddrule);
+        edtMonth = (EditText) view.findViewById(R.id.edt_month);
+        edtTarget = (EditText) view.findViewById(R.id.edt_target);
+        edtPercentage = (EditText) view.findViewById(R.id.edt_percentage);
+        spinnerBank = (Spinner) view.findViewById(R.id.spinner_bank);
+        btnAddTarget = (Button) view.findViewById(R.id.btnaddtarget);
 
+        setFromDateClickListner();
+        readBanks();
 
-//        ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, RuleTypes);
-//        spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        RuleType.setAdapter(spinnerArrayAdapterRecidential);
+        btnAddTarget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.please_wait));
+                String bank = spinnerBank.getSelectedItem().toString();
+                String month = edtMonth.getText().toString();
+                String target = edtTarget.getText().toString();
+                String percentage = edtPercentage.getText().toString();
+                String key = mDatabase.push().getKey();
 
-//        btnAddRule.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AddRule();
-//            }
-//        });
+                Target target1 = new Target();
+                target1.setBankname(bank);
+                target1.setMonth(month);
+                target1.setTarget(target);
+                target1.setPercentage(percentage);
+                target1.setTargetId(key);
+                createTarget(target1);
+            }
+        });
         return view;
     }
 
-    private void AddRule() {
-        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
-        CheckList check = new CheckList();
-        check.setRuleType(RuleType.getSelectedItem().toString());
-        check.setRule(edtRule.getText().toString());
-        check.setGeneratedId(mDatabase.push().getKey());
-
-        leedRepository.createCheckList(check, new CallBack() {
+    private void createTarget(Target target) {
+        leedRepository.createTarget(target, new CallBack() {
             @Override
             public void onSuccess(Object object) {
+                Toast.makeText(getContext(), "Target Set Successfully", Toast.LENGTH_SHORT).show();
+                edtMonth.setText("");
+                edtPercentage.setText("");
+                edtTarget.setText("");
                 progressDialogClass.dismissDialog();
-                Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onError(Object object) {
-
+                progressDialogClass.dismissDialog();
             }
         });
     }
 
+    private void readBanks() {
+        progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.please_wait));
+        leedRepository.readAllBanks(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    bankList = (ArrayList<Bank>) object;
+
+                    for (Bank bank : bankList) {
+                        banknameList.add(bank.getBankname());
+                    }
+                    ArrayAdapter<String> spinnerArrayAdapterRecidential = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, banknameList);
+                    spinnerArrayAdapterRecidential.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinnerBank.setAdapter(spinnerArrayAdapterRecidential);
+                    progressDialogClass.dismissDialog();
+                }
+            }
+
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+            }
+        });
+    }
+
+    private void setFromCurrentDate() {
+        Calendar mcurrentDate = Calendar.getInstance();
+        fromYear = mcurrentDate.get(Calendar.YEAR);
+        fromMonth = mcurrentDate.get(Calendar.MONTH);
+        fromDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private void setFromDateClickListner() {
+        setFromCurrentDate();
+        edtMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        Calendar myCalendar = Calendar.getInstance();
+                        myCalendar.set(Calendar.YEAR, selectedyear);
+                        myCalendar.set(Calendar.MONTH, selectedmonth);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
+                        SimpleDateFormat sdf = new SimpleDateFormat(CALANDER_DATE_FORMATE, Locale.FRANCE);
+                        String formatedDate = sdf.format(myCalendar.getTime());
+                        edtMonth.setText(formatedDate);
+                        fromDay = selectedday;
+                        fromMonth = selectedmonth;
+                        fromYear = selectedyear;
+                        fromDate = Utility.convertFormatedDateToMilliSeconds(formatedDate, CALANDER_DATE_FORMATE);
+                    }
+                }, fromYear, fromMonth, fromDay);
+                mDatePicker.show();
+            }
+        });
+    }
 
     @Override
     public void onAttach(Context context) {
