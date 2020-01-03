@@ -473,6 +473,21 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
         });
     }
 
+    @Override
+    public void updateInvoice(String leedId, Map leedMap, final CallBack callBack) {
+        final DatabaseReference databaseReference = Constant.INVOICE_TABLE_REF.child(leedId);
+        fireBaseUpdateChildren(databaseReference, leedMap, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 
     @Override
     public void createSalary(Expences salary, final CallBack callBack) {

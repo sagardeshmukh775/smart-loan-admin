@@ -48,6 +48,8 @@ public interface LeedRepository {
 
     void readInvoicesByStatus(final String status, final CallBack callBack);
 
+    void updateInvoice(final String invoicedId, final Map leedMap, final CallBack callback);
+
     void updateLeedDocuments(final String leedId, final Map leedMap, final CallBack callback);
 
     void createBank(final Bank leedsModel, final CallBack callback);

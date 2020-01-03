@@ -1,25 +1,38 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
+import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.AdminInvoiceAdapterLayoutBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.InvoiceAdapterLayoutBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Invoice;
+import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
+import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_telecaller;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.TL_Updatelead_property_Details_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.AdminInvoicesViewHolder;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.InvoicesViewHolder;
 
 import java.util.ArrayList;
+import java.util.Map;
+
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STATUS_VERIFIED;
 
 public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewHolder> {
 
     private ArrayList<Invoice> leedModelArrayList;
     private Context context;
+    LeedRepository leedRepository;
 
     public AdminInvoiceAdapter(){}
 
@@ -43,7 +56,8 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
     @Override
     public void onBindViewHolder(final AdminInvoicesViewHolder holder, final int listPosition) {
         try {
-            Invoice leedModel = getModel(listPosition);
+            leedRepository = new LeedRepositoryImpl();
+            final Invoice leedModel = getModel(listPosition);
             if (!Utility.isEmptyOrNull(leedModel.getCustomerName()))
                 holder.adminInvoiceAdapterLayoutBinding.txtCustomerValue.setText(leedModel.getCustomerName());
             else
@@ -61,6 +75,37 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
                 holder.adminInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(leedModel.getCommisionwithtdsAmount());
             else
                 holder.adminInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(getString(R.string.na));
+
+            holder.adminInvoiceAdapterLayoutBinding.cardViewApprove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setLeedStatus(leedModel);
+                }
+
+                private void setLeedStatus(Invoice invoice) {
+
+                    invoice.setStatus(STATUS_VERIFIED);
+                        Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
+                        updateLeed(invoice.getInvoiceId(), invoice.getLeedStatusMap1());
+
+                }
+
+                private void updateLeed(String leedId, Map leedsMap) {
+                    leedRepository.updateLeed(leedId, leedsMap, new CallBack() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Invoice Approved Successfully", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onError(Object object) {
+
+                            Utility.showLongMessage(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), getString(R.string.server_error));
+                        }
+                    });
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

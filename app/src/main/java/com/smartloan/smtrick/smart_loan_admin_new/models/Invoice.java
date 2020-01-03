@@ -1,9 +1,12 @@
 package com.smartloan.smtrick.smart_loan_admin_new.models;
 
+import android.support.v4.app.NotificationCompat;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Invoice {
@@ -166,6 +169,15 @@ public class Invoice {
 
     public void setDisbussmentDate(String disbussmentDate) {
         this.disbussmentDate = disbussmentDate;
+    }
+
+
+    @Exclude
+    public Map getLeedStatusMap1() {
+        Map<String, Object> leedMap = new HashMap();
+        leedMap.put(NotificationCompat.CATEGORY_STATUS, getStatus());
+
+        return leedMap;
     }
 
     public static ArrayList<Invoice> getSentInvoices() {
