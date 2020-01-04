@@ -96,6 +96,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
+                                    android:layout_marginTop="3dp"
                                     android:weightSum="100">
 
                                     <TextView
@@ -122,41 +123,42 @@
 
                                 </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal"
-                                    android:weightSum="100">
-
-
-                                    <TextView
-                                        android:id="@+id/txt_loan_type_value"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="50"
-                                        android:gravity="center"
-                                        android:text="loan type"
-                                        android:textColor="@color/whitetextcolor"
-                                        android:textSize="17dp" />
-
-                                    <TextView
-                                        android:id="@+id/txt_loan_requirement_value"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_weight="50"
-                                        android:text="loan requirement"
-                                        android:gravity="center"
-                                        android:textColor="@color/whitetextcolor"
-                                        android:textSize="14dp" />
-
-
-                                </LinearLayout>
 
                             </LinearLayout>
 
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+
+                        <TextView
+                            android:id="@+id/txt_loan_type_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="center"
+                            android:text="loan type"
+                            android:textColor="@color/whitetextcolor"
+                            android:textSize="17dp" />
+
+                        <TextView
+                            android:id="@+id/txt_loan_requirement_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_weight="50"
+                            android:text="loan requirement"
+                            android:gravity="center"
+                            android:textColor="@color/whitetextcolor"
+                            android:textSize="14dp" />
+
 
                     </LinearLayout>
 
@@ -330,6 +332,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50.0"
                     android:background="@drawable/button_bg"
+                    android:layout_margin="1dp"
                     android:text="UPDATE"
                     android:textColor="@color/white"
                     android:textSize="16.0sp"
@@ -341,6 +344,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="50.0"
                     android:background="@drawable/button_bg"
+                    android:layout_margin="1dp"
                     android:text="SUBMIT TO BANK"
                     android:textColor="@color/white"
                     android:textSize="16.0sp"
