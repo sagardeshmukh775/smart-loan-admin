@@ -4,25 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <!--<RelativeLayout-->
-    <!--android:id="@id/layouttop"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/hederbackground"-->
-    <!--android:gravity="center_horizontal">-->
-
-    <!--<TextView-->
-    <!--android:id="@id/textheader"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:gravity="center_horizontal"-->
-    <!--android:padding="10.0dip"-->
-    <!--android:text=""-->
-    <!--android:textColor="#ffffffff"-->
-    <!--android:textSize="18.0sp"-->
-    <!--android:textStyle="bold" />-->
-    <!--</RelativeLayout>-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -99,7 +80,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="50"
+                                android:layout_weight="100"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -111,39 +92,67 @@
                                     android:textSize="20dp"
                                     android:textStyle="bold" />
 
-                                <TextView
-                                    android:id="@+id/txt_id_value"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/text_background"
-                                    android:padding="5dp"
-                                    android:text="Id:"
-                                    android:textColor="@color/white"
-                                    android:textSize="12dp" />
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
 
-                                <TextView
-                                    android:id="@+id/txt_loan_type_value"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="loan type"
-                                    android:textColor="@color/whitetextcolor"
-                                    android:textSize="17dp" />
+                                    <TextView
+                                        android:id="@+id/txt_id_value"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="50"
+                                        android:background="@drawable/text_background"
+                                        android:gravity="center"
+                                        android:padding="5dp"
+                                        android:text="Id:"
+                                        android:textColor="@color/white"
+                                        android:textSize="12dp" />
 
-                                <TextView
-                                    android:id="@+id/txt_loan_requirement_value"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="loan requirement"
-                                    android:textColor="@color/whitetextcolor"
-                                    android:textSize="14dp" />
+                                    <TextView
+                                        android:id="@+id/txt_bp_value"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="50"
+                                        android:gravity="center"
+                                        android:text="B.P."
+                                        android:textColor="@color/whitetextcolor"
+                                        android:textSize="14dp" />
 
-                                <TextView
-                                    android:id="@+id/txt_bp_value"
-                                    android:layout_width="wrap_content"
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="B.P."
-                                    android:textColor="@color/whitetextcolor"
-                                    android:textSize="14dp" />
+                                    android:layout_marginTop="5dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+
+                                    <TextView
+                                        android:id="@+id/txt_loan_type_value"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="50"
+                                        android:gravity="center"
+                                        android:text="loan type"
+                                        android:textColor="@color/whitetextcolor"
+                                        android:textSize="17dp" />
+
+                                    <TextView
+                                        android:id="@+id/txt_loan_requirement_value"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="3dp"
+                                        android:layout_weight="50"
+                                        android:text="loan requirement"
+                                        android:gravity="center"
+                                        android:textColor="@color/whitetextcolor"
+                                        android:textSize="14dp" />
+
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
@@ -253,11 +262,11 @@
                         android:id="@+id/edtsalespersonname"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
                         android:layout_marginTop="5.0dip"
                         android:layout_marginBottom="5.0dip"
                         android:layout_toRightOf="@id/txtsalespersonname"
                         android:layout_weight="50"
-                        android:layout_marginLeft="2dp"
                         android:background="@drawable/edittextanimation"
                         android:focusable="false"
                         android:hint="Tap to select the Sales Person"
@@ -274,46 +283,52 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                <EditText
-                    android:id="@+id/edtappointment"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5.0dip"
-                    android:layout_marginBottom="5.0dip"
-                    android:layout_toRightOf="@id/txtbankname"
-                    android:layout_weight="50"
-                    android:background="@drawable/edittextanimation"
-                    android:focusable="false"
-                    android:hint="Tap to set Appointment"
-                    android:padding="10.0dip"
-                    android:text=""
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14.0dip" />
+                    <EditText
+                        android:id="@+id/edtappointment"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginBottom="5.0dip"
+                        android:layout_toRightOf="@id/txtbankname"
+                        android:layout_weight="50"
+                        android:background="@drawable/edittextanimation"
+                        android:focusable="false"
+                        android:hint="Tap to set Appointment"
+                        android:padding="10.0dip"
+                        android:text=""
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="14.0dip" />
 
-                <EditText
-                    android:id="@+id/edtchecklist"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5.0dip"
-                    android:layout_marginBottom="5.0dip"
-                    android:layout_toRightOf="@id/txtsalespersonname"
-                    android:layout_weight="50"
-                    android:layout_marginLeft="2dp"
-                    android:background="@drawable/edittextanimation"
-                    android:focusable="false"
-                    android:hint="Tap to select the CheckList"
-                    android:padding="10.0dip"
-                    android:text=""
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14.0dip" />
+                    <EditText
+                        android:id="@+id/edtchecklist"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginBottom="5.0dip"
+                        android:layout_toRightOf="@id/txtsalespersonname"
+                        android:layout_weight="50"
+                        android:background="@drawable/edittextanimation"
+                        android:focusable="false"
+                        android:hint="Tap to select the CheckList"
+                        android:padding="10.0dip"
+                        android:text=""
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="14.0dip" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
 
                 <Button
                     android:id="@+id/buttonupdate2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="33.0"
+                    android:layout_weight="50.0"
                     android:background="@drawable/button_bg"
                     android:text="UPDATE"
                     android:textColor="@color/white"
@@ -324,13 +339,14 @@
                     android:id="@+id/buttonsubmittobank"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="33.0"
+                    android:layout_weight="50.0"
                     android:background="@drawable/button_bg"
                     android:text="SUBMIT TO BANK"
                     android:textColor="@color/white"
                     android:textSize="16.0sp"
-                    android:layout_marginTop="3dp"
                     android:textStyle="bold" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
