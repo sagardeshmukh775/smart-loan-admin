@@ -30,6 +30,8 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.View_Leed_Details_Activity;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminGeneratedLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminRejectedLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
@@ -40,7 +42,7 @@ import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.STAT
 
 public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
 
-    TelecallerLeedsAdapter telecallerLeedsAdapter;
+    AdminRejectedLeedsAdapter telecallerLeedsAdapter;
     LeedRepository leedRepository;
     AppSingleton appSingleton;
     ProgressDialogClass progressDialogClass;
@@ -189,7 +191,7 @@ public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+                View_Admin_Generated_Lead_Details_Fragment fragment2 = new View_Admin_Generated_Lead_Details_Fragment();
                 fragment2.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.detailContainer,  fragment2);
@@ -206,7 +208,7 @@ public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
         if (leedsModels != null) {
             if (telecallerLeedsAdapter == null) {
-                telecallerLeedsAdapter = new TelecallerLeedsAdapter(getActivity(), leedsModels);
+                telecallerLeedsAdapter = new AdminRejectedLeedsAdapter(getActivity(), leedsModels);
                 tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setAdapter(telecallerLeedsAdapter);
                 onClickListner();
             } else {
