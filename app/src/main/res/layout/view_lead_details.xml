@@ -4,25 +4,6 @@
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<RelativeLayout-->
-        <!--android:id="@id/layouttop"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/hederbackground"-->
-        <!--android:gravity="center_horizontal">-->
-
-        <!--<TextView-->
-            <!--android:id="@id/textheader"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:padding="10.0dip"-->
-            <!--android:text=""-->
-            <!--android:textColor="#ffffffff"-->
-            <!--android:textSize="18.0sp"-->
-            <!--android:textStyle="bold" />-->
-    <!--</RelativeLayout>-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

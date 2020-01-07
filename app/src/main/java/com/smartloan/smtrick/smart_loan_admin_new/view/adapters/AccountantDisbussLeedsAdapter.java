@@ -90,7 +90,7 @@ public class AccountantDisbussLeedsAdapter extends RecyclerView.Adapter<AcctDisb
                     holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
-                    View_Bank_Submited_Lead_Details_Fragment fragment2 = new View_Bank_Submited_Lead_Details_Fragment();
+                    View_Acct_DisbussLead_Details_Fragment fragment2 = new View_Acct_DisbussLead_Details_Fragment();
                     fragment2.setArguments(bundle);
                     FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.detailContainer,  fragment2);

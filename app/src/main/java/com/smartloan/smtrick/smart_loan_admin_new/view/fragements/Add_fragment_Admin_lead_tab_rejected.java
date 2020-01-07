@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.ListView;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TcFragmentAdminLeadTabGeneratedleadBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
@@ -181,9 +183,17 @@ public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
-                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
-                intent.putExtra(LEED_MODEL, leedsModel);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
+//                intent.putExtra(LEED_MODEL, leedsModel);
+//                startActivity(intent);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+                View_Lead_Details_Fragment1 fragment2 = new View_Lead_Details_Fragment1();
+                fragment2.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer,  fragment2);
+                ft.commit();
             }
 
             @Override

@@ -74,8 +74,6 @@ public class View_Bank_Submited_Lead_Details_Fragment extends Fragment {
 
     TextView txtGender, txtEducation, txtCoApplicant, txtOccupationtype, txtAboutProperty;
 
-
-    String lGenby;
     TextView landmark, pin, street, txtpannumber;
     LeedRepository leedRepository;
     UserRepository UserRepository;

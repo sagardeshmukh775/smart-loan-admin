@@ -1,6 +1,8 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -38,6 +40,23 @@ public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
     int toDay;
     int toMonth;
     int toYear;
+    private boolean _hasLoadedOnce= false;
+    private ProgressDialog progress;
+
+
+//    @Override
+//    public void setUserVisibleHint(boolean isFragmentVisible_) {
+//        super.setUserVisibleHint(true);
+//        if (this.isVisible()) {
+//// we check that the fragment is becoming visible
+//            if (isFragmentVisible_ && !_hasLoadedOnce) {
+//                new Loaddata().execute();
+//                _hasLoadedOnce = true;
+//            }
+//        }
+//    }
+
+
 
     /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Tc_fragment_lead_tab_verifiedleads$1 */
     class C09551 extends CallBack {
@@ -96,5 +115,36 @@ public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
         ArrayList<LeedsModel> leedsModelArrayList = new ArrayList();
         leedsModelArrayList.addAll(leedsModels);
         this.telecallerLeedsAdapter.reload(leedsModelArrayList);
+    }
+
+    private class Loaddata extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Downloading Data");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getteLeed();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+
+
+        }
     }
 }
