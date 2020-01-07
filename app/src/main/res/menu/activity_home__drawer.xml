@@ -56,6 +56,45 @@
             android:title="Add Banks" />
 
         <item
+            android:id="@+id/todolist"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="To Do List" />
+
+        <item
+            android:id="@+id/calander"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Calander" />
+
+        <item
+            android:id="@+id/mail"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Email" />
+
+        <item
+            android:id="@+id/notification"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Notification" />
+
+        <item
+            android:id="@+id/owntask"
+            android:icon="@drawable/bank"
+            android:textColor="@color/textcolor"
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:title="Own Task" />
+        <item
             android:id="@+id/Logout"
             android:icon="@drawable/logout"
             android:textColor="@color/textcolor"
