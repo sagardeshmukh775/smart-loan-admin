@@ -21,6 +21,7 @@ public class Constant {
     public static final DatabaseReference CHECKLIST_TABLE_REF = DATABASE.getReference("checklistrules");
     public static final DatabaseReference FOLLOW_UP_TABLE_REF = DATABASE.getReference("FollowUp");
     public static final DatabaseReference TARGET_TABLE_REF = DATABASE.getReference("Target");
+    public static final DatabaseReference TODOLIST_TABLE_REF = DATABASE.getReference("Todolist");
 
     /************************************** Firebase Authentication reference constants ***************************************************************************/
     public static final FirebaseAuth AUTH = FirebaseAuth.getInstance();

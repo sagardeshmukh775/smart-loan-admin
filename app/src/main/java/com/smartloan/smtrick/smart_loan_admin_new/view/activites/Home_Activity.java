@@ -1,10 +1,12 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -39,7 +41,9 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepository
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AccountantLeedsAdapter;
+import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TasksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_TodoList_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.InvoicesTabFragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.UnderConstrationFragement;
 import com.squareup.picasso.Callback;
@@ -72,6 +76,7 @@ public class Home_Activity extends AppCompatActivity
             cardCheckList, cardInvoices, cardTargets;
     TextView leedscount, bankscount, userscount, reportscount, txtInvoiceCount, txtgeneratedInvoiceCount, txtApprovedInvoiceCount;
 
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,15 +127,10 @@ public class Home_Activity extends AppCompatActivity
         txtInvoiceCount = (TextView) findViewById(R.id.invoices_count);
         txtgeneratedInvoiceCount = (TextView) findViewById(R.id.generated_invoices_count);
         txtApprovedInvoiceCount = (TextView) findViewById(R.id.approved_invoices_count);
-        // get our list view
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.mainFrame, new LeedsTabsFragment());
-//        ft.commit();
 
-        getLeedsReport();
-        getBanks();
-        readUsers();
-        readAllReports();
+
+
+        new GetWeather().execute();
 
         cardTotalLeeds.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,9 +214,39 @@ public class Home_Activity extends AppCompatActivity
             }
         });
 
-
     }
 
+    private class GetWeather extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(Home_Activity.this);
+            progress.setMessage("Downloading tasks");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getLeedsReport();
+            getBanks();
+            readUsers();
+            readAllReports();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+        }
+    }
     private void readAllReports() {
         leedsRepository.readAllLeeds(new CallBack() {
             @Override
@@ -237,7 +267,7 @@ public class Home_Activity extends AppCompatActivity
         });    }
 
     private void getLeedsReport() {
-        progressDialogClass.showDialog(this.getString(R.string.SIGNING_IN), this.getString(R.string.PLEASE_WAIT));
+//        progressDialogClass.showDialog(this.getString(R.string.SIGNING_IN), this.getString(R.string.PLEASE_WAIT));
         leedsRepository.readAllLeeds(new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -252,7 +282,8 @@ public class Home_Activity extends AppCompatActivity
 
             @Override
             public void onError(Object object) {
-                progressDialogClass.dismissDialog();
+
+//                progressDialogClass.dismissDialog();
             }
         });
     }
@@ -387,6 +418,15 @@ public class Home_Activity extends AppCompatActivity
                 intentbank.putExtra("value", "banks");
                 startActivity(intentbank);
                 break;
+            case R.id.todolist:
+                Intent intenttodolist = new Intent(Home_Activity.this, Activity_Home_Main.class);
+                intenttodolist.putExtra("value", "todolist");
+                startActivity(intenttodolist);
+                break;
+            case R.id.calander:
+            case R.id.mail:
+            case R.id.notification:
+            case R.id.owntask:
             case R.id.Logout:
                 clearDataWithSignOut();
                 break;

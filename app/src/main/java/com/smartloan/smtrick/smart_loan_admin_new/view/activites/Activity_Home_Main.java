@@ -17,6 +17,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Add_Comission_
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Add_Target_Fragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_Bills_Tab_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_Invoices_Tab_Fragment;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Admin_TodoList_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.LeedsTabsFragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.LoanCalculatorFragement;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.ReportsTabFragment;
@@ -96,6 +97,11 @@ public class Activity_Home_Main extends AppCompatActivity
         }else if (value.equalsIgnoreCase("target")) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainFrame, new Add_Target_Fragement());
+            ft.commit();
+
+        }else if (value.equalsIgnoreCase("todolist")) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame, new Admin_TodoList_Fragment());
             ft.commit();
 
         }

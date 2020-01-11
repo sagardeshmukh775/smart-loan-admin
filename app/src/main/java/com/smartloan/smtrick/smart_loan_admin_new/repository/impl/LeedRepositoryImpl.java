@@ -17,6 +17,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Target;
+import com.smartloan.smtrick.smart_loan_admin_new.models.TodoList;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.FirebaseTemplateRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
@@ -854,5 +855,48 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
         });
     }
 
+    @Override
+    public void createTodolist(TodoList todoList, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.TODOLIST_TABLE_REF.child(todoList.getTodolistId());
+        fireBaseCreate(databaseReference, todoList, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+    @Override
+    public void readTodolistByLeedId(String id, final CallBack callBack) {
+        final Query query = Constant.TODOLIST_TABLE_REF.orderByChild("adinId").equalTo(id);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<TodoList> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            TodoList followUp = suggestionSnapshot.getValue(TodoList.class);
+                            leedsModelArrayList.add(followUp);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 
 }

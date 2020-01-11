@@ -143,6 +143,10 @@
         <activity
             android:name=".view.activites.MainActivity_Admin_new"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".view.activites.Admin_Add_Task_Activity"
+            android:windowSoftInputMode="stateHidden" />
+
     </application>
 
 </manifest>

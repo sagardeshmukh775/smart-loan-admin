@@ -57,7 +57,7 @@
 
         <item
             android:id="@+id/todolist"
-            android:icon="@drawable/bank"
+            android:icon="@drawable/todolist"
             android:textColor="@color/textcolor"
             android:textSize="22sp"
             android:textStyle="normal|bold"
@@ -65,7 +65,7 @@
 
         <item
             android:id="@+id/calander"
-            android:icon="@drawable/bank"
+            android:icon="@drawable/calender"
             android:textColor="@color/textcolor"
             android:textSize="22sp"
             android:textStyle="normal|bold"
@@ -73,7 +73,7 @@
 
         <item
             android:id="@+id/mail"
-            android:icon="@drawable/bank"
+            android:icon="@drawable/mail"
             android:textColor="@color/textcolor"
             android:textSize="22sp"
             android:textStyle="normal|bold"
@@ -81,7 +81,7 @@
 
         <item
             android:id="@+id/notification"
-            android:icon="@drawable/bank"
+            android:icon="@drawable/notification"
             android:textColor="@color/textcolor"
             android:textSize="22sp"
             android:textStyle="normal|bold"
@@ -89,7 +89,7 @@
 
         <item
             android:id="@+id/owntask"
-            android:icon="@drawable/bank"
+            android:icon="@drawable/task"
             android:textColor="@color/textcolor"
             android:textSize="22sp"
             android:textStyle="normal|bold"

@@ -11,6 +11,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModelCo;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Expences;
 import com.smartloan.smtrick.smart_loan_admin_new.models.Target;
+import com.smartloan.smtrick.smart_loan_admin_new.models.TodoList;
 
 import java.util.Map;
 
@@ -90,6 +91,9 @@ public interface LeedRepository {
 
     void createTarget(final Target target, final CallBack callback);
 
+    void createTodolist(final TodoList followUp, final CallBack callback);
+
+    void readTodolistByLeedId(final String adminId, final CallBack callBack);
 
 
 }
