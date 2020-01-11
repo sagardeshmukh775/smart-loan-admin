@@ -424,6 +424,10 @@ public class Home_Activity extends AppCompatActivity
                 startActivity(intenttodolist);
                 break;
             case R.id.calander:
+                Intent intentcalandert = new Intent(Home_Activity.this, Activity_Home_Main.class);
+                intentcalandert.putExtra("value", "calender");
+                startActivity(intentcalandert);
+                break;
             case R.id.mail:
             case R.id.notification:
             case R.id.owntask:

@@ -104,11 +104,7 @@ public class Admin_TodoList_Fragment extends Fragment implements AdapterView.OnI
                     followUpList = (List<TodoList>) object;
                     todoAdapter = new TodoAdapter(getContext(), followUpList);
                     recycleTasks.setAdapter(todoAdapter);
-//                    for (TodoList todoList: followUpList) {
-//                        if (todoList.getLeedNumber().equalsIgnoreCase(leedsModel.getLeedNumber())){
-//                            followUpList1.add(todoList);
-//                        }
-//                    }
+
                 }
 
             }
