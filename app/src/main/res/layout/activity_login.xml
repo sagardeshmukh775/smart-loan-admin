@@ -25,8 +25,9 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleTint="@color/hederbackground"
-            android:backgroundTint="@color/hederbackground"
+            app:passwordToggleTint="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
             android:layout_marginTop="16dp">
 
             <android.support.design.widget.TextInputEditText
@@ -34,6 +35,10 @@
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
+                android:drawableLeft="@drawable/logiinnumber"
+                android:drawablePadding="20dp"
                 android:hint="@string/phone" />
         </android.support.design.widget.TextInputLayout>
 
@@ -41,40 +46,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:passwordToggleTint="@color/hederbackground"
-            android:backgroundTint="@color/hederbackground"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleTint="@color/white"
+            android:textColorHint="@color/white">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edittextpassword"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
+                android:drawableLeft="@drawable/password"
+                android:drawablePadding="20dp"
                 android:hint="@string/password" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/buttonlogin"
             style="@style/DefaultButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/login" />
 
         <Button
             android:id="@+id/buttonRegister"
             style="@style/DefaultButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/register" />
-        <!--<TextView-->
-            <!--android:id="@+id/textViewCreateAccount"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:gravity="center_horizontal" />-->
+
     </LinearLayout>
 </ScrollView>

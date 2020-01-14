@@ -514,9 +514,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
         layoutref2address = (RelativeLayout) view.findViewById(R.id.layoutreference2address);
         layoutref2contact = (RelativeLayout) view.findViewById(R.id.layoutreference2contactno);
         layoutref2relationship = (RelativeLayout) view.findViewById(R.id.layoutreference2relationhsip);
-//        setSupportActionBar(toolbar);
-//        leedsModel = (LeedsModel) getIntent().getSerializableExtra(Constant.LEED_MODEL);
-
 
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
@@ -529,7 +526,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
         btnsave = (Button) view.findViewById(R.id.buttonsave);
         etcname = (EditText) view.findViewById(R.id.txtcamevalue);
         etaddress = (EditText) view.findViewById(R.id.txtcurrentaddressvalue);
-        //etpermanantaddress = (EditText) findViewById(R.id.txtpermenantaddressvalue);
         groupRadio = (RadioGroup) view.findViewById(R.id.radioGYN);
         currentpin = (EditText) view.findViewById(R.id.txtcurrentpin1);
         currentlandmark = (EditText) view.findViewById(R.id.txtcurrentlandmark1);
@@ -595,7 +591,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
         RcoapplicantYES = (RadioButton) view.findViewById(R.id.radioapplicantYES);
         RcoapplicantNO = (RadioButton) view.findViewById(R.id.radioapplicantNO);
         groupRadiocoapplicant = (RadioGroup) view.findViewById(R.id.radiocoapplicantYesNo);
-//        groupRadiocoapplicant.setOnCheckedChangeListener(new C08172());
         groupRadiocoapplicant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -608,7 +603,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
                 }
             }
         });
-//        groupRadioEducation.setOnCheckedChangeListener(new C08183());
         groupRadioEducation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -622,7 +616,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
             }
         });
 
-//        groupRadioGender.setOnCheckedChangeListener(new C08194());
         groupRadioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -631,7 +624,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
                 cGender = Rgender.getText().toString();
             }
         });
-//        groupRadio.setOnCheckedChangeListener(new C08205());
         groupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -683,7 +675,6 @@ public class TL_Updatelead_C_Details_Fragment extends Fragment implements View.O
         Rfemale = (RadioButton) view.findViewById(R.id.radioFemale);
         btnsave.setOnClickListener(new C08216());
         btnnext.setOnClickListener(new C08227());
-//        Intent in = getIntent();
         String code1 = args.getString("code");
         if (code.equalsIgnoreCase(code1)) {
             edtreferencename.requestFocus();

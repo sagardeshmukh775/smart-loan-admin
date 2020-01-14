@@ -423,6 +423,7 @@
                                 android:layout_toRightOf="@+id/txtcurrentaddress"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10dp"
+                                android:inputType="textMultiLine"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
@@ -678,6 +679,7 @@
                                 android:layout_toRightOf="@id/txtperaddress"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10.0dip"
+                                android:inputType="textMultiLine"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14.0dip" />

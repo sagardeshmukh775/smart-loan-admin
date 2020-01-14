@@ -101,6 +101,7 @@
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10.0dip"
                                 android:text=""
+                                android:inputType="text"
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14.0dip" />
                         </RelativeLayout>
@@ -408,6 +409,7 @@
                                 android:layout_toRightOf="@id/txtcurrentaddress"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10.0dip"
+                                android:inputType="textMultiLine"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14.0dip" />
@@ -850,6 +852,7 @@
                                 android:layout_toRightOf="@id/txtofficeaddress"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10.0dip"
+                                android:inputType="textMultiLine"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14.0dip" />

@@ -1,6 +1,8 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.activites;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -98,17 +100,17 @@ public class Registeractivity extends AppCompatActivity implements
         RdFemale = (RadioButton) findViewById(R.id.radiofemale);
 
         spin = (Spinner) findViewById(R.id.spinnerselectusertype);
-
         spin.setOnItemSelectedListener(this);
 
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.sppinner_layout_listitem, Userstypeall
+                this, R.layout.sppinner_layout_listitem2, Userstypeall
         );
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spin.setAdapter(spinnerArrayAdapter);
 
         txttc = (TextView) findViewById(R.id.txttermsandconditions);
+        txtlogin = (TextView) findViewById(R.id.textViewLogin);
         setClickListners();
         setTouchListner();
     }
@@ -145,6 +147,11 @@ public class Registeractivity extends AppCompatActivity implements
             case R.id.buttongenerateotp:
                 String phonenumber ="+91" + etmobile.getText().toString()  ;
                 sendVerificationCode(phonenumber);
+                break;
+            case R.id.txtlogin:
+                Intent intent1 = new Intent(Registeractivity.this, LoginScreen.class);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
                 break;
         }
     }

@@ -503,7 +503,7 @@
                                 android:layout_toRightOf="@+id/txtovertime"
                                 android:background="@drawable/edittextanimation"
                                 android:inputType="number"
-                                android:maxLength="4"
+                                android:maxLength="5"
                                 android:padding="10dp"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
@@ -646,7 +646,7 @@
                                 android:layout_toRightOf="@+id/txtagreecultureincome"
                                 android:background="@drawable/edittextanimation"
                                 android:inputType="number"
-                                android:maxLength="5"
+                                android:maxLength="7"
                                 android:padding="10dp"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
@@ -862,6 +862,8 @@
                                     android:layout_toRightOf="@+id/checkboxCarloan"
                                     android:background="@drawable/edittextanimation"
                                     android:padding="10dp"
+                                    android:inputType="number"
+                                    android:maxLength="7"
                                     android:text=""
                                     android:textColor="@color/mainTextColor"
                                     android:textSize="14dp" />
@@ -897,6 +899,8 @@
                                     android:layout_toRightOf="@+id/checkboxHomeloan"
                                     android:background="@drawable/edittextanimation"
                                     android:padding="10dp"
+                                    android:inputType="number"
+                                    android:maxLength="7"
                                     android:text=""
                                     android:textColor="@color/mainTextColor"
                                     android:textSize="14dp" />
@@ -931,6 +935,8 @@
                                     android:layout_toRightOf="@+id/checkboxSocietyloan"
                                     android:background="@drawable/edittextanimation"
                                     android:padding="10dp"
+                                    android:inputType="number"
+                                    android:maxLength="7"
                                     android:text=""
                                     android:textColor="@color/mainTextColor"
                                     android:textSize="14dp" />
@@ -967,6 +973,8 @@
                                     android:layout_toRightOf="@+id/checkboxPersonalloan"
                                     android:background="@drawable/edittextanimation"
                                     android:padding="10dp"
+                                    android:inputType="number"
+                                    android:maxLength="7"
                                     android:text=""
                                     android:textColor="@color/mainTextColor"
                                     android:textSize="14dp" />
@@ -1032,6 +1040,8 @@
                                 android:layout_toRightOf="@+id/txtotheremi"
                                 android:background="@drawable/edittextanimation"
                                 android:padding="10dp"
+                                android:inputType="number"
+                                android:maxLength="7"
                                 android:text=""
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
