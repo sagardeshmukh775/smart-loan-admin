@@ -128,6 +128,7 @@ public class Registeractivity extends AppCompatActivity implements
     private void setClickListners() {
         btlogin.setOnClickListener(this);
         txttc.setOnClickListener(this);
+        txtlogin.setOnClickListener(this);
         btnotp.setOnClickListener(this);
     }
 
@@ -148,7 +149,7 @@ public class Registeractivity extends AppCompatActivity implements
                 String phonenumber ="+91" + etmobile.getText().toString()  ;
                 sendVerificationCode(phonenumber);
                 break;
-            case R.id.txtlogin:
+            case R.id.textViewLogin:
                 Intent intent1 = new Intent(Registeractivity.this, LoginScreen.class);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
