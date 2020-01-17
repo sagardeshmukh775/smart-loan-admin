@@ -1,7 +1,9 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -28,6 +30,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Home_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.View_Leed_Details_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.AdminGeneratedLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
@@ -48,6 +51,7 @@ public class Add_fragment_lead_tab_generated extends Fragment {
     TcFragmentAdminLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
     ArrayList<LeedsModel> leedsModelArrayList;
     ArrayList<LeedsModel> leedsModelArrayList1;
+    private ProgressDialog progress;
 
 //    ArrayList<GetterSetterInvoice> searchResults = GetSearchResults();
 
@@ -98,10 +102,40 @@ public class Add_fragment_lead_tab_generated extends Fragment {
 
 
             });
-            getteLeed();
+//            getteLeed();
+            new GetLeeds().execute();
         }
 
         return tcFragmentLeadTabGeneratedleadBinding.getRoot();
+    }
+
+    private class GetLeeds extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Downloading Leeds");
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            getteLeed();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(progress.isShowing())
+            {
+                progress.dismiss();
+            }
+
+        }
     }
 
     private void setAdapter(final String toString) {
@@ -142,7 +176,7 @@ public class Add_fragment_lead_tab_generated extends Fragment {
     }
 
     private void getteLeed() {
-        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
+//        progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
         leedRepository.readLeedsByStatus(STATUS_GENERATED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
@@ -150,12 +184,12 @@ public class Add_fragment_lead_tab_generated extends Fragment {
                     leedsModelArrayList = (ArrayList<LeedsModel>) object;
                     serAdapter(leedsModelArrayList);
                 }
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-                progressDialogClass.dismissDialog();
+//                progressDialogClass.dismissDialog();
                 Utility.showLongMessage(getActivity(), getString(R.string.server_error));
             }
         });

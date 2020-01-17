@@ -27,6 +27,7 @@ public class Invoice {
     private String status;
     private String agentId;
     private String leedId;
+    private String loanType;
 
     public Invoice() {
         this.invoiceId = "";
@@ -46,6 +47,7 @@ public class Invoice {
 
         this.tdsAmount = "";
         this.agentId = "";
+        this.loanType = "";
     }
 
 
@@ -171,6 +173,13 @@ public class Invoice {
         this.disbussmentDate = disbussmentDate;
     }
 
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
 
     @Exclude
     public Map getLeedStatusMap1() {

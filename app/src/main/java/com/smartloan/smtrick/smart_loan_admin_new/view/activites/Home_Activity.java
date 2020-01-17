@@ -289,6 +289,9 @@ public class Home_Activity extends AppCompatActivity
     }
 
     private void getInvoiceReport() {
+        invoicesArraylist.clear();
+        GeneratedinvoicesArraylist.clear();
+        ApprovedinvoicesArraylist.clear();
         leedsRepository.readAllInvoices1(new CallBack() {
             @Override
             public void onSuccess(Object object) {

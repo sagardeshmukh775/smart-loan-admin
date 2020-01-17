@@ -103,7 +103,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         leedRepository = new LeedRepositoryImpl();
         UserRepository = new UserRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
-        mDatabase = FirebaseDatabase.getInstance().getReference("invoice");
+        mDatabase = Constant.INVOICE_TABLE_REF;
 
         SalesPerson = new ArrayList<>();
         leedsArraylist = new ArrayList<>();
@@ -171,6 +171,7 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 invoice.setAgentId(leedsModel.getAgentId());
                 invoice.setStatus(STATUS_INVOICE_SENT);
                 invoice.setDisbussmentDate(leedsModel.getDisbussmentDate());
+                invoice.setLoanType(leedsModel.getLoanType());
 
                 leedRepository.createInvoice1(invoice, new CallBack() {
                     @Override
@@ -237,22 +238,22 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
         }
 
         String comission = leedsModel.getComissionamount();
-        if (comission == null) {
+        if (comission != null) {
             edtComissionAmount.setText(comission);
 
         } else {
             int commission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
-            if (commission > 1000000 && commission < 9000000) {
+            if (commission > 1000000 && commission <= 9000000) {
                 double com = (commission * 0.30) / 100;
                 double com1 = (com * 10) / 100;
                 double com2 = com - com1;
                 edtComissionAmount.setText(String.valueOf(com2));
-            } else if (commission > 9000000 && commission < 15000000) {
+            } else if (commission > 9000000 && commission <= 15000000) {
                 double com = (commission * 0.40) / 100;
                 double com1 = (com * 10) / 100;
                 double com2 = com - com1;
                 edtComissionAmount.setText(String.valueOf(com2));
-            } else if (commission > 15000000 && commission < 35000000) {
+            } else if (commission > 15000000 && commission <= 35000000) {
                 double com = (commission * 0.55) / 100;
                 double com1 = (com * 10) / 100;
                 double com2 = com - com1;

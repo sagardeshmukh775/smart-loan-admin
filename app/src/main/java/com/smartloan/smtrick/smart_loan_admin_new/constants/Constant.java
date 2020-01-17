@@ -42,7 +42,7 @@ public class Constant {
     public static final String SALES = "SALES";
     public static final String ACCOUNTANT = "ACCOUNTANT";
     public static final String AGENT_PREFIX = "AG-";
-    public static final String INV_PREFIX = "INV-";
+    public static final String INV_PREFIX = "IN-";
     public static final String LEED_PREFIX = "L-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
     //********************************************STATUS FLEADS*****************************
@@ -66,23 +66,13 @@ public class Constant {
     public static final String STATUS_APPROVED_BILL = "APPROVEDBILL";
     public static final String STATUS_PAID_BILL = "PAIDBILL";
 
-
-
     public static final String STATUS_IN_PROGRESS = "IN-PROGRESS";
     public static final String GLOBAL_DATE_FORMATE = "dd MMM yyyy";
-    public static final String GLOBAL_TIME_FORMATE = "hh:mm a";
-
     public static final String CALANDER_DATE_FORMATE = "dd/MM/yy";
-    public static final String LEED_DATE_FORMATE = "dd MMM, yyyy";
-    public static final String DAY_DATE_FORMATE = "EEEE";
-    public static final String TIME_DATE_FORMATE = "hh:mm a";
+
     //****************************************************************
     public static final String LEED_MODEL = "LEED_MODEL";
     public static final String INVOICE = "INVOICE";
-
-
-    public static final String LEED_MODEL3 = "LEED_MODEL3";
-    public static final String LEED_MODEL2 = "LEED_MODEL2";
 
     public static final String DATABASE_PATH_UPLOADS = "Advertise";
     public static final String STORAGE_PATH_UPLOADS = "NewImage/";

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:layout_marginTop="80dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <!--    <FrameLayout-->
@@ -18,166 +18,285 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="100">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:weightSum="100">
 
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_total_leeds"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_total_leeds"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Total Leeds"
-                        android:textColor="@color/mainTextColor"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/total_leedcount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/mainTextColor"
-                        android:textSize="18dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="100">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/approved_leeds"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="10"
-                            android:text="Generated leeds"
+                            android:text="Total Leeds"
                             android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/generated_leeds_count"
+                            android:id="@+id/total_leedcount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="90"
-                            android:gravity="center"
                             android:text="0"
                             android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_marginBottom="4dp"
-                        android:background="@color/graycolor" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="100">
-
-                        <TextView
-                            android:id="@+id/rejected_leeds"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="10"
-                            android:text="Rejected leeds"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/rejected_leeds_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="90"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_banks"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:weightSum="100">
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:layout_weight="90"-->
-<!--                            android:background="@drawable/cerclebackgroundpink"-->
-<!--                            android:padding="10dp"-->
-<!--                            android:src="@drawable/banks" />-->
+                            android:textSize="18dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <TextView
+                                android:id="@+id/approved_leeds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="10"
+                                android:text="Generated leeds"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/generated_leeds_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="90"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
                             android:layout_marginLeft="2dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="4dp"
+                            android:background="@color/graycolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <TextView
+                                android:id="@+id/rejected_leeds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="10"
+                                android:text="Rejected leeds"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/rejected_leeds_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="90"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_banks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="100">
+
+                            <!--                        <ImageView-->
+                            <!--                            android:layout_width="wrap_content"-->
+                            <!--                            android:layout_height="match_parent"-->
+                            <!--                            android:layout_gravity="center"-->
+                            <!--                            android:layout_weight="90"-->
+                            <!--                            android:background="@drawable/cerclebackgroundpink"-->
+                            <!--                            android:padding="10dp"-->
+                            <!--                            android:src="@drawable/banks" />-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="10"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Banks"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_margin="3dp"
+                                    android:background="@color/graycolor" />
+
+                                <TextView
+                                    android:id="@+id/banks_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Banks"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_users"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Active Users"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="3dp"
+                            android:background="@color/graycolor" />
+
+                        <TextView
+                            android:id="@+id/users_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/mainTextColor"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_loan_calculator"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:background="@drawable/cerclebackgroundyello"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:src="@drawable/calculator" />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="10"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Banks"
+                                android:text="Loan Calculator"
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="18dp"
                                 android:textStyle="bold" />
@@ -185,14 +304,14 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="@color/graycolor"
-                                android:layout_margin="3dp"/>
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
 
                             <TextView
-                                android:id="@+id/banks_count"
+                                android:id="@+id/calc_count"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Add Banks"
+                                android:text="Calculate EMI"
                                 android:textColor="@color/mainTextColor"
                                 android:textSize="14dp" />
 
@@ -200,593 +319,491 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_users"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_Commission"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Active Users"
-                        android:textColor="@color/mainTextColor"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/graycolor"
-                        android:layout_margin="3dp"/>
-
-                    <TextView
-                        android:id="@+id/users_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/mainTextColor"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_loan_calculator"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="vertical"
-                    android:weightSum="100">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="90"-->
-<!--                        android:background="@drawable/cerclebackgroundyello"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:src="@drawable/calculator" />-->
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:orientation="vertical">
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Loan Calculator"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <TextView
-                            android:id="@+id/calc_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Calculate EMI"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_Commission"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="90"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:background="@drawable/cerclebackgroundviolet"-->
-<!--                        android:src="@drawable/payment_method"/>-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Commission"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <TextView
-                            android:id="@+id/commission"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Add Commission Details"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_bills"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="90"-->
-<!--                        android:background="@drawable/cerclebackgroundyello"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:src="@drawable/bill" />-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Bills"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <TextView
-                            android:id="@+id/bills_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Generate Bills"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_Checklist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="90"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:background="@drawable/cerclebackgroundpurple"-->
-<!--                        android:src="@drawable/checklist"/>-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Checklist"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <TextView
-                            android:id="@+id/checklist"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Generate Checklist"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_Reports"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_weight="90"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:background="@drawable/cerclebackgroundpurple"-->
-<!--                        android:src="@drawable/reports" />-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Reports"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <TextView
-                            android:id="@+id/reports_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_Invoice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
-
-                    <!--                    <ImageView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_gravity="center"-->
-                    <!--                        android:layout_weight="90"-->
-                    <!--                        android:padding="10dp"-->
-                    <!--                        android:background="@drawable/cerclebackgroundpurple"-->
-                    <!--                        android:src="@drawable/checklist"/>-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Invoices"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/invoices_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp" />
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:background="@drawable/cerclebackgroundviolet"-->
+                        <!--                        android:src="@drawable/payment_method"/>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="100">
+                            android:layout_weight="10"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/generated_invoices"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Generated Invoices"
+                                android:text="Commission"
                                 android:textColor="@color/mainTextColor"
-                                android:layout_weight="10"
-                                android:textSize="14dp" />
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
 
                             <TextView
-                                android:id="@+id/generated_invoices_count"
+                                android:id="@+id/commission"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="Add Commission Details"
                                 android:textColor="@color/mainTextColor"
-                                android:layout_weight="90"
-                                android:textSize="14dp" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="100">
-
-                            <TextView
-                                android:id="@+id/approved_invoices"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Approved Invoices"
-                                android:textColor="@color/mainTextColor"
-                                android:layout_weight="10"
-                                android:textSize="14dp" />
-
-                            <TextView
-                                android:id="@+id/approved_invoices_count"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textColor="@color/mainTextColor"
-                                android:layout_weight="90"
                                 android:textSize="14dp" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_view_Target"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="vertical"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="3dp"
-                card_view:cardMaxElevation="3dp"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="5dp">
-
-                <LinearLayout
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_bills"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="100">
+                    android:layout_height="match_parent"
 
-                    <!--                    <ImageView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:layout_gravity="center"-->
-                    <!--                        android:layout_weight="90"-->
-                    <!--                        android:padding="10dp"-->
-                    <!--                        android:background="@drawable/cerclebackgroundpurple"-->
-                    <!--                        android:src="@drawable/reports" />-->
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
 
-                        <TextView
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:background="@drawable/cerclebackgroundyello"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:src="@drawable/bill" />-->
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Targets"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
+                            android:layout_weight="10"
+                            android:orientation="vertical">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/graycolor"
-                            android:layout_margin="3dp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bills"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/targets"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Set Targets"
-                            android:textColor="@color/mainTextColor"
-                            android:textSize="14dp" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
+
+                            <TextView
+                                android:id="@+id/bills_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Generate Bills"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_Checklist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:background="@drawable/cerclebackgroundpurple"-->
+                        <!--                        android:src="@drawable/checklist"/>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Checklist"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
+
+                            <TextView
+                                android:id="@+id/checklist"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Generate Checklist"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_Reports"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:background="@drawable/cerclebackgroundpurple"-->
+                        <!--                        android:src="@drawable/reports" />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Reports"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="100">
+
+                                <TextView
+                                    android:id="@+id/reports"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="10"
+                                    android:text="Total Leeds"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                                <TextView
+                                    android:id="@+id/reports_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="90"
+                                    android:text="0"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_Invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:background="@drawable/cerclebackgroundpurple"-->
+                        <!--                        android:src="@drawable/checklist"/>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Invoices"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/invoices_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="100">
+
+                                <TextView
+                                    android:id="@+id/generated_invoices"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="10"
+                                    android:text="Generated Invoices"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                                <TextView
+                                    android:id="@+id/generated_invoices_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="90"
+                                    android:text="0"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="100">
+
+                                <TextView
+                                    android:id="@+id/approved_invoices"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="10"
+                                    android:text="Approved Invoices"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                                <TextView
+                                    android:id="@+id/approved_invoices_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="90"
+                                    android:text="0"
+                                    android:textColor="@color/mainTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view_Target"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    card_view:cardCornerRadius="3dp"
+                    card_view:cardElevation="3dp"
+                    card_view:cardMaxElevation="3dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_gravity="center"-->
+                        <!--                        android:layout_weight="90"-->
+                        <!--                        android:padding="10dp"-->
+                        <!--                        android:background="@drawable/cerclebackgroundpurple"-->
+                        <!--                        android:src="@drawable/reports" />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Targets"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="3dp"
+                                android:background="@color/graycolor" />
+
+                            <TextView
+                                android:id="@+id/targets"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Set Targets"
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
 
     </ScrollView>
 
