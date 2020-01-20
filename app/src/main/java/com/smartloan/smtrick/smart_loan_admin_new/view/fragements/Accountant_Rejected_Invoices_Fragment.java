@@ -52,13 +52,13 @@ public class Accountant_Rejected_Invoices_Fragment extends Fragment implements A
             invoiceList = new ArrayList<>();
             listView = (RecyclerView) view.findViewById(R.id.recycler_view_users);
 
-            readApprovedInvoices();
+            readRejectedInvoices();
         }
 
         return view;
     }
 
-    private void readApprovedInvoices() {
+    private void readRejectedInvoices() {
         invoiceList.clear();
         leedRepository.readInvoicesByStatus(Constant.STATUS_INVOICE_AGENT_NO,new CallBack() {
             @Override

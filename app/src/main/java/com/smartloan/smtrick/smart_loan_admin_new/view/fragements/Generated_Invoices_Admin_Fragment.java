@@ -82,6 +82,7 @@ public class Generated_Invoices_Admin_Fragment extends Fragment implements Adapt
                 // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
                 listView.setHasFixedSize(true);
                 listView.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter.notifyDataSetChanged();
 
             }
 

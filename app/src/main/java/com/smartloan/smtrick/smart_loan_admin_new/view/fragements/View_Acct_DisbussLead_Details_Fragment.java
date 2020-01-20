@@ -152,7 +152,6 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                int TotalCommission1 = Integer.parseInt(leedsModel.getApprovedLoan());
                 int TotalCommission = Integer.parseInt(leedsModel.getApprovedLoan());
                 int DisbussCommission = Integer.parseInt(leedsModel.getDisbusedLoanAmount());
 

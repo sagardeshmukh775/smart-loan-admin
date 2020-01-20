@@ -34,7 +34,7 @@ public class Accountant_Invoices_Tab_Fragment extends Fragment {
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         viewPagerAdapter.addFragement(new Accountant_Invoice_fragment_lead_tab_Disbussed(), "Generated");
         viewPagerAdapter.addFragement(new Accountant_Approved_Invoices_Fragment(), "Approved");
-        viewPagerAdapter.addFragement(new Accountant_Paid_Bills_Fragment(), "Rejected");
+        viewPagerAdapter.addFragement(new Accountant_Rejected_Invoices_Fragment(), "Rejected");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setTabMode(1);
