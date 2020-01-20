@@ -22,7 +22,7 @@ public class Invoice implements Serializable {
     private String loandisbussedamount;
     private String pendingdisbussedamount;
 //    private String payoutbussedamount;
-//    private String tdsAmount;
+    private String tdsAmount;
 //    private String commisionwithtdsAmount;
 
     private String balancePayout;
@@ -52,7 +52,7 @@ public class Invoice implements Serializable {
         this.pendingdisbussedamount = "";
 //        this.payoutbussedamount = "";
 //        this.commisionwithtdsAmount = "";
-//        this.tdsAmount = "";
+        this.tdsAmount = "";
         this.balancePayout = "";
         this.balancePayoutWithTdsAmount = "";
         this.lastPayoutPaidAmount = "";
@@ -131,13 +131,13 @@ public class Invoice implements Serializable {
         this.loandisbussedamount = loandisbussedamount;
     }
 
-//    public String getTdsAmount() {
-//        return tdsAmount;
-//    }
-//
-//    public void setTdsAmount(String tdsAmount) {
-//        this.tdsAmount = tdsAmount;
-//    }
+    public String getTdsAmount() {
+        return tdsAmount;
+    }
+
+    public void setTdsAmount(String tdsAmount) {
+        this.tdsAmount = tdsAmount;
+    }
 
     public String getAgentId() {
         return agentId;
@@ -276,6 +276,7 @@ public class Invoice implements Serializable {
         leedMap.put(agentId, getAgentId());
         leedMap.put(leedId, getLeedId());
         leedMap.put(loanType, getLoanType());
+        leedMap.put(tdsAmount, getTdsAmount());
         leedMap.put(rejectionReason, getRejectionReason());
         leedMap.put(balancePayout, getBalancePayout());
         leedMap.put(balancePayoutWithTdsAmount, getBalancePayoutWithTdsAmount());

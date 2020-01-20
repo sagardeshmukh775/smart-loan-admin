@@ -161,10 +161,10 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 double Disbussmentcom = (DisbussCommission * 0.30) / 100;
                 double TDSAmount = (Disbussmentcom * 10) / 100;
                 double CommisionwithTDS = Disbussmentcom - TDSAmount;
+                double BalancePayoutWithTdsAmount = Totalcom - Disbussmentcom;
 
                 Date c = Calendar.getInstance().getTime();
                 System.out.println("Current time => " + c);
-
                 SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                 String formattedDate = df.format(c);
 
@@ -176,16 +176,17 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 invoice.setLoandisbussedamount(leedsModel.getDisbusedLoanAmount());
                 invoice.setPendingdisbussedamount(leedsModel.getPendingLoanAmount());
                 invoice.setTotalpayoutamount(String.valueOf(Totalcom));
-                invoice.setBalancePayoutWithTdsAmount(String.valueOf(TDSAmount));
+                invoice.setBalancePayoutWithTdsAmount(String.valueOf(BalancePayoutWithTdsAmount));
                 invoice.setPayOutOnDisbursementAmount(String.valueOf(Disbussmentcom));
                 invoice.setPayoutPayableAfterTdsAmount(String.valueOf(CommisionwithTDS));
-                invoice.setBalancePayout(String.valueOf(TDSAmount));
+                invoice.setBalancePayout(String.valueOf(String.valueOf(BalancePayoutWithTdsAmount)));
                 invoice.setLastPayoutPaidAmount(String.valueOf(CommisionwithTDS));
                 invoice.setLastPayoutPaidDate(formattedDate);
                 invoice.setAgentId(leedsModel.getAgentId());
                 invoice.setStatus(STATUS_INVOICE_SENT);
                 invoice.setDisbussmentDate(leedsModel.getDisbussmentDate());
                 invoice.setLoanType(leedsModel.getLoanType());
+                invoice.setTdsAmount(String.valueOf(TDSAmount));
 
                 leedRepository.createInvoice1(invoice, new CallBack() {
                     @Override
