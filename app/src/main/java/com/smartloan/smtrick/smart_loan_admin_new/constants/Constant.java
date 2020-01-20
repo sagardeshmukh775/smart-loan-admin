@@ -58,8 +58,8 @@ public class Constant {
 
     public static final String STATUS_INVOICE_SENT= "SENT";
     public static final String STATUS_INVOICE_APPROVED = "APPROVED";
-    public static final String STATUS_INVOICE_UNPAID = "UNPAID";
-    public static final String STATUS_INVOICE_PAID = "PAID";
+    public static final String STATUS_INVOICE_AGENT_YES = "AGENTYES";
+    public static final String STATUS_INVOICE_AGENT_NO = "AGENTNO";
     public static final String STATUS_INVOICE_REJECTED = "REJECT";
 
     public static final String STATUS_GENERATED_BILL = "GENERATEDBILL";

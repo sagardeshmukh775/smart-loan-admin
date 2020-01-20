@@ -145,7 +145,6 @@ public class AccountantHomeActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AccountantHomeActivity.this, Accountant_Invoice_Activity.class);
-                intent.putExtra("value", "leeds");
                 startActivity(intent);
             }
         });

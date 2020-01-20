@@ -5,11 +5,12 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Invoice {
+public class Invoice implements Serializable {
 
     private String customerName;
     private String invoiceId;
@@ -20,14 +21,23 @@ public class Invoice {
     private String totalpayoutamount;
     private String loandisbussedamount;
     private String pendingdisbussedamount;
-    private String payoutbussedamount;
-    private String tdsAmount;
-    private String commisionwithtdsAmount;
+//    private String payoutbussedamount;
+//    private String tdsAmount;
+//    private String commisionwithtdsAmount;
+
+    private String balancePayout;
+    private String balancePayoutWithTdsAmount;
+    private String lastPayoutPaidAmount;
+    private String lastPayoutPaidDate;
+    private String payOutOnDisbursementAmount;
+    private String payoutPayableAfterTdsAmount;
+
     private String phone;
     private String status;
     private String agentId;
     private String leedId;
     private String loanType;
+    private String rejectionReason;
 
     public Invoice() {
         this.invoiceId = "";
@@ -38,18 +48,23 @@ public class Invoice {
         this.leedId = "";
         this.loanapprovedaamount = "";
         this.loandisbussedamount = "";
-
         this.totalpayoutamount = "";
         this.pendingdisbussedamount = "";
-        this.payoutbussedamount = "";
-        this.commisionwithtdsAmount = "";
-        this.disbussmentDate = "";
+//        this.payoutbussedamount = "";
+//        this.commisionwithtdsAmount = "";
+//        this.tdsAmount = "";
+        this.balancePayout = "";
+        this.balancePayoutWithTdsAmount = "";
+        this.lastPayoutPaidAmount = "";
+        this.lastPayoutPaidDate = "";
+        this.payOutOnDisbursementAmount = "";
+        this.payoutPayableAfterTdsAmount = "";
 
-        this.tdsAmount = "";
+        this.disbussmentDate = "";
         this.agentId = "";
         this.loanType = "";
+        this.rejectionReason = "";
     }
-
 
 
     public String getInvoiceId() {
@@ -116,13 +131,13 @@ public class Invoice {
         this.loandisbussedamount = loandisbussedamount;
     }
 
-    public String getTdsAmount() {
-        return tdsAmount;
-    }
-
-    public void setTdsAmount(String tdsAmount) {
-        this.tdsAmount = tdsAmount;
-    }
+//    public String getTdsAmount() {
+//        return tdsAmount;
+//    }
+//
+//    public void setTdsAmount(String tdsAmount) {
+//        this.tdsAmount = tdsAmount;
+//    }
 
     public String getAgentId() {
         return agentId;
@@ -149,21 +164,21 @@ public class Invoice {
         this.pendingdisbussedamount = pendingdisbussedamount;
     }
 
-    public String getPayoutbussedamount() {
-        return payoutbussedamount;
-    }
-
-    public void setPayoutbussedamount(String payoutbussedamount) {
-        this.payoutbussedamount = payoutbussedamount;
-    }
-
-    public String getCommisionwithtdsAmount() {
-        return commisionwithtdsAmount;
-    }
-
-    public void setCommisionwithtdsAmount(String commisionwithtdsAmount) {
-        this.commisionwithtdsAmount = commisionwithtdsAmount;
-    }
+//    public String getPayoutbussedamount() {
+//        return payoutbussedamount;
+//    }
+//
+//    public void setPayoutbussedamount(String payoutbussedamount) {
+//        this.payoutbussedamount = payoutbussedamount;
+//    }
+//
+//    public String getCommisionwithtdsAmount() {
+//        return commisionwithtdsAmount;
+//    }
+//
+//    public void setCommisionwithtdsAmount(String commisionwithtdsAmount) {
+//        this.commisionwithtdsAmount = commisionwithtdsAmount;
+//    }
 
     public String getDisbussmentDate() {
         return disbussmentDate;
@@ -181,10 +196,94 @@ public class Invoice {
         this.loanType = loanType;
     }
 
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    public String getBalancePayout() {
+        return balancePayout;
+    }
+
+    public void setBalancePayout(String balancePayout) {
+        this.balancePayout = balancePayout;
+    }
+
+    public String getBalancePayoutWithTdsAmount() {
+        return balancePayoutWithTdsAmount;
+    }
+
+    public void setBalancePayoutWithTdsAmount(String balancePayoutWithTdsAmount) {
+        this.balancePayoutWithTdsAmount = balancePayoutWithTdsAmount;
+    }
+
+    public String getLastPayoutPaidAmount() {
+        return lastPayoutPaidAmount;
+    }
+
+    public void setLastPayoutPaidAmount(String lastPayoutPaidAmount) {
+        this.lastPayoutPaidAmount = lastPayoutPaidAmount;
+    }
+
+    public String getLastPayoutPaidDate() {
+        return lastPayoutPaidDate;
+    }
+
+    public void setLastPayoutPaidDate(String lastPayoutPaidDate) {
+        this.lastPayoutPaidDate = lastPayoutPaidDate;
+    }
+
+    public String getPayOutOnDisbursementAmount() {
+        return payOutOnDisbursementAmount;
+    }
+
+    public void setPayOutOnDisbursementAmount(String payOutOnDisbursementAmount) {
+        this.payOutOnDisbursementAmount = payOutOnDisbursementAmount;
+    }
+
+    public String getPayoutPayableAfterTdsAmount() {
+        return payoutPayableAfterTdsAmount;
+    }
+
+    public void setPayoutPayableAfterTdsAmount(String payoutPayableAfterTdsAmount) {
+        this.payoutPayableAfterTdsAmount = payoutPayableAfterTdsAmount;
+    }
+
+    @Exclude
+    public Map getLeedStatusMap() {
+        Map<String, Object> leedMap = new HashMap();
+        leedMap.put(NotificationCompat.CATEGORY_STATUS, getStatus());
+
+        return leedMap;
+    }
+
     @Exclude
     public Map getLeedStatusMap1() {
         Map<String, Object> leedMap = new HashMap();
-        leedMap.put(NotificationCompat.CATEGORY_STATUS, getStatus());
+        leedMap.put(customerName, getCustomerName());
+        leedMap.put(invoiceId, getInvoiceId());
+        leedMap.put(invoiceNumber, getInvoiceNumber());
+        leedMap.put(disbussmentDate, getDisbussmentDate());
+        leedMap.put(loanapprovedaamount, getLoanapprovedaamount());
+        leedMap.put(totalpayoutamount, getTotalpayoutamount());
+        leedMap.put(loandisbussedamount, getLoandisbussedamount());
+        leedMap.put(pendingdisbussedamount, getPendingdisbussedamount());
+        leedMap.put(phone, getPhone());
+        leedMap.put(status, getStatus());
+        leedMap.put(agentId, getAgentId());
+        leedMap.put(leedId, getLeedId());
+        leedMap.put(loanType, getLoanType());
+        leedMap.put(rejectionReason, getRejectionReason());
+        leedMap.put(balancePayout, getBalancePayout());
+        leedMap.put(balancePayoutWithTdsAmount, getBalancePayoutWithTdsAmount());
+        leedMap.put(lastPayoutPaidAmount, getLastPayoutPaidAmount());
+        leedMap.put(lastPayoutPaidDate, getLastPayoutPaidDate());
+        leedMap.put(payOutOnDisbursementAmount, getPayOutOnDisbursementAmount());
+        leedMap.put(payoutPayableAfterTdsAmount, getPayoutPayableAfterTdsAmount());
+
 
         return leedMap;
     }

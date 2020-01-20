@@ -67,8 +67,8 @@ public class AdminApprovedInvoiceAdapter extends RecyclerView.Adapter<Adminappro
             else
                 holder.adminApprovedInvoiceAdapterLayoutBinding.txtTxtDisbussloanValue.setText(getString(R.string.na));
 
-            if (!Utility.isEmptyOrNull(leedModel.getCommisionwithtdsAmount()))
-                holder.adminApprovedInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(leedModel.getCommisionwithtdsAmount());
+            if (!Utility.isEmptyOrNull(leedModel.getPayoutPayableAfterTdsAmount()))
+                holder.adminApprovedInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(leedModel.getPayoutPayableAfterTdsAmount());
             else
                 holder.adminApprovedInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(getString(R.string.na));
 

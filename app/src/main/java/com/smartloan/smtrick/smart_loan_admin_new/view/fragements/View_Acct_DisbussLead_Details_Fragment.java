@@ -43,7 +43,10 @@ import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.BanksAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.SalesPersonAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -157,6 +160,12 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 double TDSAmount = (Disbussmentcom * 10) / 100;
                 double CommisionwithTDS = Disbussmentcom - TDSAmount;
 
+                Date c = Calendar.getInstance().getTime();
+                System.out.println("Current time => " + c);
+
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                String formattedDate = df.format(c);
+
                 Invoice invoice = new Invoice();
                 invoice.setCustomerName(leedsModel.getCustomerName());
                 invoice.setInvoiceNumber(Utility.generateAgentId(INV_PREFIX));
@@ -164,10 +173,13 @@ public class View_Acct_DisbussLead_Details_Fragment extends Fragment {
                 invoice.setLoanapprovedaamount(leedsModel.getApprovedLoan());
                 invoice.setLoandisbussedamount(leedsModel.getDisbusedLoanAmount());
                 invoice.setPendingdisbussedamount(leedsModel.getPendingLoanAmount());
-                invoice.setPayoutbussedamount(String.valueOf(Disbussmentcom));
                 invoice.setTotalpayoutamount(String.valueOf(Totalcom));
-                invoice.setTdsAmount(String.valueOf(TDSAmount));
-                invoice.setCommisionwithtdsAmount(String.valueOf(CommisionwithTDS));
+                invoice.setBalancePayoutWithTdsAmount(String.valueOf(TDSAmount));
+                invoice.setPayOutOnDisbursementAmount(String.valueOf(Disbussmentcom));
+                invoice.setPayoutPayableAfterTdsAmount(String.valueOf(CommisionwithTDS));
+                invoice.setBalancePayout(String.valueOf(TDSAmount));
+                invoice.setLastPayoutPaidAmount(String.valueOf(CommisionwithTDS));
+                invoice.setLastPayoutPaidDate(formattedDate);
                 invoice.setAgentId(leedsModel.getAgentId());
                 invoice.setStatus(STATUS_INVOICE_SENT);
                 invoice.setDisbussmentDate(leedsModel.getDisbussmentDate());

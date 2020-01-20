@@ -12,6 +12,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.interfaces.OnFragmentInteractionListener;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Accountant_Bills_Tab_Fragment;
 import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Accountant_Invoice_fragment_lead_tab_Disbussed;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Accountant_Invoices_Tab_Fragment;
 
 public class Accountant_Invoice_Activity extends AppCompatActivity
         implements
@@ -43,7 +44,7 @@ public class Accountant_Invoice_Activity extends AppCompatActivity
 
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainFrame1, new Accountant_Invoice_fragment_lead_tab_Disbussed());
+            ft.replace(R.id.mainFrame1, new Accountant_Invoices_Tab_Fragment());
             ft.commit();
 
 

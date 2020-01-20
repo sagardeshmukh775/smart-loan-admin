@@ -37,7 +37,8 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
     private Context context;
     LeedRepository leedRepository;
 
-    public AdminInvoiceAdapter(){}
+    public AdminInvoiceAdapter() {
+    }
 
     public AdminInvoiceAdapter(Context context, ArrayList<Invoice> data) {
         this.leedModelArrayList = data;
@@ -46,7 +47,7 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
 
     @Override
     public AdminInvoicesViewHolder onCreateViewHolder(ViewGroup parent,
-                                                        int viewType) {
+                                                      int viewType) {
         AdminInvoiceAdapterLayoutBinding adminInvoiceAdapterLayoutBinding;
         adminInvoiceAdapterLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.admin_invoice_adapter_layout, parent, false);
         return new AdminInvoicesViewHolder(adminInvoiceAdapterLayoutBinding);
@@ -74,8 +75,8 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
             else
                 holder.adminInvoiceAdapterLayoutBinding.txtTxtDisbussloanValue.setText(getString(R.string.na));
 
-            if (!Utility.isEmptyOrNull(leedModel.getCommisionwithtdsAmount()))
-                holder.adminInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(leedModel.getCommisionwithtdsAmount());
+            if (!Utility.isEmptyOrNull(leedModel.getPayoutPayableAfterTdsAmount()))
+                holder.adminInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(leedModel.getPayoutPayableAfterTdsAmount());
             else
                 holder.adminInvoiceAdapterLayoutBinding.txtTxtCommissionValue.setText(getString(R.string.na));
 
@@ -88,8 +89,8 @@ public class AdminInvoiceAdapter extends RecyclerView.Adapter<AdminInvoicesViewH
                 private void setLeedStatus(Invoice invoice) {
 
                     invoice.setStatus(STATUS_INVOICE_APPROVED);
-                        Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
-                        updateLeed(invoice.getInvoiceId(), invoice.getLeedStatusMap1());
+//                    Toast.makeText(holder.adminInvoiceAdapterLayoutBinding.cardView.getContext(), "Lead Verify Successfully", Toast.LENGTH_SHORT).show();
+                    updateLeed(invoice.getInvoiceId(), invoice.getLeedStatusMap());
 
                 }
 
