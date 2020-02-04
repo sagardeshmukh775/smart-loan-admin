@@ -66,7 +66,6 @@ public class Accountant_Rejected_Invoices_Fragment extends Fragment implements A
                 if (object != null) {
                     invoiceList = (ArrayList<Invoice>) object;
 
-
                 }
 
                 adapter = new Accountant_Rejected_Invoices_Adapter(getActivity(), invoiceList);

@@ -593,7 +593,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                         useradapter = new SalesPersonAdapter(getContext(), userArraylist);
                         //adding adapter to recyclerview
                         salespersonRecycler.setAdapter(useradapter);
-                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
                         salespersonRecycler.setHasFixedSize(true);
                         salespersonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -640,7 +639,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
             public void onClick(final View view) {
 
                 final Dialog dialog1 = new Dialog(getContext());
-//                dialog1.getWindow().setBackgroundDrawableResource(R.drawable.dialogboxanimation);
                 dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 dialog1.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 dialog1.setContentView(R.layout.customdialogboxchecklist);
@@ -678,7 +676,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                             checkdapter = new CheckListAdapter(getContext(), checked);
                             //adding adapter to recyclerview
                             checklist.setAdapter(checkdapter);
-                            // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
                             checklist.setHasFixedSize(true);
                             checklist.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -703,7 +700,6 @@ public class View_Lead_Details_Fragment1 extends Fragment {
                         checkdapter = new CheckListAdapter(getContext(), checked);
                         //adding adapter to recyclerview
                         checklist.setAdapter(checkdapter);
-                        // CatalogAdapter catalogAdapter = new CatalogAdapter(catalogList);
                         checklist.setHasFixedSize(true);
                         checklist.setLayoutManager(new LinearLayoutManager(getContext()));
 
