@@ -111,22 +111,7 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
-//            if (!Utility.isEmptyOrNull(leedModel.getLoanrequirement()))
-//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(leedModel.getLoanrequirement());
-//            else
-//                holder.telecallerLeedsAdapterLayoutBinding.txtBankValue.setText(getString(R.string.na));
-//            if (!Utility.isEmptyOrNull(leedModel.getMobileNumber()))
-//                holder.telecallerLeedsAdapterLayoutBinding.agentNumber.setText(leedModel.getMobileNumber());
-//            else
-//                holder.telecallerLeedsAdapterLayoutBinding.agentNumber.setText(getString(R.string.na));
-//            if (!Utility.isEmptyOrNull(user.getMobileNumber()))
-//                holder.telecallerLeedsAdapterLayoutBinding.clientNumber.setText(user.getMobileNumber());
-//            else
-//                holder.telecallerLeedsAdapterLayoutBinding.clientNumber.setText(getString(R.string.na));
-//            if (!Utility.isEmptyOrNull(leedModel.getStatus()))
-//                holder.telecallerLeedsAdapterLayoutBinding.txtStatusValue.setText(leedModel.getStatus());
-//            else
-//                holder.telecallerLeedsAdapterLayoutBinding.txtStatusValue.setText(getString(R.string.na));
+
             if (!Utility.isEmptyOrNull(leedModel.getAgentName()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(leedModel.getAgentName());
             else
