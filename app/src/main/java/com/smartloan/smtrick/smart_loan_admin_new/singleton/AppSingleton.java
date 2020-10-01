@@ -9,6 +9,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.exception.ExceptionUtil;
 
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LOAN_TYPE_BALANCE_TRANSFER;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LOAN_TYPE_HL;
+import static com.smartloan.smtrick.smart_loan_admin_new.constants.Constant.LOAN_TYPE_LAP;
+
 public class AppSingleton {
     private static AppSingleton appSingleton;
 
@@ -45,8 +49,11 @@ public class AppSingleton {
         return appSingleton;
     }
 
+//    public String[] getLoanType() {
+//        return new String[]{"Select Loan Type", "HL", "LAP"};
+//    }
     public String[] getLoanType() {
-        return new String[]{"Select Loan Type", "HL", "LAP"};
+        return new String[]{"Select Loan Type", LOAN_TYPE_HL, LOAN_TYPE_LAP, LOAN_TYPE_BALANCE_TRANSFER};
     }
     public String[] getEmployeeType() {
         return new String[]{"Select Occupation", "Salaried", "Businessman"};

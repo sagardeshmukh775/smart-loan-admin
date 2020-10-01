@@ -94,5 +94,11 @@ public class Constant {
     public static final String USER_PROFILE_PATH = "images/user";
     public static final String IMAGE_URI_LIST = "IMAGE_URI_LIST";
 
+    public static final String LOAN_TYPE_HL = "Home Loan";
+    public static final String LOAN_TYPE_LAP = "Loan Against Property";
+    public static final String LOAN_TYPE_BALANCE_TRANSFER = "Balance Transfer";
+    public static final String LOAN_TYPE_BP = "Builder Purchase";
+    public static final String LOAN_TYPE_RE = "Resale";
+
 
 }

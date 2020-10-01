@@ -26,6 +26,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreference;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
+import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_telecaller;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
@@ -39,16 +40,14 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
 
     AppSharedPreference appSharedPreference;
     Button btcancel, btnupdatenext, btupdate, btverify;
-    String cPartner, lGenby;
     LeedRepository leedRepository;
     LeedsModel leedsModel;
-    ArrayList<LeedsModel> leedsModelArrayList;
     ProgressDialogClass progressDialogClass;
-    SimpleDateFormat sfd;
     Spinner spinloantype;
     String sploantype;
     TextView txtgeneratedby, txtldate, txtleadid, txtleadidtop, txttime;
     TextView txtLeedId, txtCustomerName, txtLoanRequirement, txtAgent,txtLoanType;
+    AppSingleton appSingleton;
 
     @Override
     public void onClick(View view) {
@@ -70,8 +69,9 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
+        appSingleton = AppSingleton.getInstance(getActivity());
 
-        String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY", "BALANCE TRANSFER"};
+        String[] loanType = appSingleton.getLoanType();
 
         btupdate = (Button) view.findViewById(R.id.buttonupdate);
         btverify = (Button) view.findViewById(R.id.buttonverify);
@@ -100,10 +100,11 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         txtAgent.setText(leedsModel.getAgentName());
         txtLoanType.setText(leedsModel.getLoanType());
 
-        spinloantype.setOnItemSelectedListener(this);
+
         ArrayAdapter<String> spinnerArrayAdapterloantype = new ArrayAdapter(getContext(), R.layout.sppinner_layout_listitem, loanType);
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinloantype.setAdapter(spinnerArrayAdapterloantype);
+        spinloantype.setOnItemSelectedListener(this);
         getdata();
 
         btverify.setOnClickListener(new View.OnClickListener() {
