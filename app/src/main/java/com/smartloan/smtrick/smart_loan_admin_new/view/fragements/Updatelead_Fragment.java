@@ -28,8 +28,6 @@ import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
 import com.smartloan.smtrick.smart_loan_admin_new.view.activites.MainActivity_telecaller;
-import com.smartloan.smtrick.smart_loan_admin_new.view.activites.TL_Updatelead_C_Details_Activity;
-import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 
 import java.text.SimpleDateFormat;
@@ -57,67 +55,13 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
 
     }
 
-    public static class C08401 implements View.OnClickListener {
-        C08401() {
-
-        }
-
-        public void onClick(View v) {
-        }
-    }
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity$2 */
-    public class C08412 implements View.OnClickListener {
-        C08412() {
-        }
-
-        public void onClick(View v) {
-            setLeedStatus(leedsModel);
-        }
-    }
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity$3 */
-    class C08423 implements View.OnClickListener {
-        C08423() {
-        }
-
-        public void onClick(View v) {
-            startActivity(new Intent(getActivity(), MainActivity_telecaller.class));
-            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-    }
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity$4 */
-    class C08434 implements View.OnClickListener {
-        C08434() {
-        }
-
-        public void onClick(View v) {
-            updateLeadDetails(leedsModel);
-            Toast.makeText(getContext(), "Lead Update Successfully", Toast.LENGTH_SHORT).show();
-//            Intent i = new Intent(getContext(), TL_Updatelead_C_Details_Activity.class);
-//            i.putExtra(Constant.LEED_MODEL, leedsModel);
-//            startActivity(i);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-
-            TL_Updatelead_C_Details_Fragment fragment2 = new TL_Updatelead_C_Details_Fragment();
-            fragment2.setArguments(bundle);
-
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.detailContainer, fragment2);
-            ft.commit();
-            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.updatelead_activity, container, false);
 
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
-//        leedsModel = (LeedsModel) getActivity().getIntent().getSerializableExtra(Constant.LEED_MODEL);
+
         Bundle args = this.getArguments();
         if (args != null) {
             leedsModel = (LeedsModel) args.getSerializable(Constant.LEED_MODEL);
@@ -126,7 +70,9 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         progressDialogClass = new ProgressDialogClass(getActivity());
         leedRepository = new LeedRepositoryImpl();
         appSharedPreference = new AppSharedPreference(getContext());
+
         String[] loanType = new String[]{"HOME LOAN", "LOAN AGAINST PROPERTY", "BALANCE TRANSFER"};
+
         btupdate = (Button) view.findViewById(R.id.buttonupdate);
         btverify = (Button) view.findViewById(R.id.buttonverify);
         btcancel = (Button) view.findViewById(R.id.buttoncancel);
@@ -159,10 +105,38 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         spinnerArrayAdapterloantype.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinloantype.setAdapter(spinnerArrayAdapterloantype);
         getdata();
-        btupdate.setOnClickListener(new C08401());
-        btverify.setOnClickListener(new C08412());
-        btcancel.setOnClickListener(new C08423());
-        btnupdatenext.setOnClickListener(new C08434());
+
+        btverify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLeedStatus(leedsModel);
+            }
+        });
+        btcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity_telecaller.class));
+                getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+        btnupdatenext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLeadDetails(leedsModel);
+                Toast.makeText(getContext(), "Lead Update Successfully", Toast.LENGTH_SHORT).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+
+                TL_Updatelead_C_Details_Fragment fragment2 = new TL_Updatelead_C_Details_Fragment();
+                fragment2.setArguments(bundle);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer, fragment2);
+                ft.commit();
+                getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
         return view;
     }
 
@@ -172,7 +146,10 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
             String agentname = leedsModel.getAgentName();
             Long ldatetime = leedsModel.getCreatedDateTimeLong();
             Long time = leedsModel.getCreatedDateTimeLong();
-            spinloantype.setSelection(((ArrayAdapter) spinloantype.getAdapter()).getPosition(leedsModel.getLoanType()));
+            String loantype = leedsModel.getLoanType();
+
+            spinloantype.setSelection(((ArrayAdapter) spinloantype.getAdapter()).getPosition(loantype));
+
             if (ldatetime != null) {
                 txtldate.setText(Utility.convertMilliSecondsToFormatedDate(leedsModel.getCreatedDateTimeLong().longValue(), Constant.GLOBAL_DATE_FORMATE));
             }

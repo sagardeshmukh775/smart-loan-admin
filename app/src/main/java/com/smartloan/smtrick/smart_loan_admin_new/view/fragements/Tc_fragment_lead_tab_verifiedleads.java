@@ -27,55 +27,27 @@ import java.util.ArrayList;
 public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
     AppSharedPreference appSharedPreference;
     AppSingleton appSingleton;
-    long fromDate;
-    int fromDay;
-    int fromMonth;
-    int fromYear;
     LeedRepository leedRepository;
     ArrayList<LeedsModel> leedsModelArrayList;
     ProgressDialogClass progressDialogClass;
     TcFragmentLeadTabGeneratedleadBinding tcFragmentLeadTabGeneratedleadBinding;
     TelecallerLeedsAdapter telecallerLeedsAdapter;
-    long toDate;
-    int toDay;
-    int toMonth;
-    int toYear;
     private boolean _hasLoadedOnce= false;
     private ProgressDialog progress;
 
 
-//    @Override
-//    public void setUserVisibleHint(boolean isFragmentVisible_) {
-//        super.setUserVisibleHint(true);
-//        if (this.isVisible()) {
-//// we check that the fragment is becoming visible
-//            if (isFragmentVisible_ && !_hasLoadedOnce) {
-//                new Loaddata().execute();
-//                _hasLoadedOnce = true;
-//            }
-//        }
-//    }
-
-
-
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Tc_fragment_lead_tab_verifiedleads$1 */
-    class C09551 extends CallBack {
-        C09551() {
-        }
-
-        public void onSuccess(Object object) {
-            if (object != null) {
-                Tc_fragment_lead_tab_verifiedleads tc_fragment_lead_tab_verifiedleads = Tc_fragment_lead_tab_verifiedleads.this;
-                tc_fragment_lead_tab_verifiedleads.leedsModelArrayList = (ArrayList) object;
-                tc_fragment_lead_tab_verifiedleads.serAdapter(tc_fragment_lead_tab_verifiedleads.leedsModelArrayList);
+    @Override
+    public void setUserVisibleHint(boolean isFragmentVisible_) {
+        super.setUserVisibleHint(true);
+        if (this.isVisible()) {
+// we check that the fragment is becoming visible
+            if (isFragmentVisible_ && !_hasLoadedOnce) {
+                new Loaddata().execute();
+                _hasLoadedOnce = true;
             }
-            Tc_fragment_lead_tab_verifiedleads.this.progressDialogClass.dismissDialog();
-        }
-
-        public void onError(Object object) {
-            Tc_fragment_lead_tab_verifiedleads.this.progressDialogClass.dismissDialog();
         }
     }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (this.tcFragmentLeadTabGeneratedleadBinding == null) {
@@ -88,7 +60,7 @@ public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setLayoutManager(new LinearLayoutManager(getActivity()));
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.setItemAnimator(new DefaultItemAnimator());
             this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addItemDecoration(new DividerItemDecoration(getContext(), 1));
-            getteLeed();
+//            getteLeed();
         }
         return this.tcFragmentLeadTabGeneratedleadBinding.getRoot();
     }
@@ -99,8 +71,21 @@ public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
     }
 
     private void getteLeed() {
-        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
-        this.leedRepository.readLeedsByStatus(Constant.STATUS_VERIFIED, new C09551());
+//        this.progressDialogClass.showDialog(getString(R.string.loading), getString(R.string.PLEASE_WAIT));
+        this.leedRepository.readLeedsByStatus(Constant.STATUS_VERIFIED, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    leedsModelArrayList = (ArrayList) object;
+                    serAdapter(leedsModelArrayList);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
     }
 
     private void serAdapter(ArrayList<LeedsModel> leedsModels) {
@@ -142,8 +127,6 @@ public class Tc_fragment_lead_tab_verifiedleads extends Fragment {
             {
                 progress.dismiss();
             }
-
-
 
         }
     }

@@ -8,7 +8,10 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.callback.CallBack;
+import com.smartloan.smtrick.smart_loan_admin_new.constants.Constant;
 import com.smartloan.smtrick.smart_loan_admin_new.databinding.TelecallerLeedsGeneratedAdapterLayoutBinding;
 import com.smartloan.smtrick.smart_loan_admin_new.models.LeedsModel;
 import com.smartloan.smtrick.smart_loan_admin_new.models.User;
@@ -24,6 +28,8 @@ import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreferenc
 import com.smartloan.smtrick.smart_loan_admin_new.repository.UserRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.UserRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.utilities.Utility;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Updatelead_Fragment;
+import com.smartloan.smtrick.smart_loan_admin_new.view.fragements.View_Lead_Details_Fragment1;
 import com.smartloan.smtrick.smart_loan_admin_new.view.holders.TelecallerGeneratedLeedsViewHolder;
 
 import java.util.ArrayList;
@@ -36,6 +42,8 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
     UserRepository userRepository;
     User user;
     int index = -1;
+    private int selectedPosition = 0;
+    static int m = 0;
 
     public TelecallerGeneratedLeedsAdapter() {
     }
@@ -60,6 +68,9 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
     @Override
     public void onBindViewHolder(final TelecallerGeneratedLeedsViewHolder holder, final int listPosition) {
         try {
+
+            LeedsModel leedModel2 = getModel(listPosition);
+
             this.appSharedPreference = new AppSharedPreference(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext());
             this.userRepository = new UserRepositoryImpl();
 
@@ -87,10 +98,51 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
             }
 
 
+            if (m == 0) {
+                if(listPosition == selectedPosition){
+                    holder.itemView.setSelected(true);
+                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#1E88E5"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#FFFFFF"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#FFFFFF"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#FFFFFF"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#FFFFFF"));
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constant.LEED_MODEL, leedModel2);// Put anything what you want
+                    Updatelead_Fragment fragment2 = new Updatelead_Fragment();
+                    fragment2.setArguments(bundle);
+                    FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.detailContainer,  fragment2);
+                    ft.commit();
 
-            LeedsModel leedModel = getModel(listPosition);
-//            readagent(leedModel.getAgentName());
-            userRepository.readUserByName(leedModel.getAgentName(), new CallBack() {
+                } else {
+                    holder.itemView.setSelected(false);
+                    holder.telecallerLeedsAdapterLayoutBinding.cardView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setTextColor(Color.parseColor("#000000"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setTextColor(Color.parseColor("#000000"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setTextColor(Color.parseColor("#000000"));
+                    holder.telecallerLeedsAdapterLayoutBinding.txtLo.setTextColor(Color.parseColor("#000000"));
+
+                }
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int currentPosition = holder.getLayoutPosition();
+                        if(selectedPosition != currentPosition){
+                            // Temporarily save the last selected position
+                            int lastSelectedPosition = selectedPosition;
+                            // Save the new selected position
+                            selectedPosition = currentPosition;
+                            // update the previous selected row
+                            notifyItemChanged(lastSelectedPosition);
+                            // select the clicked row
+                            holder.itemView.setSelected(true);
+                        }
+                    }
+                });
+                m++;
+            }
+
+            userRepository.readUserByName(leedModel2.getAgentName(), new CallBack() {
                 @Override
                 public void onSuccess(Object object) {
                     user = (User) object;
@@ -103,63 +155,25 @@ public class TelecallerGeneratedLeedsAdapter extends RecyclerView.Adapter<Teleca
                 }
             });
 
-            if (!Utility.isEmptyOrNull(leedModel.getCustomerName()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel.getCustomerName());
+            if (!Utility.isEmptyOrNull(leedModel2.getCustomerName()))
+                holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel2.getCustomerName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(getString(R.string.na));
-            if (!Utility.isEmptyOrNull(leedModel.getLoanType()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel.getLoanType());
+            if (!Utility.isEmptyOrNull(leedModel2.getLoanType()))
+                holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(leedModel2.getLoanType());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtcnamevalue.setText(getString(R.string.na));
 
-            if (!Utility.isEmptyOrNull(leedModel.getAgentName()))
-                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(leedModel.getAgentName());
+            if (!Utility.isEmptyOrNull(leedModel2.getAgentName()))
+                holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(leedModel2.getAgentName());
             else
                 holder.telecallerLeedsAdapterLayoutBinding.txtLoanTypeValue.setText(getString(R.string.na));
-//            if (leedModel.getCreatedDateTimeLong() > 0)
-//                holder.telecallerLeedsAdapterLayoutBinding.txtDateValue.setText(Utility.convertMilliSecondsToFormatedDate(leedModel.getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
-//            else
-//                holder.telecallerLeedsAdapterLayoutBinding.txtDateValue.setText(getString(R.string.na));
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        holder.telecallerLeedsAdapterLayoutBinding.agentCall.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final int REQUEST_PHONE_CALL = 1;
-//                Intent my_callIntent = new Intent(Intent.ACTION_CALL);
-//                my_callIntent.setData(Uri.parse("tel:" + user.getMobileNumber()));
-//                //here the word 'tel' is important for making a call...
-//                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
-//                }
-//                else
-//                {
-//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(my_callIntent);
-//                }
-//            }
-//        });
-//        holder.telecallerLeedsAdapterLayoutBinding.clientCall.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final int REQUEST_PHONE_CALL = 1;
-//                LeedsModel leedModel = getModel(listPosition);
-//                String mobileNo = "+91" + leedModel.getMobileNumber();
-//                String uri = "tel:" + mobileNo.trim();
-//                Intent intent = new Intent(Intent.ACTION_CALL);
-//                intent.setData(Uri.parse(uri));
-//                if (ContextCompat.checkSelfPermission(holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions((Activity) holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext(), new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
-//                }
-//                else
-//                {
-//                    holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.getContext().startActivity(intent);
-//                }
-//
-//            }
-//        });
     }
 
     private void readagent(String agentName) {

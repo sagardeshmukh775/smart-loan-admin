@@ -120,10 +120,8 @@ public class TelecallerLeedsAdapter extends RecyclerView.Adapter<TelecallerLeeds
                 m++;
             }
 
-
-
-
             LeedsModel leedModel = getModel(listPosition);
+
             if (!Utility.isEmptyOrNull(leedModel.getCustomerName()))
                 holder.telecallerLeedsAdapterLayoutBinding.txtIdValue.setText(leedModel.getCustomerName());
             else

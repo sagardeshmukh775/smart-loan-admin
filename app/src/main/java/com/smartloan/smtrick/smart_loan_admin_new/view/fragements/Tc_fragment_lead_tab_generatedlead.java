@@ -1,10 +1,9 @@
 package com.smartloan.smtrick.smart_loan_admin_new.view.fragements;
 
-import android.content.Intent;
+
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,10 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.smartloan.smtrick.smart_loan_admin_new.R;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener;
 import com.smartloan.smtrick.smart_loan_admin_new.RecyclerListener.RecyclerTouchListener.ClickListener;
@@ -32,9 +27,7 @@ import com.smartloan.smtrick.smart_loan_admin_new.preferences.AppSharedPreferenc
 import com.smartloan.smtrick.smart_loan_admin_new.repository.LeedRepository;
 import com.smartloan.smtrick.smart_loan_admin_new.repository.impl.LeedRepositoryImpl;
 import com.smartloan.smtrick.smart_loan_admin_new.singleton.AppSingleton;
-import com.smartloan.smtrick.smart_loan_admin_new.view.activites.Updatelead_Activity;
 import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerGeneratedLeedsAdapter;
-import com.smartloan.smtrick.smart_loan_admin_new.view.adapters.TelecallerLeedsAdapter;
 import com.smartloan.smtrick.smart_loan_admin_new.view.dialog.ProgressDialogClass;
 import java.util.ArrayList;
 
@@ -57,33 +50,13 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
     int toYear;
     EditText Search;
 
-    /* renamed from: com.smartloan.smtrick.smart_loan_admin_new.view.fragements.Tc_fragment_lead_tab_generatedlead$1 */
-    class C09521 implements ClickListener {
-        C09521() {
-        }
-
-        public void onClick(View view, int position) {
-            LeedsModel leedsModel = Tc_fragment_lead_tab_generatedlead.this.getModel(position);
-//            Intent intent = new Intent(Tc_fragment_lead_tab_generatedlead.this.getActivity(), Updatelead_Activity.class);
-//            intent.putExtra(Constant.LEED_MODEL, leedsModel);
-//            Tc_fragment_lead_tab_generatedlead.this.startActivity(intent);
-            Bundle bundle = new Bundle();
-//            bundle.putString("key","abc");
-            bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
-
-            Updatelead_Fragment fragment2 = new Updatelead_Fragment();
-            fragment2.setArguments(bundle);
-
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.detailContainer,  fragment2);
-            ft.commit();
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.detailContainer, fragment2)
-//                    .commit();
-        }
-
-        public void onLongClick(View view, int position) {
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // load data here
+        }else{
+            // fragment is no longer visible
         }
     }
 
@@ -157,28 +130,6 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
 
             }
         });
-//        FirebaseDatabase.getInstance().getReference("users").orderByChild("role").equalTo("SERVICE PROVIDER").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                leedsModelArrayList.clear();
-//                tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.removeAllViews();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//
-//                    LeedsModel leedsModel = snapshot.getValue(LeedsModel.class);
-//                    if (leedsModel.getCustomerName() != null) {
-//                        if (leedsModel.getCustomerName().toLowerCase().contains(toString)) {
-//                            leedsModelArrayList.add(leedsModel);
-//                        }
-//                    }
-//                }
-//                serAdapter(leedsModelArrayList);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
     }
 
@@ -188,7 +139,27 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
     }
 
     private void onClickListner() {
-        this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new C09521()));
+        this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), this.tcFragmentLeadTabGeneratedleadBinding.recyclerViewLeeds, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                LeedsModel leedsModel = getModel(position);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
+
+                Updatelead_Fragment fragment2 = new Updatelead_Fragment();
+                fragment2.setArguments(bundle);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.detailContainer,  fragment2);
+                ft.commit();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     private void getteLeed() {
@@ -197,16 +168,15 @@ public class Tc_fragment_lead_tab_generatedlead extends Fragment {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
-                    Tc_fragment_lead_tab_generatedlead tc_fragment_lead_tab_generatedlead = Tc_fragment_lead_tab_generatedlead.this;
-                    tc_fragment_lead_tab_generatedlead.leedsModelArrayList = (ArrayList) object;
-                    tc_fragment_lead_tab_generatedlead.serAdapter(tc_fragment_lead_tab_generatedlead.leedsModelArrayList);
+                    leedsModelArrayList = (ArrayList) object;
+                    serAdapter(leedsModelArrayList);
                 }
-                Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
+                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
-                Tc_fragment_lead_tab_generatedlead.this.progressDialogClass.dismissDialog();
+                progressDialogClass.dismissDialog();
 
             }
         });

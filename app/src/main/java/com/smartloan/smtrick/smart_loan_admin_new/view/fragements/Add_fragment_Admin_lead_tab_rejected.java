@@ -185,9 +185,6 @@ public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 LeedsModel leedsModel = getModel(position);
-//                Intent intent = new Intent(getActivity(), View_Leed_Details_Activity.class);
-//                intent.putExtra(LEED_MODEL, leedsModel);
-//                startActivity(intent);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constant.LEED_MODEL, leedsModel);// Put anything what you want
@@ -244,8 +241,6 @@ public class Add_fragment_Admin_lead_tab_rejected extends Fragment {
             {
                 progress.dismiss();
             }
-
-
 
         }
     }

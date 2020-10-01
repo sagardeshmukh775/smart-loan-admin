@@ -195,6 +195,9 @@ public class LeedsModel implements Serializable {
     private String comissionamount;
     private String disbussmentDate;
 
+    private String homeLoanType;
+    private String balanceTransferLoanType;
+
     private ArrayList<String> checklist;
     private ArrayList<String> checklistCollected;
     private ArrayList<String> checklistCollectedimages;
@@ -368,6 +371,9 @@ public class LeedsModel implements Serializable {
         this.rejectionReason = "na";
         this.comissionamount = "na";
         this.disbussmentDate = "na";
+
+        this.homeLoanType = "na";
+        this.balanceTransferLoanType = "na";
 
         this.checklist = new ArrayList<String>();
         this.checklistCollected = new ArrayList<String>();
@@ -1832,6 +1838,22 @@ public class LeedsModel implements Serializable {
         this.channelPartner = channelPartner;
     }
 
+    public String getHomeLoanType() {
+        return homeLoanType;
+    }
+
+    public void setHomeLoanType(String homeLoanType) {
+        this.homeLoanType = homeLoanType;
+    }
+
+    public String getBalanceTransferLoanType() {
+        return balanceTransferLoanType;
+    }
+
+    public void setBalanceTransferLoanType(String balanceTransferLoanType) {
+        this.balanceTransferLoanType = balanceTransferLoanType;
+    }
+
     @Exclude
     public Map getLeedStatusMap() {
         Map<String, Object> leedMap = new HashMap();
@@ -2009,7 +2031,8 @@ public class LeedsModel implements Serializable {
         leedMap.put("status", getStatus());
         leedMap.put("disbussmentDate", getDisbussmentDate());
 
-
+        leedMap.put("homeLoanType", getHomeLoanType());
+        leedMap.put("balanceTransferLoanType", getBalanceTransferLoanType());
 
         return leedMap;
     }

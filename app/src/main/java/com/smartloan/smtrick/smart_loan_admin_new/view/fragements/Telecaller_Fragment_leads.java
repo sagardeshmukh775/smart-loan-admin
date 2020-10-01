@@ -49,17 +49,19 @@ public class Telecaller_Fragment_leads extends Fragment implements AdapterView.O
         }
 
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        //adapter = new Tab_Adapter(getSupportFragmentManager());
+        viewPager.setOffscreenPageLimit(0);
         adapter = new Tab_Adapter(getChildFragmentManager());
 
         adapter.addFragment(new Tc_fragment_lead_tab_generatedlead(), "Genrated");
         adapter.addFragment(new Tc_fragment_lead_tab_verifiedleads(), "Verified");
-//        adapter.addFragment(new Tc_fragment_lead_tab_acceptedleads(), "Accepted");
-//        adapter.addFragment(new Tc_fragment_lead_tab_rejectedleads(), "Rejected");
 
         viewPager.setAdapter(adapter);
+
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         return view;
     }
