@@ -64,19 +64,19 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
-                        android:padding="2dp"
                         android:baselineAligned="false"
                         android:orientation="horizontal"
+                        android:padding="2dp"
                         android:weightSum="100">
 
-                            <ImageView
-                                android:id="@+id/profile_image"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_marginTop="6dp"
-                                android:layout_weight="80"
-                                android:src="@drawable/avatar" />
+                        <ImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="80"
+                            android:src="@drawable/avatar" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -98,9 +98,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="C Name:"
-                                    android:textStyle="bold"
                                     android:textColor="@color/whitetextcolor"
-                                    android:textSize="20dp" />
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -109,26 +109,32 @@
                                     android:orientation="horizontal"
                                     android:weightSum="100">
 
-                                <TextView
-                                    android:id="@+id/txt_id_value"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="50"
-                                    android:text="Id:"
-                                    android:background="@drawable/text_background"
-                                    android:padding="5dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="12dp" />
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="50">
+
+                                        <TextView
+                                            android:id="@+id/txt_id_value"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/text_background"
+                                            android:padding="8dp"
+                                            android:text="Id:"
+                                            android:textColor="@color/white"
+                                            android:textSize="12dp" />
+
+                                    </LinearLayout>
 
                                     <TextView
                                         android:id="@+id/txt_bp_value"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="B.P."
                                         android:layout_marginLeft="5dp"
+                                        android:layout_weight="50"
+                                        android:text="B.P."
                                         android:textColor="@color/whitetextcolor"
-                                        android:textSize="14dp"
-                                        android:layout_weight="50"/>
+                                        android:textSize="14dp" />
 
                                 </LinearLayout>
 
@@ -143,22 +149,21 @@
                                         android:id="@+id/txt_loan_type_value"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_weight="50"
                                         android:text="loan type"
                                         android:textColor="@color/whitetextcolor"
-                                        android:layout_weight="50"
                                         android:textSize="17dp" />
-
 
 
                                     <TextView
                                         android:id="@+id/txt_loan_requirement_value"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="loan requirement"
                                         android:layout_marginLeft="5dp"
+                                        android:layout_weight="50"
+                                        android:text="loan requirement"
                                         android:textColor="@color/whitetextcolor"
-                                        android:textSize="14dp"
-                                        android:layout_weight="50"/>
+                                        android:textSize="14dp" />
 
 
                                 </LinearLayout>
@@ -185,9 +190,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_weight="50"
                             android:gravity="center"
-                            android:layout_gravity="center"
                             android:orientation="horizontal">
 
                             <TextView
@@ -487,10 +492,78 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:id="@+id/layoutbuttonnext"
+                            android:id="@+id/layoutLoansubtype"
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
                             android:layout_below="@+id/layoutLoantype"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtloansubtype"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Home Loan type:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14dp" />
+
+                            <Spinner
+                                android:id="@+id/sploansubtype1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_toRightOf="@+id/txtloansubtype"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layoutLoanbttype"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@+id/layoutLoansubtype"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtloanbttype"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:padding="10dp"
+                                android:text="Balance trancefer type:"
+                                android:textColor="@color/darkgraycolor"
+                                android:textSize="14dp" />
+
+                            <Spinner
+                                android:id="@+id/sploanbttype1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_toRightOf="@+id/txtloanbttype"
+                                android:background="@drawable/edittextanimation"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/mainTextColor"
+                                android:textSize="14dp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layoutbuttonnext"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_below="@+id/layoutLoanbttype"
                             android:gravity="center_horizontal">
 
                             <Button
