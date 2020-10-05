@@ -134,12 +134,14 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
         spinloanbttype.setAdapter(spinnerAdapterBalanceTransferType);
 
         if (spinloantype.getSelectedItem().toString().equalsIgnoreCase(LOAN_TYPE_LAP)) {
-            layoutBTType.setVisibility(View.GONE);
-            layoutHLType.setVisibility(View.GONE);
+            hideBTLoanDetails();
+            hidehomeLoanDetails();
         } else if (spinloantype.getSelectedItem().toString().equalsIgnoreCase(LOAN_TYPE_HL)) {
-            layoutBTType.setVisibility(View.GONE);
+            showchomeLoanDetails();
+            hideBTLoanDetails();
         } else if (spinloantype.getSelectedItem().toString().equalsIgnoreCase(LOAN_TYPE_BALANCE_TRANSFER)) {
-            layoutHLType.setVisibility(View.GONE);
+            hidehomeLoanDetails();
+            showBTLoanDetails();
         }
 
         spinloantype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -149,9 +151,17 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
                 if (loantype.equalsIgnoreCase(Constant.LOAN_TYPE_HL)) {
                     showchomeLoanDetails();
                     hideBTLoanDetails();
+
+                    String HLType = leedsModel.getHomeLoanType();
+                    spinloansubtype.setSelection(((ArrayAdapter) spinloansubtype.getAdapter()).getPosition(HLType));
+
                 } else if (loantype.equalsIgnoreCase(Constant.LOAN_TYPE_BALANCE_TRANSFER)){
                     hidehomeLoanDetails();
                     showBTLoanDetails();
+
+                    String BTType = leedsModel.getBalanceTransferLoanType();
+                    spinloanbttype.setSelection(((ArrayAdapter) spinloanbttype.getAdapter()).getPosition(BTType));
+
                 }else {
                     hideBTLoanDetails();
                     hidehomeLoanDetails();
@@ -233,7 +243,13 @@ Updatelead_Fragment extends Fragment implements View.OnClickListener, AdapterVie
     }
 
     private void updateLeadDetails(LeedsModel leedsModel) {
-        leedsModel.setLoanType(sploantype);
+        leedsModel.setLoanType(spinloantype.getSelectedItem().toString());
+
+        if (spinloantype.getSelectedItem().toString().equalsIgnoreCase(LOAN_TYPE_HL)){
+            leedsModel.setHomeLoanType(spinloansubtype.getSelectedItem().toString());
+        }else  if (spinloantype.getSelectedItem().toString().equalsIgnoreCase(LOAN_TYPE_BALANCE_TRANSFER)){
+            leedsModel.setBalanceTransferLoanType(spinloanbttype.getSelectedItem().toString());
+        }
         updateLeed(leedsModel.getLeedId(), leedsModel.getLeedStatusMap());
     }
 
