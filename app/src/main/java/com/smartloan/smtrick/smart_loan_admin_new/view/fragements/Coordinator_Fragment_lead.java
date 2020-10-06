@@ -65,7 +65,6 @@ public class Coordinator_Fragment_lead extends Fragment implements AdapterView.O
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-
         return view;
     }
 
